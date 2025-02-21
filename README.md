@@ -1,6 +1,9 @@
 ## Quản lý tiệc cưới - SE104
 
+
 Board: https://trello.com/b/A5fWKbrM 
+
+
 
 Participants:
 - Leader: Nguyễn Quý Phong - 23521169
