@@ -1,13 +1,10 @@
 ## Quản lý tiệc cưới - SE104
 
-
 Board: https://trello.com/b/A5fWKbrM 
 
-
-
-Participants:
-- Leader: Nguyễn Quý Phong - 23521169
-- Member: Tôn Kim Dung - 23520340
-- Member: Đỗ Lê Khánh Vy - 23521826
-- Member: Nguyễn Thúy Vy - 23521834
-- Member: Trần Thị Huệ Nguyên - 23521063
+Members:
+- 23521169 - Nguyễn Quý Phong
+- 23520340 - Tôn Kim Dung
+- 23521826 - Đỗ Lê Khánh Vy
+- 23521834 - Nguyễn Thúy Vy
+- 23521063 - Trần Thị Huệ Nguyên
