@@ -4,12 +4,12 @@
   </a>
 </p>
 
-## **QUẢN LÝ TIỆC CƯỚI - SE104**
+# **QUẢN LÝ TIỆC CƯỚI - SE104**
 
-# Board: 
+## Board: 
 https://trello.com/b/A5fWKbrM 
 
-# Members:
+## Members:
 
 | STT | MSSV      | Họ và Tên            | Chức Vụ     | Email                    |
 |-----|----------|-------------------|------------|--------------------------|
