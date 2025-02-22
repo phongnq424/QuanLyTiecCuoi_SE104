@@ -7,7 +7,7 @@
 # **QUẢN LÝ TIỆC CƯỚI - SE104**
 
 ## Board: 
-[Nhấn vào đây](https://trello.com/invite/b/67b8a7abbd93474995d6afe7/ATTI6c995e2e957957c5c5c7df2fe9e88223F98FD3C2/nmcnpm-quản-ly-tiệc-cưới)
+[Tại đây](https://trello.com/invite/b/67b8a7abbd93474995d6afe7/ATTI6c995e2e957957c5c5c7df2fe9e88223F98FD3C2/nmcnpm-quản-ly-tiệc-cưới)
 
 ## Members:
 
