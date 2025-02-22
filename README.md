@@ -6,10 +6,10 @@
 
 ## QUẢN LÝ TIỆC CƯỚI - SE104
 
-#Board: 
-URL đếnhttps://trello.com/b/A5fWKbrM 
+# Board: 
+https://trello.com/b/A5fWKbrM 
 
-#Members:
+# Members:
 
 | STT | MSSV      | Họ và Tên            | Chức Vụ     | Email                    |
 |-----|----------|-------------------|------------|--------------------------|
