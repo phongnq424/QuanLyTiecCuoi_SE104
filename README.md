@@ -19,10 +19,6 @@
 | 4   | 23521834 | Nguyễn Thúy Vy       | Thành viên  | 23521834@gm.uit.edu.vn |
 | 5   | 23521063 | Trần Thị Huệ Nguyên  | Thành viên  | 23521063@gm.uit.edu.vn |
 
-Participants:
-- Leader: [Name - ID]
-- Member: [Name - ID]
-- Member: [Name - ID]
 
 
 
