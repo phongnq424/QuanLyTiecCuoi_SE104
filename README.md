@@ -1,8 +1,15 @@
 ## QUẢN LÝ TIỆC CƯỚI - SE104
 
-Board: https://trello.com/b/A5fWKbrM 
+<p align="center">
+  <a href="https://www.uit.edu.vn/" title="Trường Đại học Công nghệ Thông tin" style="border: none;">
+    <img src="https://i.imgur.com/WmMnSRt.png" alt="Trường Đại học Công nghệ Thông tin | University of Information Technology">
+  </a>
+</p>
 
-Members:
+#Board: 
+URL đếnhttps://trello.com/b/A5fWKbrM 
+
+#Members:
 
 | STT | MSSV      | Họ và Tên            | Chức Vụ     | Email                    |
 |-----|----------|-------------------|------------|--------------------------|
