@@ -1,0 +1,68 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\QuanLyTiecCuoi_SE104\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\quanlytieccuoi_se104\\quanlytieccuoi\\viewmodel\\basicviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\viewmodel\\basicviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\quanlytieccuoi_se104\\quanlytieccuoi\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\quanlytieccuoi_se104\\quanlytieccuoi\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BasicViewModel.cs",
+              "DocumentMoniker": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\ViewModel\\BasicViewModel.cs",
+              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\ViewModel\\BasicViewModel.cs",
+              "ToolTip": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\ViewModel\\BasicViewModel.cs",
+              "RelativeToolTip": "QuanLyTiecCuoi\\ViewModel\\BasicViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T13:55:41.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MainWindow.xaml",
+              "ToolTip": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MainWindow.xaml",
+              "RelativeToolTip": "QuanLyTiecCuoi\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-30T13:48:11.617Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MainWindow.xaml.cs",
+              "RelativeToolTip": "QuanLyTiecCuoi\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-30T13:48:09.202Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
