@@ -9,8 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="View\" />
+    <Compile Remove="Model\**" />
+    <Compile Remove="View\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <EmbeddedResource Remove="View\**" />
+    <None Remove="Model\**" />
+    <None Remove="View\**" />
+    <Page Remove="Model\**" />
+    <Page Remove="View\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MVVM\Model\Services\" />
+    <Folder Include="MVVM\View\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="Theme\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>

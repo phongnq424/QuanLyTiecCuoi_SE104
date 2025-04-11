@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace QuanLyTiecCuoi.ViewModel
+namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
