@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\
+D:\QuanLyTiecCuoi\QuanLyTiecCuoi\obj\Debug\net8.0-windows\
 QuanLyTiecCuoi
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-D:\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\App.xaml
-11407045341
-
-5-1855050297
-1981451641563
-MainWindow.xaml;
+D:\QuanLyTiecCuoi\QuanLyTiecCuoi\App.xaml
+31115469822
+2-285556205
+11-1979813416
+198-556154604
+MainWindow.xaml;MVVM\View\DSSanhView.xaml;MVVM\View\SanhView.xaml;
 
 False
 

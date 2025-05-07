@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyTiecCuoi"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="Quản lý Tiệc Cưới" Height="450" Width="800">
+    
+    <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
 </Window>

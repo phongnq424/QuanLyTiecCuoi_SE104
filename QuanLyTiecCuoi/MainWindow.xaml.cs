@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using QuanLyTiecCuoi.MVVM.View;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,8 @@ namespace QuanLyTiecCuoi
         public MainWindow()
         {
             InitializeComponent();
+
+            MainFrame.Navigate(new SanhView()); // Hiển thị Page SanhView
         }
     }
 }
