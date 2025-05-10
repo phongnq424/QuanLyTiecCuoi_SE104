@@ -21,10 +21,7 @@
 
   <ItemGroup>
     <Folder Include="MVVM\Model\Services\" />
-    <Folder Include="MVVM\View\" />
     <Folder Include="DTOs\" />
-    <Folder Include="Theme\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>
