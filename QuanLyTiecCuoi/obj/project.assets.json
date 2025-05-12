@@ -8,19 +8,19 @@
     "net8.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\my computer\\.nuget\\packages\\": {}
+    "C:\\Users\\phong\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj",
+      "projectUniqueName": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj",
       "projectName": "QuanLyTiecCuoi",
-      "projectPath": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj",
-      "packagesPath": "C:\\Users\\my computer\\.nuget\\packages\\",
-      "outputPath": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\obj\\",
+      "projectPath": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj",
+      "packagesPath": "C:\\Users\\phong\\.nuget\\packages\\",
+      "outputPath": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\my computer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\phong\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -69,7 +69,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
