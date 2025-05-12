@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\QuanLyTiecCuoi_SE104\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\view\\controlbar\\controlbarusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\view\\controlbar\\controlbarusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\view\\hoadon\\chitiethoadonwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\view\\hoadon\\chitiethoadonwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\quanlytieccuoi_se104\\quanlytieccuoi\\theme\\styles\\buttonstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\theme\\styles\\buttonstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\quanlytieccuoi_se104\\quanlytieccuoi\\theme\\styles\\textblockstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\theme\\styles\\textblockstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\quanlytieccuoi_se104\\quanlytieccuoi\\theme\\styles\\buttonstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\theme\\styles\\buttonstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\quanlytieccuoi_se104\\quanlytieccuoi\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\quanlytieccuoi_se104\\quanlytieccuoi\\theme\\styles\\textboxstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\theme\\styles\\textboxstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\view\\controlbar\\controlbarusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\view\\controlbar\\controlbarusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\quanlytieccuoi_se104\\quanlytieccuoi\\resourcesxaml\\mainresource.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -42,11 +42,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "TextBoxStyle.xaml",
               "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\TextBoxStyle.xaml",
               "RelativeDocumentMoniker": "QuanLyTiecCuoi\\Theme\\Styles\\TextBoxStyle.xaml",
@@ -82,7 +82,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ChiTietHoaDonWindow.xaml",
               "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\ChiTietHoaDonWindow.xaml",
               "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\ChiTietHoaDonWindow.xaml",
@@ -94,7 +94,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\App.xaml",
               "RelativeDocumentMoniker": "QuanLyTiecCuoi\\App.xaml",
@@ -106,7 +106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "ButtonStyles.xaml",
               "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\ButtonStyles.xaml",
               "RelativeDocumentMoniker": "QuanLyTiecCuoi\\Theme\\Styles\\ButtonStyles.xaml",
@@ -118,7 +118,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "ControlBarUserControl.xaml",
               "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\ControlBar\\ControlBarUserControl.xaml",
               "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MVVM\\View\\ControlBar\\ControlBarUserControl.xaml",
