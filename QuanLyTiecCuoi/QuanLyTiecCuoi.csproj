@@ -20,11 +20,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Resources\styles.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="MVVM\Model\Services\" />
     <Folder Include="MVVM\View\" />
     <Folder Include="DTOs\" />
     <Folder Include="Theme\" />
-    <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 
 </Project>
