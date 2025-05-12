@@ -8,13 +8,13 @@ D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\D
 QuanLyTiecCuoi
 none
 false
-TRACE;DEBUG;NET;NET8_0;NETCOREAPP
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\App.xaml
-11407045341
+8914882101
 
-9689179474
-198-556154604
-MainWindow.xaml;
+13-1023313896
+198-211836927
+MainWindow.xaml;MVVM\View\ControlBar\ControlBarUserControl.xaml;MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml;MVVM\View\HoaDon\HoaDonUserControl.xaml;ResourcesXAML\MainResource.xaml;Theme\Styles\ButtonStyles.xaml;Theme\Styles\TextBlockStyle.xaml;Theme\Styles\TextBoxStyle.xaml;
 
-False
+True
 
