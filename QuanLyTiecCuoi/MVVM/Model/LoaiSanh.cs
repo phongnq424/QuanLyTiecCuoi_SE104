@@ -1,15 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace QuanLyTiecCuoi.MVVM.Model
 {
-    public class LoaiSanh
+    public class LoaiSanh : INotifyPropertyChanged
     {
+        private string _tenLoaiSanh;
+        private double? _donGiaBanToiThieu;
+
         public int MaLoaiSanh { get; set; }
-        public string TenLoaiSanh { get; set; }
-        public decimal DonGiaBanToiThieu { get; set; }
+
+        public string TenLoaiSanh
+        {
+            get => _tenLoaiSanh;
+            set
+            {
+                if (_tenLoaiSanh != value)
+                {
+                    _tenLoaiSanh = value;
+                    OnPropertyChanged(nameof(TenLoaiSanh));
+                }
+            }
+        }
+
+        public double? DonGiaBanToiThieu
+        {
+            get => _donGiaBanToiThieu;
+            set
+            {
+                if (_donGiaBanToiThieu != value)
+                {
+                    _donGiaBanToiThieu = value;
+                    OnPropertyChanged(nameof(DonGiaBanToiThieu));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
+
 }

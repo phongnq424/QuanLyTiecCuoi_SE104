@@ -17,16 +17,22 @@
         <StackPanel>
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Tiêu đề -->
                 <TextBlock Text="Serenité Wedding - Sảnh Tiệc" 
-                FontSize="30" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,20,0"/>
+                FontSize="30" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="0"/>
 
-                <!-- Button DS Sảnh -->
-                <Button Content="Danh sách Sảnh" Width="150" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" Click="btnDSSanh_Click"/>
+                <!-- Nút Chi Tiết Loại Sảnh -->
+                <Button Content="Chi tiết Loại Sảnh" Width="150" Height="30" FontSize="16" Margin="0,0,30,0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" 
+                        Click="btnCTLoaiSanh_Click"/>
+
+                <!-- Nút Chi Tiết Sảnh -->
+                <Button Content="Chi tiết Sảnh" Width="120" Height="30" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" 
+                        Click="btnCTSanh_Click"/>
             </Grid>
 
             <!-- Bộ lọc ngày và ca -->

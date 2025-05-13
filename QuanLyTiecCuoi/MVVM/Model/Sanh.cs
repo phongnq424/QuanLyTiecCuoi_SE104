@@ -11,7 +11,7 @@ namespace QuanLyTiecCuoi.MVVM.Model
         public int MaSanh { get; set; }
         public string TenSanh { get; set; }
         public int MaLoaiSanh { get; set; }
-        public int SoLuongBanToiDa { get; set; }
+        public int? SoLuongBanToiDa { get; set; }
         public string GhiChu { get; set; }
         public string HinhAnh { get; set; }
 

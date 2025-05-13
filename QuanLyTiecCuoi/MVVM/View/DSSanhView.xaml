@@ -15,14 +15,16 @@
 
     <Grid Margin="20">
         <!-- Tiêu đề -->
-        <TextBlock Text="Danh Sách Sảnh Tiệc" FontSize="20" FontWeight="Bold" Margin="10" />
+        <TextBlock Text="Danh Sách Sảnh" FontSize="30" FontWeight="Bold" Margin="10" />
 
         <!-- DataGrid để hiển thị danh sách sảnh -->
         <DataGrid ItemsSource="{Binding DanhSachSanh}" 
+                  SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
                   AutoGenerateColumns="False" 
-                  Margin="10,50,10,10" 
+                  Margin="10,60,10,50" 
                   HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch">
+                  VerticalAlignment="Stretch"
+                  FontSize="16">
 
             <DataGrid.Columns>
                 <!-- Cột STT -->
@@ -45,7 +47,7 @@
                 <!-- Cột Đơn Giá Bàn Tối Thiểu -->
                 <DataGridTextColumn Header="Đơn Giá Bàn Tối Thiểu" 
                                     Width="*"
-                                    Binding="{Binding LoaiSanh.DonGiaBanToiThieu, StringFormat=C0}" />
+                                    Binding="{Binding LoaiSanh.DonGiaBanToiThieu, StringFormat=N0}" />
                 <!-- Cột Ghi Chú -->
                 <DataGridTextColumn Header="Ghi Chú" 
                                     Width="*"
@@ -53,11 +55,25 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- Nút Thêm mới sảnh -->
-        <Button Content="Thêm Sảnh" 
-                Command="{Binding AddSanhCommand}" 
-                VerticalAlignment="Bottom" 
-                HorizontalAlignment="Right" 
-                Margin="10" />
+        <Grid Margin="10" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Quay lại" Height="30" FontSize="16"
+                Click="btnQuayLai_Click" Margin="10,0,150,0"/>
+
+            <Button Grid.Column="1" Content="Thêm Sảnh" Height="30" FontSize="16"
+                Command="{Binding AddSanhCommand}" Margin="10,0,10,0" />
+
+            <Button Grid.Column="2" Content="Sửa Sảnh" Height="30" FontSize="16"
+                Command="{Binding EditSanhCommand}" Margin="10,0,10,0" />
+
+            <Button Grid.Column="3" Content="Xóa Sảnh" Height="30" FontSize="16"
+                Command="{Binding DeleteSanhCommand}" Margin="10,0,10,0" />
+        </Grid>
     </Grid>
 </Page>

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 D:\QuanLyTiecCuoi\QuanLyTiecCuoi\App.xaml
-31115469822
+62147110422
 2-285556205
-131504798664
+19340111681
 198-556154604
-MainWindow.xaml;MVVM\View\DSSanhView.xaml;MVVM\View\SanhView.xaml;
+MainWindow.xaml;MVVM\View\AddOrEditLoaiSanhWindow.xaml;MVVM\View\AddOrEditSanhWindow.xaml;MVVM\View\DSLoaiSanhView.xaml;MVVM\View\DSSanhView.xaml;MVVM\View\SanhView.xaml;
 
-False
+True
 

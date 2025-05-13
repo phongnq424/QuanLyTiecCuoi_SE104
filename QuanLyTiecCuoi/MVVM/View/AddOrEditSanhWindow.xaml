@@ -1,0 +1,67 @@
+﻿<Window x:Class="QuanLyTiecCuoi.MVVM.View.AddOrEditSanhWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View"
+        mc:Ignorable="d"
+        Title="Thêm Sửa Sảnh" Height="450" Width="800">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Tiêu đề -->
+            <RowDefinition Height="Auto"/>
+            <!-- Tên sảnh -->
+            <RowDefinition Height="Auto"/>
+            <!-- Loại sảnh -->
+            <RowDefinition Height="Auto"/>
+            <!-- Đơn giá bàn tối thiểu -->
+            <RowDefinition Height="Auto"/>
+            <!-- Số lượng bàn tối đa -->
+            <RowDefinition Height="Auto"/>
+            <!-- Ghi chú -->
+            <RowDefinition Height="Auto"/>
+            <!-- Nút Lưu -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Tiêu đề -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Thông Tin Sảnh" 
+           FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,10"/>
+
+        <!-- Tên Sảnh -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Tên sảnh:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
+        <TextBox Grid.Row="1" Grid.Column="1" FontSize="16" Height="30" Margin="0,10,10,0"
+             Text="{Binding SanhInfo.TenSanh, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- Loại Sảnh -->
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Loại sảnh:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" Height="30" FontSize="16" Margin="0,10,10,0"
+                  ItemsSource="{Binding DanhSachLoaiSanh}"
+                  SelectedItem="{Binding SelectedLoaiSanh, Mode=TwoWay}"
+                  DisplayMemberPath="TenLoaiSanh"/>
+
+        <!-- Đơn Giá Bàn Tối Thiểu -->
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Đơn giá bàn tối thiểu:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Height="30" FontSize="16" VerticalAlignment="Center" Margin="0,10,10,0"
+            Text="{Binding DonGiaBanToiThieuText}"/>
+        
+        <!-- Số Lượng Bàn Tối Đa -->
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Số lượng bàn tối đa:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
+        <TextBox Grid.Row="4" Grid.Column="1" FontSize="16" Height="30" Margin="0,10,10,0"
+            Text="{Binding SanhInfo.SoLuongBanToiDa,TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- Ghi Chú -->
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Ghi chú:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
+        <TextBox Grid.Row="5" Grid.Column="1" FontSize="16" Height="30" Margin="0,10,10,0"
+            Text="{Binding SanhInfo.GhiChu, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <!-- Nút Lưu -->
+        <Button Grid.Row="6" Grid.Column="1" Content="Lưu" Width="80" Height="30" FontSize="16"
+        HorizontalAlignment="Right" Margin="0,15,10,0" Click="btnSave_Click"/>
+    </Grid>
+</Window>

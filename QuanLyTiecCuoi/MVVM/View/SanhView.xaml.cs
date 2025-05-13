@@ -25,7 +25,12 @@ namespace QuanLyTiecCuoi.MVVM.View
             InitializeComponent();
         }
 
-        private void btnDSSanh_Click(object sender, RoutedEventArgs e)
+        private void btnCTLoaiSanh_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new DSLoaiSanhView());
+        }
+
+        private void btnCTSanh_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new DSSanhView());
         }

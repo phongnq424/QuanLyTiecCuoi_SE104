@@ -1,5 +1,7 @@
 ﻿using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.MVVM.Model;
+using QuanLyTiecCuoi.MVVM.View;
+using QuanLyTiecCuoi.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,57 +14,126 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
     public class SanhViewModel : BaseViewModel
     {
-        public ObservableCollection<Sanh> DanhSachSanh { get; set; }
+        private readonly LoaiSanhService _loaiSanhService;
+        private readonly SanhService _sanhService;
         public ObservableCollection<LoaiSanh> DanhSachLoaiSanh { get; set; }
+        public ObservableCollection<Sanh> DanhSachSanh { get; set; }
 
-        private Sanh _sanhDangChon;
-        public Sanh SanhDangChon
+        private Sanh _selectedSanh;
+        public Sanh SelectedSanh
         {
-            get => _sanhDangChon;
-            set { _sanhDangChon = value; OnPropertyChanged(); }
+            get => _selectedSanh;
+            set { _selectedSanh = value; OnPropertyChanged(); }
         }
 
-        public ICommand ThemSanhCommand { get; }
+        private LoaiSanh _selectedLoaiSanh;
+        public LoaiSanh SelectedLoaiSanh
+        {
+            get => _selectedLoaiSanh;
+            set
+            {
+                if (_selectedLoaiSanh != value)
+                {
+                    _selectedLoaiSanh = value;
+                    OnPropertyChanged();
+
+                    // Tự động cập nhật giá bàn tối thiểu hiển thị khi chọn loại sảnh
+                    OnPropertyChanged(nameof(DonGiaBanToiThieu));
+                }
+            }
+        }
+
+        // Thuộc tính chỉ hiển thị (readonly) – binding lên TextBlock
+        public double? DonGiaBanToiThieu
+        {
+            get => SelectedLoaiSanh?.DonGiaBanToiThieu;
+        }
+
+        public ICommand AddSanhCommand { get; set; }
+
+        public ICommand EditSanhCommand { get; set; }
+
+        public ICommand DeleteSanhCommand { get; set; }
+
 
         public SanhViewModel()
         {
             // Database
-            DanhSachLoaiSanh = new ObservableCollection<LoaiSanh>
-            {
-                new LoaiSanh { MaLoaiSanh = 1, TenLoaiSanh = "A", DonGiaBanToiThieu = 1000000},
-                new LoaiSanh { MaLoaiSanh = 2, TenLoaiSanh = "B", DonGiaBanToiThieu = 1100000}
-            };
+            _loaiSanhService = new LoaiSanhService();
+            DanhSachLoaiSanh = new ObservableCollection<LoaiSanh>(_loaiSanhService.GetAll());
 
-            DanhSachSanh = new ObservableCollection<Sanh>
-            {
-                new Sanh { MaSanh = 1, TenSanh = "Sảnh 1", MaLoaiSanh = 1, SoLuongBanToiDa = 20, GhiChu = "Sảnh nhỏ", LoaiSanh = DanhSachLoaiSanh[0], HinhAnh = "/Resources/sanh1.jpg" },
-                new Sanh { MaSanh = 2, TenSanh = "Sảnh 2", MaLoaiSanh = 2, SoLuongBanToiDa = 30, GhiChu = "Sảnh lớn", LoaiSanh = DanhSachLoaiSanh[1], HinhAnh = "/Resources/sanh2.jpg" }
-            };
+            _sanhService = new SanhService();
+            DanhSachSanh = new ObservableCollection<Sanh>(_sanhService.GetAll());
 
-            // Khởi tạo lệnh Thêm Sảnh 
-            ThemSanhCommand = new RelayCommand<object>(
+            // Khởi tạo lệnh 
+            AddSanhCommand = new RelayCommand<object>(
                 canExecute: _ => true,
-                execute: _ => ThemSanh()
+                execute: _ => AddSanh()
+            );
+
+            EditSanhCommand = new RelayCommand<object>(
+                canExecute: _ => SelectedSanh != null,
+                execute: _ => EditSanh()
+            );
+
+            DeleteSanhCommand = new RelayCommand<object>(
+                canExecute: _ => SelectedSanh != null,
+                execute: _ => DeleteSanh()
             );
         }
 
+        // Đếm số Sảnh
         public int SoLuongSanh
         {
             get { return DanhSachSanh.Count; }
         }
 
-        private void ThemSanh()
+        // Thêm Sảnh mới
+        private void AddSanh()
         {
-            // Thêm sảnh mới vào danh sách
-            DanhSachSanh.Add(new Sanh
+            var window = new AddOrEditSanhWindow(DanhSachLoaiSanh.ToList());
+            if (window.ShowDialog() == true)
             {
-                MaSanh = DanhSachSanh.Count + 1,
-                TenSanh = "Sảnh mới",
-                MaLoaiSanh = 1,
-                SoLuongBanToiDa = 5,
-                GhiChu = "Sảnh mới thêm",
-                LoaiSanh = DanhSachLoaiSanh[0]
-            });
+                var newSanh = window.SanhInfo;
+
+                _sanhService.AddSanh(newSanh);
+
+                DanhSachSanh = _sanhService.GetAll();
+                OnPropertyChanged(nameof(DanhSachSanh));
+
+                SelectedSanh = newSanh;
+            }
         }
+
+        // Chỉnh sửa Sảnh (Chỉ thay đổi các thuộc tính của Sảnh, không thay đổi LoaiSanh)
+        private void EditSanh()
+        {
+            var window = new AddOrEditSanhWindow(SelectedSanh, DanhSachLoaiSanh.ToList());
+            if (window.ShowDialog() == true)
+            {
+                var newSanh = window.SanhInfo;
+
+                _sanhService.AddSanh(newSanh);
+
+                DanhSachSanh = _sanhService.GetAll();
+                OnPropertyChanged(nameof(DanhSachSanh));
+
+                SelectedSanh = newSanh;
+            }
+        }
+
+        // Xóa Sảnh
+        private void DeleteSanh()
+        {
+            if (SelectedSanh == null) return;
+
+            _sanhService.DeleteSanh(SelectedSanh);
+
+            DanhSachSanh = _sanhService.GetAll();
+            OnPropertyChanged(nameof(DanhSachSanh));
+
+            SelectedSanh = null;
+        }
+
     }
 }
