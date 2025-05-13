@@ -105,7 +105,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
         }
 
-        // Chỉnh sửa Sảnh (Chỉ thay đổi các thuộc tính của Sảnh, không thay đổi LoaiSanh)
+        // Chỉnh sửa Sảnh
         private void EditSanh()
         {
             var window = new AddOrEditSanhWindow(SelectedSanh, DanhSachLoaiSanh.ToList());
@@ -113,7 +113,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             {
                 var newSanh = window.SanhInfo;
 
-                _sanhService.AddSanh(newSanh);
+                _sanhService.EditSanh(newSanh);
 
                 DanhSachSanh = _sanhService.GetAll();
                 OnPropertyChanged(nameof(DanhSachSanh));
