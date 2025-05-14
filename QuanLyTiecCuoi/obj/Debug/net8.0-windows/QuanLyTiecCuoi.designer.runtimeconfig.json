@@ -12,13 +12,12 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\my computer\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\my computer\\.nuget\\packages",
-      "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      "C:\\Users\\phong\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\phong\\.nuget\\packages"
     ],
     "configProperties": {
+      "System.Reflection.NullabilityInfoContext.IsSupported": true,
       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": true,
-      "CSWINRT_USE_WINDOWS_UI_XAML_PROJECTIONS": false,
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true
     }
   }

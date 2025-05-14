@@ -23,5 +23,10 @@ namespace QuanLyTiecCuoi.MVVM.View.HoaDon
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
