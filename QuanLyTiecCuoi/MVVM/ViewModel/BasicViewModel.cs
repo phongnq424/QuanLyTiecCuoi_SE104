@@ -19,8 +19,15 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             if (handler != null)
                 handler(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        class RelayCommand<T> : ICommand
+        protected bool SetProperty<T>(ref T backingField, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(backingField, value))
+                return false;
+            backingField = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+        public class RelayCommand<T> : ICommand
         {
             private readonly Predicate<T> _canExecute;
             private readonly Action<T> _execute;

@@ -223,7 +223,8 @@
                 Grid.Row="3" 
                 Margin="0,0,70,0"
                 Content="In hóa đơn"
-                Style="{StaticResource ButtonStyle}"/>
+                Style="{StaticResource ButtonStyle}"
+                        Click="Button_Click" />
 
 
             </StackPanel>

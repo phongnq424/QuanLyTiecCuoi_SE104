@@ -8,6 +8,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyTiecCuoi.MVVM.View;
+using QuanLyTiecCuoi.MVVM.View.HoaDon;
+using QuanLyTiecCuoi.MVVM.View.BaoCao;
 
 namespace QuanLyTiecCuoi
 {
@@ -19,6 +22,7 @@ namespace QuanLyTiecCuoi
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new BaoCaoPage());
         }
     }
 }
