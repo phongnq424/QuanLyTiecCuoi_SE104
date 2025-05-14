@@ -7,21 +7,21 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="DatTiec.xaml.cs">
+    <Compile Update="MVVM\View\DatTiec.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Tiec_tracuu.xaml.cs">
+    <Compile Update="MVVM\View\ThemTiec.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="DatTiec.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Tiec_tracuu.xaml">
+    <Page Update="MVVM\View\DatTiec.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\ThemTiec.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

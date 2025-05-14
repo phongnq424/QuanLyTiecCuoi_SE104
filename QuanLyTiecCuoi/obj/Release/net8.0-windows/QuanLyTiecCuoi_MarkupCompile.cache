@@ -10,11 +10,11 @@ none
 false
 TRACE;RELEASE;NET;NET8_0;NETCOREAPP
 D:\phongnq424\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\App.xaml
-3823560537
+3-44609524
 
-9402275140
-198-556154604
-DatTiec.xaml;MainWindow.xaml;Tiec_tracuu.xaml;
+151714402079
+2161302176528
+MainWindow.xaml;MVVM\View\DatTiec.xaml;MVVM\View\ThemTiec.xaml;
 
 True
 
