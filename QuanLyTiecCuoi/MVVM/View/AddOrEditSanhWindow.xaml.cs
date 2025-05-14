@@ -1,7 +1,10 @@
-﻿using QuanLyTiecCuoi.MVVM.Model;
+﻿using Microsoft.Win32;
+using QuanLyTiecCuoi.MVVM.Model;
+using QuanLyTiecCuoi.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -82,6 +85,46 @@ namespace QuanLyTiecCuoi.MVVM.View
             };
 
             DataContext = this;
+        }
+
+        private void btnChonAnh_Click(object sender, RoutedEventArgs e)
+        {
+            // Tạo một đối tượng OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png|All files (*.*)|*.*"
+            };
+
+            // Mở hộp thoại chọn file
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string selectedFileName = System.IO.Path.GetFileName(openFileDialog.FileName);
+                string targetFolder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
+
+                if (!Directory.Exists(targetFolder))
+                    Directory.CreateDirectory(targetFolder);
+
+                string targetPath = System.IO.Path.Combine(targetFolder, selectedFileName);
+
+                try
+                {
+                    // Sao chép file vào thư mục Resources
+                    File.Copy(openFileDialog.FileName, targetPath, true); // Ghi đè nếu đã tồn tại
+
+                    // Lưu tên file vào thuộc tính HinhAnh của SanhInfo
+                    SanhInfo.HinhAnh = selectedFileName;
+
+                    // Cập nhật TextBlock hoặc TextBox với tên file đã chọn
+                    ImageNameTextBlock.Text = selectedFileName;
+
+                    // Ẩn Button chọn hình ảnh
+                    ChooseImageButton.Visibility = Visibility.Collapsed;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi lưu ảnh: {ex.Message}");
+                }
+            }
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
