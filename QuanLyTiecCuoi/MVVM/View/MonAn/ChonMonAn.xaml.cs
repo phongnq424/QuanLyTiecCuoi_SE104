@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,27 +13,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using QuanLyTiecCuoi.MVVM.Model;
 
-namespace QuanLyTiecCuoi.MVVM.View.DichVu
+namespace QuanLyTiecCuoi.MVVM.View.MonAn
 {
-    /// <summary>
-    /// Interaction logic for ChonDichVu.xaml
-    /// </summary>
-    public partial class ChonDichVu : Window
+    public partial class ChonMonAn : Window
     {
-        public ObservableCollection<DichVu> DanhSachDichVu { get; set; } = new ObservableCollection<DichVu>();
-        public ObservableCollection<string> DichVuDaChon { get; set; } = new ObservableCollection<string>();
-        public ChonDichVu()
+        public ObservableCollection<MonAnModel> DanhSachMonAn { get; set; } = new ObservableCollection<MonAnModel>();
+        public ObservableCollection<string> MonAnDaChon { get; set; } = new ObservableCollection<string>();
+        
+
+
+        public ChonMonAn()
         {
             InitializeComponent();
             DataContext = this;
             //this.maDatTiecHienTai = maDatTiec;
-            LoadDichVuFromDatabase();
-        }
+            LoadMonAnFromDatabase();
 
+
+        }
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (sender is TextBox tb && (tb.Text == "Tên dịch vụ" || tb.Text == "Đơn giá"))
+            if (sender is TextBox tb && (tb.Text == "Tên món ăn" || tb.Text == "Đơn giá"))
             {
                 tb.Text = "";
                 tb.Foreground = System.Windows.Media.Brushes.Black;
@@ -46,7 +47,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
             if (sender is TextBox tb && string.IsNullOrWhiteSpace(tb.Text))
             {
                 if (tb.Name == "txtSearchName")
-                    tb.Text = "Tên dịch vụ";
+                    tb.Text = "Tên món ăn";
                 else if (tb.Name == "txtSearchPrice")
                     tb.Text = "Đơn giá";
 
@@ -55,10 +56,10 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
         }
 
 
-        private void LoadDichVuFromDatabase()
+        private void LoadMonAnFromDatabase()
         {
-            string connectionString = "Server=LAPTOP-4M3UQQRL;Database=QuanLyTiecCuoi;Trusted_Connection=True;";
-            string query = "SELECT MaDichVu, TenDichVu, DonGia, MoTa FROM DichVu";
+            //string connectionString = "Server=LAPTOP-4M3UQQRL;Database=QuanLyTiecCuoi;Trusted_Connection=True;";
+            //string query = "SELECT MaMon, TenMon, DonGia FROM MonAn";
 
             //using (SqlConnection conn = new SqlConnection(connectionString))
             //using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -67,23 +68,22 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
             //    SqlDataReader reader = cmd.ExecuteReader();
             //    while (reader.Read())
             //    {
-            //        DanhSachDichVu.Add(new DichVu   
+            //        DanhSachMonAn.Add(new MonAnModel
             //        {
-            //            MaDichVu = reader.GetInt32(0),
-            //            TenDichVu = reader.GetString(1),
-            //            DonGia = reader.GetDecimal(2),
-            //            MoTa = reader.GetString(1)
+            //            MaMon = reader.GetInt32(0),
+            //            TenMon = reader.GetString(1),
+            //            DonGia = reader.GetDecimal(2)
             //        });
             //    }
             //}
-
+           
         }
 
-        private void DichVu_Click(object sender, MouseButtonEventArgs e)
+        private void MonAn_Click(object sender, MouseButtonEventArgs e)
         {
-            if (sender is Border border && border.DataContext is DichVu dichVu)
+            if (sender is Border border && border.DataContext is MonAnModel monAn)
             {
-                DichVuDaChon.Add(dichVu.TenDichVu);
+                MonAnDaChon.Add(monAn.TenMon);
             }
         }
         private void Minimize_Click(object sender, RoutedEventArgs e)
@@ -105,23 +105,23 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             string connectionString = "Server=LAPTOP-4M3UQQRL;Database=QuanLyTiecCuoi;Trusted_Connection=True;";
-            string insertQuery = "INSERT INTO CHITIETDVTIEC (MaCTDV, MaDatTiec, MaDichVu, SoLuong, DonGia) VALUES (@MaCTDV, @MaDatTiec, @MaDichVu, @SoLuong, @DonGia)";
+            string insertQuery = "INSERT INTO CHITIETMENU (MaDatTiec, MaMon, SoLuong, DonGia, GhiChu) VALUES (@MaDatTiec, @MaMon, @SoLuong, @DonGia, @GhiChu)";
 
             //using (SqlConnection conn = new SqlConnection(connectionString))
             //{
             //    conn.Open();
 
-            //    foreach (string tenDichVu in DichVuDaChon)
+            //    foreach (string tenMon in MonAnDaChon)
             //    {
-            //        var dv = DanhSachDichVu.FirstOrDefault(m => m.TenDichVu == tenDichVu);
-            //        if (dv != null)
+            //        var mon = DanhSachMonAn.FirstOrDefault(m => m.TenMon == tenMon);
+            //        if (mon != null)
             //        {
             //            using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
             //            {
             //                cmd.Parameters.AddWithValue("@MaDatTiec", maDatTiecHienTai);
-            //                cmd.Parameters.AddWithValue("@MaMon", dv.MaDichVu);
+            //                cmd.Parameters.AddWithValue("@MaMon", mon.MaMon);
             //                cmd.Parameters.AddWithValue("@SoLuong", 1); // giả sử mỗi món 1 phần
-            //                cmd.Parameters.AddWithValue("@DonGia", dv.DonGia);
+            //                cmd.Parameters.AddWithValue("@DonGia", mon.DonGia);
             //                cmd.Parameters.AddWithValue("@GhiChu", DBNull.Value); // hoặc ghi chú nếu cần
 
             //                cmd.ExecuteNonQuery();
@@ -133,13 +133,8 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
             MessageBox.Show("Đã lưu thực đơn thành công!");
             this.Close(); // thoát form
         }
-    }
-    public class DichVu
-    {
-        public int MaDichVu { get; set; }
-        public string TenDichVu { get; set; }
-        public decimal DonGia { get; set; }
 
-        public string MoTa {  get; set; }
     }
+
+    
 }
