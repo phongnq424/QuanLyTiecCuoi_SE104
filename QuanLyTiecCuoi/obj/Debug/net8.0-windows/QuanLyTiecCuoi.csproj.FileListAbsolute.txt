@@ -105,7 +105,6 @@ D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuo
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\CHITIETBAOCAO.g.cs
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\ControlBar\ControlBarUserControl.g.cs
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\HoaDon\ChiTietHoaDonWindow.g.cs
-D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\HoaDon\HoaDonUserControl.g.cs
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\Login\LoginWindow.g.cs
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\MainWindow\MainWindow.g.cs
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\App.g.cs
@@ -116,7 +115,6 @@ D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuo
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\CHITIETBAOCAO.baml
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\ControlBar\ControlBarUserControl.baml
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\HoaDon\ChiTietHoaDonWindow.baml
-D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\HoaDon\HoaDonUserControl.baml
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\Login\LoginWindow.baml
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\MainWindow\MainWindow.baml
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\ResourcesXAML\MainResource.baml
@@ -136,3 +134,5 @@ D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuo
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\QuanLyTiecCuoi.genruntimeconfig.cache
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\ref\QuanLyTiecCuoi.dll
 D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\Theme\Styles\ButtonStyle.baml
+D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\HoaDon\HoaDonPage.g.cs
+D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\HoaDon\HoaDonPage.baml
