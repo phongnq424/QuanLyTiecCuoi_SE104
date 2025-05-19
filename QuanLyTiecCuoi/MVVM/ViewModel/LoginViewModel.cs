@@ -14,6 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Data.Services;
+using QuanLyTiecCuoi.MVVM.View.MainVindow;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
@@ -52,9 +53,10 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             ForgotPasswordCommand = new RelayCommand<Window>((P) => { return true; }, (p) => {
                 p.Close();
+                //bo chuc nang nay
             });
 
-            LoginCommand = new RelayCommand<object>((p) => 
+            LoginCommand = new RelayCommand<Window>((p) => 
             {
                 ErrorMessVisability = Visibility.Hidden;
                 if(loginCondition())
@@ -63,24 +65,38 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     return false;
                 }
                 return true;
-            }, async (p) =>
+            }, (p) => 
             {
-                NGUOIDUNG nguoidung = await NhanVienService.Ins.Login(UserName, Password);
-                if(nguoidung != null)
-                {
-                    //dang nhap thanh cong
-                }
-                else
-                {
-                    ErrorMessVisability = Visibility.Visible;
-                }
-
+                MainWindow wd = new MainWindow();
+                Application.Current.MainWindow = wd;
+                wd.Show();
+                p.Close();
+                //Login(p);
             });
+        }
+
+        private async void Login(Window p)
+        {
+            NGUOIDUNG nguoidung = await NhanVienService.Ins.Login(UserName, Password);
+            if (nguoidung == null)
+            {
+                MainWindowViewModel.NguoiDungHienTai = nguoidung;
+                MainWindow wd = new MainWindow()
+                {
+                    Owner = p
+                };
+                wd.Show();
+                p.Close();
+            }
+            else
+            {
+                ErrorMessVisability = Visibility.Visible;
+            }
         }
 
         private bool loginCondition()
         {
-            return (UserName.Length > 0) && (Password.Length > 0);
+            return (UserName != null) && (UserName.Length > 0) && (Password.Length > 0);
         }
 
     }

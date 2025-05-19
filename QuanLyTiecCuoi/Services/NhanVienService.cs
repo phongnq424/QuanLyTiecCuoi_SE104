@@ -48,5 +48,51 @@ namespace QuanLyTiecCuoi.Data.Services
                 return null;
             }
         }
+
+        public async Task<List<CHUCNANG>> LayChucNang(NGUOIDUNG nv)
+        {
+            try
+            {
+                using(var context = new WeddingDbContext())
+                {
+                    var danhsach = (from pq in context.PhanQuyens
+                                    where pq.MaNhom == nv.MaNhom
+                                    join cn in context.ChucNangs on pq.MaChucNang equals cn.MaChucNang
+                                    select new CHUCNANG
+                                    {
+                                        MaChucNang = cn.MaChucNang,
+                                        TenChucNang = cn.TenChucNang,
+                                        TenManHinhDuocLoad = cn.TenManHinhDuocLoad
+                                    }).ToListAsync();
+                    return await danhsach;
+                }
+            }
+            catch (Exception ex) {
+                return null;
+            }
+        }
+
+
+        public async Task<List<CHUCNANG>> LayTatCaChucNang()
+        {
+            try
+            {
+                using (var context = new WeddingDbContext())
+                {
+                    var danhsach = (from  cn in context.ChucNangs 
+                                    select new CHUCNANG
+                                    {
+                                        MaChucNang = cn.MaChucNang,
+                                        TenChucNang = cn.TenChucNang,
+                                        TenManHinhDuocLoad = cn.TenManHinhDuocLoad
+                                    }).ToListAsync();
+                    return await danhsach;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

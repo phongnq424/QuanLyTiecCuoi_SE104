@@ -17,7 +17,6 @@ namespace QuanLyTiecCuoi.Data.Models
         //bỏ đơn giá bàn
         public decimal DonGiaBan { get; set; }
         public decimal TongTienBan { get; set; }
-
         public int MaDatTiec { get; set; }
         public decimal TongTienDV { get; set; }
         public decimal TongTienHD { get; set; }

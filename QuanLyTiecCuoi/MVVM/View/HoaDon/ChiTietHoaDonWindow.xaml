@@ -10,7 +10,7 @@
         DataContext="{StaticResource HoaDonViewModel}"
         Background="Transparent"
         Title="ChiTietHoaDonWindow" 
-        Height="1000" Width="1600">
+        Height="900" Width="1000">
     <Border
         BorderThickness="2"
         BorderBrush="Black"
@@ -22,20 +22,20 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Border 
                 Grid.Row="0"
-                Height="100"
+                Height="80"
                 CornerRadius="60,60,0,0"
                 BorderThickness="0,0,0,2"
                 BorderBrush="Black"
                 Background="#D9D9D9">
                 <Grid>
                     <controlBar:ControlBarUserControl
-                        Width="auto" 
-                        VerticalAlignment="Top" 
-                        Margin="30"
+                        Width="auto"  
+                        Margin="30,0"
+                        VerticalAlignment="Center"
                         HorizontalAlignment="Right"/>
                     <TextBlock 
                         Text="Chi tiết hóa đơn"
@@ -44,7 +44,7 @@
             </Border>
             <Border
                 Grid.Row="1"
-                Margin="50,20"
+                Margin="30,20,30,10"
                 Padding="10"
                 CornerRadius="30"
                 BorderBrush="Black"
@@ -98,7 +98,7 @@
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.8*"/>
@@ -107,8 +107,7 @@
 
                 <Grid Grid.Column="0" Grid.Row="0">
                     <Border
-                        Grid.Row="0"
-                        Margin="50,10,0,10"
+                        Margin="30,10,0,10"
                         CornerRadius="30"
                         BorderBrush="Black"
                         BorderThickness="1"
@@ -121,6 +120,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock
+                                Margin="15,10"
                                 Text="Menu"
                                 Style="{StaticResource Header3Style}"></TextBlock>
 
@@ -145,15 +145,13 @@
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
-                        
-                        
                     </Border>
                 </Grid>
 
                 <Grid Grid.Column="1" Grid.Row="0">
                     <Border
                         Grid.Row="0"
-                        Margin="30,10,50,10"
+                        Margin="30,10,30,10"
                         CornerRadius="30"
                         BorderBrush="Black"
                         BorderThickness="1"
@@ -166,16 +164,15 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock
+                                VerticalAlignment="Center"
+                                Margin="15,10"
                                 Text="Dịch vụ"
                                 Style="{StaticResource Header3Style}"/>
                             <Button
                                 Style="{StaticResource ButtonStyle}"
-                                Height="60"
-                                Width="200"
-                                
                                 HorizontalAlignment="Right"
                                 Margin="5"
-                                Content="Thêm"/>
+                                Content="Thêm dịch vụ"/>
 
                             <ListView
                                 Grid.Row="1">
@@ -315,24 +312,24 @@
             </Grid>
             <Button 
                 Grid.Row="3" 
+                Margin="30,0"
                 HorizontalAlignment="Left"
-                Margin="70,0"
                 Content="Lưu thay đổi"
                 Command="{Binding LuuThayDoiCommand}"
                 Style="{StaticResource ButtonStyle}"/>
 
-            <StackPanel Grid.Row="3" HorizontalAlignment="Right" Orientation="Horizontal">
+            <StackPanel Grid.Row="3" HorizontalAlignment="Right" 
+                        Margin="30,0"
+                        Orientation="Horizontal">
                 
             <Button 
                 Grid.Row="3" 
-                Margin="0,0,70,0"
                 Content="Xác nhận thanh toán"
                 Command="{Binding ThanhToanCommand}"
                 Style="{StaticResource ButtonStyle}"/>
 
             <Button 
                 Grid.Row="3" 
-                Margin="0,0,70,0"
                 Content="In hóa đơn"
                 Command="{Binding InHoaDonCommand}"
                 Style="{StaticResource ButtonStyle}"/>

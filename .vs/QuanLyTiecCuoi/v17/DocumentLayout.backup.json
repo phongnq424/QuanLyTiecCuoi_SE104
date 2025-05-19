@@ -3,60 +3,36 @@
   "WorkspaceRootPath": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\theme\\styles\\buttonstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\theme\\styles\\buttonstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\view\\hoadon\\chitiethoadonwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\view\\hoadon\\chitiethoadonwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\view\\hoadon\\hoadonusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\view\\hoadon\\hoadonusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\viewmodel\\hoadonviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\viewmodel\\hoadonviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\resourcesxaml\\mainresource.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\resourcesxaml\\mainresource.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\view\\mainwindow\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\view\\mainwindow\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\view\\login\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\view\\login\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\theme\\styles\\datepickerstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\theme\\styles\\datepickerstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\theme\\styles\\buttonstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\theme\\styles\\buttonstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\view\\hoadon\\hoadonusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\view\\hoadon\\hoadonusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\theme\\styles\\textboxstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\theme\\styles\\textboxstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\viewmodel\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\viewmodel\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\theme\\styles\\textblockstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\theme\\styles\\textblockstyle.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\view\\hoadon\\hoadonusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\view\\hoadon\\hoadonusercontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\data\\services\\hoadonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\data\\services\\hoadonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\viewmodel\\hoadonviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\viewmodel\\hoadonviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\data\\services\\nhanvienservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\data\\services\\nhanvienservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\data\\models\\nguoidung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\data\\models\\nguoidung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|d:\\uit\\ki_4\\se104_nmcnpm\\do_an\\project\\maindb\\quanlytieccuoi_se104\\quanlytieccuoi\\mvvm\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FAA861B-CCBD-494F-8B79-58D2EC73061B}|QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj|solutionrelative:quanlytieccuoi\\mvvm\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -65,18 +41,18 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 383,
-          "SelectedChildIndex": 4,
+          "DockedWidth": 483,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "LoginViewModel.cs",
               "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\ViewModel\\LoginViewModel.cs",
               "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MVVM\\ViewModel\\LoginViewModel.cs",
               "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\ViewModel\\LoginViewModel.cs",
               "RelativeToolTip": "QuanLyTiecCuoi\\MVVM\\ViewModel\\LoginViewModel.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAgwBEAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAAAEgAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-16T08:22:25.537Z",
               "IsPinned": true,
@@ -84,7 +60,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "HoaDonUserControl.xaml",
               "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\HoaDonUserControl.xaml",
               "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\HoaDonUserControl.xaml",
@@ -97,13 +73,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "HoaDonViewModel.cs",
               "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\ViewModel\\HoaDonViewModel.cs",
               "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MVVM\\ViewModel\\HoaDonViewModel.cs",
               "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\ViewModel\\HoaDonViewModel.cs",
               "RelativeToolTip": "QuanLyTiecCuoi\\MVVM\\ViewModel\\HoaDonViewModel.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAlwFQAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAtwFQAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-16T08:48:31.667Z",
               "IsPinned": true,
@@ -112,26 +88,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ChiTietHoaDonWindow.xaml",
-              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\ChiTietHoaDonWindow.xaml",
-              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\ChiTietHoaDonWindow.xaml",
-              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\ChiTietHoaDonWindow.xaml",
-              "RelativeToolTip": "QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\ChiTietHoaDonWindow.xaml",
+              "Title": "LoginWindow.xaml",
+              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\Login\\LoginWindow.xaml",
+              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MVVM\\View\\Login\\LoginWindow.xaml",
+              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\Login\\LoginWindow.xaml",
+              "RelativeToolTip": "QuanLyTiecCuoi\\MVVM\\View\\Login\\LoginWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-16T10:13:27.785Z",
-              "IsPinned": true,
+              "WhenOpened": "2025-05-19T12:36:07.106Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ButtonStyles.xaml",
-              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\ButtonStyles.xaml",
-              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\Theme\\Styles\\ButtonStyles.xaml",
-              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\ButtonStyles.xaml",
-              "RelativeToolTip": "QuanLyTiecCuoi\\Theme\\Styles\\ButtonStyles.xaml",
+              "DocumentIndex": 2,
+              "Title": "ButtonStyle.xaml",
+              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\ButtonStyle.xaml",
+              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\Theme\\Styles\\ButtonStyle.xaml",
+              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\ButtonStyle.xaml",
+              "RelativeToolTip": "QuanLyTiecCuoi\\Theme\\Styles\\ButtonStyle.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-19T03:42:00.429Z",
+              "WhenOpened": "2025-05-19T12:35:04.053Z",
               "EditorCaption": ""
             },
             {
@@ -148,120 +123,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "App.xaml",
-              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\App.xaml",
-              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\App.xaml",
-              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\App.xaml",
-              "RelativeToolTip": "QuanLyTiecCuoi\\App.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-19T01:56:14.476Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "MainResource.xaml",
-              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\ResourcesXAML\\MainResource.xaml",
-              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\ResourcesXAML\\MainResource.xaml",
-              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\ResourcesXAML\\MainResource.xaml",
-              "RelativeToolTip": "QuanLyTiecCuoi\\ResourcesXAML\\MainResource.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-19T01:56:10.093Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DatePickerStyle.xaml",
-              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\DatePickerStyle.xaml",
-              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\Theme\\Styles\\DatePickerStyle.xaml",
-              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\DatePickerStyle.xaml",
-              "RelativeToolTip": "QuanLyTiecCuoi\\Theme\\Styles\\DatePickerStyle.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-19T01:55:09.096Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "HoaDonService.cs",
-              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Data\\Services\\HoaDonService.cs",
-              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\Data\\Services\\HoaDonService.cs",
-              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Data\\Services\\HoaDonService.cs",
-              "RelativeToolTip": "QuanLyTiecCuoi\\Data\\Services\\HoaDonService.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAADwvzQAAAANAAAAAAAAAA==",
+              "Title": "MainWindowViewModel.cs",
+              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\ViewModel\\MainWindowViewModel.cs",
+              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MVVM\\ViewModel\\MainWindowViewModel.cs",
+              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\ViewModel\\MainWindowViewModel.cs",
+              "RelativeToolTip": "QuanLyTiecCuoi\\MVVM\\ViewModel\\MainWindowViewModel.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAA1wIEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-18T18:44:30.225Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "TextBlockStyle.xaml",
-              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\TextBlockStyle.xaml",
-              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\Theme\\Styles\\TextBlockStyle.xaml",
-              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\TextBlockStyle.xaml",
-              "RelativeToolTip": "QuanLyTiecCuoi\\Theme\\Styles\\TextBlockStyle.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-18T18:23:13.478Z",
+              "WhenOpened": "2025-05-19T12:10:26.68Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "TextBoxStyle.xaml",
-              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\TextBoxStyle.xaml",
-              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\Theme\\Styles\\TextBoxStyle.xaml",
-              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Theme\\Styles\\TextBoxStyle.xaml",
-              "RelativeToolTip": "QuanLyTiecCuoi\\Theme\\Styles\\TextBoxStyle.xaml",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\MainWindow\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MVVM\\View\\MainWindow\\MainWindow.xaml",
+              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\MainWindow\\MainWindow.xaml",
+              "RelativeToolTip": "QuanLyTiecCuoi\\MVVM\\View\\MainWindow\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-18T18:23:12.217Z",
+              "WhenOpened": "2025-05-19T12:03:43.643Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "NhanVienService.cs",
-              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Data\\Services\\NhanVienService.cs",
-              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\Data\\Services\\NhanVienService.cs",
-              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Data\\Services\\NhanVienService.cs",
-              "RelativeToolTip": "QuanLyTiecCuoi\\Data\\Services\\NhanVienService.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAQwCAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "HoaDonUserControl.xaml.cs",
+              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\HoaDonUserControl.xaml.cs",
+              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\HoaDonUserControl.xaml.cs",
+              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\HoaDonUserControl.xaml.cs",
+              "RelativeToolTip": "QuanLyTiecCuoi\\MVVM\\View\\HoaDon\\HoaDonUserControl.xaml.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAqwBUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-18T18:10:39.626Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LoginWindow.xaml",
-              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\Login\\LoginWindow.xaml",
-              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\MVVM\\View\\Login\\LoginWindow.xaml",
-              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\MVVM\\View\\Login\\LoginWindow.xaml",
-              "RelativeToolTip": "QuanLyTiecCuoi\\MVVM\\View\\Login\\LoginWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-16T09:58:27.464Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "NGUOIDUNG.cs",
-              "DocumentMoniker": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Data\\Models\\NGUOIDUNG.cs",
-              "RelativeDocumentMoniker": "QuanLyTiecCuoi\\Data\\Models\\NGUOIDUNG.cs",
-              "ToolTip": "D:\\uit\\KI_4\\SE104_NMCNPM\\Do_An\\Project\\mainDB\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\Data\\Models\\NGUOIDUNG.cs",
-              "RelativeToolTip": "QuanLyTiecCuoi\\Data\\Models\\NGUOIDUNG.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABEAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T09:12:27.2Z",
+              "WhenOpened": "2025-05-19T12:01:25.665Z",
               "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedWidth": 189,
+          "DockedWidth": 89,
           "SelectedChildIndex": -1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"

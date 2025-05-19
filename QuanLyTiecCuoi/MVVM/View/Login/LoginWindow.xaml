@@ -7,14 +7,15 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         MouseDown="MainWindow_MouseDown"
-        x:Name="DangNhapWindow"
+        WindowStartupLocation="CenterScreen"
+        x:Name="MangHinhDangNhap"
         WindowStyle="None"
         Title="LoginWindow" Height="600" Width="960">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding FirstLoadCommand}" 
-                                   CommandParameter="{Binding ElementName=DangNhapWindow}" />
+                                   CommandParameter="{Binding ElementName=MangHinhDangNhap}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Border>
@@ -102,16 +103,17 @@
                                 Style="{StaticResource ToggleButtonPassword}"/>
                         </Grid>
 
-                        <Button
+                        <!--<Button
                             Style="{StaticResource ForgotPassWordStyle}"
                             Content="Quên mật khẩu"
                             Command="{Binding ForgotPasswordCommand}"
-                            CommandParameter="{Binding ElementName=DangNhapWindow}"></Button>
+                            CommandParameter="{Binding ElementName=MangHinhDangNhap}"></Button>-->
 
                         <Button
                             Margin="0,50,0,10"
                             Content="Đăng nhập"
                             Command="{Binding LoginCommand }"
+                            CommandParameter="{Binding ElementName=MangHinhDangNhap}"
                             Style="{StaticResource LoginButtonStyle}"></Button>
 
 
