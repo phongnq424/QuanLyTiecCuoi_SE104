@@ -18,7 +18,7 @@ namespace QuanLyTiecCuoi.MVVM.View.HoaDon
     /// <summary>
     /// Interaction logic for HoaDonUserControl.xaml
     /// </summary>
-    public partial class HoaDonUserControl : UserControl
+    public partial class HoaDonUserControl : Page
     {
         public HoaDonUserControl()
         {

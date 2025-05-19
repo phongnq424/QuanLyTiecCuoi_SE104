@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\
+D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\
 QuanLyTiecCuoi
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\App.xaml
-8914882101
+D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\mainDB\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\App.xaml
+12897491936
 
-11-212958680
-198-211836927
-MainWindow.xaml;MVVM\View\ControlBar\ControlBarUserControl.xaml;MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml;MVVM\View\HoaDon\HoaDonUserControl.xaml;ResourcesXAML\MainResource.xaml;Theme\Styles\ButtonStyles.xaml;Theme\Styles\TextBlockStyle.xaml;Theme\Styles\TextBoxStyle.xaml;
+38496624200
+225-2001665997
+MVVM\View\CHITIETBAOCAO.xaml;MVVM\View\ControlBar\ControlBarUserControl.xaml;MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml;MVVM\View\HoaDon\HoaDonUserControl.xaml;MVVM\View\Login\LoginWindow.xaml;MVVM\View\MainWindow\MainWindow.xaml;ResourcesXAML\MainResource.xaml;Theme\Styles\ButtonStyle.xaml;Theme\Styles\DatePickerStyle.xaml;Theme\Styles\PasswordBoxStyle.xaml;Theme\Styles\TextBlockStyle.xaml;Theme\Styles\TextBoxStyle.xaml;
 
 False
 
