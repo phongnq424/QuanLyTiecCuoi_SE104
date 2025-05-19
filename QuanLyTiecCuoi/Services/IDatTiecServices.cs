@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace QuanLyTiecCuoi.MVVM.Model.Services
+namespace QuanLyTiecCuoi.Services
 {
     public interface IDatTiecService
     {
-        List<DatTiecModel> GetAll();
-        void Add(DatTiecModel tiec);
+        //List<DatTiecModel> GetAll();
+        //void Add(DatTiecModel tiec);
     }
 }

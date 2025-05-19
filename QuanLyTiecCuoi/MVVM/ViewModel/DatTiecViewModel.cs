@@ -17,7 +17,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
     {
         private readonly IDatTiecService _datTiecService;
 
-        public ObservableCollection<DatTiecModel> DanhSachDatTiec { get; set; } = new ObservableCollection<DatTiecModel>();
+        public ObservableCollection<DatTiecServices> DanhSachDatTiec { get; set; } = new ObservableCollection<DatTiecServices>();
 
         public DatTiecViewModel(IDatTiecService datTiecService)
         {

@@ -14,7 +14,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
     public class ThemTiecViewModel : INotifyPropertyChanged
     {
-        public DatTiecModel TiecMoi { get; set; } = new DatTiecModel();
+        public DatTiecServices TiecMoi { get; set; } = new DatTiecServices();
         public ICommand LuuCommand { get; set; }
 
         private readonly IDatTiecService _service;

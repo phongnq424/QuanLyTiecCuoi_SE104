@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyTiecCuoi.MVVM.Model
 {
-    public class DatTiecModel
+    public class DatTiecServices
     {
         public int MaDatTiec { get; set; }
         public string TenCoDau { get; set; }
