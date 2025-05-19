@@ -1,0 +1,68 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Style cho DatePicker -->
+    <Style x:Key="CustomDatePickerStyle" TargetType="DatePicker">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Width" Value="auto"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DatePicker">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <DatePickerTextBox
+                            x:Name="PART_TextBox"
+                            Background="Transparent"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="0,0,0,2"
+                            Foreground="Black"
+                            Padding="5,0"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+                        <Button 
+                            x:Name="PART_Button"
+                            Foreground="Gray"
+                            Grid.Column="1"
+                            Focusable="False"
+                            IsTabStop="False"
+                            ClickMode="Press"
+                            FontFamily="Segoe MDL2 Assets"
+                            Content="&#xE787;"
+                            Margin="5,0,0,0"
+                            FontSize="24"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="0">
+                        </Button>
+
+                        <Popup x:Name="PART_Popup"
+                           Placement="Bottom"
+                           PlacementTarget="{Binding ElementName=PART_TextBox}"
+                           IsOpen="{TemplateBinding IsDropDownOpen}"
+                           AllowsTransparency="True"
+                           Focusable="False"
+                           StaysOpen="False">
+                            <Border BorderBrush="Gray" BorderThickness="1" Background="White">
+                                <Calendar x:Name="PART_Calendar"
+                                      IsTodayHighlighted="True"
+                                      SelectedDate="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                            </Border>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

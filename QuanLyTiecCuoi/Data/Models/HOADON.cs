@@ -14,6 +14,7 @@ namespace QuanLyTiecCuoi.Data.Models
         public int MaHoaDon { get; set; }
         public DateTime NgayThanhToan { get; set; }
 
+        //bỏ đơn giá bàn
         public decimal DonGiaBan { get; set; }
         public decimal TongTienBan { get; set; }
 
