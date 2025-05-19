@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using QuanLyTiecCuoi.MVVM.Model.Services;
+using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -25,17 +25,17 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             LoadData();
         }
 
-        private void LoadData()
-        {
-            var list = _datTiecService.GetAll();
-            DanhSachDatTiec.Clear();
+        //private void LoadData()
+        //{
+        //    var list = _datTiecService.GetAll();
+        //    DanhSachDatTiec.Clear();
 
-            foreach (var item in list)
-            {
-                DanhSachDatTiec.Add(item);
-            }
+        //    foreach (var item in list)
+        //    {
+        //        DanhSachDatTiec.Add(item);
+        //    }
                 
-        }
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
