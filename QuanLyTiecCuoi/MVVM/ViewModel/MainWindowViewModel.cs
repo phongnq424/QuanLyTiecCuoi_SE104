@@ -64,7 +64,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     new CHUCNANG() { MaChucNang = 0, TenChucNang = "Trang chủ", TenManHinhDuocLoad = "Trangchu"},
                     new CHUCNANG() { MaChucNang = 0, TenChucNang = "Sảnh", TenManHinhDuocLoad = "Sanh"},
                     new CHUCNANG() { MaChucNang = 0, TenChucNang = "Đặt tiệc", TenManHinhDuocLoad = "DatTiec"},
-                    new CHUCNANG() { MaChucNang = 0, TenChucNang = "Hóa đơn", TenManHinhDuocLoad = "HoaDon.HoaDonUserControl"},
+                    new CHUCNANG() { MaChucNang = 0, TenChucNang = "Hóa đơn", TenManHinhDuocLoad = "HoaDon.HoaDonPage"},
                     new CHUCNANG() { MaChucNang = 0, TenChucNang = "Báo cáo", TenManHinhDuocLoad = "Trangchu"},
                     new CHUCNANG() { MaChucNang = 0, TenChucNang = "Tùy chỉnh", TenManHinhDuocLoad = "Trangchu"},
                 };
@@ -125,19 +125,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 return null;
 
             return Activator.CreateInstance(type);
-        }
-
-        public void NavigatePage(string pageName)
-        {
-            string fullTypeName = $"QuanLyTiecCuoi.MVVM.View.{pageName}";
-
-            var type = AppDomain.CurrentDomain.GetAssemblies()
-                        .SelectMany(a => a.GetTypes())
-                        .FirstOrDefault(t => t.FullName == fullTypeName);
-
-            var pageInstance = Activator.CreateInstance(type) as Page;
-
-            CurrentView = pageInstance;
         }
     }
 }

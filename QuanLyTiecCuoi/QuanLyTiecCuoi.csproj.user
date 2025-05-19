@@ -13,7 +13,7 @@
     <Compile Update="MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MVVM\View\HoaDon\HoaDonUserControl.xaml.cs">
+    <Compile Update="MVVM\View\HoaDon\HoaDonPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

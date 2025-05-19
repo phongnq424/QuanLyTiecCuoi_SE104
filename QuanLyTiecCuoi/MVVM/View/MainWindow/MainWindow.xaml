@@ -109,10 +109,6 @@
             Padding="30"
             NavigationUIVisibility="Hidden"
             Content="{Binding CurrentView}"
-            Grid.Column="1" Source="{Binding CurrentView}"/>
-        <!--<Grid Grid.Column="1">
-            <ContentControl 
-                Content="{Binding CurrentView}"/>
-        </Grid>-->
+            Grid.Column="1"  />
     </Grid>
 </Window>
