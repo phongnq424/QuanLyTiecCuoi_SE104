@@ -6,68 +6,69 @@
       xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View"
       xmlns:vm="clr-namespace:QuanLyTiecCuoi.MVVM.ViewModel"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1000" d:DesignWidth="1600"
       Title="DSLoaiSanhView">
 
     <Page.DataContext>
         <vm:LoaiSanhViewModel />
     </Page.DataContext>
 
-    <Grid Margin="20">
-        <!-- Tiêu đề -->
-        <TextBlock Text="Danh Sách Loại Sảnh" FontSize="30" FontWeight="Bold" Margin="10" />
+    <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
+        <Grid Margin="20">
+            <!-- Tiêu đề -->
+            <TextBlock Text="Danh Sách Loại Sảnh" FontSize="40" FontFamily="Cambria" FontWeight="Bold" Margin="10" />
 
-        <!-- DataGrid để hiển thị danh sách sảnh -->
-        <DataGrid ItemsSource="{Binding DanhSachLoaiSanh}"
-                  SelectedItem="{Binding SelectedLoaiSanh, Mode=TwoWay}"
-                  AutoGenerateColumns="False" 
-                  Margin="10,60,10,50" 
-                  HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch"
-                  FontSize="16">
+            <!-- DataGrid để hiển thị danh sách sảnh -->
+            <DataGrid ItemsSource="{Binding DanhSachLoaiSanh}"
+                      SelectedItem="{Binding SelectedLoaiSanh, Mode=TwoWay}"
+                      AutoGenerateColumns="False" 
+                      Margin="10,70,10,70" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch"
+                      FontSize="20" FontFamily="Cambria">
 
-            <DataGrid.Columns>
-                <!-- Cột STT -->
-                <DataGridTextColumn Header="STT"
-                                Width="50" 
-                                IsReadOnly="True" 
-                                Binding="{Binding MaLoaiSanh}" />
-                <!-- Cột Loại Sảnh -->
-                <DataGridTextColumn Header="Tên Loại Sảnh" 
-                                Width="*"
-                                Binding="{Binding TenLoaiSanh}" />
-                <!-- Cột Đơn Giá Bàn Tối Thiểu -->
-                <DataGridTextColumn Header="Đơn Giá Bàn Tối Thiểu" 
-                                Width="*"
-                                Binding="{Binding DonGiaBanToiThieu, StringFormat=N0}" />
-            </DataGrid.Columns>
-        </DataGrid>
+                <DataGrid.Columns>
+                    <!-- Cột STT -->
+                    <DataGridTextColumn Header="STT"
+                                    Width="200" 
+                                    IsReadOnly="True" 
+                                    Binding="{Binding MaLoaiSanh}" />
+                    <!-- Cột Loại Sảnh -->
+                    <DataGridTextColumn Header="Tên Loại Sảnh" 
+                                    Width="*"
+                                    Binding="{Binding TenLoaiSanh}" />
+                    <!-- Cột Đơn Giá Bàn Tối Thiểu -->
+                    <DataGridTextColumn Header="Đơn Giá Bàn Tối Thiểu" 
+                                    Width="*"
+                                    Binding="{Binding DonGiaBanToiThieu, StringFormat=N0}" />
+                </DataGrid.Columns>
+            </DataGrid>
 
-        <Grid Margin="10" VerticalAlignment="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <Grid Margin="10" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <!-- Nút Quay Lại -->
-            <Button Grid.Column="0" Content="Quay lại" Height="30" FontSize="16"
-                Click="btnQuayLai_Click" Margin="10,0,150,0"/>
+                <!-- Nút Quay Lại -->
+                <Button Grid.Column="0" Content="Quay lại" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Left"
+                    Click="btnQuayLai_Click" Style="{StaticResource ButtonStyle}" Margin="10,0,0,0" />
 
-            <!-- Nút Thêm Sảnh -->
-            <Button Grid.Column="1" Content="Thêm Sảnh" Height="30" FontSize="16"
-                Command="{Binding AddLoaiSanhCommand}" Margin="10,0,10,0" />
+                <!-- Nút Thêm Loại Sảnh -->
+                <Button Grid.Column="1" Content="Thêm Loại Sảnh" Height="40" Width="220" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                    Command="{Binding AddLoaiSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
 
-            <!-- Nút Sửa Sảnh -->
-            <Button Grid.Column="2" Content="Sửa Sảnh" Height="30" FontSize="16"
-                Command="{Binding EditLoaiSanhCommand}" Margin="10,0,10,0" />
+                <!-- Nút Sửa Sảnh -->
+                <Button Grid.Column="2" Content="Sửa Loại Sảnh" Height="40" Width="220" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                    Command="{Binding EditLoaiSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
 
-            <!-- Nút Xóa Sảnh -->
-            <Button Grid.Column="3" Content="Xóa Sảnh" Height="30" FontSize="16"
-                Command="{Binding DeleteLoaiSanhCommand}" Margin="10,0,10,0" />
+                <!-- Nút Xóa Sảnh -->
+                <Button Grid.Column="3" Content="Xóa Loại Sảnh" Height="40" Width="220" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                    Command="{Binding DeleteLoaiSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
+            </Grid>
         </Grid>
-    </Grid>
-    
+    </Border>
     
 </Page>

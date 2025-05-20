@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View"
         mc:Ignorable="d"
-        Title="Thêm Sửa Sảnh" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Thêm Sửa Sảnh" Height="550" Width="950">
     
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -32,45 +33,53 @@
         </Grid.ColumnDefinitions>
 
         <!-- Tiêu đề -->
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Thông Tin Sảnh" 
-           FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,10"/>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Thông Tin Sảnh" FontFamily="Cambria"
+           FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,30"/>
 
         <!-- Tên Sảnh -->
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Tên sảnh:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
-        <TextBox Grid.Row="1" Grid.Column="1" FontSize="16" Height="30" Margin="0,10,10,0"
-             Text="{Binding SanhInfo.TenSanh, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Tên sảnh:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,10,15"/>
+        <Border Grid.Row="1" Grid.Column="1" Height="40" Margin="0,0,10,15" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+            <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalContentAlignment="Center"
+                     Text="{Binding SanhInfo.TenSanh, UpdateSourceTrigger=PropertyChanged}"/>
+        </Border>
 
         <!-- Loại Sảnh -->
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Loại sảnh:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
-        <ComboBox Grid.Row="2" Grid.Column="1" Height="30" FontSize="16" Margin="0,10,10,0"
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Loại sảnh:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,10,15"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" Height="40" FontSize="20" FontFamily="Cambria" Margin="0,0,10,15" VerticalContentAlignment="Center"
                   ItemsSource="{Binding DanhSachLoaiSanh}"
                   SelectedItem="{Binding SelectedLoaiSanh, Mode=TwoWay}"
                   DisplayMemberPath="TenLoaiSanh"/>
 
         <!-- Đơn Giá Bàn Tối Thiểu -->
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Đơn giá bàn tối thiểu:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
-        <TextBlock Grid.Row="3" Grid.Column="1" Height="30" FontSize="16" VerticalAlignment="Center" Margin="0,10,10,0"
-            Text="{Binding DonGiaBanToiThieuText}"/>
-        
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Đơn giá bàn tối thiểu:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,10,15"/>
+        <Border Grid.Row="3" Grid.Column="1" Height="40" Margin="0,0,10,15" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+            <TextBlock FontSize="20" FontFamily="Cambria" Background="Transparent" Padding="5,0" VerticalAlignment="Center"
+                       Text="{Binding DonGiaBanToiThieuText}"/>
+        </Border>
+
         <!-- Số Lượng Bàn Tối Đa -->
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Số lượng bàn tối đa:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
-        <TextBox Grid.Row="4" Grid.Column="1" FontSize="16" Height="30" Margin="0,10,10,0"
-            Text="{Binding SanhInfo.SoLuongBanToiDa,TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Số lượng bàn tối đa:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,10,15"/>
+        <Border Grid.Row="4" Grid.Column="1" Height="40" Margin="0,0,10,15" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+            <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalContentAlignment="Center"
+             Text="{Binding SanhInfo.SoLuongBanToiDa,TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>
+        </Border>
 
         <!-- Ghi Chú -->
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Ghi chú:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
-        <TextBox Grid.Row="5" Grid.Column="1" FontSize="16" Height="30" Margin="0,10,10,0"
-            Text="{Binding SanhInfo.GhiChu, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Ghi chú:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,10,15"/>
+        <Border Grid.Row="5" Grid.Column="1" Height="40" Margin="0,0,10,15" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+            <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalContentAlignment="Center"
+                     Text="{Binding SanhInfo.GhiChu, UpdateSourceTrigger=PropertyChanged}"/>
+        </Border>
 
         <!-- Hình Ảnh -->
-        <TextBlock Grid.Row="6" Grid.Column="0" Text="Hình ảnh:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
-        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" Margin="0,10,10,0" VerticalAlignment="Center">
-            <TextBlock x:Name="ImageNameTextBlock" Text="{Binding SanhInfo.HinhAnh}" VerticalAlignment="Center" FontSize="14" Margin="0,0,0,0"/>
-            <Button x:Name="ChooseImageButton" Content="Chọn ảnh..." Width="100" Height="30" Click="btnChonAnh_Click"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Hình ảnh:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,10,10,15"/>
+        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" Margin="0,0,10,0" VerticalAlignment="Center">
+            <TextBlock x:Name="ImageNameTextBlock" Text="{Binding SanhInfo.HinhAnh}" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria" Margin="0,0,0,0"/>
+            <Button x:Name="ChooseImageButton" Content="Chọn ảnh..." FontSize="18" FontFamily="Cambria" Width="150" Height="40" Click="btnChonAnh_Click"/>
         </StackPanel>
 
         <!-- Nút Lưu -->
-        <Button Grid.Row="7" Grid.Column="1" Content="Lưu" Width="80" Height="30" FontSize="16"
-        HorizontalAlignment="Right" Margin="0,15,10,0" Click="btnSave_Click"/>
+        <Button Grid.Row="7" Grid.Column="1" Content="Lưu" Width="120" Height="40" Style="{StaticResource ButtonStyle}"
+                HorizontalAlignment="Right" Margin="0,30,10,0" Click="btnSave_Click"/>
     </Grid>
 </Window>

@@ -24,13 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\arrow-down.png" />
     <None Remove="Resources\sanh1.jpg" />
     <None Remove="Resources\sanh2.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DTOs\" />
-    <Folder Include="Theme\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +40,10 @@
     <Content Include="Resources\sanh2.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\arrow-down.png" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View"
         mc:Ignorable="d"
-            Title="Thêm Sửa Loại Sảnh" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Thêm Sửa Loại Sảnh" Height="450" Width="800">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -24,21 +25,25 @@
         </Grid.ColumnDefinitions>
 
         <!-- Tiêu đề -->
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Thông Tin Loại Sảnh" 
-               FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,10"/>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Thông Tin Loại Sảnh" FontFamily="Cambria"
+               FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,30"/>
 
         <!-- Tên Loại Sảnh -->
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Tên loại sảnh:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
-        <TextBox Grid.Row="1" Grid.Column="1" FontSize="16" Height="30" Margin="0,10,10,0"
-                 Text="{Binding LoaiSanhInfo.TenLoaiSanh, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Tên loại sảnh:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,10,15"/>
+        <Border Grid.Row="1" Grid.Column="1" Height="40" Margin="0,0,10,15" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+            <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalContentAlignment="Center"
+                Text="{Binding LoaiSanhInfo.TenLoaiSanh, UpdateSourceTrigger=PropertyChanged}"/>
+        </Border>
 
         <!-- Đơn Giá -->
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Đơn giá bàn tối thiểu:" FontSize="16" VerticalAlignment="Center" Margin="10,10,10,0"/>
-        <TextBox Grid.Row="2" Grid.Column="1" FontSize="16" Height="30" Margin="0,10,10,0"
-                 Text="{Binding LoaiSanhInfo.DonGiaBanToiThieu,TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Đơn giá bàn tối thiểu:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,10,0"/>
+        <Border Grid.Row="2" Grid.Column="1" Height="40" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+            <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalContentAlignment="Center"
+                Text="{Binding LoaiSanhInfo.DonGiaBanToiThieu,TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>
+        </Border>
 
         <!-- Nút Lưu -->
-        <Button Grid.Row="3" Grid.Column="1" Content="Lưu" Width="80" Height="30" FontSize="16"
-            HorizontalAlignment="Right" Margin="0,15,10,0" Click="btnSave_Click"/>
+        <Button Grid.Row="3" Grid.Column="1" Content="Lưu" Style="{StaticResource ButtonStyle}" Width="120" Height="40" FontSize="20" FontFamily="Cambria"
+                HorizontalAlignment="Right" Margin="0,30,10,0" Click="btnSave_Click"/>
     </Grid>
 </Window>

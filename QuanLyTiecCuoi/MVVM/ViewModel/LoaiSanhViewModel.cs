@@ -1,6 +1,6 @@
 ﻿using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.MVVM.Model;
-using QuanLyTiecCuoi.Service;
+using QuanLyTiecCuoi.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

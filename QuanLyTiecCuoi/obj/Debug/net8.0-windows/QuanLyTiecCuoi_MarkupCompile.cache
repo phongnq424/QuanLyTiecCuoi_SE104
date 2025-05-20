@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 D:\QuanLyTiecCuoi\QuanLyTiecCuoi\App.xaml
-62147110422
+71868124020
 2-285556205
-171150466897
+171148405295
 198-556154604
-MainWindow.xaml;MVVM\View\AddOrEditLoaiSanhWindow.xaml;MVVM\View\AddOrEditSanhWindow.xaml;MVVM\View\DSLoaiSanhView.xaml;MVVM\View\DSSanhView.xaml;MVVM\View\SanhView.xaml;
+MainWindow.xaml;MVVM\View\AddOrEditLoaiSanhWindow.xaml;MVVM\View\AddOrEditSanhWindow.xaml;MVVM\View\DSLoaiSanhView.xaml;MVVM\View\DSSanhView.xaml;MVVM\View\SanhView.xaml;Theme\Styles\ButtonStyle.xaml;
 
 False
 

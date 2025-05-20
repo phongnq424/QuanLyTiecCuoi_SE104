@@ -54,3 +54,5 @@ D:\QuanLyTiecCuoi\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\AddOrEditLoa
 D:\QuanLyTiecCuoi\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\AddOrEditLoaiSanhWindow.baml
 D:\QuanLyTiecCuoi\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\AddOrEditSanhWindow.g.cs
 D:\QuanLyTiecCuoi\QuanLyTiecCuoi\obj\Debug\net8.0-windows\MVVM\View\AddOrEditSanhWindow.baml
+D:\QuanLyTiecCuoi\QuanLyTiecCuoi\obj\Debug\net8.0-windows\App.baml
+D:\QuanLyTiecCuoi\QuanLyTiecCuoi\obj\Debug\net8.0-windows\Theme\Styles\ButtonStyle.baml
