@@ -9,8 +9,8 @@
 [Dd]istPublic/
 
 # Build directories
-QuanLyTiecCuoi/bin/
-QuanLyTiecCuoi/obj/
+bin/
+obj/
 
 # Visual Studio specific
 .vs2019/
