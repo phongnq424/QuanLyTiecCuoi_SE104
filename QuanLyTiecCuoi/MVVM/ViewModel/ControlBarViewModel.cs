@@ -12,7 +12,7 @@ using System.Windows.Input;
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
 
-    internal class ControlBarViewModel : ObservableObject
+    internal class ControlBarViewModel : BaseViewModel
     {
         #region commands
         public ICommand CloseWindowCommand { get; set; }

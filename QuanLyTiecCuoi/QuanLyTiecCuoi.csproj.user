@@ -16,9 +16,6 @@
     <Compile Update="MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MVVM\View\HoaDon\HoaDonUserControl.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">

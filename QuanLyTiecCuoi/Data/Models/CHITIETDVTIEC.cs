@@ -12,7 +12,7 @@ namespace QuanLyTiecCuoi.Data.Models
     {
         [Key]
         public int MaCTDV { get; set; }
-
+        //giá dịch vụ tại thời điểm đặt tiệc
         public int MaDatTiec { get; set; }
         public int MaDichVu { get; set; }
         public int SoLuong { get; set; }

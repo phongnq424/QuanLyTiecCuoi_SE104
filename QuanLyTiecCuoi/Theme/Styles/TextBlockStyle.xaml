@@ -3,16 +3,17 @@
     <Style x:Key="Header1Style" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="40"/>
-        <Setter Property="FontSize" Value="60"/>
+        <Setter Property="Margin" Value="40,10"/>
+        <Setter Property="FontSize" Value="50"/>
         <Setter Property="FontFamily" Value="Rage Italic"/>
     </Style>
 
     <Style x:Key="Header2Style" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="30"/>
-        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="Margin" Value="30,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="30"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontFamily" Value="Cambria"/>
     </Style>
@@ -20,17 +21,70 @@
     <Style x:Key="Header3Style" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="15"/>
-        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Margin" Value="15,5"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontFamily" Value="Cambria"/>
     </Style>
 
+    
     <Style x:Key="Header4Style" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="15"/>
-        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontFamily" Value="Cambria"/>
+    </Style>
+
+    <Style x:Key="Header5Style" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="Cambria"/>
+    </Style>
+
+
+    <Style x:Key="ErrorTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Red" />
+        <Setter Property="Margin" Value="0,20,0,0" />
+        <Setter Property="Opacity" Value="0.5"/>
+        <Setter Property="FontFamily" Value="Cambria" />
+        <Style.Triggers>
+            <Trigger Property="Visibility" Value="Visible">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <!-- Fade In -->
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             From="0" To="1" Duration="0:0:0.3" />
+
+                            <!-- Wait 3 seconds then Fade Out -->
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                BeginTime="0:0:1"
+                                                From="1" To="0" Duration="0:0:1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="Header6Style" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+
+    <Style x:Key="GridViewTableHeaderStyle" TargetType="GridViewColumnHeader">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Width" Value="auto"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Height" Value="45" />
     </Style>
 </ResourceDictionary>

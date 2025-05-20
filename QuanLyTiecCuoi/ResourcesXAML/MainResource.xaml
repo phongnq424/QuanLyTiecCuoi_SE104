@@ -1,7 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:ViewModel="clr-namespace:QuanLyTiecCuoi.MVVM.ViewModel"
+                    xmlns:Login="clr-namespace:QuanLyTiecCuoi.MVVM.View.Login"
                     xmlns:ControlBarView="clr-namespace:QuanLyTiecCuoi.MVVM.View.ControlBar">
 
     <ViewModel:ControlBarViewModel x:Key="ControlBarViewModel"/>
+    <ViewModel:MainWindowViewModel x:Key="mainWindowViewModel"/>
+    <ViewModel:LoginViewModel x:Key="LoginViewModel"/>
+    <ViewModel:HoaDonViewModel x:Key="HoaDonViewModel"/>
+
+
+
 </ResourceDictionary>
