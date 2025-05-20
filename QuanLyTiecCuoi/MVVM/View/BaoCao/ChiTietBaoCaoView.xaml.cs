@@ -10,23 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyTiecCuoi.MVVM.View.HoaDon
+namespace QuanLyTiecCuoi.MVVM.View.BaoCao
 {
     /// <summary>
-    /// Interaction logic for ChiTietHoaDonWindow.xaml
+    /// Interaction logic for BAOCAO.xaml
     /// </summary>
-    public partial class ChiTietHoaDonWindow : Window
+    public partial class ChiTietBaoCaoPage : Page
     {
-        public ChiTietHoaDonWindow()
+        public ChiTietBaoCaoPage(ChiTietBaoCaoViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }

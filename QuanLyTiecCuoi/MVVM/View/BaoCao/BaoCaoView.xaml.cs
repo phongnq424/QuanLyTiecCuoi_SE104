@@ -12,17 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyTiecCuoi;
 
-namespace QuanLyTiecCuoi.MVVM.View
+namespace QuanLyTiecCuoi.MVVM.View.BaoCao
 {
     /// <summary>
-    /// Interaction logic for BAOCAO.xaml
+    /// Interaction logic for BaoCaoPage.xaml
     /// </summary>
-    public partial class BAOCAO : Page
+    public partial class BaoCaoPage : Page
     {
-        public BAOCAO()
+        public BaoCaoPage(BaoCaoViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }

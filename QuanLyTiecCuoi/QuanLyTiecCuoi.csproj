@@ -10,12 +10,16 @@
 
   <ItemGroup>
     <Compile Remove="Model\**" />
+    <Compile Remove="MVVM\Model\Services\**" />
     <Compile Remove="View\**" />
     <EmbeddedResource Remove="Model\**" />
+    <EmbeddedResource Remove="MVVM\Model\Services\**" />
     <EmbeddedResource Remove="View\**" />
     <None Remove="Model\**" />
+    <None Remove="MVVM\Model\Services\**" />
     <None Remove="View\**" />
     <Page Remove="Model\**" />
+    <Page Remove="MVVM\Model\Services\**" />
     <Page Remove="View\**" />
   </ItemGroup>
 
@@ -66,34 +70,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MVVM\Model\Services\" />
+    <None Remove="resources\images\controlbarimg\arrow-down.png" />
+    <None Remove="resources\images\controlbarimg\close.png" />
+    <None Remove="resources\images\controlbarimg\closeBill_Infor.png" />
+    <None Remove="resources\images\controlbarimg\close_mouseover.png" />
+    <None Remove="resources\images\controlbarimg\maxi.png" />
+    <None Remove="resources\images\controlbarimg\MaxiMouseOver.png" />
+    <None Remove="resources\images\controlbarimg\minimize.png" />
+    <None Remove="resources\images\controlbarimg\minimize_mouseover.png" />
+    <None Remove="resources\images\controlbarimg\more.png" />
+    <None Remove="resources\images\controlbarimg\reloadIcon.png" />
+    <None Remove="resources\images\controlbarimg\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="DTOs\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.5" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\Images\appImage.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Login\Font.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Login\hideIcon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\Login\showIcon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
 </Project>

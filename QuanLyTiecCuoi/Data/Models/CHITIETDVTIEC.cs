@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyTiecCuoi.Data.Models
 {
-    internal class CHITIETDVTIEC
+    public class CHITIETDVTIEC
     {
         [Key]
         public int MaCTDV { get; set; }

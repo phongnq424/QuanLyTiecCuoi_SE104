@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyTiecCuoi.Data.Models
 {
-    internal class THAMSO
+    public class THAMSO
     {
         [Key]
         public int Id { get; set; }

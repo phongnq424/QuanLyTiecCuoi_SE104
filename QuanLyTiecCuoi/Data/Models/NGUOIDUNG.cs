@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace QuanLyTiecCuoi.Data.Models
 {
-    internal class NGUOIDUNG
+    public class NGUOIDUNG
     {
         [Key]
-        public int TenDangNhap { get; set; }
+        public string TenDangNhap { get; set; }
         public string MatKhau { get; set; }
         public int MaNhom { get; set; }
 
