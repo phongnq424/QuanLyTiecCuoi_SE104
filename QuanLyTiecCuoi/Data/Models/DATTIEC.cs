@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace QuanLyTiecCuoi.Data.Models
 {
-    internal class DATTIEC
+    public class DATTIEC
     {
         [Key]
         public int MaDatTiec { get; set; }

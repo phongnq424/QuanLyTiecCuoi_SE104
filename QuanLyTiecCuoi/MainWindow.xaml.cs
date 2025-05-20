@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using QuanLyTiecCuoi.MVVM.View;
 using QuanLyTiecCuoi.MVVM.View.HoaDon;
 using QuanLyTiecCuoi.MVVM.View.BaoCao;
+using QuanLyTiecCuoi.Services;
 
 namespace QuanLyTiecCuoi
 {
@@ -19,10 +20,16 @@ namespace QuanLyTiecCuoi
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly BaoCaoPage _baoCaoPage;
+        private readonly ChiTietBaoCaoPage _chiTietBaoCaoPage;
+
+        public MainWindow(BaoCaoPage baoCaoPage, ChiTietBaoCaoPage chiTietBaoCaoPage)
         {
             InitializeComponent();
-            MainFrame.Navigate(new BaoCaoPage());
+            _baoCaoPage = baoCaoPage;
+            _chiTietBaoCaoPage = chiTietBaoCaoPage;
+
+            MainFrame.Navigate(_baoCaoPage);
         }
     }
 }

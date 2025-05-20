@@ -10,7 +10,7 @@ using QuanLyTiecCuoi.Data.Models;
 
 namespace QuanLyTiecCuoi.Data
 {
-    internal class WeddingDbContext : DbContext
+    public class WeddingDbContext : DbContext
     {
         public DbSet<SANH> Sanhs { get; set; }
         public DbSet<LOAISANH> LoaiSanhs { get; set; }
@@ -29,20 +29,14 @@ namespace QuanLyTiecCuoi.Data
         public DbSet<PHANQUYEN> PhanQuyens { get; set; }
         public DbSet<NGUOIDUNG> NguoiDungs { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
+        private readonly string _connectionString;
 
-            var connectionString = config.GetConnectionString("DefaultConnection");
-            optionsBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 34)));
-        }
+        public WeddingDbContext(DbContextOptions<WeddingDbContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PHANQUYEN>()
-                .HasKey(p => new { p.MaNhom, p.MaChucNang });
+            modelBuilder.Entity<PHANQUYEN>().HasKey(p => new { p.MaNhom, p.MaChucNang });
+            base.OnModelCreating(modelBuilder);
+            // Bạn có thể cấu hình thêm mapping nếu cần
         }
     }
 }

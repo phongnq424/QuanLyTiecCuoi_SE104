@@ -21,10 +21,10 @@ namespace QuanLyTiecCuoi.MVVM.View.BaoCao
     /// </summary>
     public partial class BaoCaoPage : Page
     {
-        public BaoCaoPage()
+        public BaoCaoPage(BaoCaoViewModel vm)
         {
             InitializeComponent();
-            DataContext = new BaoCaoViewModel();
+            DataContext = vm;
         }
     }
 }

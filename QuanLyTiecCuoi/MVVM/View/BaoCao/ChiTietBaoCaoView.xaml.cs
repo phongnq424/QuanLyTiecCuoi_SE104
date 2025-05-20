@@ -20,11 +20,12 @@ namespace QuanLyTiecCuoi.MVVM.View.BaoCao
     /// </summary>
     public partial class ChiTietBaoCaoPage : Page
     {
-        public ChiTietBaoCaoPage()
+        public ChiTietBaoCaoPage(ChiTietBaoCaoViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = new ChiTietBaoCaoViewModel();
+            DataContext = viewModel;
         }
+
 
     }
 }

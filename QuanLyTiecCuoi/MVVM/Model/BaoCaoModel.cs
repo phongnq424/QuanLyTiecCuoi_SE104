@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace QuanLyTiecCuoi.MVVM.Model
 {
-    internal class BaoCaoModel
+    public class BaoCaoModel
     {
         public int Thang { get; set; }
 
         public int Nam { get; set; }
-        public double TongDoanhThu { get; set; }
+        public decimal TongDoanhThu { get; set; }
         public int TongTiecCuoi { get; set; }
         public List<ChiTietBaoCaoModel> ChiTietBaoCao { get; set; }
 

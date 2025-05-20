@@ -44,7 +44,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasKey("MaBaoCao");
 
-                    b.ToTable("BaoCaoThangs");
+                    b.ToTable("BaoCaoThangs", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.CASANH", b =>
@@ -68,7 +68,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasKey("MaCa");
 
-                    b.ToTable("CaSanhs");
+                    b.ToTable("CaSanhs", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.CHITIETBAOCAO", b =>
@@ -98,7 +98,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasIndex("MaBaoCao");
 
-                    b.ToTable("ChiTietBaoCaos");
+                    b.ToTable("ChiTietBaoCaos", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.CHITIETDVTIEC", b =>
@@ -124,7 +124,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasIndex("MaDichVu");
 
-                    b.ToTable("ChiTietDVTiecs");
+                    b.ToTable("ChiTietDVTiecs", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.CHITIETMENU", b =>
@@ -154,7 +154,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasIndex("MaMon");
 
-                    b.ToTable("ChiTietMenus");
+                    b.ToTable("ChiTietMenus", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.CHUCNANG", b =>
@@ -175,7 +175,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasKey("MaChucNang");
 
-                    b.ToTable("ChucNangs");
+                    b.ToTable("ChucNangs", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.DATTIEC", b =>
@@ -228,7 +228,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasIndex("MaSanh");
 
-                    b.ToTable("DatTiecs");
+                    b.ToTable("DatTiecs", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.DICHVU", b =>
@@ -258,7 +258,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasKey("MaDichVu");
 
-                    b.ToTable("DichVus");
+                    b.ToTable("DichVus", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.HOADON", b =>
@@ -294,7 +294,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasIndex("MaDatTiec");
 
-                    b.ToTable("HoaDons");
+                    b.ToTable("HoaDons", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.LOAISANH", b =>
@@ -315,7 +315,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasKey("MaLoaiSanh");
 
-                    b.ToTable("LoaiSanhs");
+                    b.ToTable("LoaiSanhs", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.MONAN", b =>
@@ -341,16 +341,13 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasKey("MaMon");
 
-                    b.ToTable("MonAns");
+                    b.ToTable("MonAns", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.NGUOIDUNG", b =>
                 {
-                    b.Property<int>("TenDangNhap")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("TenDangNhap"));
+                    b.Property<string>("TenDangNhap")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("MaNhom")
                         .HasColumnType("int");
@@ -363,7 +360,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasIndex("MaNhom");
 
-                    b.ToTable("NguoiDungs");
+                    b.ToTable("NguoiDungs", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.NHOMNGUOIDUNG", b =>
@@ -380,7 +377,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasKey("MaNhom");
 
-                    b.ToTable("NhomNguoiDungs");
+                    b.ToTable("NhomNguoiDungs", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.PHANQUYEN", b =>
@@ -395,7 +392,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasIndex("MaChucNang");
 
-                    b.ToTable("PhanQuyens");
+                    b.ToTable("PhanQuyens", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.SANH", b =>
@@ -429,7 +426,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasIndex("MaLoaiSanh");
 
-                    b.ToTable("Sanhs");
+                    b.ToTable("Sanhs", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.THAMSO", b =>
@@ -448,7 +445,7 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ThamSos");
+                    b.ToTable("ThamSos", (string)null);
                 });
 
             modelBuilder.Entity("QuanLyTiecCuoi.Data.Models.CHITIETBAOCAO", b =>
