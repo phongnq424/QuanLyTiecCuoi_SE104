@@ -1,4 +1,4 @@
-﻿using QuanLyTiecCuoi.MVVM.Model.Services;
+﻿using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -26,17 +26,17 @@ namespace QuanLyTiecCuoi.MVVM.View
         {
             InitializeComponent();
             IDatTiecService datTiecService = new DatTiecService();
-            this.DataContext = new ThemTiecViewModel(datTiecService);
+           // this.DataContext = new ThemTiecViewModel(datTiecService);
 
             LoadShiftsFromDatabase();
             LoadHallsFromDatabase();
         }
         private void CalendarButton_Click(object sender, RoutedEventArgs e)
         {
-            CalendarPopup.IsOpen = true;
+            CalendarOverlay.Visibility = Visibility.Visible;
         }
 
-        private void MyCalendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void MyCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             if (MyCalendar.SelectedDate.HasValue)
             {
@@ -44,7 +44,9 @@ namespace QuanLyTiecCuoi.MVVM.View
                 SelectedDateText.Text = selectedDate.ToString("dd/MM/yyyy");
 
                 // Tự động đóng popup sau khi chọn ngày
-                CalendarPopup.IsOpen = false;
+                //   CalendarPopup.IsOpen = false;
+                
+                CalendarOverlay.Visibility = Visibility.Collapsed; // Đóng
             }
         }
 

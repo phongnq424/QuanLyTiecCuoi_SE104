@@ -22,7 +22,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public DatTiecViewModel(IDatTiecService datTiecService)
         {
             _datTiecService = datTiecService;
-            LoadData();
+            //LoadData();
         }
 
         //private void LoadData()

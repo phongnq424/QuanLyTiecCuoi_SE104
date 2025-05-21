@@ -1,4 +1,4 @@
-﻿using QuanLyTiecCuoi.MVVM.Model.Services;
+﻿using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -38,6 +38,10 @@ namespace QuanLyTiecCuoi.MVVM.View
         }
 
         private void InHoaDon_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new ThemTiec());
+        }
+        private void Edit_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new ThemTiec());
         }

@@ -1,4 +1,4 @@
-﻿using QuanLyTiecCuoi.MVVM.Model.Services;
+﻿using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.View;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 using System.Text;
