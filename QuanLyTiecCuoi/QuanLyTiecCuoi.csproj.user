@@ -7,10 +7,20 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Update="MVVM\View\DatTiec.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MVVM\View\ThemTiec.xaml.cs">
+=======
+    <Compile Update="MVVM\View\BaoCao\BaoCaoView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\ControlBar\ControlBarUserControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml.cs">
+>>>>>>> origin/main
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -18,10 +28,17 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+<<<<<<< HEAD
     <Page Update="MVVM\View\DatTiec.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\ThemTiec.xaml">
+=======
+    <Page Update="MVVM\View\BaoCao\BaoCaoView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\Styles\ComboBoxStyle.xaml">
+>>>>>>> origin/main
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

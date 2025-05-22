@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyTiecCuoi"
         mc:Ignorable="d"
+<<<<<<< HEAD
         Title="MainWindow" Height="450" Width="800">
 
     <Grid>
@@ -12,4 +13,11 @@
     </Grid>
 
 
+=======
+        Title="MainWindow" Height="650" Width="1200">
+    <Grid>
+        <Frame x:Name="MainFrame" />
+    </Grid>
+
+>>>>>>> origin/main
 </Window>
