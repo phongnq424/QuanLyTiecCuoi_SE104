@@ -20,19 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Remove="Resources\styles.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="MVVM\Command\" />
+    <Folder Include="Resources\" />
     <Folder Include="Theme\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Resources\styles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
   </ItemGroup>
 
   <ItemGroup>

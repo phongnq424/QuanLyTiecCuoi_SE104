@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:QuanLyTiecCuoi"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="theme/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="theme/TextBlockStyle.xaml"/>
+                <ResourceDictionary Source="theme/TextBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

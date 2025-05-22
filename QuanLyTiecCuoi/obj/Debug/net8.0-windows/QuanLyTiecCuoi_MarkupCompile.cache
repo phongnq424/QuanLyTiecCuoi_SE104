@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 D:\phongnq424\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\App.xaml
-3-44609524
+61215647363
 
 15-1511804415
 2161302176528
-MainWindow.xaml;MVVM\View\DatTiec.xaml;MVVM\View\ThemTiec.xaml;
+MainWindow.xaml;MVVM\View\DatTiec.xaml;MVVM\View\ThemTiec.xaml;theme\ButtonStyle.xaml;theme\TextBlockStyle.xaml;theme\TextBoxStyle.xaml;
 
-False
+True
 

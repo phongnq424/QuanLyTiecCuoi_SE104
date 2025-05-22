@@ -98,3 +98,7 @@ D:\phongnq424\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\refin
 D:\phongnq424\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\QuanLyTiecCuoi.pdb
 D:\phongnq424\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\QuanLyTiecCuoi.genruntimeconfig.cache
 D:\phongnq424\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\ref\QuanLyTiecCuoi.dll
+D:\phongnq424\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\theme\ButtonStyle.baml
+D:\phongnq424\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\App.baml
+D:\phongnq424\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\theme\TextBlockStyle.baml
+D:\phongnq424\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\theme\TextBoxStyle.baml

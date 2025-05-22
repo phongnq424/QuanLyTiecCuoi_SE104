@@ -49,6 +49,13 @@ namespace QuanLyTiecCuoi.MVVM.View
                 CalendarOverlay.Visibility = Visibility.Collapsed; // Đóng
             }
         }
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService != null && NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
 
         //CA
         private void LoadShiftsFromDatabase()
