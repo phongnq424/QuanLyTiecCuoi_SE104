@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <Folder Include="DTOs\" />
     <Folder Include="MVVM\Command\" />
     <Folder Include="Resources\" />
@@ -34,7 +33,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
-=======
     <None Remove="Resources\Images\appImage.png" />
     <None Remove="Resources\Images\controlbarimg\close.png" />
     <None Remove="Resources\Images\controlbarimg\close_mouseover.png" />
@@ -96,7 +94,6 @@
 
   <ItemGroup>
     <Folder Include="DTOs\" />
->>>>>>> origin/main
   </ItemGroup>
 
 </Project>
