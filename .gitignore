@@ -1,1 +1,32 @@
+# Build folders
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Visual Studio cache and config
 .vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Other unnecessary files
+*.log
+*.cache
+*.dll
+*.exe
+*.pdb
+*.bak
+*.tmp
+*.config
+
+# VS Code settings
+.vscode/
+
+# Publish and build artifacts
+publish/
+*.publish/
+
+# Environment files
+.env
