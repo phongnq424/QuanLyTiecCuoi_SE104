@@ -11,7 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using QuanLyTiecCuoi.MVVM.ViewModel;
 using System.Windows.Shapes;
+using QuanLyTiecCuoi.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace QuanLyTiecCuoi.MVVM.View
 {
@@ -20,19 +23,23 @@ namespace QuanLyTiecCuoi.MVVM.View
     /// </summary>
     public partial class SanhView : Page
     {
-        public SanhView()
+
+        public SanhView(SanhViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
 
         private void btnCTLoaiSanh_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DSLoaiSanhView());
+            var loaiSanhVM = App.AppHost.Services.GetRequiredService<LoaiSanhViewModel>();
+            NavigationService.Navigate(new DSLoaiSanhView(loaiSanhVM));
         }
 
         private void btnCTSanh_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DSSanhView());
+            var SanhVM = App.AppHost.Services.GetRequiredService<SanhViewModel>();
+            NavigationService.Navigate(new DSSanhView(SanhVM));
         }
     }
 }

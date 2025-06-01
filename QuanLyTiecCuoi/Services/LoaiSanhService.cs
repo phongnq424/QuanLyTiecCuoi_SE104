@@ -1,4 +1,7 @@
-﻿using QuanLyTiecCuoi.MVVM.Model;
+﻿using QuanLyTiecCuoi.Data;
+using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.MVVM.Model;
+using QuanLyTiecCuoi.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,51 +13,69 @@ namespace QuanLyTiecCuoi.Services
 {
     public class LoaiSanhService
     {
-        public ObservableCollection<LoaiSanh> DanhSachLoaiSanh { get; set; }
+        private readonly LoaiSanhRepository _loaiSanhRepo;
 
-        public LoaiSanhService()
+        public LoaiSanhService(LoaiSanhRepository loaiSanhRepo)
         {
-            // Giả lập dữ liệu từ database
-            DanhSachLoaiSanh = new ObservableCollection<LoaiSanh>
-            {
-                new LoaiSanh { MaLoaiSanh = 1, TenLoaiSanh = "A", DonGiaBanToiThieu = 1000000 },
-                new LoaiSanh { MaLoaiSanh = 2, TenLoaiSanh = "B", DonGiaBanToiThieu = 1100000 }
-            };
+            _loaiSanhRepo = loaiSanhRepo;
         }
 
         // Lấy tất cả các LoaiSanh từ database
-        public ObservableCollection<LoaiSanh> GetAll()
+        public ObservableCollection<LoaiSanh> GetAllLoaiSanh()
         {
-            return DanhSachLoaiSanh;
+            var list = _loaiSanhRepo.GetAll();
+            return new ObservableCollection<LoaiSanh>(
+                list.Select(e => new LoaiSanh
+                {
+                    MaLoaiSanh = e.MaLoaiSanh,
+                    TenLoaiSanh = e.TenLoaiSanh,
+                    DonGiaBanToiThieu = e.DonGiaBanToiThieu
+                })
+            );
+        }
+
+        // Lấy Loại Sảnh theo ID
+        public LoaiSanh GetLoaiSanhById(int maLoaiSanh)
+        {
+            var e = _loaiSanhRepo.GetById(maLoaiSanh);
+            if (e == null) return null;
+
+            return new LoaiSanh
+            {
+                MaLoaiSanh = e.MaLoaiSanh,
+                TenLoaiSanh = e.TenLoaiSanh,
+                DonGiaBanToiThieu = e.DonGiaBanToiThieu
+            };
         }
 
         // Thêm mới Loại Sảnh 
-        public void Add(LoaiSanh loaiSanh)
+        public void AddLoaiSanh(LoaiSanh loaiSanh)
         {
-            if (loaiSanh != null)
+            var entity = new Data.Models.LOAISANH
             {
-                loaiSanh.MaLoaiSanh = DanhSachLoaiSanh.Any() ? DanhSachLoaiSanh.Max(x => x.MaLoaiSanh) + 1 : 1;
-                DanhSachLoaiSanh.Add(loaiSanh);
-            }    
-                
+                TenLoaiSanh = loaiSanh.TenLoaiSanh,
+                DonGiaBanToiThieu = loaiSanh.DonGiaBanToiThieu ?? 0
+            };
+            _loaiSanhRepo.AddLoaiSanh(entity);
+
         }
 
         // Chỉnh sửa Loại Sảnh
-        public void Edit(LoaiSanh loaiSanh)
+        public void EditLoaiSanh(LoaiSanh loaiSanh)
         {
-            var existing = DanhSachLoaiSanh.FirstOrDefault(l => l.MaLoaiSanh == loaiSanh.MaLoaiSanh);
-            if (existing != null)
+            var entity = _loaiSanhRepo.GetById(loaiSanh.MaLoaiSanh);
+            if (entity != null)
             {
-                existing.TenLoaiSanh = loaiSanh.TenLoaiSanh;
-                existing.DonGiaBanToiThieu = loaiSanh.DonGiaBanToiThieu;
+                entity.TenLoaiSanh = loaiSanh.TenLoaiSanh;
+                entity.DonGiaBanToiThieu = loaiSanh.DonGiaBanToiThieu ?? 0;
+                _loaiSanhRepo.UpdateLoaiSanh(entity);
             }
         }
 
         // Xóa Loại Sảnh
-        public void Delete(LoaiSanh loaiSanh)
+        public void DeleteLoaiSanh(LoaiSanh loaiSanh)
         {
-            if (loaiSanh != null)
-                DanhSachLoaiSanh.Remove(loaiSanh);
+            _loaiSanhRepo.DeleteLoaiSanh(loaiSanh.MaLoaiSanh);
         }
     }
 }

@@ -87,6 +87,9 @@ namespace QuanLyTiecCuoi.MVVM.View
             DataContext = this;
         }
 
+        // Biến lưu đường dẫn tạm của ảnh được chọn
+        private string _tempImagePath = null;
+
         private void btnChonAnh_Click(object sender, RoutedEventArgs e)
         {
             // Tạo một đối tượng OpenFileDialog
@@ -98,32 +101,15 @@ namespace QuanLyTiecCuoi.MVVM.View
             // Mở hộp thoại chọn file
             if (openFileDialog.ShowDialog() == true)
             {
-                string selectedFileName = System.IO.Path.GetFileName(openFileDialog.FileName);
-                string targetFolder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
+                // Lưu đường dẫn tạm của ảnh được chọn
+                _tempImagePath = openFileDialog.FileName;
 
-                if (!Directory.Exists(targetFolder))
-                    Directory.CreateDirectory(targetFolder);
+                // Chỉ hiển thị tên ảnh
+                string selectedFileName = System.IO.Path.GetFileName(_tempImagePath);
+                ImageNameTextBlock.Text = selectedFileName;
 
-                string targetPath = System.IO.Path.Combine(targetFolder, selectedFileName);
-
-                try
-                {
-                    // Sao chép file vào thư mục Resources
-                    File.Copy(openFileDialog.FileName, targetPath, true); // Ghi đè nếu đã tồn tại
-
-                    // Lưu tên file vào thuộc tính HinhAnh của SanhInfo
-                    SanhInfo.HinhAnh = selectedFileName;
-
-                    // Cập nhật TextBlock hoặc TextBox với tên file đã chọn
-                    ImageNameTextBlock.Text = selectedFileName;
-
-                    // Ẩn Button chọn hình ảnh
-                    ChooseImageButton.Visibility = Visibility.Collapsed;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Lỗi khi lưu ảnh: {ex.Message}");
-                }
+                // Ẩn nút chọn ảnh 
+                ChooseImageButton.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -134,6 +120,34 @@ namespace QuanLyTiecCuoi.MVVM.View
             {
                 SanhInfo.MaLoaiSanh = SelectedLoaiSanh.MaLoaiSanh;
                 SanhInfo.LoaiSanh = SelectedLoaiSanh;
+            }
+
+            // Chỉ copy ảnh nếu người dùng nhấn Lưu
+            if (!string.IsNullOrEmpty(_tempImagePath))
+            {
+                try
+                {
+                    string selectedFileName = System.IO.Path.GetFileName(_tempImagePath);
+                    string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                    string projectRoot = Directory.GetParent(baseDir).Parent.Parent.Parent.FullName;
+                    string targetFolder = System.IO.Path.Combine(projectRoot, "Resources", "Images", "Sanh");
+
+                    if (!Directory.Exists(targetFolder))
+                        Directory.CreateDirectory(targetFolder);
+
+                    string targetPath = System.IO.Path.Combine(targetFolder, selectedFileName);
+
+                    // Copy ảnh vào Resources
+                    File.Copy(_tempImagePath, targetPath, true);
+
+                    // Gán tên file cho HinhAnh
+                    SanhInfo.HinhAnh = selectedFileName;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi lưu ảnh: {ex.Message}");
+                    return; // Dừng lại nếu lỗi
+                }
             }
 
             DialogResult = true;

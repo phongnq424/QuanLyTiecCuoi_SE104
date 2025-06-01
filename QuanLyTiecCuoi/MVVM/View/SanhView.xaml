@@ -3,15 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View"
+      xmlns:local="clr-namespace:QuanLyTiecCuoi.Services"
       xmlns:vm="clr-namespace:QuanLyTiecCuoi.MVVM.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1600"
       Title="Quản lý Sảnh Tiệc">
 
-    <Page.DataContext>
-        <vm:SanhViewModel />
-    </Page.DataContext>
+    <Page.Resources>
+        <local:ImagePathConverter x:Key="ImagePathConverter"/>
+    </Page.Resources>
 
     <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
         <Grid Margin="20">
@@ -111,7 +111,7 @@
                                         <Rectangle RadiusX="20" RadiusY="20" Fill="Gray" Margin="5"/>
                                         <Rectangle RadiusX="19" RadiusY="19" Margin="7" >
                                             <Rectangle.Fill>
-                                                <ImageBrush ImageSource="{Binding HinhAnh}" Stretch="UniformToFill"/>
+                                                <ImageBrush ImageSource="{Binding HinhAnh, Converter={StaticResource ImagePathConverter}}" Stretch="UniformToFill"/>
                                             </Rectangle.Fill>
                                         </Rectangle>
 

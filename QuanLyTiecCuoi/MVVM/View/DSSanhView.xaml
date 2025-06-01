@@ -9,28 +9,78 @@
       d:DesignHeight="1000" d:DesignWidth="1600"
       Title="Danh Sách Sảnh Tiệc">
 
-    <Page.DataContext>
-        <vm:SanhViewModel />
-    </Page.DataContext>
-
     <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
         <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
             <!-- Tiêu đề -->
-            <TextBlock Text="Danh Sách Sảnh" FontSize="40" FontFamily="Cambria" FontWeight="Bold" Margin="10" />
+            <TextBlock Text="Danh Sách Sảnh" FontSize="40" FontFamily="Cambria" FontWeight="Bold" Margin="10" Grid.Row="0" />
 
+            <!-- Bộ lọc loại sảnh -->
+            <Grid Margin="10,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <!-- Cột cho "Giới thiệu" -->
+                    <ColumnDefinition Width="150"/>
+                    <!-- Cột cho "Tên Sảnh" -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Cột cho "Loại Sảnh" -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Cột cho "Số Lượng Bàn Tối Đa" -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Cột cho "Đơn Giá Bàn Tối Thiểu" -->
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Tìm kiếm theo: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria" Grid.Column="0" FontStyle="Italic"/>
+
+                <!-- Tên Sảnh -->
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="1" >
+                    <TextBlock Text="Tên Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
+                    <TextBox Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
+                 Text="{Binding FilterTenSanh, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <!-- Loại Sảnh -->
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="2" >
+                    <TextBlock Text="Loại Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
+                    <TextBox Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
+                             Text="{Binding FilterLoaiSanh, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <!-- Số Lượng Bàn Tối Đa -->
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="3" >
+                    <TextBlock Text="Số lượng bàn: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
+                    <TextBox Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
+                             Text="{Binding FilterSoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <!-- Đơn Giá Bàn Tối Thiểu -->
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="4" >
+                    <TextBlock Text="Đơn giá bàn: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
+                    <TextBox Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
+             Text="{Binding FilterDonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </Grid>
+            
             <!-- DataGrid để hiển thị danh sách sảnh -->
             <DataGrid ItemsSource="{Binding DanhSachSanh}" 
                   SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
                   AutoGenerateColumns="False" 
-                  Margin="10,70,10,70"  
+                  Margin="10,10,10,10"  
                   HorizontalAlignment="Stretch" 
                   VerticalAlignment="Stretch"
+                  Grid.Row="2"
                   FontSize="20" FontFamily="Cambria">
 
                 <DataGrid.Columns>
                     <!-- Cột STT -->
                     <DataGridTextColumn Header="STT" 
-                                    Width="100" 
+                                    Width="150" 
                                     IsReadOnly="True" 
                                     Binding="{Binding MaSanh}" />
                     <!-- Cột Tên Sảnh -->
@@ -56,7 +106,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Grid Margin="10" VerticalAlignment="Bottom">
+            <Grid Margin="10" VerticalAlignment="Bottom" Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="*" />

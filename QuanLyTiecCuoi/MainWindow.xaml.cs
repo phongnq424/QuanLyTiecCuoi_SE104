@@ -1,4 +1,7 @@
-﻿using QuanLyTiecCuoi.MVVM.View;
+﻿using Microsoft.Extensions.DependencyInjection;
+using QuanLyTiecCuoi.MVVM.View;
+using QuanLyTiecCuoi.MVVM.ViewModel;
+using QuanLyTiecCuoi.Services;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,7 +24,10 @@ namespace QuanLyTiecCuoi
         {
             InitializeComponent();
 
-            MainFrame.Navigate(new SanhView()); // Hiển thị Page SanhView
+            var sanhViewModel = App.AppHost.Services.GetRequiredService<SanhViewModel>();
+            var sanhView = new SanhView(sanhViewModel);
+            MainFrame.Navigate(sanhView);
+
         }
     }
 }

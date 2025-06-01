@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyTiecCuoi.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace QuanLyTiecCuoi.MVVM.View
     /// </summary>
     public partial class DSSanhView : Page
     {
-        public DSSanhView()
+        public DSSanhView(SanhViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
 
         private void btnQuayLai_Click(object sender, RoutedEventArgs e)

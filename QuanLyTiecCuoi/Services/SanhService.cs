@@ -1,4 +1,5 @@
 ﻿using QuanLyTiecCuoi.MVVM.Model;
+using QuanLyTiecCuoi.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,54 +11,93 @@ namespace QuanLyTiecCuoi.Services
 {
     public class SanhService
     {
-        private ObservableCollection<Sanh> DanhSachSanh;
+        private readonly SanhRepository _sanhRepo;
 
-        public SanhService()
+        public SanhService(SanhRepository sanhRepo) 
         {
-            // Giả lập dữ liệu từ database
-            DanhSachSanh = new ObservableCollection<Sanh>
-            {
-                new Sanh { MaSanh = 1, TenSanh = "Sảnh 1", MaLoaiSanh = 1, SoLuongBanToiDa = 20, GhiChu = "Sảnh nhỏ", LoaiSanh = new LoaiSanh { MaLoaiSanh = 1, TenLoaiSanh = "A", DonGiaBanToiThieu = 1000000 }, HinhAnh = "/Resources/sanh1.jpg" },
-                new Sanh { MaSanh = 2, TenSanh = "Sảnh 2", MaLoaiSanh = 2, SoLuongBanToiDa = 30, GhiChu = "Sảnh lớn", LoaiSanh = new LoaiSanh { MaLoaiSanh = 2, TenLoaiSanh = "B", DonGiaBanToiThieu = 1100000 }, HinhAnh = "/Resources/sanh2.jpg" }
-            };
+            _sanhRepo = sanhRepo;
         }
 
         // Lấy tất cả các Sảnh
-        public ObservableCollection<Sanh> GetAll()
+        public ObservableCollection<Sanh> GetAllSanh()
         {
-            return DanhSachSanh;
+            var sanhs = _sanhRepo.GetAll();
+
+            return new ObservableCollection<Sanh>(
+                sanhs.Select(s => new Sanh
+                {
+                    MaSanh = s.MaSanh,
+                    TenSanh = s.TenSanh,
+                    MaLoaiSanh = s.MaLoaiSanh,
+                    SoLuongBanToiDa = s.SoLuongBanToiDa,
+                    GhiChu = s.GhiChu,
+                    HinhAnh = s.HinhAnh,
+                    LoaiSanh = s.LoaiSanh != null ? new LoaiSanh
+                    {
+                        MaLoaiSanh = s.LoaiSanh.MaLoaiSanh,
+                        TenLoaiSanh = s.LoaiSanh.TenLoaiSanh,
+                        DonGiaBanToiThieu = s.LoaiSanh.DonGiaBanToiThieu
+                    } : null
+                })
+            );
+        }
+
+        // Lấy Sảnh theo ID
+        public Sanh GetSanhById(int maSanh)
+        {
+            var s = _sanhRepo.GetById(maSanh);
+            if (s == null) return null;
+
+            return new Sanh
+            {
+                MaSanh = s.MaSanh,
+                TenSanh = s.TenSanh,
+                MaLoaiSanh = s.MaLoaiSanh,
+                SoLuongBanToiDa = s.SoLuongBanToiDa,
+                GhiChu = s.GhiChu,
+                HinhAnh = s.HinhAnh,
+                LoaiSanh = s.LoaiSanh != null ? new LoaiSanh
+                {
+                    MaLoaiSanh = s.LoaiSanh.MaLoaiSanh,
+                    TenLoaiSanh = s.LoaiSanh.TenLoaiSanh,
+                    DonGiaBanToiThieu = s.LoaiSanh.DonGiaBanToiThieu
+                } : null
+            };
         }
 
         // Thêm Sảnh mới
         public void AddSanh(Sanh sanh)
         {
-            if (sanh != null)
+            var entity = new Data.Models.SANH
             {
-                sanh.MaSanh = DanhSachSanh.Any() ? DanhSachSanh.Max(s => s.MaSanh) + 1 : 1;
-                DanhSachSanh.Add(sanh);
-            }
+                TenSanh = sanh.TenSanh,
+                MaLoaiSanh = sanh.MaLoaiSanh,
+                SoLuongBanToiDa = sanh.SoLuongBanToiDa ?? 0,
+                GhiChu = sanh.GhiChu,
+                HinhAnh = sanh.HinhAnh
+            };
+            _sanhRepo.AddSanh(entity);
         }
 
         // Chỉnh sửa Sảnh
         public void EditSanh(Sanh sanh)
         {
-            var existingSanh = DanhSachSanh.FirstOrDefault(s => s.MaSanh == sanh.MaSanh);
-            if (existingSanh != null)
+            var entity = _sanhRepo.GetById(sanh.MaSanh);
+            if (entity != null)
             {
-                existingSanh.TenSanh = sanh.TenSanh;
-                existingSanh.SoLuongBanToiDa = sanh.SoLuongBanToiDa;
-                existingSanh.GhiChu = sanh.GhiChu;
-                existingSanh.HinhAnh = sanh.HinhAnh;
+                entity.TenSanh = sanh.TenSanh;
+                entity.MaLoaiSanh = sanh.MaLoaiSanh;
+                entity.SoLuongBanToiDa = sanh.SoLuongBanToiDa ?? 0;
+                entity.GhiChu = sanh.GhiChu;
+                entity.HinhAnh = sanh.HinhAnh;
+                _sanhRepo.UpdateSanh(entity);
             }
         }
 
         // Xóa một Sảnh
         public void DeleteSanh(Sanh sanh)
         {
-            if (sanh != null)
-            {
-                DanhSachSanh.Remove(sanh);
-            }
+            _sanhRepo.DeleteSanh(sanh.MaSanh);
         }
     }
 }

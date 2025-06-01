@@ -7,5 +7,5 @@
         mc:Ignorable="d"
         Title="Quản lý Tiệc Cưới" Height="450" Width="800">
     
-    <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+    <Frame x:Name="MainFrame" />
 </Window>
