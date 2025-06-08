@@ -48,7 +48,9 @@ namespace QuanLyTiecCuoi.Data.Services
                 }
 
 
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 return null;
             }
         }

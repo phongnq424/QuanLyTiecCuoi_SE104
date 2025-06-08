@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\appImage.png" />
+    <None Remove="Resources\Images\controlbarimg\arrow-down.png" />
     <None Remove="Resources\Images\controlbarimg\close.png" />
     <None Remove="Resources\Images\controlbarimg\close_mouseover.png" />
     <None Remove="Resources\Images\controlbarimg\Maxi.png" />
@@ -40,6 +41,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\controlbarimg\arrow-down.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\controlbarimg\close.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -70,7 +74,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="resources\images\controlbarimg\arrow-down.png" />
     <None Remove="resources\images\controlbarimg\close.png" />
     <None Remove="resources\images\controlbarimg\closeBill_Infor.png" />
     <None Remove="resources\images\controlbarimg\close_mouseover.png" />
@@ -86,5 +89,19 @@
   <ItemGroup>
     <Folder Include="DTOs\" />
   </ItemGroup>
+  <ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
+		<PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.15" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.10" />
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+	</ItemGroup>
 
 </Project>

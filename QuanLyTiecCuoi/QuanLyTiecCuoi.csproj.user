@@ -13,15 +13,30 @@
     <Compile Update="MVVM\View\ControlBar\ControlBarUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MVVM\View\DatTiec\ChinhSuaTiecView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\DatTiec\DatTiecView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\DatTiec\ThemTiecView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
+    <Page Update="MVVM\View\BaoCao\BaoCaoView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MVVM\View\BaoCao\BaoCaoView.xaml">
+    <Page Update="MVVM\View\DatTiec\ChinhSuaTiecView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\DatTiec\DatTiecView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\DatTiec\ThemTiecView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Theme\Styles\ComboBoxStyle.xaml">

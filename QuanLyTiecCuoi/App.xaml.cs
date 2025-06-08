@@ -9,6 +9,8 @@ using QuanLyTiecCuoi.Data;
 using QuanLyTiecCuoi.MVVM.View.BaoCao;
 using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.Repository;
+using QuanLyTiecCuoi.MVVM.ViewModel;
+using QuanLyTiecCuoi.MVVM.View.DatTiec;
 
 
 namespace QuanLyTiecCuoi
@@ -32,19 +34,23 @@ namespace QuanLyTiecCuoi
 
                     services.AddTransient<BaoCaoRepository>();
                     services.AddTransient<ChiTietBaoCaoRepository>();
+                    services.AddTransient<DatTiecRepository>();
 
                     // Dùng BaoCaoService lấy dữ liệu từ AppDataRepository
                     services.AddTransient<BaoCaoService>();
                     services.AddTransient<ChiTietBaoCaoService>();
-
+                    services.AddTransient<DatTiecService>();
                     // Các ViewModel
                     services.AddTransient<BaoCaoViewModel>();
                     services.AddTransient<ChiTietBaoCaoViewModel>();
-
+                    services.AddTransient<DatTiecViewModel>();
+                    services.AddTransient<ThemTiecViewModel>();
                     // Các View
                     services.AddTransient<MainWindow>();
                     services.AddTransient<BaoCaoPage>();
                     services.AddTransient<ChiTietBaoCaoPage>();
+                    services.AddTransient<DatTiecView>();
+                    services.AddTransient<ThemTiecView>();
                 })
                 .Build();
         }

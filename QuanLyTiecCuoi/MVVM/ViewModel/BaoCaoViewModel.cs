@@ -2,7 +2,6 @@
 using LiveCharts.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi;
-using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.MVVM.Model;
 using QuanLyTiecCuoi.MVVM.View.BaoCao;
 using QuanLyTiecCuoi.MVVM.ViewModel;

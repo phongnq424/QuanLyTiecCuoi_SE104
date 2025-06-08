@@ -1,7 +1,7 @@
 # User-specific files
 .vs/
 .vscode/
-
+.vs/
 # Windows Installer files
 [Dd]ebug/
 [Dd]ebugPublic/

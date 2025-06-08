@@ -34,7 +34,7 @@ namespace QuanLyTiecCuoi.Data.Services
                 {
                     int number = int.Parse(UserName);
                     NGUOIDUNG? user = await context.NguoiDungs.Where(
-                        x => x.TenDangNhap == number && x.MatKhau == Password).FirstOrDefaultAsync();
+                        x => x.TenDangNhap == number.ToString() && x.MatKhau == Password).FirstOrDefaultAsync();
                     if (user == null)
                     {
                         return null;

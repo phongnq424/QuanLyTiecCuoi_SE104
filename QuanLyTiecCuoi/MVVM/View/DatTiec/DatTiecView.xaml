@@ -1,0 +1,119 @@
+﻿<Page x:Class="QuanLyTiecCuoi.MVVM.View.DatTiec.DatTiecView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.DatTiec"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" d:DesignWidth="1600"
+      Title="DatTiec">
+    <Viewbox Stretch="Uniform">
+        <Grid Width="1600" Height="1000">
+            <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
+                <!-- Root Grid full màn hình -->
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <StackPanel Grid.Row="0" Margin="0 10">
+                        <TextBlock 
+                            FontFamily="Cambria"
+                            Text="Serenité Wedding" 
+                            FontSize="60" 
+                            FontWeight="SemiBold" 
+                            HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                    <!-- Input controls -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="0 10">
+                        <ComboBox
+                            x:Name="FilterComboBox"
+                            Width="260" Height="40" 
+                            FontSize="20" 
+                            Margin="10"
+                            ItemsSource="{Binding DanhSachTieuChi}"
+                            SelectedItem="{Binding TieuChiDangChon}"
+                            SelectionChanged="FilterComboBox_SelectionChanged">
+                            <ComboBox.Resources>
+                                <Style TargetType="ComboBox" BasedOn="{StaticResource RoundedComboBoxStyle}"/>
+                            </ComboBox.Resources>
+                        </ComboBox>
+                        <TextBox
+                            x:Name="FilterTextBox"
+                            Style="{StaticResource TextBoxStyle1}"
+                            Width="350"
+                            Margin="10"
+                            Text="{Binding TuKhoaTimKiem, UpdateSourceTrigger=PropertyChanged}"
+                            TextAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontStyle="Italic" 
+                            FontSize="18"
+                            BorderThickness="1"
+                            GotFocus="TextBox_GotFocus"
+                            LostFocus="TextBox_LostFocus" 
+                            TextChanged="TextBox_TextChanged"/>
+                        <DatePicker
+                            x:Name="FilterDatePicker"
+                            Width="350"
+                            Margin="10"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            Visibility="Collapsed"
+                            SelectedDateChanged="FilterDatePicker_SelectedDateChanged"/>
+                    </StackPanel>
+
+
+                    <!-- ListView section -->
+                    <DataGrid 
+                        x:Name="MyDataGrid"
+                        ItemsSource="{Binding DanhSachDatTiec}" 
+                        AutoGenerateColumns="False"
+                        HorizontalAlignment="Stretch" 
+                        Margin="0 10" CanUserAddRows="False" Grid.Row="2"
+                        IsReadOnly="True"
+                        MouseDoubleClick="MyDataGrid_MouseDoubleClick"
+                        >
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="FontSize" Value="20"/>
+                                <Setter Property="FontFamily" Value="Cambria"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Cô dâu" Binding="{Binding TenCoDau}" Width="*" />
+                            <DataGridTextColumn Header="Chú rể" Binding="{Binding TenChuRe}" Width="*" />
+                            <DataGridTextColumn Header="SĐT" Binding="{Binding SDT}" Width="*" />
+                            <DataGridTextColumn Header="Đặt cọc" Binding="{Binding TienDatCoc}" Width="*" />
+                            <DataGridTextColumn Header="Ca" Binding="{Binding MaCa}" Width="*" />
+                            <DataGridTextColumn Header="Sảnh" Binding="{Binding MaSanh}" Width="*" />
+                            <DataGridTextColumn Header="Ngày đãi" Binding="{Binding NgayDatTiec}" Width="*" />
+                            <DataGridTextColumn Header="Số bàn" Binding="{Binding SoLuongBan}" Width="*" />
+                            <DataGridTextColumn Header="Dự trữ" Binding="{Binding SoBanDuTru}" Width="*" />
+                            <DataGridTemplateColumn Header=" " Width="0.5*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="✏" Click="Edit_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!-- Button row -->
+                    <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Right" 
+                        Margin="0,10,0,0" 
+                        Grid.Row="3">
+                        <Button Content="Thêm tiệc cưới" Click="Add_Click"  Style="{StaticResource ButtonStyle}"/>
+                        <Button Content="In hóa đơn" Click="InHoaDon_Click" Style="{StaticResource ButtonStyle}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Viewbox>
+</Page>

@@ -10,26 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyTiecCuoi.MVVM.View.MainVindow
+namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ChinhSuaTiec.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ChinhSuaTiecView : Page
     {
-        public MainWindow()
+        public ChinhSuaTiecView()
         {
             InitializeComponent();
-        }
-        private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                this.DragMove();
-            }
-
         }
     }
 }
