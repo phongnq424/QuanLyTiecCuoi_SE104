@@ -53,16 +53,13 @@
                             VerticalContentAlignment="Center"
                             FontStyle="Italic" 
                             FontSize="18"
-                            BorderThickness="1"
-                            GotFocus="TextBox_GotFocus"
-                            LostFocus="TextBox_LostFocus" 
-                            TextChanged="TextBox_TextChanged"/>
+                            BorderThickness="1"/>
                         <DatePicker
+                            Margin="10 0"
+                            Width="250"
+                            FontSize="26"
+                            VerticalAlignment="Center"
                             x:Name="FilterDatePicker"
-                            Width="350"
-                            Margin="10"
-                            VerticalContentAlignment="Center"
-                            FontSize="18"
                             Visibility="Collapsed"
                             SelectedDateChanged="FilterDatePicker_SelectedDateChanged"/>
                     </StackPanel>
@@ -92,7 +89,7 @@
                             <DataGridTextColumn Header="Đặt cọc" Binding="{Binding TienDatCoc}" Width="*" />
                             <DataGridTextColumn Header="Ca" Binding="{Binding MaCa}" Width="*" />
                             <DataGridTextColumn Header="Sảnh" Binding="{Binding MaSanh}" Width="*" />
-                            <DataGridTextColumn Header="Ngày đãi" Binding="{Binding NgayDatTiec}" Width="*" />
+                            <DataGridTextColumn Header="Ngày đãi" Binding="{Binding NgayDaiTiec}" Width="*" />
                             <DataGridTextColumn Header="Số bàn" Binding="{Binding SoLuongBan}" Width="*" />
                             <DataGridTextColumn Header="Dự trữ" Binding="{Binding SoBanDuTru}" Width="*" />
                             <DataGridTemplateColumn Header=" " Width="0.5*">

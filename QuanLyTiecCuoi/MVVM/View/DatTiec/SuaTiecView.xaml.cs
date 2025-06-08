@@ -5,16 +5,17 @@ using System.Windows;
 using System.Windows.Controls;
 using QuanLyTiecCuoi.Data.Models;
 
+
 namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 {
-    public partial class ThemTiecView : Page
+    public partial class SuaTiecView : Page
     {
-        public ThemTiecViewModel viewModel { get; set; }
+        public SuaTiecViewModel viewModel { get; set; }
 
-        public ThemTiecView()
+        public SuaTiecView(DATTIEC selectedTiec)
         {
             InitializeComponent();
-            viewModel = new ThemTiecViewModel();
+            viewModel = new SuaTiecViewModel(selectedTiec);
             this.DataContext = viewModel;
 
             // Load các combobox (ca, sảnh)
@@ -23,16 +24,15 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             ShiftComboBox.ItemsSource = viewModel.DanhSachCa;
             HallComboBox.ItemsSource = viewModel.DanhSachSanh;
         }
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (sender is TextBox tb)
-            {
-                tb.Clear();
-            }
-        }
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.GoBack();
+        }
+        private void Edit_Click(object sender, RoutedEventArgs e) 
+        {
+            FilterDatePicker.Visibility = Visibility.Visible; // Hiển thị DatePicker khi nhấn nút Edit
+            editBtn.Visibility = Visibility.Collapsed; // Ẩn nút Edit
         }
         private void FilterDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -88,14 +88,14 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 
         private void LuuTiec(object sender, RoutedEventArgs e)
         {
-            if (viewModel.ThemTiecMoi())
+            if (viewModel.CapNhatTiec())
             {
-                MessageBox.Show("Đã lưu tiệc cưới thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Đã cập nhật tiệc cưới thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService?.GoBack();
             }
             else
             {
-                MessageBox.Show("Lưu tiệc thất bại. Vui lòng kiểm tra dữ liệu.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Cập nhật tiệc thất bại. Vui lòng kiểm tra dữ liệu.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

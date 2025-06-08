@@ -66,5 +66,13 @@ namespace QuanLyTiecCuoi.Services
         {
             return _datTiecRepo.GetAllSanhs();
         }
+        public void UpdateDatTiec(DATTIEC updatedTiec)
+        {
+            if (updatedTiec == null)
+                throw new ArgumentNullException(nameof(updatedTiec));
+
+            // Gọi repository để update
+            _datTiecRepo.UpdateDatTiec(updatedTiec);
+        }
     }
 }

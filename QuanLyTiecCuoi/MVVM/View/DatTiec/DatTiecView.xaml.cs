@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using QuanLyTiecCuoi.Repository;
 using System.Windows.Input;
+using QuanLyTiecCuoi.Data.Models;
 
 
 namespace QuanLyTiecCuoi.MVVM.View.DatTiec
@@ -25,7 +26,13 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new ThemTiecView());
+            var themTiecView = new ThemTiecView();
+            themTiecView.viewModel.DanhSachChanged += () =>
+            {
+                // Sau khi sửa xong, load lại danh sách
+                (this.DataContext as DatTiecViewModel)?.LoadDanhSachDatTiec();
+            };
+            NavigationService?.Navigate(themTiecView);
         }
 
         private void InHoaDon_Click(object sender, RoutedEventArgs e)
@@ -44,7 +51,14 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                 if (row != null)
                 {
                     editableRow = row;
-                    NavigationService?.Navigate(new ChinhSuaTiecView());
+                    DATTIEC selected = row.Item as DATTIEC;
+                    var suaTiecView = new SuaTiecView(selected);
+                    suaTiecView.viewModel.DanhSachChanged += () =>
+                    {
+                        // Sau khi sửa xong, load lại danh sách
+                        (this.DataContext as DatTiecViewModel)?.LoadDanhSachDatTiec();
+                    };
+                    NavigationService?.Navigate(suaTiecView);
                     //MyDataGrid.SelectedItem = row.Item;
 
                     //// Bật cho phép chỉnh sửa
@@ -101,19 +115,6 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             if (parentObject == null) return null;
             if (parentObject is T parent) return parent;
             else return FindVisualParent<T>(parentObject);
-        }
-
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
         }
         private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

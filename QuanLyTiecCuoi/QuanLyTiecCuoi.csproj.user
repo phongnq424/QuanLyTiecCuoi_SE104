@@ -13,7 +13,7 @@
     <Compile Update="MVVM\View\ControlBar\ControlBarUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MVVM\View\DatTiec\ChinhSuaTiecView.xaml.cs">
+    <Compile Update="MVVM\View\DatTiec\SuaTiecView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MVVM\View\DatTiec\DatTiecView.xaml.cs">
@@ -30,7 +30,7 @@
     <Page Update="MVVM\View\BaoCao\BaoCaoView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MVVM\View\DatTiec\ChinhSuaTiecView.xaml">
+    <Page Update="MVVM\View\DatTiec\SuaTiecView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\DatTiec\DatTiecView.xaml">

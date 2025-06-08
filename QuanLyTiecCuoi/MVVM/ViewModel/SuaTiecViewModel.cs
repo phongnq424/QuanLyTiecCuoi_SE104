@@ -9,11 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
-    public class ThemTiecViewModel : BaseViewModel
+    public class SuaTiecViewModel : BaseViewModel
     {
         private readonly DatTiecService _datTiecService;
 
-        public DATTIEC TiecMoi { get; set; } = new DATTIEC();
+        public DATTIEC TiecMoi { get; set; }
 
         public ObservableCollection<CASANH> DanhSachCa { get; set; } = new();
         public ObservableCollection<SANH> DanhSachSanh { get; set; } = new();
@@ -21,9 +21,25 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public List<string> MonAnDaChon { get; set; } = new();
         public List<string> DichVuDaChon { get; set; } = new();
 
-        public ThemTiecViewModel()
+        public SuaTiecViewModel(DATTIEC tiecCanSua)
         {
             _datTiecService = App.AppHost.Services.GetRequiredService<DatTiecService>();
+
+            // Tạo bản sao dữ liệu tiệc cưới để chỉnh sửa
+            TiecMoi = new DATTIEC
+            {
+                MaDatTiec = tiecCanSua.MaDatTiec,
+                TenCoDau = tiecCanSua.TenCoDau,
+                TenChuRe = tiecCanSua.TenChuRe,
+                SDT = tiecCanSua.SDT,
+                TienDatCoc = tiecCanSua.TienDatCoc,
+                SoLuongBan = tiecCanSua.SoLuongBan,
+                SoBanDuTru = tiecCanSua.SoBanDuTru,
+                NgayDaiTiec = tiecCanSua.NgayDaiTiec,
+                MaCa = tiecCanSua.MaCa,
+                MaSanh = tiecCanSua.MaSanh
+                // Thêm các thuộc tính khác nếu có
+            };
 
             LoadDanhSachCa();
             LoadDanhSachSanh();
@@ -61,27 +77,29 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         public void ChonMonAn()
         {
-            MonAnDaChon = new List<string> { "Gà quay", "Lẩu hải sản", "Bò sốt tiêu" };
+            // Giả lập danh sách món ăn đã chọn (sau này có thể mở form chọn món ăn)
+            MonAnDaChon = new List<string> { "Gỏi cuốn", "Tôm chiên", "Chè sen" };
         }
 
         public void ChonDichVu()
         {
-            DichVuDaChon = new List<string> { "Ca sĩ", "Xe hoa", "MC chuyên nghiệp" };
+            // Giả lập danh sách dịch vụ đã chọn
+            DichVuDaChon = new List<string> { "Ban nhạc", "Chụp ảnh", "MC" };
         }
         public event Action DanhSachChanged;
-        public bool ThemTiecMoi()
+        public bool CapNhatTiec()
         {
             if (TiecMoi == null) return false;
 
             try
             {
-                _datTiecService.AddDatTiec(TiecMoi);
-                DanhSachChanged?.Invoke(); // Thông báo danh sách đã thay đổi
+                _datTiecService.UpdateDatTiec(TiecMoi);
+                DanhSachChanged?.Invoke(); 
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi thêm tiệc mới: " + ex.Message);
+                Console.WriteLine("Lỗi khi cập nhật tiệc: " + ex.Message);
                 return false;
             }
         }

@@ -43,7 +43,16 @@ namespace QuanLyTiecCuoi.Repository
 
         public void UpdateDatTiec(DATTIEC datTiec)
         {
-            _context.DatTiecs.Update(datTiec);
+            if (datTiec == null)
+                throw new ArgumentNullException(nameof(datTiec));
+
+            var existingEntity = _context.DatTiecs.Find(datTiec.MaDatTiec);
+            if (existingEntity == null)
+                throw new InvalidOperationException($"Không tìm thấy tiệc với mã {datTiec.MaDatTiec}");
+
+            // Cập nhật các trường cần thiết
+            _context.Entry(existingEntity).CurrentValues.SetValues(datTiec);
+
             _context.SaveChanges();
         }
 

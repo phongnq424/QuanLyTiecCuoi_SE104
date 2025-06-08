@@ -112,7 +112,7 @@ public class DatTiecViewModel : BaseViewModel
         var mainFrame = Application.Current.MainWindow.FindName("MainFrame") as Frame;
         if (mainFrame != null)
         {
-            var suaTiecPage = App.AppHost.Services.GetRequiredService<ChinhSuaTiecView>();
+            var suaTiecPage = App.AppHost.Services.GetRequiredService<SuaTiecView>();
             mainFrame.Navigate(suaTiecPage);
         }
     }
