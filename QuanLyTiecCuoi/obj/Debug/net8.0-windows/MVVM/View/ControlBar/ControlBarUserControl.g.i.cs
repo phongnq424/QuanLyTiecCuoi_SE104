@@ -61,8 +61,7 @@ namespace QuanLyTiecCuoi.MVVM.View.ControlBar {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/QuanLyTiecCuoi;V1.0.0.0;component/mvvm/view/controlbar/controlbarusercontrol.xam" +
-                    "l", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/QuanLyTiecCuoi;component/mvvm/view/controlbar/controlbarusercontrol.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\MVVM\View\ControlBar\ControlBarUserControl.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

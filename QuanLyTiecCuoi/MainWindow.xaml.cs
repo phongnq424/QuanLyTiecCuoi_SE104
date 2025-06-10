@@ -1,4 +1,9 @@
-﻿using System.Text;
+﻿using Microsoft.Extensions.DependencyInjection;
+using QuanLyTiecCuoi.MVVM.View;
+using QuanLyTiecCuoi.MVVM.View.MonAn;
+using QuanLyTiecCuoi.MVVM.ViewModel;
+using QuanLyTiecCuoi.Services;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +24,10 @@ namespace QuanLyTiecCuoi
         public MainWindow()
         {
             InitializeComponent();
+
+            var datTiecView = new ChonMonAn();
+            MainFrame.Navigate(datTiecView);
+
         }
     }
 }

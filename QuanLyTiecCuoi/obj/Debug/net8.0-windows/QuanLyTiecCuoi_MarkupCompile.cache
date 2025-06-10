@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\
+D:\UIT_Nam2_Ky2\CNPM\Project\QuanLyTiecCuoi\obj\Debug\net8.0-windows\
 QuanLyTiecCuoi
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-D:\uit\KI_4\SE104_NMCNPM\Do_An\Project\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\App.xaml
-8914882101
-
-11-212958680
-198-211836927
-MainWindow.xaml;MVVM\View\ControlBar\ControlBarUserControl.xaml;MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml;MVVM\View\HoaDon\HoaDonUserControl.xaml;ResourcesXAML\MainResource.xaml;Theme\Styles\ButtonStyles.xaml;Theme\Styles\TextBlockStyle.xaml;Theme\Styles\TextBoxStyle.xaml;
+D:\UIT_Nam2_Ky2\CNPM\Project\QuanLyTiecCuoi\App.xaml
+21-1095340167
+11413424753
+47-2124132878
+233142717659
+MainWindow.xaml;MVVM\View\ControlBar\ControlBarUserControl.xaml;MVVM\View\DichVu\ChiTietTC.xaml;MVVM\View\DichVu\ChonDichVu.xaml;MVVM\View\DichVu\SuaDichVu.xaml;MVVM\View\DichVu\ThemDichVu.xaml;MVVM\View\DichVu\TuyChinhDichVu.xaml;MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml;MVVM\View\HoaDon\HoaDonUserControl.xaml;MVVM\View\MonAn\ChiTietTC.xaml;MVVM\View\MonAn\ChonMonAn.xaml;MVVM\View\MonAn\SuaMonAn.xaml;MVVM\View\MonAn\ThemMonAn.xaml;MVVM\View\MonAn\TuyChinhMonAn.xaml;ResourcesXAML\MainResource.xaml;Theme\Styles\ButtonStyle.xaml;Theme\Styles\ComboBoxStyle.xaml;Theme\Styles\DatePickerStyle.xaml;Theme\Styles\PasswordBoxStyle.xaml;Theme\Styles\TextBlockStyle.xaml;Theme\Styles\TextBoxStyle.xaml;
 
 False
 

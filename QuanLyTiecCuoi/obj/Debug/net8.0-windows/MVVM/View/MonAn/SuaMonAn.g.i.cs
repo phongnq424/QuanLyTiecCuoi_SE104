@@ -85,7 +85,7 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/QuanLyTiecCuoi;V1.0.0.0;component/mvvm/view/monan/suamonan.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/QuanLyTiecCuoi;component/mvvm/view/monan/suamonan.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\MVVM\View\MonAn\SuaMonAn.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

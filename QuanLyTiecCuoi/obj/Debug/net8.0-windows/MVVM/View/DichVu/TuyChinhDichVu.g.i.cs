@@ -85,7 +85,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/QuanLyTiecCuoi;V1.0.0.0;component/mvvm/view/dichvu/tuychinhdichvu.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/QuanLyTiecCuoi;component/mvvm/view/dichvu/tuychinhdichvu.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\MVVM\View\DichVu\TuyChinhDichVu.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -3,5 +3,6 @@
                     xmlns:ViewModel="clr-namespace:QuanLyTiecCuoi.MVVM.ViewModel"
                     xmlns:ControlBarView="clr-namespace:QuanLyTiecCuoi.MVVM.View.ControlBar">
 
-    <ViewModel:ControlBarViewModel x:Key="ControlBarViewModel"/>
+    
+    
 </ResourceDictionary>

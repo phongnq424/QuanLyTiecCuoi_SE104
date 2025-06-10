@@ -10,15 +10,45 @@
     <Compile Update="MVVM\View\ControlBar\ControlBarUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MVVM\View\DichVu\ChonDichVu.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MVVM\View\HoaDon\HoaDonUserControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MVVM\View\MonAn\ChonMonAn.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\DichVu\ChonDichVu.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\MonAn\ChonMonAn.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\Styles\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\Styles\ComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\Styles\DatePickerStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\Styles\PasswordBoxStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\Styles\TextBlockStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\Styles\TextBoxStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

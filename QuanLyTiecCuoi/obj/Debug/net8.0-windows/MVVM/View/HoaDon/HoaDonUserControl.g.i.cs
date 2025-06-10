@@ -62,7 +62,7 @@ namespace QuanLyTiecCuoi.MVVM.View.HoaDon {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/QuanLyTiecCuoi;V1.0.0.0;component/mvvm/view/hoadon/hoadonusercontrol.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/QuanLyTiecCuoi;component/mvvm/view/hoadon/hoadonusercontrol.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\MVVM\View\HoaDon\HoaDonUserControl.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

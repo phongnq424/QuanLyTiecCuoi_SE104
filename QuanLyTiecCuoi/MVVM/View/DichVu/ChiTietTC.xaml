@@ -18,6 +18,7 @@
                     <TextBlock Text="Chi tiết dịch vụ" 
                                TextAlignment="Center" Width="201" Height="14" FontWeight="Bold" Margin="15,0,0,0"/>
                     <Button x:Name="btnClose"
+                            Style="{StaticResource ButtonStyle}"
                             Content="✕" 
                             Width="20" 
                             Height="20" 

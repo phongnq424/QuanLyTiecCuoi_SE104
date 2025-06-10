@@ -14,7 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.MVVM.Model;
+using QuanLyTiecCuoi.MVVM.ViewModel.MonAn;
 
 namespace QuanLyTiecCuoi.MVVM.View.MonAn
 {
@@ -23,122 +25,51 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
     /// </summary>
     public partial class TuyChinhMonAn : Page
     {
-        // Collection gốc
-        public ObservableCollection<MonAnModel> MonAnList { get; set; }
+        private TuyChinhMonAnViewModel _viewModel;
 
-        // View có filter
-        private ICollectionView _monAnView;
         public TuyChinhMonAn()
         {
             InitializeComponent();
-            // Khởi tạo dữ liệu (thay bằng gọi DB hoặc service của bạn)
-            this.Loaded += TuyChinhMonAn_Loaded;
-        }
-        private void TuyChinhMonAn_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.Loaded -= TuyChinhMonAn_Loaded;
+            _viewModel = new TuyChinhMonAnViewModel();
+            this.DataContext = _viewModel;
 
-            // Ở đây chắc chắn tất cả control đã được khởi tạo từ XAML
-            MonAnList = new ObservableCollection<MonAnModel>(LoadMonAnDemo());
-            _monAnView = CollectionViewSource.GetDefaultView(MonAnList);
-            _monAnView.Filter = FilterMonAn;
-            itemsControlMonAn.ItemsSource = _monAnView;
-
-            txtSearchName.TextChanged += SearchBox_TextChanged;
-            txtSearchPrice.TextChanged += SearchBox_TextChanged;
-        }
-        private IEnumerable<MonAnModel> LoadMonAnDemo()
-        {
-            return new[]
-            {
-               new MonAnModel { TenMon="Gỏi bò", DonGia=150000 },
-              new MonAnModel { TenMon="Lẩu Thái", DonGia=350000 },
-                new MonAnModel { TenMon="Tráng miệng", DonGia=100000 },
-            };
-        }
-        // Khi người dùng gõ/chỉnh sửa trong 2 ô tìm kiếm
-        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            _monAnView.Refresh();
-        }
-        // Hàm filter chính
-        private bool FilterMonAn(object item)
-        {
-            if (item is MonAnModel m)
-            {
-                var keyName = txtSearchName.Text.Trim();
-                var keyPrice = txtSearchPrice.Text.Trim();
-
-                bool matchName = string.IsNullOrEmpty(keyName)
-                    || m.TenMon.IndexOf(keyName, StringComparison.InvariantCultureIgnoreCase) >= 0;
-
-                bool matchPrice = string.IsNullOrEmpty(keyPrice)
-                    || m.DonGia.ToString().Contains(keyPrice);
-
-                return matchName && matchPrice;
-            }
-            return false;
+            itemsControlMonAn.ItemsSource = _viewModel.DanhSachMonAn;
         }
 
-        // --- Các sự kiện của nút ---
-
-        // Chi tiết
-        private void BtnChiTiet_Click(object sender, RoutedEventArgs e)
-        {
-            if ((sender as Button)?.DataContext is MonAnModel m)
-            {
-                var win = new ChiTietTC(m);
-                win.Show();
-            }
-        }
-
-        // Chỉnh sửa
-        private void BtnChinhSua_Click(object sender, RoutedEventArgs e)
-        {
-            if ((sender as Button)?.DataContext is MonAnModel m)
-            {
-                var win = new SuaMonAn(m);
-                win.Show();
-            }
-        }
-
-        // Thêm món ăn
-        private void BtnThemMonAn_Click(object sender, RoutedEventArgs e)
-        {
-            var win = new ThemMonAn();
-            // Giả sử dialog trả về NewMonAn khi OK
-            if (win.ShowDialog() == true && win.NewMonAn != null)
-            {
-                MonAnList.Add(win.NewMonAn);
-                _monAnView.Refresh();
-            }
-        }
-
-        // Xóa với MessageBox xác nhận
         private void BtnXoa_Click(object sender, RoutedEventArgs e)
         {
-            if ((sender as Button)?.DataContext is MonAnModel m)
+            if (sender is Button btn && btn.DataContext is MONAN monAn)
             {
-                var res = MessageBox.Show(
-                    "Bạn có chắc muốn xóa món ăn này?",
-                    "Xác nhận xóa",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Question);
-
-                if (res == MessageBoxResult.Yes)
-                    MonAnList.Remove(m);
+                _viewModel.XoaMonAn(monAn);
             }
         }
 
-        // Xử lý placeholder (đã có trong XAML)
+        private void BtnChiTiet_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.DataContext is MONAN monAn)
+            {
+                _viewModel.HienThiChiTiet(monAn);
+            }
+        }
+
+        private void BtnChinhSua_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.DataContext is MONAN monAn)
+            {
+                _viewModel.SuaMonAn(monAn);
+            }
+        }
+
+        private void BtnThemMonAn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Mở giao diện thêm món ăn mới", "Thêm món ăn");
+        }
+
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (sender is TextBox tb &&
-                (tb.Text == "Tên món ăn" || tb.Text == "Đơn giá"))
+            if (sender is TextBox tb && (tb.Text == "Tên món ăn" || tb.Text == "Đơn giá"))
             {
                 tb.Text = "";
-                tb.Foreground = Brushes.Black;
-                tb.FontStyle = FontStyles.Normal;
             }
         }
 
@@ -146,16 +77,13 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
         {
             if (sender is TextBox tb && string.IsNullOrWhiteSpace(tb.Text))
             {
-                tb.FontStyle = FontStyles.Italic;
-                tb.Foreground = new SolidColorBrush(Color.FromRgb(0x88, 0x88, 0x88));
-                if (tb.Name == "txtSearchName")
-                    tb.Text = "Tên món ăn";
-                else if (tb.Name == "txtSearchPrice")
-                    tb.Text = "Đơn giá";
+                if (tb.Name == "txtSearchName") tb.Text = "Tên món ăn";
+                if (tb.Name == "txtSearchPrice") tb.Text = "Đơn giá";
             }
         }
     }
 
-    
+
+
 }
 

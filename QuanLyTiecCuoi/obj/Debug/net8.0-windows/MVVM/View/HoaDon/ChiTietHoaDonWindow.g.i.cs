@@ -54,7 +54,7 @@ namespace QuanLyTiecCuoi.MVVM.View.HoaDon {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/QuanLyTiecCuoi;V1.0.0.0;component/mvvm/view/hoadon/chitiethoadonwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/QuanLyTiecCuoi;component/mvvm/view/hoadon/chitiethoadonwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
