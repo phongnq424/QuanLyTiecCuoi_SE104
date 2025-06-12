@@ -15,18 +15,24 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Data.Services;
 using QuanLyTiecCuoi.MVVM.View.MainVindow;
+using QuanLyTiecCuoi.Services;
+using Microsoft.Extensions.DependencyInjection;
+using QuanLyTiecCuoi.MVVM.View.Login;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
-    internal class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
+        private readonly DangNhapService _DangNhapService;
 
-        private Visibility _ErrorMessVisability;
+
+        private Visibility _ErrorMessVisability = Visibility.Hidden;
         public Visibility ErrorMessVisability
         {
             get { return _ErrorMessVisability; }
             set { _ErrorMessVisability = value; OnPropertyChanged(); }
         }
+
 
 
         private string _UserName;
@@ -41,10 +47,12 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ICommand ForgotPasswordCommand { get; set; }
         public ICommand LoginCommand { get; set; }
         #endregion
-        public LoginViewModel()
+        public LoginViewModel(DangNhapService dangNhapService)
         {
+            _DangNhapService = dangNhapService;
             ErrorMessVisability = Visibility.Hidden;
-            FirstLoadCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+            FirstLoadCommand = new RelayCommand<Window>((p) => { return true; }, async (p) => {
+
             });
 
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
@@ -57,38 +65,33 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             });
 
             LoginCommand = new RelayCommand<Window>((p) => 
+            { return true; }, (p) => 
             {
-                ErrorMessVisability = Visibility.Hidden;
-                if(loginCondition())
-                {
+
+                if (!loginCondition())
+                { 
                     ErrorMessVisability = Visibility.Visible;
-                    return false;
+                    return;
                 }
-                return true;
-            }, (p) => 
-            {
-                MainWindow wd = new MainWindow();
-                Application.Current.MainWindow = wd;
-                wd.Show();
-                p.Close();
-                //Login(p);
+                Login(p);
             });
         }
 
         private async void Login(Window p)
         {
-            NGUOIDUNG nguoidung = await NhanVienService.Ins.Login(UserName, Password);
-            if (nguoidung == null)
+            var nguoidung = await _DangNhapService.Login(UserName, Password);
+            if (nguoidung != null) 
             {
                 MainWindowViewModel.NguoiDungHienTai = nguoidung;
-                MainWindow wd = new MainWindow()
+                var wd = App.AppHost?.Services.GetRequiredService<MainWindow>();
+                if (wd != null)
                 {
-                    Owner = p
-                };
-                wd.Show();
-                p.Close();
+                    Application.Current.MainWindow = wd;
+                    wd.Show();
+                    p?.Close();
+                }
             }
-            else
+            else 
             {
                 ErrorMessVisability = Visibility.Visible;
             }
@@ -96,7 +99,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         private bool loginCondition()
         {
-            return (UserName != null) && (UserName.Length > 0) && (Password.Length > 0);
+            return (UserName != null) && (UserName.Length > 0) && Password != null && (Password.Length > 0);
         }
 
     }

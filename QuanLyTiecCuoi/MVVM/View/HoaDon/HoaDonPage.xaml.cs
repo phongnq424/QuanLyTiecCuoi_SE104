@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyTiecCuoi.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace QuanLyTiecCuoi.MVVM.View.HoaDon
     /// </summary>
     public partial class HoaDonPage : Page
     {
-        public HoaDonPage()
+        public HoaDonPage(HoaDonViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
+  
     }
 }

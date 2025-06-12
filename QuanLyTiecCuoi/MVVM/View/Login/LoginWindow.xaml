@@ -70,7 +70,7 @@
                             Text="Tên đăng nhập"
                             Style="{StaticResource Header5Style}"/>
                         <TextBox
-                            Text="{Binding  UserName}"
+                            Text="{Binding UserName}"
                             Style="{StaticResource TextBoxStyle1}"></TextBox>
 
 
@@ -91,6 +91,7 @@
                             
                             <PasswordBox
                                 x:Name="Passwbox"
+                                PasswordChanged="Passwbox_PasswordChanged"
                                 Style="{StaticResource PasswordBoxStyle}"
                                 ></PasswordBox>
 
@@ -113,7 +114,7 @@
                             Margin="0,50,0,10"
                             Content="Đăng nhập"
                             Command="{Binding LoginCommand }"
-                            CommandParameter="{Binding ElementName=MangHinhDangNhap}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                             Style="{StaticResource LoginButtonStyle}"></Button>
 
 

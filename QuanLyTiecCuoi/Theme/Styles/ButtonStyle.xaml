@@ -11,8 +11,8 @@
 
 
     <Style x:Key="ButtonMinimizeStyle" TargetType="Button">
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="30"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -25,8 +25,8 @@
                             <Setter TargetName="BorderImg" Property="Background" Value="{StaticResource MinusIconMouseOverSource}"/>
                         </Trigger>
                         <Trigger Property="IsMouseCaptured" Value="True">
-                            <Setter TargetName="BorderImg" Property="Width" Value="35"/>
-                            <Setter TargetName="BorderImg" Property="Height" Value="35"/>
+                            <Setter TargetName="BorderImg" Property="Width" Value="25"/>
+                            <Setter TargetName="BorderImg" Property="Height" Value="25"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -36,8 +36,8 @@
 
 
     <Style x:Key="MyButtonCloseStyle" TargetType="Button">
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="30"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -50,8 +50,8 @@
                             <Setter TargetName="BorderImg" Property="Background" Value="{StaticResource CloseIconMouseOverSource}"/>
                         </Trigger>
                         <Trigger Property="IsMouseCaptured" Value="True">
-                            <Setter TargetName="BorderImg" Property="Width" Value="35"/>
-                            <Setter TargetName="BorderImg" Property="Height" Value="35"/>
+                            <Setter TargetName="BorderImg" Property="Width" Value="25"/>
+                            <Setter TargetName="BorderImg" Property="Height" Value="25"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -60,8 +60,8 @@
     </Style>
 
     <Style x:Key="MyButtonMaximineStyle" TargetType="Button">
-        <Setter Property="Height" Value="37"/>
-        <Setter Property="Width" Value="37"/>
+        <Setter Property="Height" Value="27"/>
+        <Setter Property="Width" Value="27"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -74,8 +74,8 @@
                             <Setter TargetName="BorderImg" Property="Background" Value="{StaticResource MaxiIconMouseOverSource}"/>
                         </Trigger>
                         <Trigger Property="IsMouseCaptured" Value="True">
-                            <Setter TargetName="BorderImg" Property="Width" Value="32"/>
-                            <Setter TargetName="BorderImg" Property="Height" Value="32"/>
+                            <Setter TargetName="BorderImg" Property="Width" Value="22"/>
+                            <Setter TargetName="BorderImg" Property="Height" Value="22"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -134,6 +134,66 @@
                                     <DoubleAnimation Storyboard.TargetName="ButtonBorder"
                                                  Storyboard.TargetProperty="Opacity" 
                                                  To="1" Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonAddServiceStyle" TargetType="Button">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="auto"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border x:Name="ButtonBorder"
+                    Height="auto"
+                    Width="auto"
+                    BorderThickness="1"
+                    BorderBrush="#603127"
+                    CornerRadius="15">
+                        <Border.Background>
+                            <SolidColorBrush x:Name="SolidColor" Color="White" Opacity="100"></SolidColorBrush>
+                        </Border.Background>
+                        <TextBlock 
+                        Margin="15,5"
+                        FontSize="15"
+                        FontFamily="Cambria"
+                        Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                        </TextBlock>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="BorderThickness" Value="2"/>
+                        </Trigger>
+
+                        <EventTrigger RoutedEvent="Button.PreviewMouseDown">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="SolidColor" 
+                                              Storyboard.TargetProperty="Opacity" 
+                                              From="1" To="0.5" Duration="0:0:0.1" />
+                                    <DoubleAnimation Storyboard.TargetName="ButtonBorder"
+                                              Storyboard.TargetProperty="Opacity" 
+                                              To="0.5" Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Button.PreviewMouseUp">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="SolidColor" 
+                                              Storyboard.TargetProperty="Opacity" 
+                                              From="0.5" To="1" Duration="0:0:0.1" />
+                                    <DoubleAnimation Storyboard.TargetName="ButtonBorder"
+                                             Storyboard.TargetProperty="Opacity" 
+                                             To="1" Duration="0:0:0.1" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>

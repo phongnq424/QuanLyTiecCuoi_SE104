@@ -1,16 +1,17 @@
 ﻿<Application x:Class="QuanLyTiecCuoi.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:QuanLyTiecCuoi"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:QuanLyTiecCuoi">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/ResourcesXAML/MainResource.xaml"/>
-
-                <ResourceDictionary Source="/Theme/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Theme/Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Theme/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="/Theme/Styles/TextBlockStyle.xaml"/>
                 <ResourceDictionary Source="/Theme/Styles/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Theme/Styles/PasswordBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Theme/Styles/DatePickerStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <ImageSource x:Key="MaximizeMouseOverImg">pack://application:,,,/resources/images/controlbarimg/maximouseover.png</ImageSource>
             <ImageSource x:Key="MinimizeMouseOverImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/minimize_mouseover.png</ImageSource>

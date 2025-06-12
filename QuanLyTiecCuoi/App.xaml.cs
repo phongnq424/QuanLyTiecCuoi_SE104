@@ -9,6 +9,12 @@ using QuanLyTiecCuoi.Data;
 using QuanLyTiecCuoi.MVVM.View.BaoCao;
 using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.Repository;
+using QuanLyTiecCuoi.MVVM.View.Login;
+using QuanLyTiecCuoi.MVVM.View.MainVindow;
+using QuanLyTiecCuoi.Data.Services;
+using QuanLyTiecCuoi.MVVM.ViewModel;
+using QuanLyTiecCuoi.MVVM.View.HoaDon;
+using QuanLyTiecCuoi.Core;
 
 
 namespace QuanLyTiecCuoi
@@ -26,34 +32,52 @@ namespace QuanLyTiecCuoi
                 .ConfigureServices((context, services) =>
                 {
                     string connectionString = context.Configuration.GetConnectionString("DefaultConnection");
+                    Console.WriteLine(">>> Connection string: " + connectionString);
 
                     services.AddDbContext<WeddingDbContext>(options =>
                         options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+                    //interface 
+                    services.AddSingleton<IWindowService, WindowService>();
+
                     services.AddTransient<BaoCaoRepository>();
                     services.AddTransient<ChiTietBaoCaoRepository>();
+                    services.AddTransient<HoaDonRepository>();
+                    services.AddTransient<NhanVienRepository>();
 
                     // Dùng BaoCaoService lấy dữ liệu từ AppDataRepository
                     services.AddTransient<BaoCaoService>();
                     services.AddTransient<ChiTietBaoCaoService>();
+                    services.AddTransient<HoaDonService>();
+                    services.AddTransient<NhanVienService>();
+                    services.AddTransient<DangNhapService>();
 
                     // Các ViewModel
+                    services.AddTransient<MainWindowViewModel>();
                     services.AddTransient<BaoCaoViewModel>();
                     services.AddTransient<ChiTietBaoCaoViewModel>();
+                    services.AddTransient<HoaDonViewModel>();
+                    services.AddTransient<ControlBarViewModel>();
+                    services.AddTransient<LoginViewModel>();
 
                     // Các View
                     services.AddTransient<MainWindow>();
+                    services.AddTransient<LoginWindow>();
                     services.AddTransient<BaoCaoPage>();
                     services.AddTransient<ChiTietBaoCaoPage>();
+                    services.AddTransient<HoaDonPage>();
+                    services.AddTransient<ChiTietHoaDonWindow>();
                 })
                 .Build();
         }
         protected override async void OnStartup(StartupEventArgs e)
         {
+
             await AppHost.StartAsync();
 
             // Tự show LoginWindow (ví dụ)
-            var loginWindow = AppHost.Services.GetRequiredService<MainWindow>();
+
+            var loginWindow = AppHost.Services.GetRequiredService<LoginWindow>();
             loginWindow.Show();
 
             base.OnStartup(e);
