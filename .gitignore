@@ -10,7 +10,8 @@
 
 # Build directories
 QuanLyTiecCuoi/bin/
-QuanLyTiecCuoiobj/
+QuanLyTiecCuoi/obj/
+QuanLyTiecCuoi/obj/Debug/net8.0-windows/
 
 # User-specific files
 QuanLyTiecCuoi/appsettings.json

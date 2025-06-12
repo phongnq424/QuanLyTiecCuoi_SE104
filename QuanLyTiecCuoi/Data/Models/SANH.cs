@@ -22,6 +22,9 @@ namespace QuanLyTiecCuoi.Data.Models
         [ForeignKey("MaLoaiSanh")]
         public virtual LOAISANH LoaiSanh { get; set; }
         public string HinhAnh { get; set; }
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
     }
 }

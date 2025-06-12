@@ -78,6 +78,23 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<DatTiecView>();
                     services.AddTransient<SuaTiecView>();
                     services.AddTransient<ThemTiecView>();
+
+
+                    services.AddTransient<LoaiSanhRepository>();
+                    services.AddTransient<SanhRepository>();
+
+                    services.AddTransient<LoaiSanhService>();
+                    services.AddTransient<SanhService>();
+
+                    services.AddTransient<LoaiSanhViewModel>();
+                    services.AddTransient<SanhViewModel>();
+
+                    services.AddTransient<MainWindow>();
+                    services.AddTransient<SanhView>();
+                    services.AddTransient<DSLoaiSanhView>();
+                    services.AddTransient<DSSanhView>();
+                    services.AddTransient<AddOrEditLoaiSanhWindow>();
+                    services.AddTransient<AddOrEditSanhWindow>();
                 })
                 .Build();
         }

@@ -16,8 +16,11 @@ namespace QuanLyTiecCuoi.Data.Models
         public int MaDatTiec { get; set; }
         public int MaDichVu { get; set; }
         public int SoLuong { get; set; }
+<<<<<<< HEAD
+=======
         public decimal DonGia { get; set; }
         public decimal ThanhTien => DonGia * SoLuong;
+>>>>>>> main
 
         [ForeignKey("MaDatTiec")]
         public virtual DATTIEC DatTiec { get; set; }
