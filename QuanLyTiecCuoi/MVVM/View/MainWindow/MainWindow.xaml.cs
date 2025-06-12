@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -21,10 +21,10 @@ namespace QuanLyTiecCuoi.MVVM.View.MainVindow
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainWindowViewModel vm)
         {
             InitializeComponent();
-            //DataContext = App.AppHost.Services.GetService<MainWindowViewModel>();
+            DataContext = vm;
         }
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {

@@ -1,25 +1,32 @@
 ﻿<Application x:Class="QuanLyTiecCuoi.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:QuanLyTiecCuoi"
-             StartupUri="MVVM/View/MainWindow/MainWindow.xaml">
+             xmlns:local="clr-namespace:QuanLyTiecCuoi">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ResourcesXAML/MainResource.xaml" />
+                <ResourceDictionary Source="/ResourcesXAML/MainResource.xaml"/>
+                <ResourceDictionary Source="/Theme/Styles/ComboBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Theme/Styles/ButtonStyle.xaml"/>
-                <ResourceDictionary Source="/Theme/Styles/ComBoBoxStyle.xaml" />
-                <ResourceDictionary Source="/Theme/Styles/TextBlockStyle.xaml"/>
-                <ResourceDictionary Source="/Theme/Styles/TextBoxStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-            <ImageSource x:Key="MaximizeMouseOverImg">pack://application:,,,/resources/images/controlbarimg/maximouseover.png</ImageSource>
-            <ImageSource x:Key="MinimizeMouseOverImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/minimize_mouseover.png</ImageSource>
-            <ImageSource x:Key="CloseMouseOverImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/close_mouseover.png</ImageSource>
-            <ImageSource x:Key="MinimizeImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/minimize.png</ImageSource>
-            <ImageSource x:Key="MaxiImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/maxi.png</ImageSource>
-            <ImageSource x:Key="CloseImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/close.png</ImageSource>
-            <ImageSource x:Key="ArrowDownImg">pack://application:,,,/resources/images/controlbarimg/arrow-down.png</ImageSource>
-        </ResourceDictionary>
+                <Application.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="/ResourcesXAML/MainResource.xaml"/>
+                            <ResourceDictionary Source="/Theme/Styles/ButtonStyle.xaml"/>
+                            <ResourceDictionary Source="/Theme/Styles/ComBoBoxStyle.xaml"/>
+                            <ResourceDictionary Source="/Theme/Styles/TextBlockStyle.xaml"/>
+                            <ResourceDictionary Source="/Theme/Styles/TextBoxStyle.xaml"/>
+                            <ResourceDictionary Source="/Theme/Styles/PasswordBoxStyle.xaml"/>
+                            <ResourceDictionary Source="/Theme/Styles/DatePickerStyle.xaml"/>
+                        </ResourceDictionary.MergedDictionaries>
+                        <ImageSource x:Key="MaximizeMouseOverImg">pack://application:,,,/resources/images/controlbarimg/maximouseover.png</ImageSource>
+                        <ImageSource x:Key="MinimizeMouseOverImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/minimize_mouseover.png</ImageSource>
+                        <ImageSource x:Key="CloseMouseOverImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/close_mouseover.png</ImageSource>
+                        <ImageSource x:Key="MinimizeImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/minimize.png</ImageSource>
+                        <ImageSource x:Key="MaxiImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/maxi.png</ImageSource>
+                        <ImageSource x:Key="CloseImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/close.png</ImageSource>
+                        <ImageSource x:Key="ArrowDownImg">pack://application:,,,/resources/images/controlbarimg/arrow-down.png</ImageSource>
+                    </ResourceDictionary>
 
-    </Application.Resources>
+                </Application.Resources>
 </Application>

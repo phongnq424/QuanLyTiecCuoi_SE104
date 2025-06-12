@@ -72,6 +72,11 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="HeaderForTableStyle" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
     <Style x:Key="Header6Style" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -79,7 +84,7 @@
     </Style>
 
     <Style x:Key="GridViewTableHeaderStyle" TargetType="GridViewColumnHeader">
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="Width" Value="auto"/>
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center"/>

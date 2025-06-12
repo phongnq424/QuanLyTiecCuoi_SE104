@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using QuanLyTiecCuoi.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,15 @@ namespace QuanLyTiecCuoi.MVVM.View.ControlBar
         public ControlBarUserControl()
         {
             InitializeComponent();
+            if (App.AppHost?.Services != null)
+            {
+                var vm = App.AppHost.Services.GetRequiredService<ControlBarViewModel>();
+                DataContext = vm;
+            }
+            else
+            {
+
+            }
         }
     }
 }

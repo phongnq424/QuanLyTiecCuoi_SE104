@@ -7,7 +7,6 @@
         xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.MainVindow"
         mc:Ignorable="d"
         x:Name="MangHinhChinh"
-        DataContext="{StaticResource mainWindowViewModel}"
         WindowStartupLocation="CenterScreen" 
         MouseDown="MainWindow_MouseDown" 
         xmlns:controlBar="clr-namespace:QuanLyTiecCuoi.MVVM.View.ControlBar"

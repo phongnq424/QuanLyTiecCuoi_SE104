@@ -25,6 +25,12 @@
 
 </ItemGroup>
 
+<ItemGroup>
+  <None Update="appsettings.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+</ItemGroup>
+
   <ItemGroup>
     <Compile Remove="Model\**" />
     <Compile Remove="View\**" />
@@ -38,6 +44,65 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Resources\Images\appImage.png" />
+    <None Remove="Resources\Images\controlbarimg\close.png" />
+    <None Remove="Resources\Images\controlbarimg\close_mouseover.png" />
+    <None Remove="Resources\Images\controlbarimg\Maxi.png" />
+    <None Remove="Resources\Images\controlbarimg\MaxiMouseOver.png" />
+    <None Remove="Resources\Images\controlbarimg\minimize.png" />
+    <None Remove="Resources\Images\controlbarimg\minimize_mouseover.png" />
+    <None Remove="Resources\Images\controlbarimg\more.png" />
+    <None Remove="Resources\Images\controlbarimg\reloadIcon.png" />
+    <None Remove="Resources\Images\controlbarimg\user.png" />
+    <None Remove="Resources\Images\HoaDon\closeBill_Infor.png" />
+    <None Remove="Resources\Images\Login\Font.png" />
+    <None Remove="Resources\Images\Login\hideIcon.png" />
+    <None Remove="Resources\Images\Login\showIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\appImage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\controlbarimg\close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\controlbarimg\close_mouseover.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\controlbarimg\Maxi.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\controlbarimg\MaxiMouseOver.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\controlbarimg\minimize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\controlbarimg\minimize_mouseover.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\controlbarimg\more.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\controlbarimg\reloadIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\controlbarimg\user.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Login\Font.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Login\hideIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Login\showIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="resources\images\appImage.png" />
     <None Remove="resources\images\controlbarimg\arrow-down.png" />
     <None Remove="resources\images\controlbarimg\close.png" />
@@ -61,6 +126,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\HoaDon\closeBill_Infor.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.5" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="MySqlConnector" Version="2.4.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+  </ItemGroup>
+
+</Project>
     <Resource Include="resources\images\controlbarimg\arrow-down.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

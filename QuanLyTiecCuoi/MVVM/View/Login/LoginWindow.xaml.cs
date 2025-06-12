@@ -20,10 +20,11 @@ namespace QuanLyTiecCuoi.MVVM.View.Login
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow()
+        public LoginWindow(LoginViewModel vm)
         {
             InitializeComponent();
-            this.DataContext = new LoginViewModel();
+
+            DataContext = vm;
         }
 
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -53,5 +54,14 @@ namespace QuanLyTiecCuoi.MVVM.View.Login
             tbPasswordVisible.Visibility = Visibility.Collapsed;
 
         }
+
+        private void Passwbox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is LoginViewModel vm)
+            {
+                vm.Password = Passwbox.Password;
+            }
+        }
+   
     }
 }
