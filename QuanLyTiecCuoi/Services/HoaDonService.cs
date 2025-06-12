@@ -7,19 +7,28 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Threading.Tasks;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace QuanLyTiecCuoi.Data.Services
+namespace QuanLyTiecCuoi.Services
 {
     public class HoaDonService
     {
+<<<<<<< HEAD
         private readonly HoaDonRepository _hoaDonRepository;
 
         public HoaDonService(HoaDonRepository HoaDonRepo)
         {
             _hoaDonRepository = HoaDonRepo;
+=======
+        private readonly HoaDonRepository _repo;
+
+        public HoaDonService(HoaDonRepository repo)
+        {
+            _repo = repo;
+>>>>>>> main
         }
 
         public async Task<List<HOADON>> GetAllHoaDonsAsync()
         {
+<<<<<<< HEAD
             return await _hoaDonRepository.GetAllAsync();
         }
 
@@ -128,5 +137,10 @@ namespace QuanLyTiecCuoi.Data.Services
             }
             return null;
         }
+=======
+            return await _repo.GetAllAsync();
+        }
+>>>>>>> main
     }
+
 }

@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 ﻿using QuanLyTiecCuoi.Data;
 using QuanLyTiecCuoi.Data.Models;
 using Microsoft.EntityFrameworkCore;  // Cần để dùng các async EF Core
 using System;
+=======
+﻿using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.Data;
+using System;
+using Microsoft.EntityFrameworkCore;
+using QuanLyTiecCuoi.Data;
+using QuanLyTiecCuoi.Data.Models;
+>>>>>>> main
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,13 +26,17 @@ namespace QuanLyTiecCuoi.Repository
             _context = context;
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Lấy tất cả hóa đơn.
         /// </summary>
+=======
+>>>>>>> main
         public async Task<List<HOADON>> GetAllAsync()
         {
             return await _context.HoaDons.ToListAsync();
         }
+<<<<<<< HEAD
 
         /// <summary>
         /// Lấy hóa đơn theo mã.
@@ -183,4 +196,8 @@ namespace QuanLyTiecCuoi.Repository
 
 
     }
+=======
+    }
+
+>>>>>>> main
 }

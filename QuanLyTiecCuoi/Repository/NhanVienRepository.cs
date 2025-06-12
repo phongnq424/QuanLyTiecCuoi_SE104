@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuanLyTiecCuoi.Data;
 using QuanLyTiecCuoi.Data.Models;
+<<<<<<< HEAD
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Text;
+=======
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+>>>>>>> main
 
 namespace QuanLyTiecCuoi.Repository
 {
@@ -19,6 +25,7 @@ namespace QuanLyTiecCuoi.Repository
         {
             _context = context;
         }
+<<<<<<< HEAD
         /// <summary>
         /// Login
         /// </summary>
@@ -212,6 +219,38 @@ namespace QuanLyTiecCuoi.Repository
             var bytes = Encoding.UTF8.GetBytes(password);
             var hash = sha256.ComputeHash(bytes);
             return Convert.ToBase64String(hash);
+=======
+
+        public async Task<NGUOIDUNG> LoginAsync(string username, string password)
+        {
+            return await _context.NguoiDungs
+                .FirstOrDefaultAsync(x => x.TenDangNhap == username && x.MatKhau == password);
+        }
+
+        public async Task<List<CHUCNANG>> LayChucNangAsync(NGUOIDUNG nv)
+        {
+            return await (from pq in _context.PhanQuyens
+                          where pq.MaNhom == nv.MaNhom
+                          join cn in _context.ChucNangs on pq.MaChucNang equals cn.MaChucNang
+                          select new CHUCNANG
+                          {
+                              MaChucNang = cn.MaChucNang,
+                              TenChucNang = cn.TenChucNang,
+                              TenManHinhDuocLoad = cn.TenManHinhDuocLoad
+                          }).ToListAsync();
+        }
+
+        public async Task<List<CHUCNANG>> LayTatCaChucNangAsync()
+        {
+            return await _context.ChucNangs
+                .Select(cn => new CHUCNANG
+                {
+                    MaChucNang = cn.MaChucNang,
+                    TenChucNang = cn.TenChucNang,
+                    TenManHinhDuocLoad = cn.TenManHinhDuocLoad
+                })
+                .ToListAsync();
+>>>>>>> main
         }
     }
 }

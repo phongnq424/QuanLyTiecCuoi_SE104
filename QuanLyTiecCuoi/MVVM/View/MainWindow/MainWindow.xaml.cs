@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ﻿using QuanLyTiecCuoi.MVVM.ViewModel;
+=======
+﻿using Microsoft.Extensions.DependencyInjection;
+using QuanLyTiecCuoi.MVVM.ViewModel;
+>>>>>>> main
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +28,11 @@ namespace QuanLyTiecCuoi.MVVM.View.MainVindow
         public MainWindow(MainWindowViewModel vm)
         {
             InitializeComponent();
+<<<<<<< HEAD
             DataContext = vm;
+=======
+            //DataContext = App.AppHost.Services.GetService<MainWindowViewModel>();
+>>>>>>> main
         }
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {

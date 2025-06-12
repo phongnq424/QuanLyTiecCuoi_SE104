@@ -13,11 +13,16 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using QuanLyTiecCuoi.Data.Services;
+using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.View.MainVindow;
+<<<<<<< HEAD
 using QuanLyTiecCuoi.Services;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.MVVM.View.Login;
+=======
+using Microsoft.Extensions.DependencyInjection;
+
+>>>>>>> main
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
@@ -25,16 +30,25 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
     {
         private readonly DangNhapService _DangNhapService;
 
+<<<<<<< HEAD
 
         private Visibility _ErrorMessVisability = Visibility.Hidden;
+=======
+        private Visibility _ErrorMessVisability;
+
+>>>>>>> main
         public Visibility ErrorMessVisability
         {
             get { return _ErrorMessVisability; }
             set { _ErrorMessVisability = value; OnPropertyChanged(); }
         }
 
+<<<<<<< HEAD
 
 
+=======
+        private readonly NhanVienService _nhanVienService;
+>>>>>>> main
         private string _UserName;
         public string UserName { get => _UserName; set {  _UserName = value; OnPropertyChanged(); } }
 
@@ -49,7 +63,11 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         #endregion
         public LoginViewModel(DangNhapService dangNhapService)
         {
+<<<<<<< HEAD
             _DangNhapService = dangNhapService;
+=======
+            _nhanVienService = App.AppHost.Services.GetRequiredService<NhanVienService>();
+>>>>>>> main
             ErrorMessVisability = Visibility.Hidden;
             FirstLoadCommand = new RelayCommand<Window>((p) => { return true; }, async (p) => {
 
@@ -79,8 +97,13 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         private async void Login(Window p)
         {
+<<<<<<< HEAD
             var nguoidung = await _DangNhapService.Login(UserName, Password);
             if (nguoidung != null) 
+=======
+            NGUOIDUNG nguoidung = await _nhanVienService.LoginAsync(UserName, Password);
+            if (nguoidung == null)
+>>>>>>> main
             {
                 MainWindowViewModel.NguoiDungHienTai = nguoidung;
                 var wd = App.AppHost?.Services.GetRequiredService<MainWindow>();

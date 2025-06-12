@@ -9,12 +9,17 @@ using QuanLyTiecCuoi.Data;
 using QuanLyTiecCuoi.MVVM.View.BaoCao;
 using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.Repository;
+<<<<<<< HEAD
 using QuanLyTiecCuoi.MVVM.View.Login;
 using QuanLyTiecCuoi.MVVM.View.MainVindow;
 using QuanLyTiecCuoi.Data.Services;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 using QuanLyTiecCuoi.MVVM.View.HoaDon;
 using QuanLyTiecCuoi.Core;
+=======
+using QuanLyTiecCuoi.MVVM.ViewModel;
+using QuanLyTiecCuoi.MVVM.View.MainVindow;
+>>>>>>> main
 
 
 namespace QuanLyTiecCuoi
@@ -42,27 +47,41 @@ namespace QuanLyTiecCuoi
 
                     services.AddTransient<BaoCaoRepository>();
                     services.AddTransient<ChiTietBaoCaoRepository>();
+<<<<<<< HEAD
                     services.AddTransient<HoaDonRepository>();
+=======
+>>>>>>> main
                     services.AddTransient<NhanVienRepository>();
 
                     // Dùng BaoCaoService lấy dữ liệu từ AppDataRepository
                     services.AddTransient<BaoCaoService>();
                     services.AddTransient<ChiTietBaoCaoService>();
+<<<<<<< HEAD
                     services.AddTransient<HoaDonService>();
                     services.AddTransient<NhanVienService>();
                     services.AddTransient<DangNhapService>();
+=======
+                    services.AddTransient<NhanVienService>();
+>>>>>>> main
 
                     // Các ViewModel
                     services.AddTransient<MainWindowViewModel>();
                     services.AddTransient<BaoCaoViewModel>();
                     services.AddTransient<ChiTietBaoCaoViewModel>();
+<<<<<<< HEAD
                     services.AddTransient<HoaDonViewModel>();
                     services.AddTransient<ControlBarViewModel>();
+=======
+>>>>>>> main
                     services.AddTransient<LoginViewModel>();
 
                     // Các View
                     services.AddTransient<MainWindow>();
+<<<<<<< HEAD
                     services.AddTransient<LoginWindow>();
+=======
+                    services.AddSingleton<MainWindowViewModel>();
+>>>>>>> main
                     services.AddTransient<BaoCaoPage>();
                     services.AddTransient<ChiTietBaoCaoPage>();
                     services.AddTransient<HoaDonPage>();
