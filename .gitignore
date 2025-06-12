@@ -10,7 +10,7 @@
 
 # Build directories
 QuanLyTiecCuoi/bin/
-QuanLyTiecCuoiobj/
+QuanLyTiecCuoi/obj/
 
 # User-specific files
 QuanLyTiecCuoi/appsettings.json
