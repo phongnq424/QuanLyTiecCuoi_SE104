@@ -16,7 +16,7 @@ QuanLyTiecCuoiobj/
 QuanLyTiecCuoi/appsettings.json
 
 # WPF output files
-QuanLyTiecCuoi/*.obj
+QuanLyTiecCuoi/obj
 QuanLyTiecCuoi/*.exe
 QuanLyTiecCuoi/*.dll
 QuanLyTiecCuoi/*.pdb
