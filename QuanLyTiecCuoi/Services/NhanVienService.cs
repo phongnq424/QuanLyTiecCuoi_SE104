@@ -1,98 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore;
-using QuanLyTiecCuoi.Data.Models;
+﻿using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace QuanLyTiecCuoi.Data.Services
+namespace QuanLyTiecCuoi.Services
 {
-    internal class NhanVienService
+    public class NhanVienService
     {
-        public NhanVienService() { }
-        private static NhanVienService _ins;
+        private readonly NhanVienRepository _repo;
 
-        public static NhanVienService Ins
+        public NhanVienService(NhanVienRepository repo)
         {
-            get
-            {
-                if (_ins == null)
-                {
-                    _ins = new NhanVienService();
-                }
-                return _ins;
-            }
-            private set { _ins = value; }
+            _repo = repo;
         }
 
-        public async Task<NGUOIDUNG> Login(string UserName, string Password)
+        public async Task<NGUOIDUNG> LoginAsync(string username, string password)
         {
-            try
-            {
-                using (var context = new WeddingDbContext())
-                {
-                    int number = int.Parse(UserName);
-                    NGUOIDUNG? user = await context.NguoiDungs.Where(
-                        x => x.TenDangNhap == number && x.MatKhau == Password).FirstOrDefaultAsync();
-                    if (user == null)
-                    {
-                        return null;
-                    }
-
-                    return user;
-                }
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            return await _repo.LoginAsync(username, password);
         }
 
-        public async Task<List<CHUCNANG>> LayChucNang(NGUOIDUNG nv)
+        public async Task<List<CHUCNANG>> LayChucNangAsync(NGUOIDUNG nv)
         {
-            try
-            {
-                using(var context = new WeddingDbContext())
-                {
-                    var danhsach = (from pq in context.PhanQuyens
-                                    where pq.MaNhom == nv.MaNhom
-                                    join cn in context.ChucNangs on pq.MaChucNang equals cn.MaChucNang
-                                    select new CHUCNANG
-                                    {
-                                        MaChucNang = cn.MaChucNang,
-                                        TenChucNang = cn.TenChucNang,
-                                        TenManHinhDuocLoad = cn.TenManHinhDuocLoad
-                                    }).ToListAsync();
-                    return await danhsach;
-                }
-            }
-            catch (Exception ex) {
-                return null;
-            }
+            return await _repo.LayChucNangAsync(nv);
         }
 
-
-        public async Task<List<CHUCNANG>> LayTatCaChucNang()
+        public async Task<List<CHUCNANG>> LayTatCaChucNangAsync()
         {
-            try
-            {
-                using (var context = new WeddingDbContext())
-                {
-                    var danhsach = (from  cn in context.ChucNangs 
-                                    select new CHUCNANG
-                                    {
-                                        MaChucNang = cn.MaChucNang,
-                                        TenChucNang = cn.TenChucNang,
-                                        TenManHinhDuocLoad = cn.TenManHinhDuocLoad
-                                    }).ToListAsync();
-                    return await danhsach;
-                }
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            return await _repo.LayTatCaChucNangAsync();
         }
     }
 }

@@ -13,8 +13,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using QuanLyTiecCuoi.Data.Services;
+using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.View.MainVindow;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
@@ -22,13 +24,14 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
     {
 
         private Visibility _ErrorMessVisability;
+
         public Visibility ErrorMessVisability
         {
             get { return _ErrorMessVisability; }
             set { _ErrorMessVisability = value; OnPropertyChanged(); }
         }
 
-
+        private readonly NhanVienService _nhanVienService;
         private string _UserName;
         public string UserName { get => _UserName; set {  _UserName = value; OnPropertyChanged(); } }
 
@@ -43,6 +46,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         #endregion
         public LoginViewModel()
         {
+            _nhanVienService = App.AppHost.Services.GetRequiredService<NhanVienService>();
             ErrorMessVisability = Visibility.Hidden;
             FirstLoadCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
             });
@@ -77,7 +81,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         private async void Login(Window p)
         {
-            NGUOIDUNG nguoidung = await NhanVienService.Ins.Login(UserName, Password);
+            NGUOIDUNG nguoidung = await _nhanVienService.LoginAsync(UserName, Password);
             if (nguoidung == null)
             {
                 MainWindowViewModel.NguoiDungHienTai = nguoidung;

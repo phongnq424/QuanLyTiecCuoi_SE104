@@ -11,8 +11,11 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.Data.Models;
-using QuanLyTiecCuoi.Data.Services;
+using QuanLyTiecCuoi.MVVM.ViewModel;
+using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.View.Login;
+using QuanLyTiecCuoi.MVVM.View.BaoCao;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
@@ -65,7 +68,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     new CHUCNANG() { MaChucNang = 0, TenChucNang = "Sảnh", TenManHinhDuocLoad = "Sanh"},
                     new CHUCNANG() { MaChucNang = 0, TenChucNang = "Đặt tiệc", TenManHinhDuocLoad = "DatTiec"},
                     new CHUCNANG() { MaChucNang = 0, TenChucNang = "Hóa đơn", TenManHinhDuocLoad = "HoaDon.HoaDonPage"},
-                    new CHUCNANG() { MaChucNang = 0, TenChucNang = "Báo cáo", TenManHinhDuocLoad = "Trangchu"},
+                    new CHUCNANG() { MaChucNang = 0, TenChucNang = "Báo cáo", TenManHinhDuocLoad = "BaoCao.BaoCaoPage"},
                     new CHUCNANG() { MaChucNang = 0, TenChucNang = "Tùy chỉnh", TenManHinhDuocLoad = "Trangchu"},
                 };
                 //if (NguoiDungHienTai != null)
@@ -119,11 +122,13 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         public object LoadViewByName(string viewName)
         {
+            if (viewName == "BaoCao.BaoCaoPage")
+                return App.AppHost.Services.GetService<BaoCaoPage>();
+
+            // fallback cho các view không cần DI
             string fullTypeName = $"QuanLyTiecCuoi.MVVM.View.{viewName}";
             var type = Type.GetType(fullTypeName);
-            if (type == null)
-                return null;
-
+            if (type == null) return null;
             return Activator.CreateInstance(type);
         }
     }

@@ -1,5 +1,7 @@
-﻿using LiveCharts;
-using LiveCharts.Wpf;
+﻿using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi;
 using QuanLyTiecCuoi.Core;
@@ -21,8 +23,8 @@ public class BaoCaoViewModel : BaseViewModel
 
     public ObservableCollection<string> MonthYearOptions { get; set; } = new();
     public ObservableCollection<string> MonthYearOptionsToDate { get; set; } = new();
-    public SeriesCollection SeriesCollection { get; set; }
-    public List<string> Labels { get; set; }
+    public ISeries[] Series { get; set; } // Thay SeriesCollection bằng ISeries[]
+    public Axis[] XAxes { get; set; } // Thay Labels bằng Axis[]
 
     public RelayCommand<object> NavigateCommand { get; private set; }
 
@@ -102,8 +104,8 @@ public class BaoCaoViewModel : BaseViewModel
         var reports = _baoCaoService.GetBaoCaoTuNgayDenNgay(tu, den);
 
         var labels = new List<string>();
-        var weddingCounts = new ChartValues<int>();
-        var revenues = new ChartValues<double>();
+        var weddingCounts = new List<int>();
+        var revenues = new List<double>();
 
         foreach (var r in reports)
         {
@@ -113,26 +115,38 @@ public class BaoCaoViewModel : BaseViewModel
             revenues.Add(doanhThuTrieuDong);
         }
 
-        Labels = labels;
-        OnPropertyChanged(nameof(Labels));
-
-        SeriesCollection = new SeriesCollection
+        // Cấu hình Series cho biểu đồ
+        Series = new ISeries[]
         {
-            new ColumnSeries
+            new ColumnSeries<int>
             {
-                Title = "Số tiệc cưới",
+                Name = "Số tiệc cưới",
                 Values = weddingCounts,
-                ColumnPadding = 2
+                Stroke = null,
+                Fill = new SolidColorPaint(SKColors.Blue)
             },
-            new ColumnSeries
+            new ColumnSeries<double>
             {
-                Title = "Doanh thu (triệu VNĐ)",
+                Name = "Doanh thu (triệu VNĐ)",
                 Values = revenues,
-                ColumnPadding = 2
+                Stroke = null,
+                Fill = new SolidColorPaint(SKColors.Green)
             }
         };
 
-        OnPropertyChanged(nameof(SeriesCollection));
+        // Cấu hình trục X
+        XAxes = new Axis[]
+        {
+            new Axis
+            {
+                Labels = labels,
+                LabelsRotation = 45,
+                TextSize = 12
+            }
+        };
+
+        OnPropertyChanged(nameof(Series));
+        OnPropertyChanged(nameof(XAxes));
     }
 
     private void NavigateToDetailPage(object parameter)
@@ -144,5 +158,4 @@ public class BaoCaoViewModel : BaseViewModel
             mainFrame.Navigate(chiTietPage);
         }
     }
-
 }

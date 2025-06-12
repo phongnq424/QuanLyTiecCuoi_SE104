@@ -1,12 +1,10 @@
 ﻿using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.Data.Models;
-using QuanLyTiecCuoi.Data.Services;
+using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.View.HoaDon;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,6 +13,43 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
     internal class HoaDonViewModel : BaseViewModel
     {
+        private readonly HoaDonService _hoaDonService;
+
+        public HoaDonViewModel(HoaDonService hoaDonService)
+        {
+            _hoaDonService = hoaDonService;
+
+            FirstLoadCommand = new RelayCommand<Page>((p) => true, async (p) =>
+            {
+                List<HOADON> res = await _hoaDonService.GetAll();
+                if (res != null)
+                {
+                    DanhSachHoaDon = new ObservableCollection<HOADON>(res);
+                    DanhSachHoaDonDayDu = DanhSachHoaDon;
+                }
+            });
+
+            SetDateFilterCommand = new RelayCommand<DatePicker>((p) => true, async (p) =>
+            {
+                p.Visibility = UseDateFilter ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+            });
+
+            LocHoaDonCommand = new RelayCommand<DatePicker>((p) => true, async (p) =>
+            {
+                if (DanhSachHoaDonDayDu != null)
+                    LocHoaDon();
+            });
+
+            ChonHoaDonCommand = new RelayCommand<object>((p) => true, async (p) =>
+            {
+                if (HoaDonDuocChon != null)
+                {
+                    ChiTietHoaDonWindow wd = new ChiTietHoaDonWindow();
+                    wd.ShowDialog();
+                }
+            });
+        }
+
         private ObservableCollection<HOADON> _DanhSachHoaDon;
         public ObservableCollection<HOADON> DanhSachHoaDon
         {
@@ -41,7 +76,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private string _LocMaDatTiec;
         public string LocMaDatTiec
         {
-            get => _LocMaDatTiec; set { _LocMaDatTiec = value; OnPropertyChanged(); }
+            get => _LocMaDatTiec;
+            set { _LocMaDatTiec = value; OnPropertyChanged(); }
         }
 
         private HOADON _HoaDonDuocChon;
@@ -51,8 +87,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             set { _HoaDonDuocChon = value; OnPropertyChanged(); }
         }
 
-        #region Command
-        public ICommand FirstLoadCommand {  get; set; }
+        public ICommand FirstLoadCommand { get; set; }
         public ICommand SetDateFilterCommand { get; set; }
         public ICommand LocHoaDonCommand { get; set; }
         public ICommand ChonHoaDonCommand { get; set; }
@@ -60,76 +95,24 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ICommand InHoaDonCommand { get; set; }
         public ICommand ThanhToanCommand { get; set; }
 
-        #endregion
-
-        public HoaDonViewModel()
-        {
-            FirstLoadCommand = new RelayCommand<Page>((p) => { return true; }, async (p) =>
-            {
-                List<HOADON> res = await HoaDonService.Ins.GetAll();
-                if (res != null)
-                {
-                    DanhSachHoaDon = new ObservableCollection<HOADON>(res);
-                    DanhSachHoaDonDayDu = DanhSachHoaDon;
-                }
-            });
-
-            SetDateFilterCommand = new RelayCommand<DatePicker>((p) => { return true; }, async (p) =>
-            {
-                p.Visibility = UseDateFilter ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
-            });
-
-            LocHoaDonCommand = new RelayCommand<DatePicker>((p) => { return true; }, async (p) =>
-            {
-                if (DanhSachHoaDonDayDu != null)
-                    LocHoaDon();
-            });
-
-            ChonHoaDonCommand = new RelayCommand<Object>((p) => { return true; }, async (p) =>
-            {
-                if(HoaDonDuocChon != null)
-                {
-                    ChiTietHoaDonWindow wd = new ChiTietHoaDonWindow();
-                    wd.ShowDialog();
-                }
-            });
-
-
-        }
-
         private void LocHoaDon()
         {
             DanhSachHoaDon = new ObservableCollection<HOADON>();
-            if (UseDateFilter && LocMaDatTiec.Length != 0)
+            foreach (var hd in DanhSachHoaDonDayDu)
             {
-                foreach (HOADON hd in DanhSachHoaDonDayDu)
+                if (UseDateFilter && !string.IsNullOrEmpty(LocMaDatTiec))
                 {
                     if (hd.MaDatTiec.ToString().Contains(LocMaDatTiec) && hd.NgayThanhToan.Date == LocNgayThanhToan.Date)
-                    {
                         DanhSachHoaDon.Add(hd);
-                    }
                 }
-            }
-            else if (UseDateFilter)
-            {
-                foreach (HOADON hd in DanhSachHoaDonDayDu)
+                else if (UseDateFilter && hd.NgayThanhToan.Date == LocNgayThanhToan.Date)
                 {
-                    if (hd.NgayThanhToan.Date == LocNgayThanhToan.Date)
-                    {
-                        DanhSachHoaDon.Add(hd);
-                    }
+                    DanhSachHoaDon.Add(hd);
                 }
-            }
-            else if (LocMaDatTiec.Length != 0)
-            {
-                foreach (HOADON hd in DanhSachHoaDonDayDu)
+                else if (!string.IsNullOrEmpty(LocMaDatTiec) && hd.MaDatTiec.ToString().Contains(LocMaDatTiec))
                 {
-                    if (hd.MaDatTiec.ToString().Contains(LocMaDatTiec))
-                    {
-                        DanhSachHoaDon.Add(hd);
-                    }
+                    DanhSachHoaDon.Add(hd);
                 }
-
             }
         }
     }
