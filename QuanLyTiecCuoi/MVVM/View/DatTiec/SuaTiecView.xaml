@@ -1,0 +1,203 @@
+﻿<Page x:Class="QuanLyTiecCuoi.MVVM.View.DatTiec.SuaTiecView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.DatTiec"
+      mc:Ignorable="d"
+      Background="White"
+      Title="ChinhSuaTiec">
+
+    <!-- Viewbox giúp co giãn toàn bộ giao diện theo kích thước khung -->
+    <Viewbox Stretch="Uniform">
+        <Grid Width="1600" Height="1000">
+            <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header (Không thay đổi) -->
+                    <Grid Grid.Row="0" Margin="0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Content="⮜" Width="50" Height="50" 
+                        FontSize="24" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Left"
+                        Click="BackButton_Click"
+                        Margin="0 0 20 0"
+                        Grid.Column="0"
+                        Style="{StaticResource ButtonStyle}"/>
+
+                        <TextBlock 
+                        Text="Serenité Wedding" 
+                        FontSize="60" 
+                        FontFamily="Cambria"
+                        FontWeight="SemiBold" 
+                        VerticalAlignment="Center"
+                        Margin="20 0"
+                        Grid.Column="1"/>
+
+                        <Button 
+                        Command="{Binding UpdateCommand}"
+                        Click="LuuTiec"
+                        Content="Cập nhật" 
+                        FontSize="24"
+                        Padding="20 5"
+                        Margin="0 0 40 0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Grid.Column="3"
+                        Style="{StaticResource ButtonStyle}"/>
+                    </Grid>
+
+                    <!-- Content -->
+                    <Border Grid.Row="1" BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Title -->
+                            <TextBlock 
+                            Text="Chỉnh Sửa Tiệc Cưới" 
+                            FontSize="36" 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="Cambria"
+                            FontWeight="SemiBold"
+                            Margin="0 10"/>
+
+                            <!-- Main Form -->
+                            <Grid Grid.Row="1" Margin="0 10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Left Form -->
+                                <StackPanel Grid.Column="0" Margin="10">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBox"  BasedOn="{StaticResource TextBoxStyle1}" />
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="FontSize" Value="32"/>
+                                            <Setter Property="Margin" Value="0 5"/>
+                                            <Setter Property="FontFamily" Value="Cambria"/>
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+
+                                    <TextBlock Text="Cô dâu"/>
+                                    <TextBox Text="{Binding TiecMoi.TenCoDau}" />
+
+                                    <TextBlock Text="Chú rể"/>
+                                    <TextBox Text="{Binding TiecMoi.TenChuRe}" />
+
+                                    <TextBlock Text="Số điện thoại"/>
+                                    <TextBox Text="{Binding TiecMoi.SDT}"/>
+
+                                    <TextBlock Text="Tiền đặt cọc"/>
+                                    <TextBox Text="{Binding TiecMoi.TienDatCoc}"/>
+
+                                    <TextBlock Text="Số lượng bàn"/>
+                                    <TextBox Text="{Binding TiecMoi.SoLuongBan}" />
+
+                                    <TextBlock Text="Số bàn dự trữ"/>
+                                    <TextBox Text="{Binding TiecMoi.SoBanDuTru}"/>
+                                </StackPanel>
+
+                                <!-- Right Form -->
+                                <StackPanel Grid.Column="2" Margin="10">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="FontSize" Value="32"/>
+                                            <Setter Property="Margin" Value="0 5"/>
+                                            <Setter Property="FontFamily" Value="Cambria"/>
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                        </Style>
+                                        <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle1}" />
+                                        <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}" />
+                                    </StackPanel.Resources>
+
+                                    <!-- Ngày đãi tiệc -->
+
+                                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                                        <TextBlock Text="Ngày đãi tiệc"
+                                                   VerticalAlignment="Center"/>
+                                        <Button x:Name="editBtn"
+                                            Content="✏" Click="Edit_Click"/>
+                                        <DatePicker
+                                            Margin="20 0"
+                                            Width="250"
+                                            FontSize="26"
+                                            VerticalAlignment="Center"
+                                            x:Name="FilterDatePicker"
+                                            Visibility="Collapsed"
+                                            SelectedDateChanged="FilterDatePicker_SelectedDateChanged"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="SelectedDateText" 
+                                               Margin="10 0" VerticalAlignment="Center" FontSize="30"
+                                               Text="{Binding TiecMoi.NgayDaiTiec}"/>
+
+                                    <!-- Ca -->
+                                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                                        <TextBlock Text="Ca" VerticalAlignment="Center"/>
+                                        <Button x:Name="ShiftButton" Click="ShiftButton_Click" Width="50" Height="50" Content="⌚"/>
+                                        <Popup x:Name="ShiftPopup" PlacementTarget="{Binding ElementName=ShiftButton}" Placement="Bottom" StaysOpen="False">
+                                            <Border BorderBrush="Gray" BorderThickness="1" Background="White">
+                                                <ComboBox Name="ShiftComboBox" Width="260" Height="40" FontSize="20" SelectionChanged="ShiftComboBox_SelectionChanged"/>
+                                            </Border>
+                                        </Popup>
+                                    </StackPanel>
+                                    <TextBlock x:Name="SelectedShiftText" 
+                                               Margin="10 0" VerticalAlignment="Center" FontSize="20"
+                                               Text="{Binding TiecMoi.MaCa}"/>
+
+                                    <!-- Sảnh -->
+                                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                                        <TextBlock Text="Sảnh" VerticalAlignment="Center"/>
+                                        <Button x:Name="HallButton" Click="HallButton_Click" Width="50" Height="50" Content="🏛"/>
+                                        <Popup x:Name="HallPopup" PlacementTarget="{Binding ElementName=HallButton}" Placement="Bottom" StaysOpen="False">
+                                            <Border BorderBrush="Gray" BorderThickness="1" Background="White">
+                                                <ComboBox x:Name="HallComboBox" Width="260" Height="40" FontSize="20" SelectionChanged="HallComboBox_SelectionChanged"/>
+                                            </Border>
+                                        </Popup>
+                                    </StackPanel>
+                                    <TextBlock x:Name="SelectedHallText" Margin="10 0"
+                                               VerticalAlignment="Center" FontSize="30"
+                                               Text="{Binding TiecMoi.MaSanh}"/>
+
+                                    <!-- Món ăn -->
+                                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                                        <TextBlock Text="Món ăn" VerticalAlignment="Center"/>
+                                        <Button x:Name="MonAnButton" Width="50" Height="50" Click="MonAnButton_Click" Content="🍽" Margin="0 5" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="SelectedMonAnText" Margin="10 0" VerticalAlignment="Center" FontSize="30"/>
+
+                                    <!-- Dịch vụ -->
+                                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                                        <TextBlock Text="Dịch vụ"/>
+                                        <Button x:Name="DichVuButton" Width="50" Height="50" Click="DichVuButton_Click" Content="💒" Margin="0 5" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="SelectedDichVuText" Margin="10 0" VerticalAlignment="Center" FontSize="30"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Viewbox>
+</Page>

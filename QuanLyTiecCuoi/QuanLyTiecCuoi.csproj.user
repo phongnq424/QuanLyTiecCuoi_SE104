@@ -21,6 +21,15 @@
     <Page Update="MVVM\View\BaoCao\BaoCaoView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="MVVM\View\DatTiec\DatTiecView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\DatTiec\SuaTiecView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\DatTiec\ThemTiecView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Theme\Styles\ComboBoxStyle.xaml">
       <SubType>Designer</SubType>
     </Page>

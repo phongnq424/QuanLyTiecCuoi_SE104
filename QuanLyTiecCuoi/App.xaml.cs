@@ -12,6 +12,7 @@ using QuanLyTiecCuoi.Repository;
 using QuanLyTiecCuoi.MVVM.View.Login;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 using QuanLyTiecCuoi.MVVM.View.HoaDon;
+using QuanLyTiecCuoi.MVVM.View.DatTiec;
 using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.MVVM.View.MainVindow;
 
@@ -43,6 +44,7 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<ChiTietBaoCaoRepository>();
                     services.AddTransient<HoaDonRepository>();
                     services.AddTransient<NhanVienRepository>();
+                    services.AddTransient<DatTiecRepository>();
 
                     // Dùng BaoCaoService lấy dữ liệu từ AppDataRepository
                     services.AddTransient<BaoCaoService>();
@@ -50,6 +52,7 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<HoaDonService>();
                     services.AddTransient<DangNhapService>();
                     services.AddTransient<NhanVienService>();
+                    services.AddTransient<DatTiecService>();
 
                     // Các ViewModel
                     services.AddTransient<MainWindowViewModel>();
@@ -59,6 +62,9 @@ namespace QuanLyTiecCuoi
                     services.AddSingleton<MainWindowViewModel>();
                     services.AddTransient<HoaDonViewModel>();
                     services.AddTransient<ControlBarViewModel>();
+                    services.AddTransient<DatTiecViewModel>();
+                    services.AddTransient<SuaTiecViewModel>();
+                    services.AddTransient<ThemTiecViewModel>();
 
 
                     // Các View
@@ -69,6 +75,9 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<ChiTietHoaDonWindow>();
                     services.AddTransient<LoginWindow>();
                     services.AddTransient<ChiTietBaoCaoPage>();
+                    services.AddTransient<DatTiecView>();
+                    services.AddTransient<SuaTiecView>();
+                    services.AddTransient<ThemTiecView>();
                 })
                 .Build();
         }
