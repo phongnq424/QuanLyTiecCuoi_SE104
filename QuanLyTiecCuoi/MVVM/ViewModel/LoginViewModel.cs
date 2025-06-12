@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using QuanLyTiecCuoi.Data.Services;
+using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.View.MainVindow;
 using QuanLyTiecCuoi.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,10 +36,10 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
 
         private string _UserName;
-        public string UserName { get => _UserName; set {  _UserName = value; OnPropertyChanged(); } }
+        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
 
         private string _Password;
-        public string Password { get => _Password; set {  _Password = value; OnPropertyChanged(); } }   
+        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
         #region Command
         public ICommand FirstLoadCommand { get; set; }
         public ICommand LoginButtonCommand { get; set; }
@@ -51,25 +51,28 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         {
             _DangNhapService = dangNhapService;
             ErrorMessVisability = Visibility.Hidden;
-            FirstLoadCommand = new RelayCommand<Window>((p) => { return true; }, async (p) => {
+            FirstLoadCommand = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            {
 
             });
 
-            CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+            CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
                 p.Close();
             });
 
-            ForgotPasswordCommand = new RelayCommand<Window>((P) => { return true; }, (p) => {
+            ForgotPasswordCommand = new RelayCommand<Window>((P) => { return true; }, (p) =>
+            {
                 p.Close();
                 //bo chuc nang nay
             });
 
-            LoginCommand = new RelayCommand<Window>((p) => 
-            { return true; }, (p) => 
+            LoginCommand = new RelayCommand<Window>((p) =>
+            { return true; }, (p) =>
             {
 
                 if (!loginCondition())
-                { 
+                {
                     ErrorMessVisability = Visibility.Visible;
                     return;
                 }
@@ -80,7 +83,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private async void Login(Window p)
         {
             var nguoidung = await _DangNhapService.Login(UserName, Password);
-            if (nguoidung != null) 
+            if (nguoidung != null)
             {
                 MainWindowViewModel.NguoiDungHienTai = nguoidung;
                 var wd = App.AppHost?.Services.GetRequiredService<MainWindow>();
@@ -91,7 +94,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     p?.Close();
                 }
             }
-            else 
+            else
             {
                 ErrorMessVisability = Visibility.Visible;
             }

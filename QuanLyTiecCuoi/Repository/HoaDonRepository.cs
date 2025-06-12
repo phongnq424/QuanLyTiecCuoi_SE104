@@ -1,4 +1,4 @@
-﻿using QuanLyTiecCuoi.Data;
+using QuanLyTiecCuoi.Data;
 using QuanLyTiecCuoi.Data.Models;
 using Microsoft.EntityFrameworkCore;  // Cần để dùng các async EF Core
 using System;

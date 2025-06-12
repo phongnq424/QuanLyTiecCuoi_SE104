@@ -10,11 +10,12 @@ using QuanLyTiecCuoi.MVVM.View.BaoCao;
 using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.Repository;
 using QuanLyTiecCuoi.MVVM.View.Login;
-using QuanLyTiecCuoi.MVVM.View.MainVindow;
 using QuanLyTiecCuoi.Data.Services;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 using QuanLyTiecCuoi.MVVM.View.HoaDon;
 using QuanLyTiecCuoi.Core;
+using QuanLyTiecCuoi.MVVM.ViewModel;
+using QuanLyTiecCuoi.MVVM.View.MainVindow;
 
 
 namespace QuanLyTiecCuoi
@@ -51,18 +52,17 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<HoaDonService>();
                     services.AddTransient<NhanVienService>();
                     services.AddTransient<DangNhapService>();
+                    services.AddTransient<NhanVienService>();
 
                     // Các ViewModel
                     services.AddTransient<MainWindowViewModel>();
                     services.AddTransient<BaoCaoViewModel>();
                     services.AddTransient<ChiTietBaoCaoViewModel>();
-                    services.AddTransient<HoaDonViewModel>();
-                    services.AddTransient<ControlBarViewModel>();
                     services.AddTransient<LoginViewModel>();
 
                     // Các View
                     services.AddTransient<MainWindow>();
-                    services.AddTransient<LoginWindow>();
+                    services.AddSingleton<MainWindowViewModel>();
                     services.AddTransient<BaoCaoPage>();
                     services.AddTransient<ChiTietBaoCaoPage>();
                     services.AddTransient<HoaDonPage>();

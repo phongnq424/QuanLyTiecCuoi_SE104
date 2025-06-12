@@ -1,15 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace QuanLyTiecCuoi.Data.Services
+namespace QuanLyTiecCuoi.Services
 {
-    internal class NhanVienService
+    public class NhanVienService
     {
         private readonly NhanVienRepository _nhanvienRepository;
 
