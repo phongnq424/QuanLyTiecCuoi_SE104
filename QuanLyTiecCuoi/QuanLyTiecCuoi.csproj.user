@@ -24,9 +24,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="MVVM\View\AddOrEditLoaiSanhWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

@@ -16,7 +16,11 @@ namespace QuanLyTiecCuoi.Data.Models
         [MaxLength(100)]
         public string TenLoaiSanh { get; set; }
        
+<<<<<<< HEAD
         public double DonGiaBanToiThieu { get; set; }
+=======
+        public decimal DonGiaBanToiThieu { get; set; }
+>>>>>>> main
 
     }
 }
