@@ -57,7 +57,7 @@ public class BaoCaoViewModel : BaseViewModel
     {
         _baoCaoService = baoCaoService;
 
-        NavigateCommand = new RelayCommand<object>(_ => true, NavigateToDetailPage);
+        NavigateCommand = new RelayCommand<object>(_ => true, parameter => NavigateToDetailPage(parameter));
 
         var start = new DateTime(2023, 1, 1);
         var end = DateTime.Now;
@@ -151,11 +151,12 @@ public class BaoCaoViewModel : BaseViewModel
 
     private void NavigateToDetailPage(object parameter)
     {
-        var mainFrame = Application.Current.MainWindow.FindName("MainFrame") as Frame;
-        if (mainFrame != null)
+        var vm = Application.Current.MainWindow.DataContext as MainWindowViewModel;
+        if (vm != null)
         {
             var chiTietPage = App.AppHost.Services.GetRequiredService<ChiTietBaoCaoPage>();
-            mainFrame.Navigate(chiTietPage);
+            vm.CurrentView = chiTietPage;
         }
     }
+
 }

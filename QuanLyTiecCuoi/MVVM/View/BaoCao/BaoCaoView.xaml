@@ -39,11 +39,6 @@
                        VerticalAlignment="Bottom"
                        Margin="10,15,10,0"
                        Style="{StaticResource Header1Style}" />
-            <controlBar:ControlBarUserControl Grid.Row="0"
-                                              Grid.Column="2"
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Right"
-                                              Margin="0,0,12,0" />
             <StackPanel Orientation="Horizontal"
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
@@ -94,7 +89,7 @@
 
             <lvc:CartesianChart Grid.Row="2"
                                 Grid.ColumnSpan="2"
-                                Series="{Binding SeriesCollection}"
+                                Series="{Binding Series}"
                                 LegendPosition="Right"
                                 Margin="15" />
 

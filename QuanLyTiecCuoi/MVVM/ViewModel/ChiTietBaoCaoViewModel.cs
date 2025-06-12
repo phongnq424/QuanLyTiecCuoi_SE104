@@ -1,4 +1,5 @@
-﻿using QuanLyTiecCuoi;
+﻿using Microsoft.Extensions.DependencyInjection;
+using QuanLyTiecCuoi;
 using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.MVVM.Model;
 using QuanLyTiecCuoi.MVVM.View.BaoCao;
@@ -21,10 +22,14 @@ public class ChiTietBaoCaoViewModel : BaseViewModel
 
     private void NavigateToReportPage(object parameter)
     {
-        var mainFrame = Application.Current.MainWindow.FindName("MainFrame") as Frame;
-        if (mainFrame != null && mainFrame.CanGoBack)
-            mainFrame.GoBack();
+        var vm = Application.Current.MainWindow.DataContext as MainWindowViewModel;
+        if (vm != null)
+        {
+            var reportPage = App.AppHost.Services.GetRequiredService<BaoCaoPage>();
+            vm.CurrentView = reportPage;
+        }
     }
+
 
 
 

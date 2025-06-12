@@ -1,0 +1,24 @@
+# User-specific files
+.vs/
+.vscode/
+
+# Windows Installer files
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]ist/
+[Dd]istPublic/
+
+# Build directories
+QuanLyTiecCuoi/bin/
+QuanLyTiecCuoiobj/
+
+# User-specific files
+QuanLyTiecCuoi/appsettings.json
+
+# WPF output files
+QuanLyTiecCuoi/*.obj
+QuanLyTiecCuoi/*.exe
+QuanLyTiecCuoi/*.dll
+QuanLyTiecCuoi/*.pdb
+QuanLyTiecCuoi/*.cache
+QuanLyTiecCuoi/*.build
