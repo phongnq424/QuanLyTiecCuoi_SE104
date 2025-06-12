@@ -74,5 +74,9 @@ namespace QuanLyTiecCuoi.Services
             // Gọi repository để update
             _datTiecRepo.UpdateDatTiec(updatedTiec);
         }
+        public void DeleteDatTiec(int maDatTiec)
+        {
+            _datTiecRepo.DeleteDatTiec(maDatTiec);
+        }
     }
 }

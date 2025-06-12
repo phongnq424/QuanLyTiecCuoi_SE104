@@ -95,7 +95,16 @@
                             <DataGridTemplateColumn Header=" " Width="0.5*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="✏" Click="Edit_Click"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Content="✏" 
+                                                Click="Edit_Click" 
+                                                Margin="5,0"
+                                                Width="30" Height="30"/>
+                                            <Button Content="🗑" 
+                                                Click="Delete_Click" 
+                                                Margin="5,0"
+                                                Width="30" Height="30"/>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

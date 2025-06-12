@@ -122,4 +122,14 @@ public class DatTiecViewModel : BaseViewModel
             _allDatTiec.Where(x => x.NgayDaiTiec.Date == ngay.Date));
         OnPropertyChanged(nameof(DanhSachDatTiec));
     }
+    public void XoaTiec(DATTIEC tiec)
+    {
+        if (DanhSachDatTiec.Contains(tiec))
+        {
+            DanhSachDatTiec.Remove(tiec);
+
+            // Xóa trong database (nếu bạn đã cài đặt repository hoặc service để xử lý)
+            _datTiecService?.DeleteDatTiec(tiec.MaDatTiec); // gọi đến lớp xử lý thực tế nếu có
+        }
+    }
 }

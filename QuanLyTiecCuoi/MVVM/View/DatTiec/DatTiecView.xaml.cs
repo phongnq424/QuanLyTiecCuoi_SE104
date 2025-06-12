@@ -72,6 +72,31 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                 }
             }
         }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null)
+                return;
+
+            var row = FindVisualParent<DataGridRow>(button);
+            if (row == null)
+                return;
+
+            var selected = row.Item as DATTIEC;
+            if (selected == null)
+                return;
+
+            var result = MessageBox.Show($"Bạn có chắc chắn muốn xóa tiệc cưới của {selected.TenCoDau} và {selected.TenChuRe} không?",
+                                         "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                var viewModel = DataContext as DatTiecViewModel;
+                viewModel?.XoaTiec(selected);
+                MessageBox.Show("Đã xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
         private void FocusCell(DataGridRow row, string columnName)
         {
             var column = MyDataGrid.Columns.FirstOrDefault(c =>
