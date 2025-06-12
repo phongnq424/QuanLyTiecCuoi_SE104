@@ -1,4 +1,4 @@
-﻿
+using QuanLyTiecCuoi.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +11,8 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace QuanLyTiecCuoi.MVVM.View.HoaDon
 {
@@ -21,10 +21,11 @@ namespace QuanLyTiecCuoi.MVVM.View.HoaDon
     /// </summary>
     public partial class HoaDonPage : Page
     {
-        public HoaDonPage()
+        public HoaDonPage(HoaDonViewModel vm)
         {
             InitializeComponent();
-            MainFrame.Navigate(new DatTiec());
+            DataContext = vm;
         }
+  
     }
 }
