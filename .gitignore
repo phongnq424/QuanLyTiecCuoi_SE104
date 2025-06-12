@@ -1,32 +1,24 @@
-# Build folders
-bin/
-obj/
-**/bin/
-**/obj/
-
-# Visual Studio cache and config
+# User-specific files
 .vs/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# Other unnecessary files
-*.log
-*.cache
-*.dll
-*.exe
-*.pdb
-*.bak
-*.tmp
-*.config
-
-# VS Code settings
 .vscode/
 
-# Publish and build artifacts
-publish/
-*.publish/
+# Windows Installer files
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]ist/
+[Dd]istPublic/
 
-# Environment files
-.env
+# Build directories
+QuanLyTiecCuoi/bin/
+QuanLyTiecCuoiobj/
+
+# User-specific files
+QuanLyTiecCuoi/appsettings.json
+
+# WPF output files
+QuanLyTiecCuoi/obj
+QuanLyTiecCuoi/*.exe
+QuanLyTiecCuoi/*.dll
+QuanLyTiecCuoi/*.pdb
+QuanLyTiecCuoi/*.cache
+QuanLyTiecCuoi/*.build

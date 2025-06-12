@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\QuanLyTiecCuoi\QuanLyTiecCuoi\obj\Debug\net8.0-windows\
+D:\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\obj\Debug\net8.0-windows\
 QuanLyTiecCuoi
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-D:\QuanLyTiecCuoi\QuanLyTiecCuoi\App.xaml
+D:\QuanLyTiecCuoi_SE104\QuanLyTiecCuoi\App.xaml
 71868124020
 
 39-1735754701
-232-141389585
+232-1904356619
 MainWindow.xaml;MVVM\View\AddOrEditLoaiSanhWindow.xaml;MVVM\View\AddOrEditSanhWindow.xaml;MVVM\View\DSLoaiSanhView.xaml;MVVM\View\DSSanhView.xaml;MVVM\View\SanhView.xaml;Theme\Styles\ButtonStyle.xaml;
 
 False
