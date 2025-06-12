@@ -37,11 +37,12 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<MonAnRepository>();
                     services.AddTransient<DichVuRepository>();
                     services.AddScoped<ChiTietMenuRepository>();
+                    services.AddScoped<ChiTietDichVuRepository>();
 
                     // Dùng BaoCaoService lấy dữ liệu từ AppDataRepository
                     services.AddTransient<DichVuService>();
                     services.AddTransient<MonAnService>();
-                    
+                    services.AddScoped<ChiTietDichVuService>();
                     services.AddScoped<ChiTietMenuService>();
 
                     // Các ViewModel

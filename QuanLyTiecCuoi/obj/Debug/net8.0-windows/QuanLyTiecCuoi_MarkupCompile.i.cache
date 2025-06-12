@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 D:\UIT_Nam2_Ky2\CNPM\Project\QuanLyTiecCuoi\App.xaml
 21-1095340167
 11413424753
-51-191553479
+53-1574284369
 233142717659
 MainWindow.xaml;MVVM\View\ControlBar\ControlBarUserControl.xaml;MVVM\View\DichVu\ChiTietTC.xaml;MVVM\View\DichVu\ChonDichVu.xaml;MVVM\View\DichVu\SuaDichVu.xaml;MVVM\View\DichVu\ThemDichVu.xaml;MVVM\View\DichVu\TuyChinhDichVu.xaml;MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml;MVVM\View\HoaDon\HoaDonUserControl.xaml;MVVM\View\MonAn\ChiTietTC.xaml;MVVM\View\MonAn\ChonMonAn.xaml;MVVM\View\MonAn\SuaMonAn.xaml;MVVM\View\MonAn\ThemMonAn.xaml;MVVM\View\MonAn\TuyChinhMonAn.xaml;ResourcesXAML\MainResource.xaml;Theme\Styles\ButtonStyle.xaml;Theme\Styles\ComboBoxStyle.xaml;Theme\Styles\DatePickerStyle.xaml;Theme\Styles\PasswordBoxStyle.xaml;Theme\Styles\TextBlockStyle.xaml;Theme\Styles\TextBoxStyle.xaml;
 
-True
+False
 

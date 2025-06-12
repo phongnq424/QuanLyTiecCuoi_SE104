@@ -48,16 +48,16 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
         {
             if (sender is Button btn && btn.DataContext is MONAN monAn)
             {
-                var window = new ChiTietTC();
+                var window = new ChiTietTC(monAn);
                 window.ShowDialog();
             }
         }
 
         private void BtnChinhSua_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn && btn.DataContext is MonAnModel monAn)
+            if (sender is Button btn && btn.DataContext is MONAN monAn)
             {
-                var window = new ChiTietTC(monAn); // truyền dữ liệu nếu cần
+                var window = new SuaMonAn(monAn); // truyền dữ liệu nếu cần
                 window.ShowDialog();
             }
         }

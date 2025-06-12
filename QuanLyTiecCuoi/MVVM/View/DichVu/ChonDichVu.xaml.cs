@@ -8,13 +8,26 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
 {
     public partial class ChonDichVu : Page
     {
-        private ChonDichVuViewModel _viewModel;
+        private readonly ChonDichVuViewModel _viewModel;
 
         public ChonDichVu()
         {
             InitializeComponent();
             _viewModel = new ChonDichVuViewModel();
             this.DataContext = _viewModel;
+        }
+
+        private void DichVu_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border && border.DataContext is DICHVU dv)
+            {
+                _viewModel.ChonDichVu(dv);
+            }
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.LuuChiTietDichVu();
         }
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
@@ -55,43 +68,27 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
             }
         }
 
-        private void DichVu_Click(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Border border && border.DataContext is DICHVU dv)
-            {
-                _viewModel.ChonDichVu(dv);
-            }
-        }
-
-        private void OkButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show($"Đã chọn {_viewModel.DichVuDaChon.Count} dịch vụ!", "Xác nhận");
-        }
-
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
             var window = Window.GetWindow(this);
             if (window != null)
-            {
                 window.WindowState = WindowState.Minimized;
-            }
-
         }
 
         private void Maximize_Click(object sender, RoutedEventArgs e)
         {
             var window = Window.GetWindow(this);
             if (window != null)
-            {
                 window.WindowState = (window.WindowState == WindowState.Maximized)
                     ? WindowState.Normal
                     : WindowState.Maximized;
-            }
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this)?.Close();
+            var window = Window.GetWindow(this);
+            if (window != null)
+                window.Close();
         }
     }
 }

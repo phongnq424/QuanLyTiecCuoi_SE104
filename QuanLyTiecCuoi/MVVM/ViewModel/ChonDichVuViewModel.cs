@@ -4,13 +4,13 @@ using QuanLyTiecCuoi.Core;
 using System.Collections.ObjectModel;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
-using System.Windows.Controls;
 using System.Linq;
 using QuanLyTiecCuoi;
 
 public class ChonDichVuViewModel : BaseViewModel
 {
     private readonly DichVuService _dichVuService;
+    private readonly ChiTietDichVuService _chiTietDichVuService;
 
     private List<DICHVU> _allDichVu = new();
     public ObservableCollection<DICHVU> DanhSachDichVu { get; set; } = new();
@@ -40,17 +40,22 @@ public class ChonDichVuViewModel : BaseViewModel
         }
     }
 
-    public RelayCommand<DICHVU> ChonDichVuCommand { get; set; }
+    private int _maDatTiec;
+    public int MaDatTiec
+    {
+        get => _maDatTiec;
+        set
+        {
+            _maDatTiec = value;
+            OnPropertyChanged();
+        }
+    }
 
     public ChonDichVuViewModel()
     {
         _dichVuService = App.AppHost.Services.GetRequiredService<DichVuService>();
+        _chiTietDichVuService = App.AppHost.Services.GetRequiredService<ChiTietDichVuService>();
         LoadDanhSachDichVu();
-
-        ChonDichVuCommand = new RelayCommand<DICHVU>(
-            param => param != null,
-            param => ChonDichVu(param)
-        );
     }
 
     private void LoadDanhSachDichVu()
@@ -85,5 +90,22 @@ public class ChonDichVuViewModel : BaseViewModel
             DichVuDaChon.Add(dichVu);
             OnPropertyChanged(nameof(DichVuDaChon));
         }
+    }
+
+    public void LuuChiTietDichVu()
+    {
+        foreach (var dichVu in DichVuDaChon)
+        {
+            var chiTiet = new CHITIETDVTIEC
+            {
+                MaDatTiec = _maDatTiec,
+                MaDichVu = dichVu.MaDichVu,
+                SoLuong = 1 // hoặc cho chọn số lượng nếu có giao diện
+            };
+
+            _chiTietDichVuService.ThemChiTiet(chiTiet);
+        }
+
+        MessageBox.Show("Đã lưu dịch vụ vào chi tiết đặt tiệc thành công!");
     }
 }
