@@ -8,13 +8,7 @@
                 <ResourceDictionary Source="/ResourcesXAML/MainResource.xaml"/>
                 <ResourceDictionary Source="/Theme/Styles/ComboBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Theme/Styles/ButtonStyle.xaml"/>
-                <Application.Resources>
-                    <ResourceDictionary>
-                        <ResourceDictionary.MergedDictionaries>
-                            <ResourceDictionary Source="/ResourcesXAML/MainResource.xaml"/>
-                            <ResourceDictionary Source="/Theme/Styles/ButtonStyle.xaml"/>
-                            <ResourceDictionary Source="/Theme/Styles/ComBoBoxStyle.xaml"/>
-                            <ResourceDictionary Source="/Theme/Styles/TextBlockStyle.xaml"/>
+                <ResourceDictionary Source="/Theme/Styles/TextBlockStyle.xaml"/>
                             <ResourceDictionary Source="/Theme/Styles/TextBoxStyle.xaml"/>
                             <ResourceDictionary Source="/Theme/Styles/PasswordBoxStyle.xaml"/>
                             <ResourceDictionary Source="/Theme/Styles/DatePickerStyle.xaml"/>

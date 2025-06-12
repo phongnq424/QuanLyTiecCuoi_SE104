@@ -12,10 +12,9 @@ using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.Data.Models;
-using QuanLyTiecCuoi.MVVM.ViewModel;
 using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.View.Login;
-using QuanLyTiecCuoi.Services;
+using QuanLyTiecCuoi.MVVM.View.BaoCao;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
@@ -95,9 +94,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         public object LoadViewByName(string viewName)
         {
-            if (viewName == "BaoCao.BaoCaoPage")
-                return App.AppHost.Services.GetService<BaoCaoPage>();
-
             // fallback cho các view không cần DI
             string fullTypeName = $"QuanLyTiecCuoi.MVVM.View.{viewName}";
             var assembly = typeof(App).Assembly;
