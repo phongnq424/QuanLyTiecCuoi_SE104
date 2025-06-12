@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -7,6 +7,29 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+<ItemGroup>
+    <!-- Dependency Injection (chọn phiên bản thấp hơn để hỗ trợ net48) -->
+  <!-- Dùng các gói đồng bộ với EFCore 9 và .NET 8 -->
+  <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc5.4" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
+  <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.13" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13" PrivateAssets="all" />
+  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+  <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+  <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
+  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
+  <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.0" />
+  <PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
+  <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+
+</ItemGroup>
+
+<ItemGroup>
+  <None Update="appsettings.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+</ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Model\**" />
@@ -24,15 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="MVVM\Command\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Theme\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+    <None Remove="appsettings.json" />
     <None Remove="Resources\Images\appImage.png" />
     <None Remove="Resources\Images\controlbarimg\close.png" />
     <None Remove="Resources\Images\controlbarimg\close_mouseover.png" />
@@ -43,12 +58,16 @@
     <None Remove="Resources\Images\controlbarimg\more.png" />
     <None Remove="Resources\Images\controlbarimg\reloadIcon.png" />
     <None Remove="Resources\Images\controlbarimg\user.png" />
+    <None Remove="Resources\Images\HoaDon\closeBill_Infor.png" />
     <None Remove="Resources\Images\Login\Font.png" />
     <None Remove="Resources\Images\Login\hideIcon.png" />
     <None Remove="Resources\Images\Login\showIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\appImage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\controlbarimg\close.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -76,24 +95,112 @@
     <Resource Include="Resources\Images\controlbarimg\user.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\Login\Font.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Login\hideIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Login\showIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="resources\images\appImage.png" />
     <None Remove="resources\images\controlbarimg\arrow-down.png" />
     <None Remove="resources\images\controlbarimg\close.png" />
-    <None Remove="resources\images\controlbarimg\closeBill_Infor.png" />
     <None Remove="resources\images\controlbarimg\close_mouseover.png" />
-    <None Remove="resources\images\controlbarimg\maxi.png" />
+    <None Remove="resources\images\controlbarimg\Maxi.png" />
     <None Remove="resources\images\controlbarimg\MaxiMouseOver.png" />
     <None Remove="resources\images\controlbarimg\minimize.png" />
     <None Remove="resources\images\controlbarimg\minimize_mouseover.png" />
     <None Remove="resources\images\controlbarimg\more.png" />
     <None Remove="resources\images\controlbarimg\reloadIcon.png" />
     <None Remove="resources\images\controlbarimg\user.png" />
+    <None Remove="resources\images\Login\Font.png" />
+    <None Remove="resources\images\Login\hideIcon.png" />
+    <None Remove="resources\images\Login\showIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\HoaDon\closeBill_Infor.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DTOs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.5" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="MySqlConnector" Version="2.4.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+  </ItemGroup>
+
+	<ItemGroup>
+
+    <Resource Include="resources\images\controlbarimg\arrow-down.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\controlbarimg\close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\controlbarimg\close_mouseover.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\controlbarimg\Maxi.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\controlbarimg\MaxiMouseOver.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\controlbarimg\minimize.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\controlbarimg\minimize_mouseover.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\controlbarimg\more.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\controlbarimg\reloadIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\controlbarimg\user.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Resource Include="resources\images\appImage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\Login\Font.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\Login\hideIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\Login\showIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
