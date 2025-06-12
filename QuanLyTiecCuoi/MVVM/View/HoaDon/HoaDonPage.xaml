@@ -8,7 +8,6 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             DataContext="{StaticResource HoaDonViewModel}"
              x:Name="TraCuuHoaDon"
              Background="Transparent"
              d:DesignHeight="1000" d:DesignWidth="1600">
@@ -47,7 +46,7 @@
                         Text="Mã đặt tiệc"></TextBlock>
                     <TextBox
                         Width="200"
-                        Text="{Binding LocMaDatTiec}"
+                        Text="{Binding LocMaDatTiec,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource TextBoxStyle1}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="TextChanged">
@@ -82,7 +81,7 @@
                     </CheckBox>
                     <DatePicker
                         x:Name="DateFilter"
-                        Visibility="Visible"
+                        Visibility="Hidden"
                         Style="{StaticResource CustomDatePickerStyle}"
                         Margin="10" 
                         SelectedDate="{Binding LocNgayThanhToan}"
@@ -104,13 +103,14 @@
                     x:Name="HoaDonList" 
                     Background="White"
                     Margin="50"
-                    FontSize="24"
+                    FontSize="20"
                     ItemsSource="{Binding DanhSachHoaDon}"
                     SelectedItem="{Binding HoaDonDuocChon}" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction 
-                                Command="{Binding ChonHoaDonCommand}" />
+                                Command="{Binding ChonHoaDonCommand}"
+                                CommandParameter="{Binding SelectedItem, ElementName=HoaDonList}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <ListView.View>
@@ -145,7 +145,8 @@
                                     <DataTemplate>
                                         <TextBlock
                                             Style="{StaticResource Header6Style}"
-                                            Text="{Binding NgayThanhToan, StringFormat='dd/MM/yyyy'}" />
+                                            Text="{Binding NgayThanhToan, 
+                                            StringFormat='dd/MM/yyyy'}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -155,8 +156,8 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Style="{StaticResource Header6Style}"
-                                            Text="{Binding TongTienBan}"/>
+                                            Style="{StaticResource HeaderForTableStyle}"
+                                            Text="{Binding TongTienBan, StringFormat={}{0:C0}}" Language="vi-VN"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -166,8 +167,8 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Style="{StaticResource Header6Style}"
-                                            Text="{Binding TongTienDV}"/>
+                                            Style="{StaticResource HeaderForTableStyle}"
+                                            Text="{Binding TongTienDV, StringFormat={}{0:C0}}" Language="vi-VN"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -177,8 +178,8 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Style="{StaticResource Header6Style}"
-                                            Text="{Binding TongTienHD}" />
+                                            Style="{StaticResource HeaderForTableStyle}"
+                                            Text="{Binding TongTienHD, StringFormat={}{0:C0}}" Language="vi-VN" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -188,8 +189,8 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Style="{StaticResource Header6Style}"
-                                            Text="{Binding TienPhaiThanhToan}" />
+                                            Style="{StaticResource HeaderForTableStyle}"
+                                            Text="{Binding TienPhaiThanhToan, StringFormat={}{0:C0}}" Language="vi-VN" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
