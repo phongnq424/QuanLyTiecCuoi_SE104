@@ -1,123 +1,97 @@
-﻿using System;
-using System.Data.SqlTypes;
+﻿using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.Services;
+using Microsoft.Win32;
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Microsoft.Win32;
-using QuanLyTiecCuoi.MVVM.Model; 
 
 namespace QuanLyTiecCuoi.MVVM.View.MonAn
 {
     public partial class ThemMonAn : Window
     {
-        // Đây là model sẽ trả về cho caller khi ShowDialog() == true
-        private readonly MonAnModel _monAn;
-
-        public MonAnModel NewMonAn => _monAn;
+        private MONAN _monAnMoi;
+        private readonly MonAnService _monAnService;
 
         public ThemMonAn()
         {
             InitializeComponent();
 
-            // Khởi tạo model và bind về UI
-            _monAn = new MonAnModel();
-            DataContext = _monAn;
+            _monAnMoi = new MONAN();
+            DataContext = _monAnMoi;
+
+            _monAnService = App.AppHost.Services.GetService(typeof(MonAnService)) as MonAnService;
         }
 
-        // Cho phép kéo window khi WindowStyle=None
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                this.DragMove();
+            DragMove();
         }
 
-        // Đóng form
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        // Chọn ảnh mới cho món ăn
+        private void TxtTenMon_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            txtTenMon.IsReadOnly = false;
+            txtTenMon.Focus();
+        }
+
+        private void TxtTenMon_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTenMon.IsReadOnly = true;
+        }
+
+        private void TxtDonGia_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            txtDonGia.IsReadOnly = false;
+            txtDonGia.Focus();
+        }
+
+        private void TxtDonGia_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtDonGia.IsReadOnly = true;
+
+            if (!decimal.TryParse(txtDonGia.Text, out decimal donGia))
+            {
+                MessageBox.Show("Đơn giá không hợp lệ.");
+                txtDonGia.Text = "0";
+            }
+            else
+            {
+                _monAnMoi.DonGia = donGia;
+            }
+        }
+
         private void ImgMonAn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var dlg = new OpenFileDialog
-            {
-                Title = "Chọn ảnh món ăn",
-                Filter = "Image files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp"
-            };
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
 
             if (dlg.ShowDialog() == true)
             {
-                _monAn.ImagePath = dlg.FileName;
-
-                // Nếu cần, cập nhật lại Image control thủ công
+                _monAnMoi.HinhAnh = dlg.FileName;
                 imgMonAn.Source = new BitmapImage(new Uri(dlg.FileName));
             }
         }
 
-        // click cho phép edit Tên món
-        private void TxtTenMon_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            txtTenMon.IsReadOnly = false;
-            txtTenMon.Background = Brushes.White;
-            txtTenMon.BorderThickness = new Thickness(1);
-            txtTenMon.Focus();
-            txtTenMon.SelectAll();
-        }
-
-        // Khi mất focus, khóa lại và giữ giá trị
-        private void TxtTenMon_LostFocus(object sender, RoutedEventArgs e)
-        {
-            txtTenMon.IsReadOnly = true;
-            txtTenMon.Background = Brushes.Transparent;
-            txtTenMon.BorderThickness = new Thickness(0);
-        }
-
-        // click cho phép edit Đơn giá
-        private void TxtDonGia_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            txtDonGia.IsReadOnly = false;
-            txtDonGia.Background = Brushes.White;
-            txtDonGia.BorderThickness = new Thickness(1);
-            txtDonGia.Focus();
-            txtDonGia.SelectAll();
-        }
-
-        // Khi mất focus, parse và gán lại model hoặc rollback
-        private void TxtDonGia_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (double.TryParse(txtDonGia.Text, out var gia))
-            {
-                _monAn.DonGia = (SqlMoney)gia;
-            }
-            else
-            {
-                MessageBox.Show("Đơn giá không hợp lệ. Vui lòng nhập số.",
-                                "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
-                // rollback
-                txtDonGia.Text = _monAn.DonGia.ToString();
-            }
-
-            txtDonGia.IsReadOnly = true;
-            txtDonGia.Background = Brushes.Transparent;
-            txtDonGia.BorderThickness = new Thickness(0);
-        }
-
-        // Bấm nút Thêm: hỏi xác nhận, nếu Yes thì đóng dialog với kết quả true
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show(
-                "Bạn có chắc muốn thêm món ăn này?",
-                "Xác nhận thêm",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
+            if (string.IsNullOrWhiteSpace(_monAnMoi.TenMon) || _monAnMoi.DonGia <= 0)
             {
-                // Đánh dấu DialogResult = true để caller biết là OK
-                this.DialogResult = true;
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin hợp lệ.");
+                return;
             }
+
+            // Lưu vào database
+            _monAnService.ThemMonAn(_monAnMoi);
+            MessageBox.Show("Thêm món ăn thành công!");
+
+            this.DialogResult = true;
+            this.Close();
         }
     }
 }

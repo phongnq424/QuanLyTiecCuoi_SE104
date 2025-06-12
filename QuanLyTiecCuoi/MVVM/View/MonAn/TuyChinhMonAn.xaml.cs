@@ -26,6 +26,7 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
     public partial class TuyChinhMonAn : Page
     {
         private TuyChinhMonAnViewModel _viewModel;
+        
 
         public TuyChinhMonAn()
         {
@@ -47,21 +48,24 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
         {
             if (sender is Button btn && btn.DataContext is MONAN monAn)
             {
-                _viewModel.HienThiChiTiet(monAn);
+                var window = new ChiTietTC();
+                window.ShowDialog();
             }
         }
 
         private void BtnChinhSua_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn && btn.DataContext is MONAN monAn)
+            if (sender is Button btn && btn.DataContext is MonAnModel monAn)
             {
-                _viewModel.SuaMonAn(monAn);
+                var window = new ChiTietTC(monAn); // truyền dữ liệu nếu cần
+                window.ShowDialog();
             }
         }
 
         private void BtnThemMonAn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Mở giao diện thêm món ăn mới", "Thêm món ăn");
+            var window = new ThemMonAn();
+            window.ShowDialog();
         }
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
