@@ -51,7 +51,7 @@
 
                 <!-- Header -->
                 <DockPanel Grid.Row="0" Background="#F5F5F5" LastChildFill="True">
-                    <TextBlock Text="Chọn món ăn" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0"/>
+                    <TextBlock Text="Chọn món ăn" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0" FontSize="24"/>
 
                     <!-- Button Panel -->
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center">
@@ -68,7 +68,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtSearchName" Grid.Column="0" Width="150" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Tên món ăn" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <TextBox x:Name="txtSearchName" Grid.Column="0" Width="150" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Tên món ăn" FontSize="20" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
                                 <Button Grid.Column="1" Style="{StaticResource WindowButtonStyle}" Content="🔍"/>
                             </Grid>
                         </Border>
@@ -79,7 +79,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Đơn giá" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Đơn giá" FontSize="20" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
                                 <Button Grid.Column="1" Style="{StaticResource WindowButtonStyle}" Content="🔍"/>
                             </Grid>
                         </Border>
@@ -100,7 +100,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Danh sách món ăn:" FontWeight="Bold" Margin="0,0,0,5" Grid.Row="0"/>
+                        <TextBlock Text="Danh sách món ăn:" FontWeight="Bold" FontSize="24" Margin="0,0,0,5" Grid.Row="0"/>
 
                         <Border Grid.Row="1" BorderBrush="#AAA" BorderThickness="1" CornerRadius="8" Padding="10">
                             <Grid>
@@ -110,28 +110,28 @@
                                 </Grid.RowDefinitions>
 
                                 <Border Grid.Row="0" Background="#DDD" CornerRadius="6" Padding="5" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                    <TextBlock Text="Danh sách món ăn" FontWeight="Bold"/>
+                                    <TextBlock Text="Danh sách món ăn" FontWeight="Bold" FontSize="24"/>
                                 </Border>
 
                                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                                     <ItemsControl ItemsSource="{Binding DanhSachMonAn}">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal" ItemWidth="350" />
+                                                <WrapPanel Orientation="Horizontal" ItemWidth="520" />
                                             </ItemsPanelTemplate>
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Border BorderBrush="#999" BorderThickness="1" CornerRadius="5" Width="330" Margin="10" MouseLeftButtonDown="MonAn_Click">
-                                                    <Grid Margin="5">
+                                                <Border BorderBrush="#999" BorderThickness="1" CornerRadius="5" Width="500" Margin="10" MouseLeftButtonDown="MonAn_Click">
+                                                    <Grid Margin="10">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="Auto" />
-                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="2*" />
                                                         </Grid.ColumnDefinitions>
-                                                        <Image Source="/Images/coffee.png" Width="100" Height="100" Grid.Column="0" />
+                                                        <Image Source="{Binding HinhAnh}" Width="200" Height="200" Grid.Column="0" />
                                                         <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
-                                                            <TextBlock Text="{Binding TenMon}" FontWeight="Bold" FontSize="14" />
-                                                            <TextBlock Text="{Binding DonGia, StringFormat='Giá: {0:N0} VND'}" FontSize="11" Foreground="Gray" />
+                                                            <TextBlock Text="{Binding TenMon}" FontWeight="Bold" FontSize="20" />
+                                                            <TextBlock Text="{Binding DonGia, StringFormat='Giá: {0:N0} VND'}" FontSize="15" Foreground="Gray" />
                                                         </StackPanel>
                                                     </Grid>
                                                 </Border>
@@ -151,17 +151,18 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Các món ăn đã chọn:" FontWeight="Bold" Margin="0,0,0,5" Grid.Row="0"/>
+                        <TextBlock Text="Các món ăn đã chọn:" FontWeight="Bold" FontSize="24" Margin="0,0,0,5" Grid.Row="0"/>
 
                         <ListBox x:Name="lstSelectedFoods" Grid.Row="1"
-                                 ItemsSource="{Binding MonAnDaChon}"
-                                 BorderBrush="#AAA"
-                                 BorderThickness="1"
-                                 FontSize="14"
-                                 Foreground="Black"
-                                 Margin="0,0,0,10"/>
+                             ItemsSource="{Binding MonAnDaChon}"
+                             DisplayMemberPath="TenMon"
+                             BorderBrush="#AAA"
+                             BorderThickness="1"
+                             FontSize="24"
+                             Foreground="Black"
+                             Margin="0,0,0,10"/>
 
-                        <Button Content="OK" Grid.Row="2" Width="100" Height="30" HorizontalAlignment="Right"
+                        <Button Content="OK" FontSize="24" Grid.Row="2" Width="150" Height="50" HorizontalAlignment="Right"
                                 Margin="0,10,0,0" Click="OkButton_Click"/>
                     </Grid>
                 </Grid>

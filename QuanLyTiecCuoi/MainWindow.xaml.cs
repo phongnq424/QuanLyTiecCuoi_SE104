@@ -25,7 +25,7 @@ namespace QuanLyTiecCuoi
         {
             InitializeComponent();
 
-            var datTiecView = new ChonMonAn();
+            var datTiecView = new TuyChinhMonAn();
             MainFrame.Navigate(datTiecView);
 
         }

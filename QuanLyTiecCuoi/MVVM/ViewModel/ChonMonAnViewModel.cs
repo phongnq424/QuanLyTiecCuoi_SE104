@@ -4,6 +4,7 @@ using QuanLyTiecCuoi.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
 {
@@ -12,8 +13,28 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
         private readonly MonAnService _monAnService;
 
         private List<MONAN> _allMonAn = new();
-        public ObservableCollection<MONAN> DanhSachMonAn { get; set; } = new();
-        public ObservableCollection<MONAN> MonAnDaChon { get; set; } = new();
+
+        private ObservableCollection<MONAN> _danhSachMonAn;
+        public ObservableCollection<MONAN> DanhSachMonAn
+        {
+            get => _danhSachMonAn;
+            set
+            {
+                _danhSachMonAn = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<MONAN> _monAnDaChon = new();
+        public ObservableCollection<MONAN> MonAnDaChon
+        {
+            get => _monAnDaChon;
+            set
+            {
+                _monAnDaChon = value;
+                OnPropertyChanged();
+            }
+        }
 
         private string _tuKhoaTen;
         public string TuKhoaTen
@@ -49,7 +70,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
         {
             _allMonAn = _monAnService.GetAllMonAn();
             DanhSachMonAn = new ObservableCollection<MONAN>(_allMonAn);
-            OnPropertyChanged(nameof(DanhSachMonAn));
         }
 
         private void ThucHienTimKiem()
@@ -67,7 +87,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
             }
 
             DanhSachMonAn = new ObservableCollection<MONAN>(ketQua);
-            OnPropertyChanged(nameof(DanhSachMonAn));
         }
 
         public void ChonMonAn(MONAN monAn)
@@ -75,8 +94,28 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
             if (!MonAnDaChon.Contains(monAn))
             {
                 MonAnDaChon.Add(monAn);
-                OnPropertyChanged(nameof(MonAnDaChon));
             }
+        }
+
+        private int _maDatTiec;
+        private readonly ChiTietMenuService _chiTietMenuService;
+
+        public void LuuChiTietMenu()
+        {
+            foreach (var monAn in MonAnDaChon)
+            {
+                var chiTiet = new CHITIETMENU
+                {
+                    MaDatTiec = _maDatTiec,
+                    MaMon = monAn.MaMon,
+                    SoLuong = 1,
+                    GhiChu = "" // hoặc để null nếu không cần
+                };
+
+                _chiTietMenuService.ThemChiTietMenu(chiTiet);
+            }
+
+            MessageBox.Show("Đã lưu món ăn vào thực đơn thành công!");
         }
     }
 }

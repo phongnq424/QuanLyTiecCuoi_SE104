@@ -33,7 +33,6 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
             _viewModel = new TuyChinhMonAnViewModel();
             this.DataContext = _viewModel;
 
-            itemsControlMonAn.ItemsSource = _viewModel.DanhSachMonAn;
         }
 
         private void BtnXoa_Click(object sender, RoutedEventArgs e)

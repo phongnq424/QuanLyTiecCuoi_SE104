@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using QuanLyTiecCuoi.Data;
+using System.Windows;
 
 namespace QuanLyTiecCuoi.Repositories
 {
@@ -18,7 +19,9 @@ namespace QuanLyTiecCuoi.Repositories
 
         public List<MONAN> GetAll()
         {
-            return _context.MonAns.AsNoTracking().ToList();
+            var result = _context.MonAns.AsNoTracking().ToList();
+            MessageBox.Show($"[DEBUG] Số lượng món ăn từ DB: {result.Count}");
+            return result;
         }
 
         public MONAN GetById(int id)

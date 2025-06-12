@@ -50,7 +50,7 @@
                 </Grid.RowDefinitions>
 
                 <DockPanel Grid.Row="0" Background="#F5F5F5" LastChildFill="True">
-                    <TextBlock Text="Chọn dịch vụ" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0"/>
+                    <TextBlock Text="Chọn dịch vụ" FontWeight="Bold" FontSize="24" VerticalAlignment="Center" Margin="10,0"/>
 
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center">
                         <Button Style="{StaticResource WindowButtonStyle}" Content="─" Click="Minimize_Click"/>
@@ -65,7 +65,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtSearchName" Grid.Column="0" Width="150" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Tên dịch vụ" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <TextBox x:Name="txtSearchName" Grid.Column="0" Width="150" BorderThickness="0" VerticalContentAlignment="Center" FontSize="20" FontStyle="Italic" Foreground="#888" Text="Tên dịch vụ" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
                                 <Button Grid.Column="1" Style="{StaticResource WindowButtonStyle}" Padding="0" Content="🔍"/>
                             </Grid>
                         </Border>
@@ -76,7 +76,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Đơn giá" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" FontSize="20" Foreground="#888" Text="Đơn giá" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
                                 <Button Grid.Column="1" Style="{StaticResource WindowButtonStyle}" Content="🔍"/>
                             </Grid>
                         </Border>
@@ -95,7 +95,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Danh sách dịch vụ:" FontWeight="Bold" Margin="0,0,0,5" Grid.Row="0"/>
+                        <TextBlock Text="Danh sách dịch vụ:" FontWeight="Bold" FontSize="24" Margin="0,0,0,5" Grid.Row="0"/>
 
                         <Border Grid.Row="1" BorderBrush="#AAA" BorderThickness="1" CornerRadius="8" Padding="10">
                             <Grid>
@@ -105,7 +105,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Border Grid.Row="0" Background="#DDD" CornerRadius="6" Padding="5" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                    <TextBlock Text="Danh sách dịch vụ" FontWeight="Bold"/>
+                                    <TextBlock Text="Danh sách dịch vụ" FontSize="24" FontWeight="Bold"/>
                                 </Border>
 
                                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
@@ -140,7 +140,7 @@
                     </Grid>
 
                     <StackPanel Grid.Column="1" Margin="20,0,0,0">
-                        <TextBlock Text="Các dịch vụ đã chọn:" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <TextBlock Text="Các dịch vụ đã chọn:" FontWeight="Bold" FontSize="24" Margin="0,0,0,5"/>
                         <ListBox x:Name="lstSelectedFoods"
                              ItemsSource="{Binding DichVuDaChon}"
                              BorderBrush="#AAA"
@@ -148,7 +148,7 @@
                              Height="815"
                              Width="Auto"
                              Margin="0,0,0,10"
-                             FontSize="14"
+                             FontSize="24"
                              Foreground="Black"/>
 
                         <Button Content="OK"

@@ -27,7 +27,7 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"Đã chọn {_viewModel.MonAnDaChon.Count} món ăn!", "Xác nhận");
+            _viewModel.LuuChiTietMenu();
         }
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)

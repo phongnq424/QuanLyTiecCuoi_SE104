@@ -58,45 +58,55 @@
                             </Border>
 
                             <ScrollViewer Height="250" VerticalScrollBarVisibility="Auto">
-                                <ItemsControl x:Name="itemsControlMonAn">
-                                <Border Width="150" Margin="5" BorderBrush="#AAA" BorderThickness="1" CornerRadius="5">
-                                    <StackPanel>
-                                        <!-- Ảnh món ăn -->
-                                        <Image Source="{Binding ImagePath}" 
-                                               Width="120" Height="120" 
-                                               Stretch="UniformToFill" 
-                                               Margin="5"/>
+                                <ItemsControl x:Name="itemsControlMonAn" ItemsSource="{Binding DanhSachMonAn}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Width="150" Margin="5" BorderBrush="#AAA" BorderThickness="1" CornerRadius="5">
+                                                <StackPanel>
+                                                    <!-- Ảnh món ăn -->
+                                                    <Image Source="{Binding HinhAnh}" 
+                           Width="120" Height="120" 
+                           Stretch="UniformToFill" 
+                           Margin="5"/>
 
-                                        <!-- Tên món ăn -->
-                                        <TextBlock Text="{Binding TenMon}" 
-                                                   FontWeight="Bold" 
-                                                   FontSize="14" 
-                                                   TextAlignment="Center" 
-                                                   Margin="5,0"/>
+                                                    <!-- Tên món ăn -->
+                                                    <TextBlock Text="{Binding TenMon}" 
+                               FontWeight="Bold" 
+                               FontSize="14" 
+                               TextAlignment="Center" 
+                               Margin="5,0"/>
 
-                                        <!-- 3 nút: Xóa, Chỉnh sửa, Chi tiết -->
-                                        <StackPanel Orientation="Horizontal" 
-                                                    HorizontalAlignment="Center" 
-                                                    Margin="0,5,0,5">
-                                            <Button Content="🗑️" 
-                                                    Width="30" Height="30" 
-                                                    Margin="2"
-                                                    ToolTip="Xóa"
-                                                    Click="BtnXoa_Click"/>
-                                            <Button Content="✎" 
-                                                    Width="30" Height="30" 
-                                                    Margin="2"
-                                                    ToolTip="Chỉnh sửa"
-                                                    Click="BtnChinhSua_Click"/>
-                                            <Button Content="ℹ️" 
-                                                    Width="30" Height="30" 
-                                                    Margin="2"
-                                                    ToolTip="Chi tiết"
-                                                    Click="BtnChiTiet_Click"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
+                                                    <!-- 3 nút: Xóa, Chỉnh sửa, Chi tiết -->
+                                                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                Margin="0,5,0,5">
+                                                        <Button Content="🗑️" 
+                                Width="30" Height="30" 
+                                Margin="2"
+                                ToolTip="Xóa"
+                                Click="BtnXoa_Click"/>
+                                                        <Button Content="✎" 
+                                Width="30" Height="30" 
+                                Margin="2"
+                                ToolTip="Chỉnh sửa"
+                                Click="BtnChinhSua_Click"/>
+                                                        <Button Content="ℹ️" 
+                                Width="30" Height="30" 
+                                Margin="2"
+                                ToolTip="Chi tiết"
+                                Click="BtnChiTiet_Click"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
                                 </ItemsControl>
+
                             </ScrollViewer>
 
                         </StackPanel>
