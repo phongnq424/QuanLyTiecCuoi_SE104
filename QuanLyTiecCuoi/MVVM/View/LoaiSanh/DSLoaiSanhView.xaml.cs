@@ -26,13 +26,5 @@ namespace QuanLyTiecCuoi.MVVM.View
             InitializeComponent();
             DataContext = vm;
         }
-
-        private void btnQuayLai_Click(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService != null && NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-            }
-        }
     }
 }

@@ -3,11 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View"
+      xmlns:local="clr-namespace:QuanLyTiecCuoi.Services"
       xmlns:vm="clr-namespace:QuanLyTiecCuoi.MVVM.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="796" d:DesignWidth="1600"
       Title="DSLoaiSanhView">
+
+    <Page.Resources>
+        <local:STTConverter x:Key="STTConverter" />
+    </Page.Resources>
 
     <Border BorderBrush="#673500" BorderThickness="2" CornerRadius="40" Background="#ffffee">
         <Grid Margin="20">
@@ -56,15 +60,20 @@
                       Margin="10" 
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Stretch"
+                      CanUserAddRows="False"
+                      AlternationCount="1000"
                       Grid.Row="2"
                       FontSize="20" FontFamily="Cambria">
 
                 <DataGrid.Columns>
                     <!-- Cột STT -->
-                    <DataGridTextColumn Header="STT"
-                                    Width="200" 
-                                    IsReadOnly="True" 
-                                    Binding="{Binding MaLoaiSanh}" />
+                    <DataGridTemplateColumn Header="STT" Width="200" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=AlternationIndex, Converter={StaticResource STTConverter}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <!-- Cột Loại Sảnh -->
                     <DataGridTextColumn Header="Tên Loại Sảnh" 
                                     Width="*"
@@ -83,10 +92,6 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-
-                <!-- Nút Quay Lại -->
-                <Button Grid.Column="0" Content="Quay lại" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Left"
-                    Click="btnQuayLai_Click" Style="{StaticResource ButtonStyle}" Margin="10,0,0,0" />
 
                 <!-- Nút Thêm Loại Sảnh -->
                 <Button Grid.Column="1" Content="Thêm Loại Sảnh" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"

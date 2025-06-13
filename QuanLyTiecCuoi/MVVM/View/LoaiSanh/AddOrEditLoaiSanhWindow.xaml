@@ -39,7 +39,7 @@
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Đơn giá bàn tối thiểu:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,10,0"/>
         <Border Grid.Row="2" Grid.Column="1" Height="40" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
             <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalContentAlignment="Center"
-                Text="{Binding LoaiSanhInfo.DonGiaBanToiThieu,TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding LoaiSanhInfo.DonGiaBanToiThieu, StringFormat={}{0:0}, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>
         </Border>
 
         <!-- Nút Lưu -->

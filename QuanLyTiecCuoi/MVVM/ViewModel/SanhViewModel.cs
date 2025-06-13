@@ -123,12 +123,16 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public void RefreshDanhSachSanh()
         {
             // Gọi từ database
-            DanhSachSanh = new ObservableCollection<Sanh>(_sanhService.GetAllSanh());
-            OnPropertyChanged(nameof(DanhSachSanh));
+            var danhSachMoi = _sanhService.GetAllSanh();
 
-            //DanhSachSanh.Clear();
-            //foreach (var sanh in _sanhService.GetAllSanh())
-            //    DanhSachSanh.Add(sanh);
+            DanhSachSanh.Clear();
+            foreach (var sanh in danhSachMoi)
+            {
+                DanhSachSanh.Add(sanh);
+            }
+
+            // Gọi lại View
+            DanhSachSanhView.Refresh();
 
             // Cập nhật số lượng
             OnPropertyChanged(nameof(SoLuongSanh));

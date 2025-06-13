@@ -3,11 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View"
+      xmlns:local="clr-namespace:QuanLyTiecCuoi.Services"
       xmlns:vm="clr-namespace:QuanLyTiecCuoi.MVVM.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1600"
       Title="Danh Sách Sảnh Tiệc">
+
+    <Page.Resources>
+        <local:STTConverter x:Key="STTConverter" />
+    </Page.Resources>
 
     <Border BorderBrush="#673500" BorderThickness="2" CornerRadius="40" Background="#ffffee">
         <Grid Margin="20">
@@ -68,28 +72,33 @@
             </Grid>
             
             <!-- DataGrid để hiển thị danh sách sảnh -->
-            <DataGrid ItemsSource="{Binding DanhSachSanh}" 
+            <DataGrid ItemsSource="{Binding DanhSachSanhView}" 
                   SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
                   AutoGenerateColumns="False" 
                   Margin="10,10,10,10"  
                   HorizontalAlignment="Stretch" 
                   VerticalAlignment="Stretch"
+                  AlternationCount="1000"
+                  CanUserAddRows="False"
                   Grid.Row="2"
                   FontSize="20" FontFamily="Cambria">
 
                 <DataGrid.Columns>
                     <!-- Cột STT -->
-                    <DataGridTextColumn Header="STT" 
-                                    Width="150" 
-                                    IsReadOnly="True" 
-                                    Binding="{Binding MaSanh}" />
+                    <DataGridTemplateColumn Header="STT" Width="0.3*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=AlternationIndex, Converter={StaticResource STTConverter}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <!-- Cột Tên Sảnh -->
                     <DataGridTextColumn Header="Tên Sảnh" 
                                     Width="*"
                                     Binding="{Binding TenSanh}" />
                     <!-- Cột Loại Sảnh -->
                     <DataGridTextColumn Header="Loại Sảnh" 
-                                    Width="*"
+                                    Width="0.5*"
                                     Binding="{Binding LoaiSanh.TenLoaiSanh}" />
                     <!-- Cột Số Lượng Bàn Tối Đa -->
                     <DataGridTextColumn Header="Số Lượng Bàn Tối Đa" 
