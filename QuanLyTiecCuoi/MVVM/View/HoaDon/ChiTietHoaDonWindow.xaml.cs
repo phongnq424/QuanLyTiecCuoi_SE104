@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyTiecCuoi.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,18 @@ namespace QuanLyTiecCuoi.MVVM.View.HoaDon
     /// </summary>
     public partial class ChiTietHoaDonWindow : Window
     {
-        public ChiTietHoaDonWindow()
+        public ChiTietHoaDonWindow(HoaDonViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
         }
     }
 }

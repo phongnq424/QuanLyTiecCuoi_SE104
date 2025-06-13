@@ -3,51 +3,62 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.HoaDon"
         xmlns:controlBar="clr-namespace:QuanLyTiecCuoi.MVVM.View.ControlBar"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
+        WindowStyle="None"
+        MouseDown="Window_MouseDown"
         Background="Transparent"
-        Title="ChiTietHoaDonWindow" 
-        Height="1000" Width="1600">
+        x:Name="MangHinhHoaDon"
+        Title="ChiTietHoaDonWindow"
+        Height="700"
+        Width="1000">
     <Border
         BorderThickness="2"
         BorderBrush="Black"
-        CornerRadius="60"
+        CornerRadius="30"
         Background="White">
 
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="155*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Border 
+            <Border
                 Grid.Row="0"
-                Height="100"
-                CornerRadius="60,60,0,0"
+                Height="50"
+                CornerRadius="30,30,0,0"
                 BorderThickness="0,0,0,2"
                 BorderBrush="Black"
-                Background="#D9D9D9">
+                Background="#D9D9D9" Grid.ColumnSpan="2">
                 <Grid>
                     <controlBar:ControlBarUserControl
-                        Width="auto" 
-                        VerticalAlignment="Top" 
-                        Margin="30"
+                        Width="auto"
+                        Margin="30,0"
+                        VerticalAlignment="Center"
                         HorizontalAlignment="Right"/>
-                    <TextBlock 
+                    <TextBlock
                         Text="Chi tiết hóa đơn"
                         Style="{StaticResource Header2Style}"></TextBlock>
                 </Grid>
             </Border>
             <Border
                 Grid.Row="1"
-                Margin="50,20"
+                Margin="30,20,30,10"
                 Padding="10"
                 CornerRadius="30"
                 BorderBrush="Black"
                 BorderThickness="1"
-                Height="auto" Width="auto">
+                Height="auto"
+                    Width="auto" Grid.ColumnSpan="2">
                 <Grid Height="auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -56,75 +67,157 @@
 
                     <StackPanel Grid.Row="0">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Mã hóa đơn:" Style="{StaticResource Header3Style}"/>
-                            <TextBlock Text="{Binding MaHoaDon}" Style="{StaticResource Header4Style}"/>
+                            <TextBlock Text="Mã hóa đơn:"
+                                    Style="{StaticResource Header3Style}"/>
+                            <TextBlock Text="{Binding HoaDonDuocChon.MaHoaDon}"
+                                    Style="{StaticResource Header4Style}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Mã đặt tiêc:" Style="{StaticResource Header3Style}"/>
-                            <TextBlock Text="{Binding MaDatTiec}" Style="{StaticResource Header4Style}"/>
+                            <TextBlock Text="Mã đặt tiêc:"
+                                    Style="{StaticResource Header3Style}"/>
+                            <TextBlock Text="{Binding HoaDonDuocChon.MaDatTiec}"
+                                    Style="{StaticResource Header4Style}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Số lượng bàn:" Style="{StaticResource Header3Style}"/>
-                            <TextBlock Text="{Binding SoLuongBan}" Style="{StaticResource Header4Style}"/>
+                            <TextBlock Text="Số lượng bàn:"
+                                    Style="{StaticResource Header3Style}"/>
+                            <TextBlock Text="{Binding HoaDonDuocChon.DATTIEC.SoLuongBan}"
+                                    Style="{StaticResource Header4Style}"/>
                         </StackPanel>
                     </StackPanel>
 
-                    <StackPanel 
+                    <StackPanel
                         Grid.Column="1"
                         Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Tên cô dâu:" Style="{StaticResource Header3Style}"/>
-                            <TextBox DataContext="{Binding TenCoDau}" Style="{DynamicResource TextBoxDescribeStyle}"/>
+                            <TextBlock Text="{Binding TiecDuocChon.TenCoDau}" 
+                                    Style="{StaticResource Header4Style}" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Tên chú rể:" Style="{StaticResource Header3Style}"/>
-                            <TextBox DataContext="{Binding TenChuRe}" Style="{DynamicResource TextBoxDescribeStyle}"/>
+                            <TextBlock Text="{Binding TiecDuocChon.TenChuRe}" 
+                                        Style="{StaticResource Header4Style}" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Tiền đặt cọc:" Style="{StaticResource Header3Style}"/>
-                            <TextBlock Text="{Binding SoLuongBan}" Style="{StaticResource Header4Style}"/>
+                            <TextBlock Text="Tiền đặt cọc:"
+                                    Style="{StaticResource Header3Style}"/>
+                            <TextBlock Text="{Binding HoaDonDuocChon.DATTIEC.TienDatCoc,StringFormat={}{0:C0}}" Language="vi-VN"
+                                    Style="{StaticResource Header4Style}"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
-                
+
             </Border>
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,157,0,0" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.6*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Grid.Row="0">
+                <Grid Grid.Column="0"
+                        Grid.Row="0">
                     <Border
-                        Grid.Row="0"
-                        Margin="50,10,0,10"
+                        Margin="30,10,0,10"
                         CornerRadius="30"
                         BorderBrush="Black"
                         BorderThickness="1"
-                        Height="auto" Width="auto">
+                        Height="auto"
+                            Width="auto">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="50"/>
                                 <RowDefinition/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
                             <TextBlock
+                                Grid.Row="0"
+                                Margin="15,10"
                                 Text="Menu"
-                                Style="{StaticResource Header3Style}"></TextBlock>
+                                Style="{StaticResource Header3Style}"/>
 
-                            <StackPanel 
+                            <ListView
+                                FontSize="16"
+                                ItemsSource="{Binding MenuTiecDuocChon}"
+                                Grid.Row="1">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn
+                                            Width="auto"
+                                                Header="STT"
+                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource Header6Style}"
+                                                        Text="{Binding MaCTDV, StringFormat='0000'}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn
+                                            Width="80"
+                                            Header="Mã món"
+                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource Header6Style}"
+                                                        Text="{Binding MaMon, StringFormat='0000'}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn
+                                            Width="120"
+                                            Header="Tên món"
+                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource Header6Style}"
+                                                        Text="{Binding MonAn.TenMon}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn
+                                            Width="100"
+                                                Header="Đơn giá"
+                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource Header6Style}"
+                                                        Text="{Binding MonAn.DonGia,StringFormat={}{0:C0}}" Language="vi-VN"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn
+                                            Width="100"
+                                                Header="Ghi Chú"
+                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource Header6Style}"
+                                                        Text="{Binding GhiChu}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <StackPanel
                                 Margin="10"
-                                Grid.Row="2" 
+                                Grid.Row="2"
                                 HorizontalAlignment="Right">
                                 <StackPanel
                                     Orientation="Horizontal">
@@ -132,48 +225,162 @@
                                         Margin="5"
                                         Text="Đơn giá bàn:"
                                         Style="{StaticResource Header3Style}"/>
+                                    <TextBlock Text="{Binding HoaDonDuocChon.DonGiaBan, StringFormat={}{0:C0}}" Language="vi-VN"
+                                            Style="{StaticResource Header4Style}"/>
                                 </StackPanel>
-                                <StackPanel>
+                                <StackPanel Orientation="Horizontal">
                                     <TextBlock
                                         Margin="5"
                                         Text="Tổng tiền bàn:"
                                         Style="{StaticResource Header3Style}"/>
+                                    <TextBlock Text="{Binding HoaDonDuocChon.TongTienBan, StringFormat={}{0:C0}}" Language="vi-VN"
+                                            Style="{StaticResource Header4Style}"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
-                        
-                        
                     </Border>
                 </Grid>
 
-                <Grid Grid.Column="1" Grid.Row="0">
+                <Grid Grid.Column="1"
+                        Grid.Row="0">
                     <Border
                         Grid.Row="0"
-                        Margin="30,10,50,10"
+                        Margin="30,10,30,10"
                         CornerRadius="30"
                         BorderBrush="Black"
                         BorderThickness="1"
-                        Height="auto" Width="auto">
+                        Height="auto"
+                            Width="auto">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="50"/>
                                 <RowDefinition/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
                             <TextBlock
+                                VerticalAlignment="Center"
+                                Margin="15,10"
                                 Text="Dịch vụ"
-                                Style="{StaticResource Header3Style}"></TextBlock>
+                                Style="{StaticResource Header3Style}"/>
+                            <ComboBox 
+                                x:Name="DV_cbb"
+                                ItemsSource="{Binding DanhSachTenDV}"
+                                Style="{StaticResource ComboBoxStyle1}"
+                                Margin="0,0,100,0"
+                                VerticalAlignment="Center"
+                                Width="300" Height="30">
+                            </ComboBox>
+                            <Button
+                                Style="{StaticResource ButtonAddServiceStyle}"
+                                HorizontalAlignment="Right"
+                                Margin="25,10"
+                                Command="{Binding ThemDichVuCommand}"
+                                CommandParameter="{Binding SelectedItem, ElementName=DV_cbb}"
+                                Content="Thêm"/>
 
-                            <Grid 
+                            <ListView
+                                FontSize="12"
+                                ItemsSource="{Binding ChiTietDVTiecDuocChon}"
+                                Grid.Row="1">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn
+                                            Width="60"
+                                            Header="Mã DV"
+                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource Header6Style}"
+                                                        Text="{Binding MaDichVu, StringFormat='0000'}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn
+                                            Width="140"
+                                            Header="Tên dịch vụ"
+                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource Header6Style}"
+                                                        Text="{Binding DichVu.TenDichVu}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn
+                                            Width="110"
+                                                Header="Đơn giá"
+                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource Header6Style}"
+                                                        Text="{Binding DonGia,StringFormat={}{0:C0}}" Language="vi-VN"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn
+                                            Width="60"
+                                                Header="Số lượng"
+                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <xctk:IntegerUpDown
+                                                        IsEnabled="{Binding CoTheThayDoiSL}"
+                                                        Value="{Binding SoLuong}"
+                                                        Name="myUpDownControl">
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="ValueChanged">
+                                                                <i:InvokeCommandAction 
+                                                                    Command="{Binding DataContext.DoiSoLuongCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                    CommandParameter="{Binding}" />
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
+
+                                                    </xctk:IntegerUpDown>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn
+                                            Width="140"
+                                                Header="Thành tiền"
+                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource Header6Style}"
+                                                        Text="{Binding ThanhTien, StringFormat={}{0:C0}}" Language="vi-VN"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn
+                                            Width="40">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button
+                                                        Margin="-15,0,0,0"
+                                                        Style="{StaticResource ButtonStyleDeleteBillInfor}"
+                                                        Command="{Binding DataContext.XoaDichVuCommand,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                        CommandParameter="{Binding}"></Button>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Grid
                                 Margin="10"
                                 Grid.Row="2"
                                 HorizontalAlignment="Right">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock
                                         Margin="5"
-                                        Text="Đơn giá bàn:"
+                                        Text="Tổng tiền dịch vụ:"
                                         Style="{StaticResource Header3Style}"/>
+                                    <TextBlock Text="{Binding HoaDonDuocChon.TongTienDV, StringFormat={}{0:C0}}" Language="vi-VN"
+                                            Style="{StaticResource Header4Style}"/>
                                 </StackPanel>
 
                             </Grid>
@@ -185,45 +392,76 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal"
                     Margin="30,0"
-                    Grid.Row="1" Grid.Column="0">
-                    
-                    <TextBlock 
+                    Grid.Row="1"
+                        Grid.Column="0">
+
+                    <TextBlock
                         Text="Tổng tiền hóa đơn: "
                         Style="{StaticResource Header3Style}"/>
                     <TextBlock
-                        Text="{Binding TongTienHoaDon}"
+                        Text="{Binding HoaDonDuocChon.TongTienHD, StringFormat={}{0:C0}}" Language="vi-VN"
                         Style="{StaticResource Header4Style}"/>
                 </StackPanel>
 
-                <TextBlock 
+                <StackPanel
+                    Visibility="{Binding TextSoTienThanhToan}"
                     VerticalAlignment="Center"
+                    Orientation="Horizontal"
                     Margin="30,0"
-                    Grid.Row="1" Grid.Column="1"
-                    Text="{Binding}"
-                    Style="{StaticResource Header3Style}"/>
+                    Grid.Row="1"
+                        Grid.Column="1">
+                    <TextBlock
+                        Text="Tiền phải thanh toán: "
+                        Style="{StaticResource Header3Style}"/>
+                    <TextBlock
+                        Text="{Binding HoaDonDuocChon.TienPhaiThanhToan, StringFormat={}{0:C0}}" Language="vi-VN"
+                        Style="{StaticResource Header4Style}"/>
+                </StackPanel>
+
+                <StackPanel
+                    Visibility="{Binding TextNgayThanhToan}"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Margin="30,0"
+                    Grid.Row="1"
+                        Grid.Column="1">
+                    <TextBlock
+                        Text="Ngày thanh toán: "
+                        Style="{StaticResource Header3Style}"/>
+                    <TextBlock
+                        Text="{Binding HoaDonDuocChon.NgayThanhToan, StringFormat={}{0:C0}}" Language="vi-VN"
+                        Style="{StaticResource Header4Style}"/>
+                </StackPanel>
 
 
             </Grid>
-            <Button 
-                Grid.Row="3" 
+            <Button
+                Visibility="{Binding BtnLuuVisibility}"
+                Grid.Row="3"
+                Margin="30,10,0,10"
                 HorizontalAlignment="Left"
-                Margin="70,0"
                 Content="Lưu thay đổi"
+                Command="{Binding LuuThayDoiHoaDonCommand}"
                 Style="{StaticResource ButtonStyle}"/>
 
-            <StackPanel Grid.Row="3" HorizontalAlignment="Right" Orientation="Horizontal">
-                
-            <Button 
-                Grid.Row="3" 
-                Margin="0,0,70,0"
-                Content="Xác nhận thanh toán"
-                Style="{StaticResource ButtonStyle}"/>
+            <StackPanel Grid.Row="3"
+                    HorizontalAlignment="Left"
+                        Margin="596,0,0,0"
+                        Orientation="Horizontal" Grid.ColumnSpan="2">
 
-            <Button 
-                Grid.Row="3" 
-                Margin="0,0,70,0"
-                Content="In hóa đơn"
-                Style="{StaticResource ButtonStyle}"/>
+                <Button
+                    Grid.Row="3"
+                    Content="Xác nhận thanh toán"
+                    Visibility="{Binding BtnDaThanhToanVisibility}"
+                    Command="{Binding ThanhToanCommand}"
+                    CommandParameter="{Binding ElementName=MangHinhHoaDon}"
+                    Style="{StaticResource ButtonStyle}"/>
+
+                <Button
+                    Grid.Row="3"
+                    Content="In hóa đơn"
+                    Command="{Binding InHoaDonCommand}"
+                    Style="{StaticResource ButtonStyle}"/>
 
 
             </StackPanel>

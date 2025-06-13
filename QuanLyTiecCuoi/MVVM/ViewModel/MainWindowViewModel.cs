@@ -9,15 +9,19 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.Data.Models;
-//using QuanLyTiecCuoi.Data.Services;
-//using QuanLyTiecCuoi.MVVM.View.Login;
+using QuanLyTiecCuoi.Services;
+using QuanLyTiecCuoi.MVVM.View.Login;
+using QuanLyTiecCuoi.MVVM.View.BaoCao;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
-    internal class MainWindowViewModel : BaseViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
+        private readonly DangNhapService _DangNhapService;
+
         #region Command
         public ICommand FirstLoadCM { get; set; }
         public ICommand DieuHuongCommand { get; set; }
@@ -55,76 +59,58 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         }
 
         public static NGUOIDUNG NguoiDungHienTai;
-        public MainWindowViewModel()
+        public MainWindowViewModel(DangNhapService dangNhapService)
         {
-            FirstLoadCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            _DangNhapService = dangNhapService;
+
+            FirstLoadCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
-                DanhSachChucNang = new ObservableCollection<CHUCNANG>()
-                {
-                    new CHUCNANG() { MaChucNang = 0, TenChucNang = "Trang chủ", TenManHinhDuocLoad = "Trangchu"},
-                    new CHUCNANG() { MaChucNang = 0, TenChucNang = "Sảnh", TenManHinhDuocLoad = "Sanh"},
-                    new CHUCNANG() { MaChucNang = 0, TenChucNang = "Đặt tiệc", TenManHinhDuocLoad = "DatTiec"},
-                    new CHUCNANG() { MaChucNang = 0, TenChucNang = "Hóa đơn", TenManHinhDuocLoad = "HoaDon.HoaDonPage"},
-                    new CHUCNANG() { MaChucNang = 0, TenChucNang = "Báo cáo", TenManHinhDuocLoad = "Trangchu"},
-                    new CHUCNANG() { MaChucNang = 0, TenChucNang = "Tùy chỉnh", TenManHinhDuocLoad = "Trangchu"},
-                };
-                //if (NguoiDungHienTai != null)
-                //{
-                //    if (NguoiDungHienTai.NHOMNGUOIDUNG.MaNhom == 0)
-                //    {
-                //        DanhSachChucNang = new ObservableCollection<CHUCNANG>(await NhanVienService.Ins.LayTatCaChucNang());
-                //        if (DanhSachChucNang == null)
-                //        {
-                //            MessageBox.Show("Lỗi khi đăng nhập");
-                //            Logout(p);
-                //        }
-                //    }
-                //    var ds = await NhanVienService.Ins.LayChucNang(NguoiDungHienTai);
-                //    if (ds != null)
-                //    {
-                //        DanhSachChucNang = new ObservableCollection<CHUCNANG>(ds);
-                //    }
-                //    else
-                //    {
-                //        MessageBox.Show("Lỗi khi đăng nhập");
-                //        Logout(p);
-                //    }
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Lỗi khi đăng nhập");
-                //    Logout(p);
-                //}
+                DanhSachChucNang = new ObservableCollection<CHUCNANG>(await _DangNhapService.LayChucNangNguoiDung(NguoiDungHienTai));
             });
 
-            //DangXuatCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            //{
-            //    Logout(p);
-            //});
+            DangXuatCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                Logout(p);
+            });
 
 
             DieuHuongCommand = new RelayCommand<CHUCNANG>((p) => { return true; }, (p) =>
             {
                 CurrentView = LoadViewByName(p.TenManHinhDuocLoad);
             });
+            _DangNhapService = dangNhapService;
         }
 
-        //private void Logout(Window p)
-        //{
-        //    LoginWindow wd = new LoginWindow();
-        //    Application.Current.MainWindow = wd;
-        //    wd.Show();
-        //    p.Close();
-        //}
+        private void Logout(Window p)
+        {
+            var loginWindow = App.AppHost?.Services.GetRequiredService<LoginWindow>();
+            if (loginWindow != null)
+            {
+                Application.Current.MainWindow = loginWindow;
+                loginWindow.Show();
+                p?.Close();
+            }
+        }
 
         public object LoadViewByName(string viewName)
         {
+            // fallback cho các view không cần DI
             string fullTypeName = $"QuanLyTiecCuoi.MVVM.View.{viewName}";
-            var type = Type.GetType(fullTypeName);
-            if (type == null)
-                return null;
+            var assembly = typeof(App).Assembly;
+            var type = assembly.GetType(fullTypeName);
 
-            return Activator.CreateInstance(type);
+            if (type == null)
+            {
+                MessageBox.Show($"Không tìm thấy type {fullTypeName} trong assembly {assembly.FullName}");
+                return null;
+            }
+
+            var service = App.AppHost?.Services.GetService(type);
+            if (service == null)
+            {
+                MessageBox.Show($"Không lấy được service cho type {fullTypeName}");
+            }
+            return service;
         }
     }
 }

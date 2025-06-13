@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\UIT_Nam2_Ky2\\CNPM\\Project\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj": {}
+    "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj": {}
   },
   "projects": {
-    "D:\\UIT_Nam2_Ky2\\CNPM\\Project\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj": {
+    "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\UIT_Nam2_Ky2\\CNPM\\Project\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj",
+        "projectUniqueName": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj",
         "projectName": "QuanLyTiecCuoi",
-        "projectPath": "D:\\UIT_Nam2_Ky2\\CNPM\\Project\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj",
-        "packagesPath": "C:\\Users\\KIMDUNG\\.nuget\\packages\\",
-        "outputPath": "D:\\UIT_Nam2_Ky2\\CNPM\\Project\\QuanLyTiecCuoi\\obj\\",
+        "projectPath": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\QuanLyTiecCuoi.csproj",
+        "packagesPath": "C:\\Users\\phong\\.nuget\\packages\\",
+        "outputPath": "D:\\QuanLyTiecCuoi_SE104\\QuanLyTiecCuoi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\KIMDUNG\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\phong\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -45,29 +45,46 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "Extended.Wpf.Toolkit": {
+              "target": "Package",
+              "version": "[4.7.25104.5739, )"
+            },
+            "LiveChartsCore.SkiaSharpView.WPF": {
+              "target": "Package",
+              "version": "[2.0.0-rc5.4, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.15, )"
+              "version": "[8.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.13, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[8.0.15, )"
+              "version": "[8.0.13, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.FileExtensions": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[9.0.5, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.Extensions.Logging": {
-              "target": "Package",
-              "version": "[9.0.5, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.Xaml.Behaviors.Wpf": {
               "target": "Package",
@@ -97,7 +114,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
