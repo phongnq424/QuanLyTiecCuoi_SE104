@@ -7,7 +7,7 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Threading.Tasks;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace QuanLyTiecCuoi.Data.Services
+namespace QuanLyTiecCuoi.Services
 {
     public class HoaDonService
     {
@@ -129,4 +129,5 @@ namespace QuanLyTiecCuoi.Data.Services
             return null;
         }
     }
+
 }

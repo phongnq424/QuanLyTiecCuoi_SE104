@@ -1,15 +1,13 @@
 ﻿using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.Data;
 using QuanLyTiecCuoi.Data.Models;
-using QuanLyTiecCuoi.Data.Services;
+using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.View.HoaDon;
 using QuanLyTiecCuoi.Repository;
 using QuanLyTiecCuoi.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -51,7 +49,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private string _LocMaDatTiec = "";
         public string LocMaDatTiec
         {
-            get => _LocMaDatTiec; set { _LocMaDatTiec = value; OnPropertyChanged(); }
+            get => _LocMaDatTiec;
+            set { _LocMaDatTiec = value; OnPropertyChanged(); }
         }
 
         private HOADON _HoaDonDuocChon;
@@ -72,7 +71,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public DATTIEC TiecDuocChon
         {
             get => _TiecDuocChon;
-            set { _TiecDuocChon= value; OnPropertyChanged(); }
+            set { _TiecDuocChon = value; OnPropertyChanged(); }
         }
 
         private ObservableCollection<CHITIETMENU> _MenuTiecDuocChon;
@@ -86,26 +85,26 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ObservableCollection<DICHVU> DanhSachDichVu
         {
             get => _DanhSachDichVu;
-            set { _DanhSachDichVu= value; OnPropertyChanged(); }    
+            set { _DanhSachDichVu = value; OnPropertyChanged(); }
         }
 
         private List<String> _DanhSachTenDV;
         public List<String> DanhSachTenDV
         {
             get => _DanhSachTenDV;
-            set { _DanhSachTenDV= value; OnPropertyChanged(); }
+            set { _DanhSachTenDV = value; OnPropertyChanged(); }
         }
 
         private List<CHITIETDVTIEC> DanhSachDichVuTiecBiXoa;
 
         private bool _CoTheThayDoiSL;
-        public bool CoTheThayDoiSL { get => _CoTheThayDoiSL; set { _CoTheThayDoiSL= value; OnPropertyChanged(); } }  
+        public bool CoTheThayDoiSL { get => _CoTheThayDoiSL; set { _CoTheThayDoiSL = value; OnPropertyChanged(); } }
 
         private Visibility _BtnLuuVisibility = Visibility.Hidden;
         public Visibility BtnLuuVisibility { get => _BtnLuuVisibility; set { _BtnLuuVisibility = value; OnPropertyChanged(); } }
 
         private Visibility _TextNgayThanhToan = Visibility.Hidden;
-        public Visibility TextNgayThanhToan { get => _TextNgayThanhToan; set { _TextNgayThanhToan= value; OnPropertyChanged(); } }
+        public Visibility TextNgayThanhToan { get => _TextNgayThanhToan; set { _TextNgayThanhToan = value; OnPropertyChanged(); } }
 
         private Visibility _TextSoTienThanhToan = Visibility.Visible;
         public Visibility TextSoTienThanhToan { get => _TextSoTienThanhToan; set { _TextSoTienThanhToan = value; OnPropertyChanged(); } }
@@ -113,7 +112,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public Visibility BtnDaThanhToanVisibility { get => _BtnDaThanhToanVisibility; set { _BtnDaThanhToanVisibility = value; OnPropertyChanged(); } }
 
         #region Command
-        public ICommand FirstLoadCommand {  get; set; }
+        public ICommand FirstLoadCommand { get; set; }
         public ICommand SetDateFilterCommand { get; set; }
         public ICommand LocHoaDonCommand { get; set; }
         public ICommand ChonHoaDonCommand { get; set; }
@@ -153,7 +152,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             ChonHoaDonCommand = new RelayCommand<HOADON>((p) => { return true; }, async (p) =>
             {
-                if(p != null)
+                if (p != null)
                 {
                     HoaDonDuocChon = p;
                     TiecDuocChon = await hoaDonService.GetDatTiec(p.MaDatTiec);
@@ -172,17 +171,17 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 if (HoaDonDuocChon.NgayThanhToan != null) return;
                 if (p != null)
                 {
-                    foreach(var i in ChiTietDVTiecDuocChon)
+                    foreach (var i in ChiTietDVTiecDuocChon)
                     {
-                        if(i.DichVu.TenDichVu.Equals(p))
+                        if (i.DichVu.TenDichVu.Equals(p))
                         {
                             MessageBox.Show("Dịch vụ đã thêm trước đó");
                             return;
                         }
                     }
-                    foreach(var i in DanhSachDichVu)
+                    foreach (var i in DanhSachDichVu)
                     {
-                        if(i.TenDichVu.Equals(p))
+                        if (i.TenDichVu.Equals(p))
                         {
                             var chiTiet = new CHITIETDVTIEC
                             {
@@ -219,7 +218,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 if (p != null)
                 {
                     if (DanhSachDichVuTiecBiXoa == null) DanhSachDichVuTiecBiXoa = new List<CHITIETDVTIEC>();
-                    DanhSachDichVuTiecBiXoa.Add(p); 
+                    DanhSachDichVuTiecBiXoa.Add(p);
                     var danhSachMoi = new ObservableCollection<CHITIETDVTIEC>(ChiTietDVTiecDuocChon);
                     danhSachMoi.Remove(p);
                     ChiTietDVTiecDuocChon = danhSachMoi;
@@ -230,12 +229,12 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             LuuThayDoiHoaDonCommand = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                if(HoaDonDuocChon.NgayThanhToan != null)
+                if (HoaDonDuocChon.NgayThanhToan != null)
                 {
                     MessageBox.Show("Hóa đơn đã thanh toán");
                     return;
                 }
-                if(DanhSachDichVuTiecBiXoa != null)
+                if (DanhSachDichVuTiecBiXoa != null)
                 {
                     bool res = await hoaDonService.XoaCTDVT(DanhSachDichVuTiecBiXoa);
                     if (!res)
@@ -258,7 +257,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     HoaDonDuocChon = HoaDonMoi;
                     Reload();
                     BtnLuuVisibility = Visibility.Hidden;
-                    
+
                 }
                 else
                 {
@@ -286,13 +285,14 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             });
 
-            InHoaDonCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+            InHoaDonCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
                 if (BtnLuuVisibility == Visibility.Visible)
                 {
                     MessageBox.Show("Chưa lưu thay đổi");
                     return;
                 }
-                if(_BtnDaThanhToanVisibility == Visibility.Visible)
+                if (_BtnDaThanhToanVisibility == Visibility.Visible)
                 {
                     MessageBox.Show("Hóa đơn chưa được xác nhận thanh toán");
                     return;
@@ -369,9 +369,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private void GanDanhSachTenDV()
         {
             DanhSachTenDV = new List<string>();
-            if(DanhSachDichVu != null)
+            if (DanhSachDichVu != null)
             {
-                foreach(var i in  DanhSachDichVu)
+                foreach (var i in DanhSachDichVu)
                 {
                     DanhSachTenDV.Add(i.TenDichVu);
                 }
@@ -386,13 +386,13 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             HoaDonDuocChon.TongTienDV = TongTienTatCaDichVu;
             HoaDonDuocChon.TongTienHD = HoaDonDuocChon.TongTienDV + HoaDonDuocChon.TongTienBan;
             HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc;
-            OnPropertyChanged(nameof (HoaDonDuocChon));
+            OnPropertyChanged(nameof(HoaDonDuocChon));
         }
 
         private void DatThanhToanChoHoaDonDuocChon()
         {
-            if(HoaDonDuocChon == null) return;
-            if(HoaDonDuocChon.NgayThanhToan == null)
+            if (HoaDonDuocChon == null) return;
+            if (HoaDonDuocChon.NgayThanhToan == null)
             {
                 TextSoTienThanhToan = Visibility.Visible;
                 BtnDaThanhToanVisibility = Visibility.Visible;
@@ -428,7 +428,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 {
                     DanhSachHoaDon = new ObservableCollection<HOADON>(res);
                 }
-
             }
             else
                 Reload();

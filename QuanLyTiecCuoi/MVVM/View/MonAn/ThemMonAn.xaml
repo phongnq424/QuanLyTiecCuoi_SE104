@@ -1,0 +1,101 @@
+﻿<Window x:Class="QuanLyTiecCuoi.MVVM.View.MonAn.ThemMonAn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.MonAn"
+        mc:Ignorable="d"
+        Title="Thêm món ăn" Height="350" Width="250"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Window.Resources>
+        <!-- Converter đơn giản để chuyển empty string => Visible -->
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <!-- Style cho tất cả TextBox dùng Watermark -->
+        <Style x:Key="WatermarkTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <!-- Host phần nhập -->
+                            <ScrollViewer x:Name="PART_ContentHost" />
+
+                            <!-- Watermark TextBlock -->
+                            <TextBlock Text="{TemplateBinding Tag}"
+                                   Foreground="LightGray"
+                                   IsHitTestVisible="False"
+                                   Margin="0,0,0,0"
+                                   VerticalAlignment="Center"
+                                   Visibility="{Binding Text.IsEmpty, 
+                                              RelativeSource={RelativeSource TemplatedParent},
+                                              Converter={StaticResource BoolToVis}}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Border CornerRadius="20" BorderBrush="#111" BorderThickness="2"  Background="#FFF">
+
+            <StackPanel>
+                <StackPanel DockPanel.Dock ="Right" Orientation="Horizontal">
+                    <TextBlock Text="Thêm món ăn" 
+                               TextAlignment="Center" Width="201" Height="14" FontWeight="Bold" Margin="15,0,0,0"/>
+                    <Button x:Name="btnClose"
+                            Content="✕" 
+                            Width="20" 
+                            Height="20" 
+                            Margin="0,10,0,0"
+                            Click="BtnClose_Click"/>
+                </StackPanel>
+                <Image 
+                    x:Name="imgMonAn"
+                    Source="{Binding ImagePath}" 
+                    Width="200" Height="170" 
+                    Stretch="UniformToFill" 
+                    
+                    Margin="5"
+                    MouseLeftButtonDown="ImgMonAn_MouseLeftButtonDown"/>
+                <TextBox 
+                            Style="{StaticResource WatermarkTextBoxStyle}"
+                            Tag="Tên món ăn"
+                            Text="{Binding TenMon, Mode=TwoWay}"
+                            x:Name="txtTenMon"
+                            FontWeight="Bold" 
+                            FontSize="20" 
+                            
+                            TextAlignment="Center" 
+                            Margin="5,5,5,0"
+                            IsReadOnly="True"
+                            Background="Transparent"
+                            BorderThickness="1"
+                            MouseDoubleClick="TxtTenMon_MouseDoubleClick"
+                            LostFocus="TxtTenMon_LostFocus"/>
+                <TextBox 
+                     x:Name="txtDonGia"
+                    Style="{StaticResource WatermarkTextBoxStyle}"
+                    Tag="Đơn giá"
+                     Text="{Binding DonGia}" 
+                     
+                     FontSize="20" 
+                     TextAlignment="Center" 
+                     Margin="5,5,5,0"
+                     IsReadOnly="True"
+                     Background="Transparent"
+                     BorderThickness="1"
+                     MouseDoubleClick="TxtDonGia_MouseDoubleClick"
+                     LostFocus="TxtDonGia_LostFocus"/>
+                <Button Height="20" Width="40"
+                        Content ="Thêm"
+                        Margin="0,30,20,0"
+                        HorizontalAlignment="Right"
+                        Click="AddButton_Click"/>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>

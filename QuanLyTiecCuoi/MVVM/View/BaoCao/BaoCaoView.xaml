@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.BaoCao"
-      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
       xmlns:controlBar="clr-namespace:QuanLyTiecCuoi.MVVM.View.ControlBar"
       mc:Ignorable="d"
       d:DesignHeight="800"
@@ -39,11 +39,6 @@
                        VerticalAlignment="Bottom"
                        Margin="10,15,10,0"
                        Style="{StaticResource Header1Style}" />
-            <controlBar:ControlBarUserControl Grid.Row="0"
-                                              Grid.Column="2"
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Right"
-                                              Margin="0,0,12,0" />
             <StackPanel Orientation="Horizontal"
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
@@ -75,7 +70,6 @@
                               SelectedItem="{Binding SelectedTuNgay, Mode=TwoWay}" />
                 </StackPanel>
 
-                <!-- StackPanel cho Năm -->
                 <StackPanel Grid.Column="1"
                             Orientation="Horizontal"
                             VerticalAlignment="Center"
@@ -92,21 +86,13 @@
                               SelectedItem="{Binding SelectedDenNgay, Mode=TwoWay}" />
                 </StackPanel>
             </Grid>
+
             <lvc:CartesianChart Grid.Row="2"
                                 Grid.ColumnSpan="2"
-                                Series="{Binding SeriesCollection}"
-                                LegendLocation="Right"
-                                Margin="15">
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Tháng/Năm"
-                              Labels="{Binding Labels}"
-                              LabelsRotation="15" />
+                                Series="{Binding Series}"
+                                LegendPosition="Right"
+                                Margin="15" />
 
-                </lvc:CartesianChart.AxisX>
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Giá trị" />
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
             <Button Grid.Row="3"
                     Width="220"
                     Height="50"

@@ -1,0 +1,156 @@
+﻿<Page x:Class="QuanLyTiecCuoi.MVVM.View.MonAn.TuyChinhMonAn"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.MonAn"
+      mc:Ignorable="d" 
+      d:DesignHeight="380" d:DesignWidth="800"
+      Title="TuyChinhMonAn">
+
+    <Page.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="2,0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#EEE"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style x:Key="SearchBoxStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#CCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5,2"/>
+        </Style>
+    </Page.Resources>
+    <Grid Background="#FFFDF9">
+        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="20">
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    
+                    <Border BorderBrush="#AAA" BorderThickness="1" CornerRadius="8" Padding="10">
+                        <StackPanel>
+                            <Border Background="#DDD" CornerRadius="6" Padding="5" HorizontalAlignment="Center" Margin="0,0,0,10">
+                                <TextBlock Text="Danh sách món ăn" FontWeight="Bold"/>
+                            </Border>
+
+                            <ScrollViewer Height="250" VerticalScrollBarVisibility="Auto">
+                                <ItemsControl x:Name="itemsControlMonAn" ItemsSource="{Binding DanhSachMonAn}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Width="150" Margin="5" BorderBrush="#AAA" BorderThickness="1" CornerRadius="5">
+                                                <StackPanel>
+                                                    <!-- Ảnh món ăn -->
+                                                    <Image Source="{Binding HinhAnh}" 
+                           Width="120" Height="120" 
+                           Stretch="UniformToFill" 
+                           Margin="5"/>
+
+                                                    <!-- Tên món ăn -->
+                                                    <TextBlock Text="{Binding TenMon}" 
+                               FontWeight="Bold" 
+                               FontSize="14" 
+                               TextAlignment="Center" 
+                               Margin="5,0"/>
+
+                                                    <!-- 3 nút: Xóa, Chỉnh sửa, Chi tiết -->
+                                                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                Margin="0,5,0,5">
+                                                        <Button Content="🗑️" 
+                                Width="30" Height="30" 
+                                Margin="2"
+                                ToolTip="Xóa"
+                                Click="BtnXoa_Click"/>
+                                                        <Button Content="✎" 
+                                Width="30" Height="30" 
+                                Margin="2"
+                                ToolTip="Chỉnh sửa"
+                                Click="BtnChinhSua_Click"/>
+                                                        <Button Content="ℹ️" 
+                                Width="30" Height="30" 
+                                Margin="2"
+                                ToolTip="Chi tiết"
+                                Click="BtnChiTiet_Click"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                            </ScrollViewer>
+
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="20,0,0,0">
+
+                    <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom" VerticalAlignment="Center" Margin="0,0,0,0">
+                        <!-- Tên món ăn -->
+                        <Border Style="{StaticResource SearchBoxStyle}" Margin="0,10,10,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="txtSearchName" Grid.Column="0" Width="150" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Tên món ăn" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Padding="0" Content="🔍"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Đơn giá -->
+                        <Border Style="{StaticResource SearchBoxStyle}" Margin="0,10,20,10" Width="135">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Đơn giá" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Content="🔍"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                    <Button x:Name="btnThemMonAn"
+                        Content="Thêm món ăn"
+                             Width="100"
+                             Height="30"
+                             DockPanel.Dock ="Bottom"
+                             HorizontalAlignment="Center"
+                             Margin="0,10,0,0"
+                            Click="BtnThemMonAn_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
+

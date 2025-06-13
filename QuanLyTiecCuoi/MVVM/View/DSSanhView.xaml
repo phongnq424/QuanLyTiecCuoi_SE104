@@ -1,0 +1,135 @@
+﻿<Page x:Class="QuanLyTiecCuoi.MVVM.View.DSSanhView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View"
+      xmlns:vm="clr-namespace:QuanLyTiecCuoi.MVVM.ViewModel"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" d:DesignWidth="1600"
+      Title="Danh Sách Sảnh Tiệc">
+
+    <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <!-- Tiêu đề -->
+            <TextBlock Text="Danh Sách Sảnh" FontSize="40" FontFamily="Cambria" FontWeight="Bold" Margin="10" Grid.Row="0" />
+
+            <!-- Bộ lọc loại sảnh -->
+            <Grid Margin="10,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <!-- Cột cho "Giới thiệu" -->
+                    <ColumnDefinition Width="150"/>
+                    <!-- Cột cho "Tên Sảnh" -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Cột cho "Loại Sảnh" -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Cột cho "Số Lượng Bàn Tối Đa" -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Cột cho "Đơn Giá Bàn Tối Thiểu" -->
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Tìm kiếm theo: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria" Grid.Column="0" FontStyle="Italic"/>
+
+                <!-- Tên Sảnh -->
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="1" >
+                    <TextBlock Text="Tên Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
+                    <TextBox Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
+                 Text="{Binding FilterTenSanh, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <!-- Loại Sảnh -->
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="2" >
+                    <TextBlock Text="Loại Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
+                    <TextBox Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
+                             Text="{Binding FilterLoaiSanh, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <!-- Số Lượng Bàn Tối Đa -->
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="3" >
+                    <TextBlock Text="Số lượng bàn: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
+                    <TextBox Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
+                             Text="{Binding FilterSoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <!-- Đơn Giá Bàn Tối Thiểu -->
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="4" >
+                    <TextBlock Text="Đơn giá bàn: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
+                    <TextBox Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
+             Text="{Binding FilterDonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </Grid>
+            
+            <!-- DataGrid để hiển thị danh sách sảnh -->
+            <DataGrid ItemsSource="{Binding DanhSachSanh}" 
+                  SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
+                  AutoGenerateColumns="False" 
+                  Margin="10,10,10,10"  
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch"
+                  Grid.Row="2"
+                  FontSize="20" FontFamily="Cambria">
+
+                <DataGrid.Columns>
+                    <!-- Cột STT -->
+                    <DataGridTextColumn Header="STT" 
+                                    Width="150" 
+                                    IsReadOnly="True" 
+                                    Binding="{Binding MaSanh}" />
+                    <!-- Cột Tên Sảnh -->
+                    <DataGridTextColumn Header="Tên Sảnh" 
+                                    Width="*"
+                                    Binding="{Binding TenSanh}" />
+                    <!-- Cột Loại Sảnh -->
+                    <DataGridTextColumn Header="Loại Sảnh" 
+                                    Width="*"
+                                    Binding="{Binding LoaiSanh.TenLoaiSanh}" />
+                    <!-- Cột Số Lượng Bàn Tối Đa -->
+                    <DataGridTextColumn Header="Số Lượng Bàn Tối Đa" 
+                                    Width="*"
+                                    Binding="{Binding SoLuongBanToiDa}" />
+                    <!-- Cột Đơn Giá Bàn Tối Thiểu -->
+                    <DataGridTextColumn Header="Đơn Giá Bàn Tối Thiểu" 
+                                    Width="*"
+                                    Binding="{Binding LoaiSanh.DonGiaBanToiThieu, StringFormat=N0}" />
+                    <!-- Cột Ghi Chú -->
+                    <DataGridTextColumn Header="Ghi Chú" 
+                                    Width="*"
+                                    Binding="{Binding GhiChu}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Margin="10" VerticalAlignment="Bottom" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Nút Quay Lại -->
+                <Button Grid.Column="0" Content="Quay lại" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Left"
+                    Click="btnQuayLai_Click" Style="{StaticResource ButtonStyle}" Margin="10,0,0,0" />
+
+                <!-- Nút Thêm Sảnh -->
+                <Button Grid.Column="1" Content="Thêm Sảnh" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                    Command="{Binding AddSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
+
+                <!-- Nút Sửa Sảnh -->
+                <Button Grid.Column="2" Content="Sửa Sảnh" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                    Command="{Binding EditSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
+
+                <!-- Nút Xóa Sảnh -->
+                <Button Grid.Column="3" Content="Xóa Sảnh" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                    Command="{Binding DeleteSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
+            </Grid>
+        </Grid>
+    </Border>
+</Page>

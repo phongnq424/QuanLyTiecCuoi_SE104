@@ -12,9 +12,9 @@ using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.Data.Models;
-using QuanLyTiecCuoi.Data.Services;
-using QuanLyTiecCuoi.MVVM.View.Login;
 using QuanLyTiecCuoi.Services;
+using QuanLyTiecCuoi.MVVM.View.Login;
+using QuanLyTiecCuoi.MVVM.View.BaoCao;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
@@ -63,7 +63,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         {
             _DangNhapService = dangNhapService;
 
-            FirstLoadCM = new RelayCommand<Window>((p) => { return true; },async (p) =>
+            FirstLoadCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
                 DanhSachChucNang = new ObservableCollection<CHUCNANG>(await _DangNhapService.LayChucNangNguoiDung(NguoiDungHienTai));
             });
@@ -94,6 +94,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         public object LoadViewByName(string viewName)
         {
+            // fallback cho các view không cần DI
             string fullTypeName = $"QuanLyTiecCuoi.MVVM.View.{viewName}";
             var assembly = typeof(App).Assembly;
             var type = assembly.GetType(fullTypeName);
