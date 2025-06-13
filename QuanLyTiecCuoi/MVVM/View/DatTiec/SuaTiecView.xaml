@@ -37,19 +37,22 @@
                         Style="{StaticResource ButtonStyle}"/>
 
                         <TextBlock 
-                        Text="Serenité Wedding" 
-                        FontSize="60" 
-                        FontFamily="Cambria"
-                        FontWeight="SemiBold" 
-                        VerticalAlignment="Center"
-                        Margin="20 0"
-                        Grid.Column="1"/>
+                           Text="Serenité Wedding"
+                           FontWeight="Bold"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="4"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           Margin="10,15,10,0"
+                           Style="{StaticResource Header1Style}" />
 
                         <Button 
                         Command="{Binding UpdateCommand}"
                         Click="LuuTiec"
                         Content="Cập nhật" 
                         FontSize="24"
+                        FontFamily="Cambria"
                         Padding="20 5"
                         Margin="0 0 40 0"
                         HorizontalAlignment="Right"
@@ -69,7 +72,7 @@
                             <!-- Title -->
                             <TextBlock 
                             Text="Chỉnh Sửa Tiệc Cưới" 
-                            FontSize="36" 
+                            FontSize="40" 
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontFamily="Cambria"
@@ -87,7 +90,7 @@
                                 <!-- Left Form -->
                                 <StackPanel Grid.Column="0" Margin="10">
                                     <StackPanel.Resources>
-                                        <Style TargetType="TextBox"  BasedOn="{StaticResource TextBoxStyle1}" />
+                                        <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle1}"  />
                                         <Style TargetType="TextBlock">
                                             <Setter Property="FontSize" Value="32"/>
                                             <Setter Property="Margin" Value="0 5"/>
