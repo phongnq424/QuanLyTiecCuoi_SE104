@@ -9,7 +9,7 @@
       d:DesignHeight="1000" d:DesignWidth="1600"
       Title="Danh Sách Sảnh Tiệc">
 
-    <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
+    <Border BorderBrush="#673500" BorderThickness="2" CornerRadius="40" Background="#ffffee">
         <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -19,43 +19,43 @@
             </Grid.RowDefinitions>
             
             <!-- Tiêu đề -->
-            <TextBlock Text="Danh Sách Sảnh" FontSize="40" FontFamily="Cambria" FontWeight="Bold" Margin="10" Grid.Row="0" />
+            <TextBlock Text="Danh Sách Sảnh" FontSize="35" FontFamily="Cambria" FontWeight="Bold" Margin="10" Grid.Row="0" />
 
             <!-- Bộ lọc loại sảnh -->
             <Grid Margin="10,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <!-- Cột cho "Giới thiệu" -->
-                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="30"/>
                     <!-- Cột cho "Tên Sảnh" -->
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
                     <!-- Cột cho "Loại Sảnh" -->
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.5*"/>
                     <!-- Cột cho "Số Lượng Bàn Tối Đa" -->
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.8*"/>
                     <!-- Cột cho "Đơn Giá Bàn Tối Thiểu" -->
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Tìm kiếm theo: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria" Grid.Column="0" FontStyle="Italic"/>
+                <TextBlock Text="🔎" Margin="0,0,5,0" HorizontalAlignment="Right" FontSize="20" FontFamily="Cambria" Grid.Column="0"/>
 
                 <!-- Tên Sảnh -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="1" >
                     <TextBlock Text="Tên Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                    <TextBox Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
+                    <TextBox Width="180" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
                  Text="{Binding FilterTenSanh, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
                 <!-- Loại Sảnh -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="2" >
                     <TextBlock Text="Loại Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                    <TextBox Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
+                    <TextBox Width="100" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
                              Text="{Binding FilterLoaiSanh, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
                 <!-- Số Lượng Bàn Tối Đa -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="3" >
                     <TextBlock Text="Số lượng bàn: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                    <TextBox Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
+                    <TextBox Width="100" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
                              Text="{Binding FilterSoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
@@ -115,19 +115,19 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Nút Quay Lại -->
-                <Button Grid.Column="0" Content="Quay lại" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Left"
+                <Button Grid.Column="0" Content="Quay lại" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Left"
                     Click="btnQuayLai_Click" Style="{StaticResource ButtonStyle}" Margin="10,0,0,0" />
 
                 <!-- Nút Thêm Sảnh -->
-                <Button Grid.Column="1" Content="Thêm Sảnh" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                <Button Grid.Column="1" Content="Thêm Sảnh" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
                     Command="{Binding AddSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
 
                 <!-- Nút Sửa Sảnh -->
-                <Button Grid.Column="2" Content="Sửa Sảnh" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                <Button Grid.Column="2" Content="Sửa Sảnh" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
                     Command="{Binding EditSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
 
                 <!-- Nút Xóa Sảnh -->
-                <Button Grid.Column="3" Content="Xóa Sảnh" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                <Button Grid.Column="3" Content="Xóa Sảnh" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
                     Command="{Binding DeleteSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
             </Grid>
         </Grid>

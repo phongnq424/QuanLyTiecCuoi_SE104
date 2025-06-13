@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View"
       xmlns:vm="clr-namespace:QuanLyTiecCuoi.MVVM.ViewModel"
       mc:Ignorable="d" 
-      d:DesignHeight="1000" d:DesignWidth="1600"
+      d:DesignHeight="796" d:DesignWidth="1600"
       Title="DSLoaiSanhView">
 
-    <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
+    <Border BorderBrush="#673500" BorderThickness="2" CornerRadius="40" Background="#ffffee">
         <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -19,20 +19,20 @@
             </Grid.RowDefinitions>
             
             <!-- Tiêu đề -->
-            <TextBlock Text="Danh Sách Loại Sảnh" FontSize="40" FontFamily="Cambria" FontWeight="Bold" Margin="10" Grid.Row="0" />
+            <TextBlock Text="Danh Sách Loại Sảnh" FontSize="35" FontFamily="Cambria" FontWeight="Bold" Margin="10" Grid.Row="0" />
 
             <!-- Bộ lọc loại sảnh -->
             <Grid Margin="10,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <!-- Cột cho "Giới thiệu" -->
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="30"/>
                     <!-- Cột cho "Tên Loại Sảnh" -->
                     <ColumnDefinition Width="*"/>
                     <!-- Cột cho "Đơn Giá Bán Tối Thiểu" -->
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Tìm kiếm theo: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria" Grid.Column="0" FontStyle="Italic"/>
+                <TextBlock Text="🔎" Margin="0,0,5,0" FontSize="20" FontFamily="Cambria" Grid.Column="0"/>
 
                 <!-- Tên Loại Sảnh -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="1" >
@@ -78,26 +78,26 @@
 
             <Grid Margin="10" VerticalAlignment="Bottom" Grid.Row="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Nút Quay Lại -->
-                <Button Grid.Column="0" Content="Quay lại" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Left"
+                <Button Grid.Column="0" Content="Quay lại" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Left"
                     Click="btnQuayLai_Click" Style="{StaticResource ButtonStyle}" Margin="10,0,0,0" />
 
                 <!-- Nút Thêm Loại Sảnh -->
-                <Button Grid.Column="1" Content="Thêm Loại Sảnh" Height="40" Width="220" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                <Button Grid.Column="1" Content="Thêm Loại Sảnh" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
                     Command="{Binding AddLoaiSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
 
                 <!-- Nút Sửa Loại Sảnh -->
-                <Button Grid.Column="2" Content="Sửa Loại Sảnh" Height="40" Width="220" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                <Button Grid.Column="2" Content="Sửa Loại Sảnh" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
                     Command="{Binding EditLoaiSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
 
                 <!-- Nút Xóa Loại Sảnh -->
-                <Button Grid.Column="3" Content="Xóa Loại Sảnh" Height="40" Width="220" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                <Button Grid.Column="3" Content="Xóa Loại Sảnh" Height="40" Width="200" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
                     Command="{Binding DeleteLoaiSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
             </Grid>
         </Grid>

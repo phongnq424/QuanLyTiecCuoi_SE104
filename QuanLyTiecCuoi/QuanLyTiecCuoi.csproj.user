@@ -7,19 +7,25 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="MVVM\View\AddOrEditLoaiSanhWindow.xaml.cs">
+    <Compile Update="MVVM\View\LoaiSanh\AddOrEditLoaiSanhWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MVVM\View\AddOrEditSanhWindow.xaml.cs">
+    <Compile Update="MVVM\View\Sanh\AddOrEditSanhWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MVVM\View\DSLoaiSanhView.xaml.cs">
+    <Compile Update="MVVM\View\LoaiSanh\DSLoaiSanhView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MVVM\View\DSSanhView.xaml.cs">
+    <Compile Update="MVVM\View\Sanh\DSSanhView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MVVM\View\SanhView.xaml.cs">
+    <Compile Update="MVVM\View\Sanh\SanhView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\TuyChinh\AddOrEditCaWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\TuyChinh\CaPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MVVM\View\TuyChinh\NhanVienPage.xaml.cs">
@@ -30,19 +36,25 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MVVM\View\AddOrEditLoaiSanhWindow.xaml">
+    <Page Update="MVVM\View\LoaiSanh\AddOrEditLoaiSanhWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MVVM\View\AddOrEditSanhWindow.xaml">
+    <Page Update="MVVM\View\Sanh\AddOrEditSanhWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MVVM\View\DSLoaiSanhView.xaml">
+    <Page Update="MVVM\View\LoaiSanh\DSLoaiSanhView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MVVM\View\DSSanhView.xaml">
+    <Page Update="MVVM\View\Sanh\DSSanhView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MVVM\View\SanhView.xaml">
+    <Page Update="MVVM\View\Sanh\SanhView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\TuyChinh\AddOrEditCaWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\TuyChinh\CaPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Theme\Styles\ButtonStyle.xaml">
