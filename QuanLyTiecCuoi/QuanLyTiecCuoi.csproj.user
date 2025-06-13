@@ -22,6 +22,12 @@
     <Compile Update="MVVM\View\Sanh\SanhView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MVVM\View\TuyChinh\AddOrEditCaWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\TuyChinh\CaPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MVVM\View\TuyChinh\NhanVienPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -43,6 +49,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\Sanh\SanhView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\TuyChinh\AddOrEditCaWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\TuyChinh\CaPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Theme\Styles\ButtonStyle.xaml">
