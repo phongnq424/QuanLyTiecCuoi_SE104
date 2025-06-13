@@ -35,7 +35,7 @@
                         Margin="0 0 20 0"
                         Grid.Column="0"
                         Style="{StaticResource ButtonStyle}"/>
-                        
+
                         <TextBlock 
                            Text="Serenité Wedding"
                            FontWeight="Bold"
@@ -46,8 +46,7 @@
                            VerticalAlignment="Bottom"
                            Margin="10,15,10,0"
                            Style="{StaticResource Header1Style}" />
-
-
+                        
                         <Button 
                         Command="{Binding LuuCommand}"
                         Click="LuuTiec"
@@ -65,6 +64,11 @@
                     <!-- Content -->
                     <Border Grid.Row="1" BorderBrush="#673500" Background="White" BorderThickness="3" CornerRadius="40" Margin="0">
                         <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="350*"/>
+                                <ColumnDefinition Width="19*"/>
+                                <ColumnDefinition Width="1139*"/>
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
@@ -74,14 +78,14 @@
                             <TextBlock 
                             Text="Biểu mẫu 2. Đặt Tiệc Cưới" 
                             FontSize="40" 
-                            HorizontalAlignment="Center"
+                            HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontFamily="Cambria"
                             FontWeight="SemiBold"
-                            Margin="0 10"/>
+                            Margin="148,0,0,0" Grid.Column="2"/>
 
                             <!-- Main Form -->
-                            <Grid Grid.Row="1" Margin="0 10">
+                            <Grid Grid.Row="1" Margin="0,10,0,10" Grid.ColumnSpan="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="0.5*"/>
@@ -158,7 +162,7 @@
                                         <Popup x:Name="ShiftPopup" PlacementTarget="{Binding ElementName=ShiftButton}" Placement="Bottom" StaysOpen="False">
                                             <Border BorderBrush="Gray" BorderThickness="1" Background="White">
                                                 <ComboBox Name="ShiftComboBox" Width="260" Height="40" FontSize="20" SelectionChanged="ShiftComboBox_SelectionChanged"/>
-                                               
+
                                             </Border>
                                         </Popup>
                                     </StackPanel>
