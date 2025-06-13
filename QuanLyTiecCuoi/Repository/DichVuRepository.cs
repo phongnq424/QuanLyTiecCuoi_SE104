@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 using QuanLyTiecCuoi.Data;
 
-namespace QuanLyTiecCuoi.Repositories
+namespace QuanLyTiecCuoi.Repository
 {
     public class DichVuRepository
     {

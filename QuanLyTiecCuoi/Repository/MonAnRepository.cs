@@ -6,7 +6,7 @@ using System;
 using QuanLyTiecCuoi.Data;
 using System.Windows;
 
-namespace QuanLyTiecCuoi.Repositories
+namespace QuanLyTiecCuoi.Repository
 {
     public class MonAnRepository
     {

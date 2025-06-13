@@ -1,5 +1,5 @@
 ﻿using QuanLyTiecCuoi.Data.Models;
-using QuanLyTiecCuoi.Repositories;
+using QuanLyTiecCuoi.Repository;
 using System.Collections.Generic;
 
 namespace QuanLyTiecCuoi.Services

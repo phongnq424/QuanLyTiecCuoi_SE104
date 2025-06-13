@@ -3,7 +3,7 @@ using QuanLyTiecCuoi.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace QuanLyTiecCuoi.Repositories
+namespace QuanLyTiecCuoi.Repository
 {
     public class ChiTietDichVuRepository
     {
