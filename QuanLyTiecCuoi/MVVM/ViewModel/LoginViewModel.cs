@@ -40,6 +40,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         private string _Password;
         public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
+
+        private bool _dangDangNhap = false;
         #region Command
         public ICommand FirstLoadCommand { get; set; }
         public ICommand LoginButtonCommand { get; set; }
@@ -82,21 +84,31 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         private async void Login(Window p)
         {
-            var nguoidung = await _DangNhapService.Login(UserName, Password);
-            if (nguoidung != null)
+            if (_dangDangNhap) return;
+            _dangDangNhap = true;
+
+            try
             {
-                MainWindowViewModel.NguoiDungHienTai = nguoidung;
-                var wd = App.AppHost?.Services.GetRequiredService<MainWindow>();
-                if (wd != null)
+                var nguoidung = await _DangNhapService.Login(UserName, Password);
+                if (nguoidung != null)
                 {
-                    Application.Current.MainWindow = wd;
-                    wd.Show();
-                    p?.Close();
+                    MainWindowViewModel.NguoiDungHienTai = nguoidung;
+                    var wd = App.AppHost?.Services.GetRequiredService<MainWindow>();
+                    if (wd != null)
+                    {
+                        Application.Current.MainWindow = wd;
+                        wd.Show();
+                        p?.Close();
+                    }
+                }
+                else
+                {
+                    ErrorMessVisability = Visibility.Visible;
                 }
             }
-            else
+            finally
             {
-                ErrorMessVisability = Visibility.Visible;
+                _dangDangNhap = false;
             }
         }
 

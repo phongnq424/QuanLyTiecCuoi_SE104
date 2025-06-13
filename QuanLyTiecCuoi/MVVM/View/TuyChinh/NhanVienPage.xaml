@@ -203,7 +203,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Width="300" Header="Chức năng"
+                                <GridViewColumn Width="280" Header="Chức năng"
                                                 HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
