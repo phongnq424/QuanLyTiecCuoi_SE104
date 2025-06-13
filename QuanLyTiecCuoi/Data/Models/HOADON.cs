@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace QuanLyTiecCuoi.Data.Models
 {
-        public class HOADON
-        {
-                [Key]
-                public int MaHoaDon { get; set; }
-                public DateTime? NgayThanhToan { get; set; }
+    public class HOADON
+    {
+        [Key]
+        public int MaHoaDon { get; set; }
+        public DateTime? NgayThanhToan { get; set; }
 
-                //Ngay thanh toan co the null
-                //bỏ đơn giá bàn??
-                public decimal DonGiaBan { get; set; }
-                public decimal TongTienBan { get; set; }
-                public int MaDatTiec { get; set; }
-                public decimal TongTienDV { get; set; }
-                public decimal TongTienHD { get; set; }
-                public decimal TienPhaiThanhToan { get; set; }
+        //Ngay thanh toan co the null
+        //bỏ đơn giá bàn??
+        public decimal DonGiaBan { get; set; }
+        public decimal TongTienBan { get; set; }
+        public int MaDatTiec { get; set; }
+        public decimal TongTienDV { get; set; }
+        public decimal TongTienHD { get; set; }
+        public decimal TienPhaiThanhToan { get; set; }
 
-                [ForeignKey("MaDatTiec")]
-                public DATTIEC DATTIEC { get; set; }
-        }
+        [ForeignKey("MaDatTiec")]
+        public DATTIEC DATTIEC { get; set; }
+    }
 }

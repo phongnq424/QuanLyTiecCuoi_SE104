@@ -1,3 +1,17 @@
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+bin/
+obj/
+
+# Cache files
+*.cache
 # User-specific files
 .vs/
 .vscode/

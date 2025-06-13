@@ -26,6 +26,7 @@ namespace QuanLyTiecCuoi.Core
             OnPropertyChanged(propertyName);
             return true;
         }
+
     }
     public class RelayCommand<T> : ICommand
     {

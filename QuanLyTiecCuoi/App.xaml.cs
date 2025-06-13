@@ -46,6 +46,10 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<HoaDonRepository>();
                     services.AddTransient<NhanVienRepository>();
                     services.AddTransient<DatTiecRepository>();
+                    services.AddTransient<MonAnRepository>();
+                    services.AddTransient<DichVuRepository>();
+                    services.AddScoped<ChiTietMenuRepository>();
+                    services.AddScoped<ChiTietDichVuRepository>();
 
                     // Dùng BaoCaoService lấy dữ liệu từ AppDataRepository
                     services.AddTransient<BaoCaoService>();
@@ -54,6 +58,11 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<DangNhapService>();
                     services.AddTransient<NhanVienService>();
                     services.AddTransient<DatTiecService>();
+                    services.AddTransient<DichVuService>();
+                    services.AddTransient<MonAnService>();
+                    services.AddScoped<ChiTietDichVuService>();
+                    services.AddScoped<ChiTietMenuService>();
+
 
                     // Các ViewModel
                     services.AddTransient<MainWindowViewModel>();
@@ -66,6 +75,10 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<DatTiecViewModel>();
                     services.AddTransient<SuaTiecViewModel>();
                     services.AddTransient<ThemTiecViewModel>();
+                    services.AddTransient<ChonMonAnViewModel>();
+                    services.AddTransient<ChonDichVuViewModel>();
+                    services.AddTransient<TuyChinhMonAnViewModel>();
+                    services.AddTransient<TuyChinhDichVuViewModel>();
 
 
                     // Các View
@@ -79,6 +92,10 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<DatTiecView>();
                     services.AddTransient<SuaTiecView>();
                     services.AddTransient<ThemTiecView>();
+                    services.AddTransient<ChonMonAn>();
+                    services.AddTransient<ChonDichVu>();
+                    services.AddTransient<TuyChinhMonAn>();
+                    services.AddTransient<TuyChinhDichVu>();
 
 
                     services.AddTransient<LoaiSanhRepository>();

@@ -1,0 +1,72 @@
+﻿<Window x:Class="QuanLyTiecCuoi.MVVM.View.DichVu.SuaDichVu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.DichVu"
+        mc:Ignorable="d"
+        Title="Chỉnh sửa dịch vụ" Height="350" Width="250"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Grid>
+        <Border CornerRadius="20" BorderBrush="#111" BorderThickness="2"  Background="#FFF">
+
+            <StackPanel>
+                <StackPanel DockPanel.Dock ="Right" Orientation="Horizontal">
+                    <TextBlock Text="Chỉnh sửa dịch vụ" 
+                               TextAlignment="Center" Width="201" Height="14" FontWeight="Bold" Margin="15,0,0,0"/>
+                    <Button x:Name="btnClose"
+                            Content="✕" 
+                            Width="20" 
+                            Height="20" 
+                            Margin="0,10,0,0"
+                            Click="BtnClose_Click"/>
+                </StackPanel>
+                <Image 
+                    x:Name="imgDichVu"
+                    Source="{Binding ImagePath}" 
+                    Width="200" Height="170" 
+                    Stretch="UniformToFill" 
+                    Margin="5"
+                    MouseLeftButtonDown="ImgDichVu_MouseLeftButtonDown"/>
+                <TextBox 
+                            Text="{Binding TenDichVu}"
+                            x:Name="txtTenDichVu"
+                            FontWeight="Bold" 
+                            FontSize="15" 
+                            TextAlignment="Center" 
+                            Margin="5,5,5,0"
+                            IsReadOnly="True"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            MouseDoubleClick="TxtTenDichVu_MouseDoubleClick"
+                            LostFocus="TxtTenDichVu_LostFocus"/>
+                <TextBox 
+                     x:Name="txtDonGia"
+                     Text="{Binding DonGia}" 
+                     FontSize="15" 
+                     TextAlignment="Center" 
+                     Margin="5,5,5,0"
+                     IsReadOnly="True"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     MouseDoubleClick="TxtDonGia_MouseDoubleClick"
+                     LostFocus="TxtDonGia_LostFocus"/>
+                <TextBox 
+                     x:Name="txtMoTa"
+                     Text="{Binding MoTa}" 
+                     FontSize="15" 
+                     TextAlignment="Center" 
+                     Margin="5,5,5,0"
+                     IsReadOnly="True"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     MouseDoubleClick="TxtMoTa_MouseDoubleClick"
+                     LostFocus="TxtMoTa_LostFocus"/>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>

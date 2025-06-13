@@ -20,31 +20,31 @@
     <Style x:Key="ButtonMinimizeStyle"
            TargetType="Button">
         <Setter Property="Height"
-                Value="30" />
+                Value="30"/>
         <Setter Property="Width"
-                Value="30" />
+                Value="30"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
                     <Border x:Name="BorderImg"
                             Background="{StaticResource MinusIconSource}"
                             Height="{TemplateBinding Height}"
-                            Width="{TemplateBinding Width}" />
+                            Width="{TemplateBinding Width}"/>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="BorderImg"
                                     Property="Background"
-                                    Value="{StaticResource MinusIconMouseOverSource}" />
+                                    Value="{StaticResource MinusIconMouseOverSource}"/>
                         </Trigger>
                         <Trigger Property="IsMouseCaptured"
                                  Value="True">
                             <Setter TargetName="BorderImg"
                                     Property="Width"
-                                    Value="25" />
+                                    Value="25"/>
                             <Setter TargetName="BorderImg"
                                     Property="Height"
-                                    Value="25" />
+                                    Value="25"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -56,31 +56,31 @@
     <Style x:Key="MyButtonCloseStyle"
            TargetType="Button">
         <Setter Property="Height"
-                Value="30" />
+                Value="30"/>
         <Setter Property="Width"
-                Value="30" />
+                Value="30"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
                     <Border x:Name="BorderImg"
                             Background="{StaticResource CloseIconSource}"
                             Height="{TemplateBinding Height}"
-                            Width="{TemplateBinding Width}" />
+                            Width="{TemplateBinding Width}"/>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="BorderImg"
                                     Property="Background"
-                                    Value="{StaticResource CloseIconMouseOverSource}" />
+                                    Value="{StaticResource CloseIconMouseOverSource}"/>
                         </Trigger>
                         <Trigger Property="IsMouseCaptured"
                                  Value="True">
                             <Setter TargetName="BorderImg"
                                     Property="Width"
-                                    Value="25" />
+                                    Value="25"/>
                             <Setter TargetName="BorderImg"
                                     Property="Height"
-                                    Value="25" />
+                                    Value="25"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -91,31 +91,31 @@
     <Style x:Key="MyButtonMaximineStyle"
            TargetType="Button">
         <Setter Property="Height"
-                Value="27" />
+                Value="27"/>
         <Setter Property="Width"
-                Value="27" />
+                Value="27"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
                     <Border x:Name="BorderImg"
                             Background="{StaticResource MaxiIconSource}"
                             Height="{TemplateBinding Height}"
-                            Width="{TemplateBinding Width}" />
+                            Width="{TemplateBinding Width}"/>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="BorderImg"
                                     Property="Background"
-                                    Value="{StaticResource MaxiIconMouseOverSource}" />
+                                    Value="{StaticResource MaxiIconMouseOverSource}"/>
                         </Trigger>
                         <Trigger Property="IsMouseCaptured"
                                  Value="True">
                             <Setter TargetName="BorderImg"
                                     Property="Width"
-                                    Value="22" />
+                                    Value="22"/>
                             <Setter TargetName="BorderImg"
                                     Property="Height"
-                                    Value="22" />
+                                    Value="22"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -126,11 +126,11 @@
     <Style x:Key="ButtonStyle"
            TargetType="Button">
         <Setter Property="Height"
-                Value="50" />
+                Value="50"/>
         <Setter Property="Width"
-                Value="auto" />
+                Value="auto"/>
         <Setter Property="Margin"
-                Value="10" />
+                Value="10"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -158,7 +158,7 @@
                                  Value="True">
                             <Setter TargetName="ButtonBorder"
                                     Property="BorderThickness"
-                                    Value="2" />
+                                    Value="2"/>
                         </Trigger>
 
                         <EventTrigger RoutedEvent="Button.PreviewMouseDown">
@@ -168,11 +168,11 @@
                                                      Storyboard.TargetProperty="Opacity"
                                                      From="1"
                                                      To="0.5"
-                                                     Duration="0:0:0.1" />
+                                                     Duration="0:0:0.1"/>
                                     <DoubleAnimation Storyboard.TargetName="ButtonBorder"
                                                      Storyboard.TargetProperty="Opacity"
                                                      To="0.5"
-                                                     Duration="0:0:0.1" />
+                                                     Duration="0:0:0.1"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -183,11 +183,11 @@
                                                      Storyboard.TargetProperty="Opacity"
                                                      From="0.5"
                                                      To="1"
-                                                     Duration="0:0:0.1" />
+                                                     Duration="0:0:0.1"/>
                                     <DoubleAnimation Storyboard.TargetName="ButtonBorder"
                                                      Storyboard.TargetProperty="Opacity"
                                                      To="1"
-                                                     Duration="0:0:0.1" />
+                                                     Duration="0:0:0.1"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -200,11 +200,11 @@
     <Style x:Key="ButtonAddServiceStyle"
            TargetType="Button">
         <Setter Property="Height"
-                Value="30" />
+                Value="30"/>
         <Setter Property="Width"
-                Value="auto" />
+                Value="auto"/>
         <Setter Property="Margin"
-                Value="5" />
+                Value="5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -232,7 +232,7 @@
                                  Value="True">
                             <Setter TargetName="ButtonBorder"
                                     Property="BorderThickness"
-                                    Value="2" />
+                                    Value="2"/>
                         </Trigger>
 
                         <EventTrigger RoutedEvent="Button.PreviewMouseDown">
@@ -242,11 +242,11 @@
                                                      Storyboard.TargetProperty="Opacity"
                                                      From="1"
                                                      To="0.5"
-                                                     Duration="0:0:0.1" />
+                                                     Duration="0:0:0.1"/>
                                     <DoubleAnimation Storyboard.TargetName="ButtonBorder"
                                                      Storyboard.TargetProperty="Opacity"
                                                      To="0.5"
-                                                     Duration="0:0:0.1" />
+                                                     Duration="0:0:0.1"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -257,11 +257,11 @@
                                                      Storyboard.TargetProperty="Opacity"
                                                      From="0.5"
                                                      To="1"
-                                                     Duration="0:0:0.1" />
+                                                     Duration="0:0:0.1"/>
                                     <DoubleAnimation Storyboard.TargetName="ButtonBorder"
                                                      Storyboard.TargetProperty="Opacity"
                                                      To="1"
-                                                     Duration="0:0:0.1" />
+                                                     Duration="0:0:0.1"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -274,23 +274,23 @@
     <Style x:Key="RadioButtonStyle"
            TargetType="RadioButton">
         <Setter Property="Background"
-                Value="LightGray" />
+                Value="LightGray"/>
         <Setter Property="Foreground"
-                Value="Black" />
+                Value="Black"/>
         <Setter Property="FontWeight"
-                Value="Normal" />
+                Value="Normal"/>
         <Setter Property="TextBlock.TextDecorations"
-                Value="{x:Null}" />
+                Value="{x:Null}"/>
         <Setter Property="Padding"
-                Value="0,2.5" />
+                Value="0,2.5"/>
         <Setter Property="Cursor"
-                Value="Hand" />
+                Value="Hand"/>
         <Setter Property="FontSize"
-                Value="20" />
+                Value="20"/>
         <Setter Property="Width"
-                Value="250" />
+                Value="250"/>
         <Setter Property="Height"
-                Value="60" />
+                Value="60"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
@@ -299,14 +299,14 @@
                             Padding="{TemplateBinding Padding}">
                         <ContentPresenter x:Name="content"
                                           HorizontalAlignment="Center"
-                                          VerticalAlignment="Center" />
+                                          VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked"
                                  Value="True">
                             <Setter TargetName="content"
                                     Property="TextElement.FontWeight"
-                                    Value="Bold" />
+                                    Value="Bold"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -318,21 +318,21 @@
     <Style x:Key="ToggleButtonPassword"
            TargetType="ToggleButton">
         <Setter Property="Width"
-                Value="18" />
+                Value="18"/>
         <Setter Property="Height"
-                Value="18" />
+                Value="18"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Image x:Name="image"
                            Stretch="Fill"
-                           Source="../../Resources/Images/Login/hideIcon.png" />
+                           Source="../../Resources/Images/Login/hideIcon.png"/>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked"
                                  Value="True">
                             <Setter TargetName="image"
                                     Property="Source"
-                                    Value="../../Resources/Images/Login/showIcon.png" />
+                                    Value="../../Resources/Images/Login/showIcon.png"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -343,11 +343,11 @@
     <Style x:Key="LoginButtonStyle"
            TargetType="Button">
         <Setter Property="Height"
-                Value="48" />
+                Value="48"/>
         <Setter Property="Width"
-                Value="300" />
+                Value="300"/>
         <Setter Property="FontSize"
-                Value="20" />
+                Value="20"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -369,16 +369,16 @@
                                  Value="True">
                             <Setter TargetName="ButtonBorder"
                                     Property="BorderThickness"
-                                    Value="2" />
+                                    Value="2"/>
                         </Trigger>
                         <Trigger Property="IsMouseCaptured"
                                  Value="True">
                             <Setter TargetName="ButtonBorder"
                                     Property="Background"
-                                    Value="#FDE6C2" />
+                                    Value="#FDE6C2"/>
                             <Setter TargetName="ButtonBorder"
                                     Property="BorderThickness"
-                                    Value="2" />
+                                    Value="2"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -389,19 +389,19 @@
     <Style x:Key="ForgotPassWordStyle"
            TargetType="Button">
         <Setter Property="VerticalAlignment"
-                Value="Top" />
+                Value="Top"/>
         <Setter Property="HorizontalAlignment"
-                Value="Right" />
+                Value="Right"/>
         <Setter Property="Margin"
-                Value="0,10,10,0" />
+                Value="0,10,10,0"/>
         <Setter Property="FontStyle"
-                Value="Italic" />
+                Value="Italic"/>
         <Setter Property="FontSize"
-                Value="15" />
+                Value="15"/>
         <Setter Property="FontFamily"
-                Value="Cambria" />
+                Value="Cambria"/>
         <Setter Property="Opacity"
-                Value="0.5" />
+                Value="0.5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -415,13 +415,13 @@
                         <Trigger Property="IsMouseOver"
                                  Value="True">
                             <Setter Property="Opacity"
-                                    Value="1" />
+                                    Value="1"/>
                         </Trigger>
 
                         <Trigger Property="IsMouseOver"
                                  Value="False">
                             <Setter Property="Opacity"
-                                    Value="0.5" />
+                                    Value="0.5"/>
                         </Trigger>
 
 
@@ -430,7 +430,7 @@
                                 <Storyboard>
                                     <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="TextDecorations">
                                         <DiscreteObjectKeyFrame KeyTime="0:0:0"
-                                                                Value="{x:Static TextDecorations.Underline}" />
+                                                                Value="{x:Static TextDecorations.Underline}"/>
                                     </ObjectAnimationUsingKeyFrames>
                                 </Storyboard>
                             </BeginStoryboard>
@@ -445,22 +445,22 @@
     <Style x:Key="ButtonStyleDeleteBillInfor"
            TargetType="Button">
         <Setter Property="Margin"
-                Value="-10,0,0,0" />
+                Value="-10,0,0,0"/>
         <Setter Property="Width"
-                Value="25" />
+                Value="25"/>
         <Setter Property="Height"
-                Value="25" />
+                Value="25"/>
         <Setter Property="VerticalAlignment"
-                Value="Center" />
+                Value="Center"/>
         <Setter Property="HorizontalAlignment"
-                Value="Center" />
+                Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
                     <Border x:Name="BorderImg"
                             Background="{StaticResource CloseIconBillInforSource}"
                             Height="{TemplateBinding Height}"
-                            Width="{TemplateBinding Width}" />
+                            Width="{TemplateBinding Width}"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -469,26 +469,26 @@
     <Style x:Key="LogoutButtonStyle"
            TargetType="Button">
         <Setter Property="VerticalAlignment"
-                Value="Top" />
+                Value="Top"/>
         <Setter Property="HorizontalAlignment"
-                Value="Left" />
+                Value="Left"/>
         <Setter Property="FontSize"
-                Value="30" />
+                Value="30"/>
         <Setter Property="FontWeight"
-                Value="Bold" />
+                Value="Bold"/>
         <Setter Property="FontFamily"
-                Value="Cambria" />
+                Value="Cambria"/>
         <Setter Property="BorderThickness"
-                Value="0" />
+                Value="0"/>
         <Setter Property="Background"
-                Value="Transparent" />
+                Value="Transparent"/>
         <Style.Triggers>
             <EventTrigger RoutedEvent="MouseLeftButtonDown">
                 <BeginStoryboard>
                     <Storyboard>
                         <DoubleAnimation Storyboard.TargetProperty="Opacity"
                                          To="0.5"
-                                         Duration="0:0:0.2" />
+                                         Duration="0:0:0.2"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
