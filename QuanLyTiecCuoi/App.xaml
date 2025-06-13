@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="/Theme/Styles/TextBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Theme/Styles/PasswordBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Theme/Styles/DatePickerStyle.xaml"/>
+                <ResourceDictionary Source="/Theme/Styles/TabItemStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <ImageSource x:Key="MaximizeMouseOverImg">pack://application:,,,/resources/images/controlbarimg/maximouseover.png</ImageSource>
             <ImageSource x:Key="MinimizeMouseOverImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/minimize_mouseover.png</ImageSource>

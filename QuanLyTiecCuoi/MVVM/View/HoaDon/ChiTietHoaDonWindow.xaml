@@ -328,7 +328,7 @@
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <xctk:IntegerUpDown
-                                                        IsEnabled="{Binding CoTheThayDoiSL}"
+                                                        IsEnabled="{Binding DataContext.CoTheThayDoiSL, RelativeSource={RelativeSource AncestorType=Window}}"
                                                         Value="{Binding SoLuong}"
                                                         Name="myUpDownControl">
                                                         <i:Interaction.Triggers>

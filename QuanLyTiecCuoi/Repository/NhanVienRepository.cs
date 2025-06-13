@@ -40,7 +40,7 @@ namespace QuanLyTiecCuoi.Repository
         /// <summary>
         /// Lấy toàn bộ người dùng và nhóm quyền
         /// </summary>
-        public async Task<List<NGUOIDUNG>> GetAllAsync()
+        public async Task<List<NGUOIDUNG>> GetAllNguoiDungAsync()
         {
             return await _context.NguoiDungs
                 .Include(nd => nd.NHOMNGUOIDUNG)
@@ -61,7 +61,7 @@ namespace QuanLyTiecCuoi.Repository
         /// </summary>
         /// <param name="NGUOIDUNG"></param>
         /// <returns></returns>
-        public async Task<NGUOIDUNG> AddAsync(NGUOIDUNG nguoidung)
+        public async Task<NGUOIDUNG> AddUserAsync(NGUOIDUNG nguoidung)
         {
             nguoidung.MatKhau = HashPassword(nguoidung.MatKhau);
             _context.NguoiDungs.Add(nguoidung);
@@ -72,27 +72,26 @@ namespace QuanLyTiecCuoi.Repository
         /// <summary>
         /// Cập nhật người dùng
         /// </summary>
-        /// <param name="NGUOIDUNG"></param>
-        public async Task<bool> UpdateAsync(NGUOIDUNG NGUOIDUNG)
+        /// <param name="nguoiDung"></param>
+        public async Task<NGUOIDUNG?> UpdateUserAsync(NGUOIDUNG nguoiDung)
         {
-            var existing = await _context.NguoiDungs.FindAsync(NGUOIDUNG.TenDangNhap);
-            if (existing == null) return false;
+            var existing = await _context.NguoiDungs.FindAsync(nguoiDung.TenDangNhap);
+            if (existing == null) return null;
 
-            existing.MatKhau = NGUOIDUNG.MatKhau;
-            existing.MaNhom = NGUOIDUNG.MaNhom;
+            existing.MaNhom = nguoiDung.MaNhom;
 
             await _context.SaveChangesAsync();
-            return true;
+            return existing;
         }
 
         /// <summary>
         /// Xóa người dùng
         /// </summary>
-        /// <param name="tenDangNhap"></param>
+        /// <param></param>
         /// <returns></returns>
-        public async Task<bool> DeleteAsync(string tenDangNhap)
+        public async Task<bool> DeleteAsync(NGUOIDUNG nguoiDung)
         {
-            var existing = await _context.NguoiDungs.FindAsync(tenDangNhap);
+            var existing = await _context.NguoiDungs.FindAsync(nguoiDung.TenDangNhap);
             if (existing == null) return false;
 
             _context.NguoiDungs.Remove(existing);
@@ -119,6 +118,16 @@ namespace QuanLyTiecCuoi.Repository
         public async Task<List<NHOMNGUOIDUNG>> GetNhomNguoiDung()
         {
             return await _context.NhomNguoiDungs.ToListAsync();
+        }
+        /// <summary>
+        /// Lấy nhóm theo tên nhóm
+        /// </summary>
+        /// <param name="tennhom"></param>
+        /// <returns></returns>
+        public async Task<NHOMNGUOIDUNG?> LayNhomTheoTenNhom(String tennhom)
+        {
+            return await _context.NhomNguoiDungs
+                                 .FirstOrDefaultAsync(n => n.TenNhom == tennhom);
         }
 
         /// <summary>
@@ -159,24 +168,19 @@ namespace QuanLyTiecCuoi.Repository
             await _context.SaveChangesAsync();
             return true;
         }
-
         /// <summary>
-        /// Xoa chức năng ra khỏi nhóm
+        /// Xóa phân quyền cho 1 nhóm
         /// </summary>
-        /// <param name="maNhom"></param>
-        /// <param name="maChucNang"></param>
+        /// <param name="pq"></param>
         /// <returns></returns>
-        public async Task<bool> XoaChucNangKhoiNhomAsync(int maNhom, int maChucNang)
+        public async Task<PHANQUYEN?> XoaChucNangKhoiNhomAsync(PHANQUYEN pq)
         {
-            var pq = await _context.PhanQuyens
-                .FirstOrDefaultAsync(p => p.MaNhom == maNhom && p.MaChucNang == maChucNang);
-
             if (pq == null)
-                return false;
+                return null;
 
             _context.PhanQuyens.Remove(pq);
             await _context.SaveChangesAsync();
-            return true;
+            return pq;
         }
 
         /// <summary>
@@ -203,8 +207,76 @@ namespace QuanLyTiecCuoi.Repository
         {
             return await _context.ChucNangs.ToListAsync();
         }
+        /// <summary>
+        /// Lấy danh sách phân quyền của nhóm
+        /// </summary>
+        /// <param name="nhom"></param>
+        /// <returns></returns>
+        public async Task<List<PHANQUYEN>> LayPhanQuyenTheoNhomNguoiDung(NHOMNGUOIDUNG nhom)
+        {
+            return await _context.PhanQuyens.Include(cn => cn.CHUCNANG).Where(pq => pq.MaNhom == nhom.MaNhom).ToListAsync();
+        }
 
+        /// <summary>
+        /// Lấy phân quyền theo tên chức năng + nhóm
+        /// </summary>
+        /// <param name="tencn"></param>
+        /// <param name="nhom"></param>
+        /// <returns></returns>
+        public async Task<PHANQUYEN?> LayPhanQuyenTenCNNhom(string tencn, NHOMNGUOIDUNG nhom)
+        {
+            return await _context.PhanQuyens
+                .FirstOrDefaultAsync(pq => pq.CHUCNANG.TenChucNang == tencn && pq.MaNhom == nhom.MaNhom);
+        }
+        /// <summary>
+        /// tao phan quyen
+        /// </summary>
+        /// <param name="pq"></param>
+        /// <returns></returns>
+        public async Task<PHANQUYEN> TaoPhanQuyen(PHANQUYEN pq)
+        {
+            _context.PhanQuyens.Add(pq);
+            await _context.SaveChangesAsync();
+            return pq;
+        }
 
+        /// <summary>
+        /// chinh sua ten nhom
+        /// </summary>
+        /// <param name="nhom"></param>
+        /// <returns></returns>
+        public async Task<NHOMNGUOIDUNG> ChinhSuaNhom(NHOMNGUOIDUNG nhom)
+        {
+            var existing = await _context.NhomNguoiDungs.FindAsync(nhom.MaNhom);
+            if (existing == null) return null;
+            existing.TenNhom = nhom.TenNhom;
+
+            await _context.SaveChangesAsync();
+            return existing;
+        }
+        /// <summary>
+        /// kiem tra truoc khi xoa nhom
+        /// </summary>
+        /// <param name="nhom"></param>
+        /// <returns></returns>
+        public async Task<NGUOIDUNG?> CoTonTaiNguoiDungThuocNhom(NHOMNGUOIDUNG nhom)
+        {
+            return await _context.NguoiDungs.FirstOrDefaultAsync(nd => nd.MaNhom == nhom.MaNhom);
+        }
+        /// <summary>
+        /// Xoa nhom
+        /// </summary>
+        /// <param name="nhom"></param>
+        /// <returns></returns>
+        public async Task<bool> XoaNhom(NHOMNGUOIDUNG nhom)
+        {
+            var existing = await _context.NhomNguoiDungs.FindAsync(nhom.MaNhom);
+            if (existing == null) return false;
+
+            _context.NhomNguoiDungs.Remove(existing);
+            await _context.SaveChangesAsync();
+            return true;
+        }
 
         private string HashPassword(string password)
         {
