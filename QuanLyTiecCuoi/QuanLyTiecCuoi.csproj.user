@@ -8,6 +8,38 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Update="MVVM\View\AddOrEditLoaiSanhWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\AddOrEditSanhWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\DSLoaiSanhView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\DSSanhView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\SanhView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MVVM\View\AddOrEditLoaiSanhWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\AddOrEditSanhWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\DSLoaiSanhView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\DSSanhView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\SanhView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Theme\Styles\ButtonStyle.xaml">
       <SubType>Designer</SubType>
     </Page>

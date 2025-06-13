@@ -4,11 +4,4 @@
                     xmlns:Login="clr-namespace:QuanLyTiecCuoi.MVVM.View.Login"
                     xmlns:ControlBarView="clr-namespace:QuanLyTiecCuoi.MVVM.View.ControlBar">
 
-    <ViewModel:ControlBarViewModel x:Key="ControlBarViewModel"/>
-    <ViewModel:MainWindowViewModel x:Key="mainWindowViewModel"/>
-    <ViewModel:LoginViewModel x:Key="LoginViewModel"/>
-    <ViewModel:HoaDonViewModel x:Key="HoaDonViewModel"/>
-
-
-
 </ResourceDictionary>

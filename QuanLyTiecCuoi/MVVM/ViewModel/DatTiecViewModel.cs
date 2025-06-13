@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿using QuanLyTiecCuoi.Data.Models;
+=======
+using QuanLyTiecCuoi.Data.Models;
+>>>>>>> main
 using QuanLyTiecCuoi.MVVM.View.DatTiec;
 using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi;

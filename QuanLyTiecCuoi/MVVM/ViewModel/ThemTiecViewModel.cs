@@ -1,4 +1,4 @@
-﻿using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.Services;
 using System;
 using System.Collections.ObjectModel;

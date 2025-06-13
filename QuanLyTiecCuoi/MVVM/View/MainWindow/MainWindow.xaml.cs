@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,28 +12,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyTiecCuoi.MVVM.View.ControlBar
+namespace QuanLyTiecCuoi.MVVM.View.MainVindow
 {
     /// <summary>
-    /// Interaction logic for ControlBarUserControl.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class ControlBarUserControl : UserControl
+    public partial class MainWindow : Window
     {
-        public ControlBarUserControl()
+        public MainWindow(MainWindowViewModel vm)
         {
             InitializeComponent();
-            if (App.AppHost?.Services != null)
+            DataContext = vm;
+        }
+        private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
-                var vm = App.AppHost.Services.GetRequiredService<ControlBarViewModel>();
-                DataContext = vm;
+                this.DragMove();
             }
-            else
-            {
 
-            }
         }
     }
 }

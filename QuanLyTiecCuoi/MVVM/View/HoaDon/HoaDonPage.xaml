@@ -1,0 +1,203 @@
+﻿<Page x:Class="QuanLyTiecCuoi.MVVM.View.HoaDon.HoaDonPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.HoaDon"
+             xmlns:controlBar="clr-namespace:QuanLyTiecCuoi.MVVM.View.ControlBar"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             x:Name="TraCuuHoaDon"
+             Background="Transparent"
+             d:DesignHeight="1000" d:DesignWidth="1600">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding FirstLoadCommand}" 
+                                   CommandParameter="{Binding ElementName=DangNhapWindow}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border
+        BorderBrush="#673500"
+        BorderThickness="2"
+        CornerRadius="40"
+        Background="#ffffee">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+
+            <TextBlock 
+                Text="Serenité Wedding"
+                Style="{StaticResource Header1Style}"/>
+            </Grid>
+            <StackPanel
+                Grid.Row="1"
+                Orientation="Horizontal">
+                <StackPanel
+                    Margin="50,10,0,0"
+                    Orientation="Vertical">
+                    <TextBlock 
+                        Style="{StaticResource Header5Style}"
+                        Text="Mã đặt tiệc"></TextBlock>
+                    <TextBox
+                        Width="200"
+                        Text="{Binding LocMaDatTiec,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource TextBoxStyle1}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction 
+                                    Command="{Binding LocHoaDonCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel 
+                    Margin="20,10"
+                    HorizontalAlignment="Left"
+                    Orientation="Vertical">
+                    <CheckBox
+                        Content="Lọc theo ngày thanh toán "
+                        FontSize="20"
+                        FontFamily="Cambria"
+                        Margin="5"
+                        IsChecked="{Binding UseDateFilter}"
+                        Foreground="black"
+                        Background="#FDE6C2">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SetDateFilterCommand}"
+                                                                           CommandParameter="{Binding ElementName=DateFilter}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="Unchecked">
+                                <i:InvokeCommandAction Command="{Binding SetDateFilterCommand}"
+                                                                           CommandParameter="{Binding ElementName=DateFilter}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <DatePicker
+                        x:Name="DateFilter"
+                        Visibility="Hidden"
+                        Style="{StaticResource CustomDatePickerStyle}"
+                        Margin="10" 
+                        SelectedDate="{Binding LocNgayThanhToan}"
+                        HorizontalAlignment="Right"
+                        FontSize="20" 
+                        Width="auto">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedDateChanged">
+                                <i:InvokeCommandAction Command="{Binding LocHoaDonCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </DatePicker>
+                </StackPanel>
+            </StackPanel>
+            
+
+            <Grid Grid.Row="2">
+                <ListView 
+                    x:Name="HoaDonList" 
+                    Background="White"
+                    Margin="50"
+                    FontSize="20"
+                    ItemsSource="{Binding DanhSachHoaDon}"
+                    SelectedItem="{Binding HoaDonDuocChon}" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction 
+                                Command="{Binding ChonHoaDonCommand}"
+                                CommandParameter="{Binding SelectedItem, ElementName=HoaDonList}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn 
+                                Width="140" Header="Mã hóa đơn" 
+                                HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Style="{StaticResource Header6Style}"
+                                            Text="{Binding MaHoaDon, StringFormat='0000'}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn 
+                                Width="140"
+                                Header="Mã đặt tiệc"
+                                HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Style="{StaticResource Header6Style}"
+                                            Text="{Binding MaDatTiec, StringFormat='0000'}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn 
+                                Width="200" Header="Ngày thanh toán"
+                                HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Style="{StaticResource Header6Style}"
+                                            Text="{Binding NgayThanhToan, 
+                                            StringFormat='dd/MM/yyyy'}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn 
+                                Width="200" Header="Tổng tiền bàn"
+                                HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Style="{StaticResource HeaderForTableStyle}"
+                                            Text="{Binding TongTienBan, StringFormat={}{0:C0}}" Language="vi-VN"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn 
+                                Width="240" Header="Tổng tiền dịch vụ"
+                                HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Style="{StaticResource HeaderForTableStyle}"
+                                            Text="{Binding TongTienDV, StringFormat={}{0:C0}}" Language="vi-VN"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn 
+                                Width="240" Header="Tổng tiền hóa đơn" 
+                                HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Style="{StaticResource HeaderForTableStyle}"
+                                            Text="{Binding TongTienHD, StringFormat={}{0:C0}}" Language="vi-VN" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn 
+                                Width="250" Header="Tiền phải thanh toán" 
+                                HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Style="{StaticResource HeaderForTableStyle}"
+                                            Text="{Binding TienPhaiThanhToan, StringFormat={}{0:C0}}" Language="vi-VN" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>

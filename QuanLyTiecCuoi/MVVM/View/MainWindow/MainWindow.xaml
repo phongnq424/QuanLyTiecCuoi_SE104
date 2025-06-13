@@ -1,0 +1,113 @@
+﻿<Window x:Class="QuanLyTiecCuoi.MVVM.View.MainVindow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.MainVindow"
+        mc:Ignorable="d"
+        x:Name="MangHinhChinh"
+        WindowStartupLocation="CenterScreen" 
+        MouseDown="MainWindow_MouseDown" 
+        xmlns:controlBar="clr-namespace:QuanLyTiecCuoi.MVVM.View.ControlBar"
+        BorderBrush="Black"
+        BorderThickness="1"
+        WindowState="Maximized"
+        
+        Title="MainWindow" Height="1080" Width="1920">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding FirstLoadCM}" 
+                                   CommandParameter="{Binding ElementName=MangHinhChinh}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+        <Grid
+            Background="#F1F1EC"
+            Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid
+                Grid.Row="0"
+                Width="225" Height="225"
+                Margin="25, 20, 25, 20">
+                <Image
+                    Stretch="Fill"
+                    Width="auto"
+                    Height="auto"
+                    Source="/Resources/Images/appImage.png"></Image>
+            </Grid>
+
+
+            <StackPanel 
+                Grid.Row="1"
+                Height="660" 
+                Margin="0">
+                <ScrollViewer 
+                    VerticalScrollBarVisibility="Auto">
+                    <ItemsControl
+                        Padding="0"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"        
+                        ItemsSource="{Binding DanhSachChucNang}"
+                        Width="auto" Height="auto">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <RadioButton
+                                        Style="{StaticResource RadioButtonStyle}"
+                                        Content="{Binding TenChucNang}"
+                                        Margin="0,2.5"
+                                        IsChecked="False"
+                                        GroupName="DieuHuongGroup"
+                                        BorderBrush="#FFC3A1">
+                                        
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Checked">
+                                                <i:InvokeCommandAction
+                                                    Command="{Binding DataContext.DieuHuongCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                    CommandParameter="{Binding }" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </RadioButton>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </StackPanel>
+
+            <Button
+                Grid.Row="2"
+                Margin="0,0,0,20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Command="{Binding DangXuatCommand}"
+                CommandParameter="{Binding ElementName=MangHinhChinh}"
+                Style="{StaticResource LogoutButtonStyle}"
+                Content="Đăng xuất">
+            </Button>
+        </Grid>
+
+        <Frame 
+            Padding="30"
+            NavigationUIVisibility="Hidden"
+            Content="{Binding CurrentView}"
+            Grid.Column="1"  />
+    </Grid>
+</Window>
