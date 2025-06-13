@@ -6,7 +6,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
-  <ItemGroup />
+
   <ItemGroup>
     <Compile Update="MVVM\View\AddOrEditLoaiSanhWindow.xaml.cs">
       <SubType>Code</SubType>
