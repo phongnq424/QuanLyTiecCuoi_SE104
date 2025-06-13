@@ -234,6 +234,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
 
 
     <Style x:Key="ToggleButtonPassword" TargetType="ToggleButton">
@@ -371,4 +373,61 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
+
+
+    <Style x:Key="XButtonStyle" TargetType="Button">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Margin="5" Width="10" Height="10">
+                        <Path Stroke="Black" StrokeThickness="1" Data="M 0 0 L 10 10 M 0 10 L 10 0" 
+                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="RadioButton2Style" TargetType="RadioButton">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="TextBlock.TextDecorations" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="0,2.5"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border 
+                        CornerRadius="10"
+                        x:Name="border" 
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        Background="{TemplateBinding Background}" 
+                        Padding="{TemplateBinding Padding}">
+                        <ContentPresenter 
+                            x:Name="content"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="content" Property="TextElement.FontWeight" Value="Bold"/>
+                            <Setter Property="Background" Value="#FFE4C3"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

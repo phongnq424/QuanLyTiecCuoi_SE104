@@ -16,6 +16,12 @@
     <Compile Update="MVVM\View\HoaDon\ChiTietHoaDonWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MVVM\View\TuyChinh\NhanVienPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\TuyChinh\TuyChinhPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MVVM\View\BaoCao\BaoCaoView.xaml">
