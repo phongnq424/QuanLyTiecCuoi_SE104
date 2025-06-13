@@ -106,6 +106,8 @@
                 <DataGrid ItemsSource="{Binding DanhSachSanh}"
                           SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
                           AutoGenerateColumns="False"
+                          AlternationCount="1000"
+                          IsReadOnly="True"
                           Margin="10,10,10,10"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch"
@@ -115,10 +117,17 @@
 
                     <DataGrid.Columns>
                         <!-- Cột STT (Mã Ca) -->
-                        <DataGridTextColumn Header="STT"
-                                            Width="100"
-                                            IsReadOnly="True"
-                                            Binding="{Binding MaCa}" />
+                        <DataGridTemplateColumn Header="STT"
+                                                Width="100"
+                                                IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=AlternationIndex, Converter={StaticResource STTConverter}}"
+                                               HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
 
                         <!-- Cột Tên Ca -->
                         <DataGridTextColumn Header="Tên Ca"
