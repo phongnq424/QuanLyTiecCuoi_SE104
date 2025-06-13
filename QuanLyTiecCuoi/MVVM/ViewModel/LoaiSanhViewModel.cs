@@ -140,7 +140,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 bool matchGia = true;
                 if (!string.IsNullOrWhiteSpace(FilterDonGiaBanToiThieu))
                 {
-                    if (double.TryParse(FilterDonGiaBanToiThieu, out double giaFilter))
+                    if (decimal.TryParse(FilterDonGiaBanToiThieu, out decimal giaFilter))
                     {
                         matchGia = loaiSanh.DonGiaBanToiThieu.HasValue && loaiSanh.DonGiaBanToiThieu.Value <= giaFilter;
                     }

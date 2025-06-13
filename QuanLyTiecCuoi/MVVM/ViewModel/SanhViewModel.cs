@@ -75,7 +75,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         }
 
         // Thuộc tính chỉ hiển thị (readonly) – binding lên TextBlock
-        public double? DonGiaBanToiThieu => SelectedLoaiSanh?.DonGiaBanToiThieu;
+        public decimal? DonGiaBanToiThieu => SelectedLoaiSanh?.DonGiaBanToiThieu;
 
         public ICommand AddSanhCommand { get; set; }
 
@@ -178,7 +178,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
 
             bool matchGia = true;
-            if (double.TryParse(FilterDonGiaBanToiThieu, out double gia))
+            if (decimal.TryParse(FilterDonGiaBanToiThieu, out decimal gia))
             {
                 matchGia = sanh.LoaiSanh?.DonGiaBanToiThieu <= gia;
             }
