@@ -32,7 +32,6 @@ namespace QuanLyTiecCuoi.Data
         private readonly string _connectionString;
 
         public WeddingDbContext(DbContextOptions<WeddingDbContext> options) : base(options) { }
-        public WeddingDbContext() {}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PHANQUYEN>().HasKey(p => new { p.MaNhom, p.MaChucNang });
