@@ -1,6 +1,5 @@
 ﻿using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.Data.Models;
-using QuanLyTiecCuoi.Data.Services;
 using QuanLyTiecCuoi.Services;
 using System;
 using System.Collections.Generic;

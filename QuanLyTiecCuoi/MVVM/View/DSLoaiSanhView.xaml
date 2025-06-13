@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View"
       xmlns:vm="clr-namespace:QuanLyTiecCuoi.MVVM.ViewModel"
       mc:Ignorable="d" 
-      d:DesignHeight="1000" d:DesignWidth="1600"
+      d:DesignHeight="796" d:DesignWidth="1600"
       Title="DSLoaiSanhView">
 
     <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">

@@ -1,6 +1,5 @@
 ﻿using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.Data.Models;
-using QuanLyTiecCuoi.Data.Services;
 using QuanLyTiecCuoi.MVVM.View.TuyChinh;
 using System;
 using System.Collections.Generic;
@@ -43,6 +42,10 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             switch (p)
             {
                 case "Nhân viên": return "TuyChinh.NhanVienPage";
+                case "Loại sảnh": return "DSLoaiSanhView";
+                case "Món ăn": return "MonAn.TuyChinhMonAn";
+                case "Dịch vụ": return "DichVu.TuyChinhDichVu";
+                case "Quy định": return "null";
                 default: return "";
                        
             }

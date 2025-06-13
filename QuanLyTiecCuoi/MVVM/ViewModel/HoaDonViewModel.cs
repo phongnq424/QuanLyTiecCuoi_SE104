@@ -357,7 +357,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             return doc;
         }
 
-        private async void Reload()
+        private async Task Reload()
         {
             List<HOADON> res = await _HoaDonService.GetAllHoaDonsAsync();
             if (res != null)
@@ -411,26 +411,35 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
         }
 
+        private bool _isLocHoaDonRunning = false;
         private async void LocHoaDon()
         {
-            if (LocMaDatTiec.Length != 0)
+            if (_isLocHoaDonRunning) return;
+            _isLocHoaDonRunning = true;
+
+            try
             {
-                List<HOADON> res = await _HoaDonService.GetHoaDonByMaDatTiecAsync(LocMaDatTiec);
-                if (res != null)
+                if (LocMaDatTiec.Length != 0)
                 {
-                    DanhSachHoaDon = new ObservableCollection<HOADON>(res);
+                    var res = await _HoaDonService.GetHoaDonByMaDatTiecAsync(LocMaDatTiec);
+                    if (res != null)
+                        DanhSachHoaDon = new ObservableCollection<HOADON>(res);
+                }
+                else if (UseDateFilter)
+                {
+                    var res = await _HoaDonService.GetHoaDonsByNgayThanhToanAsync(LocNgayThanhToan);
+                    if (res != null)
+                        DanhSachHoaDon = new ObservableCollection<HOADON>(res);
+                }
+                else
+                {
+                    await Reload();
                 }
             }
-            else if (UseDateFilter)
+            finally
             {
-                List<HOADON> res = await _HoaDonService.GetHoaDonsByNgayThanhToanAsync(LocNgayThanhToan);
-                if (res != null)
-                {
-                    DanhSachHoaDon = new ObservableCollection<HOADON>(res);
-                }
+                _isLocHoaDonRunning = false;
             }
-            else
-                Reload();
         }
     }
 }
