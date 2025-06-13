@@ -1,6 +1,5 @@
 ﻿using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.Data.Models;
-using QuanLyTiecCuoi.Data.Services;
 using QuanLyTiecCuoi.MVVM.View.TuyChinh;
 using System;
 using System.Collections.Generic;

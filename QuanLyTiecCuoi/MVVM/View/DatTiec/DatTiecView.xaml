@@ -9,7 +9,7 @@
       Title="DatTiec">
     <Viewbox Stretch="Uniform">
         <Grid Width="1600" Height="1000">
-            <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
+            <Border BorderBrush="#673500" Background="#ffffee" BorderThickness="3" CornerRadius="40" Margin="20">
                 <!-- Root Grid full màn hình -->
                 <Grid Margin="20">
                     <Grid.RowDefinitions>
@@ -35,6 +35,7 @@
                             x:Name="FilterComboBox"
                             Width="260" Height="40" 
                             FontSize="20" 
+                            FontFamily="Cambria"
                             Margin="10"
                             ItemsSource="{Binding DanhSachTieuChi}"
                             SelectedItem="{Binding TieuChiDangChon}"
@@ -51,8 +52,9 @@
                             Text="{Binding TuKhoaTimKiem, UpdateSourceTrigger=PropertyChanged}"
                             TextAlignment="Center"
                             VerticalContentAlignment="Center"
+							FontFamily="Cambria"
                             FontStyle="Italic" 
-                            FontSize="18"
+                            FontSize="20"
                             BorderThickness="1"/>
                         <DatePicker
                             Margin="10 0"
@@ -68,12 +70,15 @@
                     <!-- ListView section -->
                     <DataGrid 
                         x:Name="MyDataGrid"
+                        Background="White"
                         ItemsSource="{Binding DanhSachDatTiec}" 
                         AutoGenerateColumns="False"
                         HorizontalAlignment="Stretch" 
                         Margin="0 10" CanUserAddRows="False" Grid.Row="2"
                         IsReadOnly="True"
                         MouseDoubleClick="MyDataGrid_MouseDoubleClick"
+                        FontFamily="Cambria"
+                        FontSize="20"
                         >
                         <DataGrid.Resources>
                             <Style TargetType="DataGridColumnHeader">
@@ -115,8 +120,8 @@
                         HorizontalAlignment="Right" 
                         Margin="0,10,0,0" 
                         Grid.Row="3">
-                        <Button Content="Thêm tiệc cưới" Click="Add_Click"  Style="{StaticResource ButtonStyle}"/>
-                        <Button Content="In hóa đơn" Click="InHoaDon_Click" Style="{StaticResource ButtonStyle}"/>
+                        <Button Content="Thêm tiệc cưới" Click="Add_Click"  Style="{StaticResource ButtonStyle}" FontFamily="Cambria" FontSize="20"/>
+                        <Button Content="In hóa đơn" Click="InHoaDon_Click" Style="{StaticResource ButtonStyle}" FontFamily="Cambria" FontSize="20"/>
                     </StackPanel>
                 </Grid>
             </Border>

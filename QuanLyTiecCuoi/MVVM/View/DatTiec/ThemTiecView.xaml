@@ -11,7 +11,7 @@
     <!-- Viewbox giúp co giãn toàn bộ giao diện theo kích thước khung -->
     <Viewbox Stretch="Uniform">
         <Grid Width="1600" Height="1000">
-            <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
+            <Border BorderBrush="#673500" Background="#ffffee" BorderThickness="3" CornerRadius="40" Margin="20">
                 <Grid Margin="20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -59,7 +59,7 @@
                     </Grid>
 
                     <!-- Content -->
-                    <Border Grid.Row="1" BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="0">
+                    <Border Grid.Row="1" BorderBrush="Black" Background="White" BorderThickness="3" CornerRadius="40" Margin="0">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
