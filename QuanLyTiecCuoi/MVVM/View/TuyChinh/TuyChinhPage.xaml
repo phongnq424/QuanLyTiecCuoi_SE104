@@ -88,16 +88,6 @@
                     IsChecked="False"
                     GroupName="ProductTypeGroup"
                     Style="{StaticResource RadioButton2Style}"/>
-                <RadioButton
-                    HorizontalAlignment="Stretch"
-                    Cursor="Hand"
-                    Content="Nhân viên"
-                    Margin="5, 10"
-                    Command="{Binding DoiTrangCommand}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                    IsChecked="False"
-                    GroupName="ProductTypeGroup"
-                    Style="{StaticResource RadioButton2Style}"/>
             </StackPanel>
 
             <Frame 

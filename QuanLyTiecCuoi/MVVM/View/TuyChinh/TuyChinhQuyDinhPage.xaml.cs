@@ -1,5 +1,4 @@
-﻿using QuanLyTiecCuoi.MVVM.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,13 @@ using System.Windows.Shapes;
 namespace QuanLyTiecCuoi.MVVM.View.TuyChinh
 {
     /// <summary>
-    /// Interaction logic for NhanVienPage.xaml
+    /// Interaction logic for TuyChinhQuyDinhPage.xaml
     /// </summary>
-    public partial class NhanVienPage : Page
+    public partial class TuyChinhQuyDinhPage : Page
     {
-        public NhanVienPage(NhanVienViewModel vm)
+        public TuyChinhQuyDinhPage()
         {
             InitializeComponent();
-            DataContext = vm;
         }
     }
 }
