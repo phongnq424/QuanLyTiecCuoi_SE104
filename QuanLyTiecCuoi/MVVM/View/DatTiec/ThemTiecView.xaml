@@ -11,7 +11,7 @@
     <!-- Viewbox giúp co giãn toàn bộ giao diện theo kích thước khung -->
     <Viewbox Stretch="Uniform">
         <Grid Width="1600" Height="1000">
-            <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
+            <Border BorderBrush="#673500" Background="#ffffee" BorderThickness="3" CornerRadius="40" Margin="20">
                 <Grid Margin="20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -37,19 +37,22 @@
                         Style="{StaticResource ButtonStyle}"/>
 
                         <TextBlock 
-                        Text="Serenité Wedding" 
-                        FontSize="60" 
-                        FontFamily="Cambria"
-                        FontWeight="SemiBold" 
-                        VerticalAlignment="Center"
-                        Margin="20 0"
-                        Grid.Column="1"/>
-
+                           Text="Serenité Wedding"
+                           FontWeight="Bold"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="4"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           Margin="10,15,10,0"
+                           Style="{StaticResource Header1Style}" />
+                        
                         <Button 
                         Command="{Binding LuuCommand}"
                         Click="LuuTiec"
                         Content="Đặt tiệc" 
                         FontSize="24"
+                        FontFamily="Cambria"
                         Padding="20 5"
                         Margin="0 0 40 0"
                         HorizontalAlignment="Right"
@@ -59,8 +62,13 @@
                     </Grid>
 
                     <!-- Content -->
-                    <Border Grid.Row="1" BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="0">
+                    <Border Grid.Row="1" BorderBrush="#673500" Background="White" BorderThickness="3" CornerRadius="40" Margin="0">
                         <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="350*"/>
+                                <ColumnDefinition Width="19*"/>
+                                <ColumnDefinition Width="1139*"/>
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
@@ -69,15 +77,15 @@
                             <!-- Title -->
                             <TextBlock 
                             Text="Biểu mẫu 2. Đặt Tiệc Cưới" 
-                            FontSize="36" 
-                            HorizontalAlignment="Center"
+                            FontSize="40" 
+                            HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontFamily="Cambria"
                             FontWeight="SemiBold"
-                            Margin="0 10"/>
+                            Margin="148,0,0,0" Grid.Column="2"/>
 
                             <!-- Main Form -->
-                            <Grid Grid.Row="1" Margin="0 10">
+                            <Grid Grid.Row="1" Margin="0,10,0,10" Grid.ColumnSpan="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="0.5*"/>
@@ -139,6 +147,8 @@
                                             Margin="20 0"
                                             Width="250"
                                             FontSize="26"
+                                            FontFamily="Cambria"
+                                            HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
                                             x:Name="FilterDatePicker"
                                             SelectedDateChanged="FilterDatePicker_SelectedDateChanged"/>
@@ -152,7 +162,7 @@
                                         <Popup x:Name="ShiftPopup" PlacementTarget="{Binding ElementName=ShiftButton}" Placement="Bottom" StaysOpen="False">
                                             <Border BorderBrush="Gray" BorderThickness="1" Background="White">
                                                 <ComboBox Name="ShiftComboBox" Width="260" Height="40" FontSize="20" SelectionChanged="ShiftComboBox_SelectionChanged"/>
-                                               
+
                                             </Border>
                                         </Popup>
                                     </StackPanel>

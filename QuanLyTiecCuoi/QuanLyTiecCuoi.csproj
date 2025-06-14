@@ -29,17 +29,32 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Copy cấu hình -->
+    <!-- Tài nguyên hình ảnh -->
+    <Resource Include="Resources\Images\**\*.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Tài nguyên hình ảnh -->
-    <Resource Include="Resources\Images\**\*.png">
+    <Compile Update="MVVM\ViewModel\ControlBarViewModel.cs">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="ResourcesXAML\MainResource.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
 
 </Project>

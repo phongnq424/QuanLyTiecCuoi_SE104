@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace QuanLyTiecCuoi.Data.Models
 {
-        public class LOAISANH
-        {
-                [Key]
-                public int MaLoaiSanh { get; set; }
-                [Required]
-                [MaxLength(100)]
-                public string TenLoaiSanh { get; set; }
+    public class LOAISANH
+    {
+        [Key]
+        public int MaLoaiSanh { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string TenLoaiSanh { get; set; }
 
-                public decimal DonGiaBanToiThieu { get; set; }
+        public decimal DonGiaBanToiThieu { get; set; }
 
-        }
+    }
 }

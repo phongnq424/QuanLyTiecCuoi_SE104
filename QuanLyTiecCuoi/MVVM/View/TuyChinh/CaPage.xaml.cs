@@ -14,25 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyTiecCuoi.MVVM.View
+namespace QuanLyTiecCuoi.MVVM.View.TuyChinh
 {
     /// <summary>
-    /// Interaction logic for DSLoaiSanhView.xaml
+    /// Interaction logic for CaPage.xaml
     /// </summary>
-    public partial class DSLoaiSanhView : Page
+    public partial class CaPage : Page
     {
-        public DSLoaiSanhView(LoaiSanhViewModel vm)
+        public CaPage(CaViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
-        }
-
-        private void btnQuayLai_Click(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService != null && NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-            }
         }
     }
 }

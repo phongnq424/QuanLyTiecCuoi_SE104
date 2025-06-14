@@ -1,4 +1,5 @@
 ﻿using QuanLyTiecCuoi.Core;
+using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.MVVM.Model;
 using QuanLyTiecCuoi.MVVM.View;
 using QuanLyTiecCuoi.Services;
@@ -6,9 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -75,7 +78,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         }
 
         // Thuộc tính chỉ hiển thị (readonly) – binding lên TextBlock
-        public double? DonGiaBanToiThieu => SelectedLoaiSanh?.DonGiaBanToiThieu;
+        public decimal? DonGiaBanToiThieu => SelectedLoaiSanh?.DonGiaBanToiThieu;
 
         public ICommand AddSanhCommand { get; set; }
 
@@ -117,12 +120,21 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public int SoLuongSanh => DanhSachSanh.Count;
 
         // Refresh DS Sảnh
-        private void RefreshDanhSachSanh()
+        public void RefreshDanhSachSanh()
         {
-            DanhSachSanh.Clear();
-            foreach (var sanh in _sanhService.GetAllSanh())
-                DanhSachSanh.Add(sanh);
+            // Gọi từ database
+            var danhSachMoi = _sanhService.GetAllSanh();
 
+            DanhSachSanh.Clear();
+            foreach (var sanh in danhSachMoi)
+            {
+                DanhSachSanh.Add(sanh);
+            }
+
+            // Gọi lại View
+            DanhSachSanhView.Refresh();
+
+            // Cập nhật số lượng
             OnPropertyChanged(nameof(SoLuongSanh));
         }
 
@@ -156,9 +168,43 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private void DeleteSanh()
         {
             if (SelectedSanh == null) return;
-            _sanhService.DeleteSanh(SelectedSanh);
-            RefreshDanhSachSanh();
-            SelectedSanh = null;
+
+            // Xác nhận xóa
+            var result = MessageBox.Show(
+                $"Bạn có chắc chắn muốn xóa sảnh '{SelectedSanh.TenSanh}' không?",
+                "Xác nhận xóa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    // Xóa ảnh nếu tồn tại
+                    if (!string.IsNullOrWhiteSpace(SelectedSanh.HinhAnh))
+                    {
+                        string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                        string projectRoot = Directory.GetParent(baseDir).Parent.Parent.Parent.FullName;
+                        string imagePath = System.IO.Path.Combine(projectRoot, "Resources", "Images", "Sanh", SelectedSanh.HinhAnh);
+
+                        if (File.Exists(imagePath))
+                        {
+                            File.Delete(imagePath);
+                        }
+                    }
+
+                    // Xóa khỏi database
+                    _sanhService.DeleteSanh(SelectedSanh);
+
+                    // Refresh
+                    RefreshDanhSachSanh();
+                    SelectedSanh = null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi xóa sảnh: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private bool FilterSanh(object obj)
@@ -178,7 +224,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
 
             bool matchGia = true;
-            if (double.TryParse(FilterDonGiaBanToiThieu, out double gia))
+            if (decimal.TryParse(FilterDonGiaBanToiThieu, out decimal gia))
             {
                 matchGia = sanh.LoaiSanh?.DonGiaBanToiThieu <= gia;
             }

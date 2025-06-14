@@ -29,7 +29,7 @@ namespace QuanLyTiecCuoi.Services
 
         public async Task<NGUOIDUNG> TaoNguoiDung(NGUOIDUNG nd)
         {
-            return await _nhanvienRepository.AddAsync(nd);
+            return await _nhanvienRepository.AddUserAsync(nd);
         }
     }
 }

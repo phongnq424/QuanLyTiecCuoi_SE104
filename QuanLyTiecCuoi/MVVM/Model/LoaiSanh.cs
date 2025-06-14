@@ -10,7 +10,7 @@ namespace QuanLyTiecCuoi.MVVM.Model
     public class LoaiSanh : INotifyPropertyChanged
     {
         private string _tenLoaiSanh;
-        private double? _donGiaBanToiThieu;
+        private decimal? _donGiaBanToiThieu;
 
         public int MaLoaiSanh { get; set; }
 
@@ -27,7 +27,7 @@ namespace QuanLyTiecCuoi.MVVM.Model
             }
         }
 
-        public double? DonGiaBanToiThieu
+        public decimal? DonGiaBanToiThieu
         {
             get => _donGiaBanToiThieu;
             set

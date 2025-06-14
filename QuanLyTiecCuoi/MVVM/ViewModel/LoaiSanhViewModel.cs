@@ -11,6 +11,8 @@ using System.Windows.Input;
 using QuanLyTiecCuoi.MVVM.View;
 using System.ComponentModel;
 using System.Windows.Data;
+using System.IO;
+using System.Windows;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
@@ -88,10 +90,19 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         // Refresh Loại Sảnh
         private void RefreshDanhSachLoaiSanh()
         {
-            DanhSachLoaiSanh.Clear();
-            foreach (var loaiSanh in _loaiSanhService.GetAllLoaiSanh())
-                DanhSachLoaiSanh.Add(loaiSanh);
+            // Gọi từ database
+            var danhSachMoi = _loaiSanhService.GetAllLoaiSanh();
 
+            DanhSachLoaiSanh.Clear();
+            foreach (var loai in danhSachMoi)
+            {
+                DanhSachLoaiSanh.Add(loai);
+            }
+
+            // Gọi lại View
+            DanhSachLoaiSanhView.Refresh();
+
+            // Cập nhật số lượng
             OnPropertyChanged(nameof(SoLuongLoaiSanh));
         }
 
@@ -125,9 +136,30 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private void DeleteLoaiSanh()
         {
             if (SelectedLoaiSanh == null) return;
-            _loaiSanhService.DeleteLoaiSanh(SelectedLoaiSanh);
-            RefreshDanhSachLoaiSanh();
-            SelectedLoaiSanh = null;
+
+            // Xác nhận xóa
+            var result = MessageBox.Show(
+                $"Bạn có chắc chắn muốn xóa loại sảnh '{SelectedLoaiSanh.TenLoaiSanh}' không?",
+                "Xác nhận xóa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    // Xóa khỏi database
+                    _loaiSanhService.DeleteLoaiSanh(SelectedLoaiSanh);
+
+                    // Refresh
+                    RefreshDanhSachLoaiSanh();
+                    SelectedLoaiSanh = null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi xóa sảnh: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private bool FilterLoaiSanh(object obj)
@@ -140,7 +172,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 bool matchGia = true;
                 if (!string.IsNullOrWhiteSpace(FilterDonGiaBanToiThieu))
                 {
-                    if (double.TryParse(FilterDonGiaBanToiThieu, out double giaFilter))
+                    if (decimal.TryParse(FilterDonGiaBanToiThieu, out decimal giaFilter))
                     {
                         matchGia = loaiSanh.DonGiaBanToiThieu.HasValue && loaiSanh.DonGiaBanToiThieu.Value <= giaFilter;
                     }

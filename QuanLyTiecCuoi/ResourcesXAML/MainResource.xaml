@@ -4,4 +4,5 @@
                     xmlns:Login="clr-namespace:QuanLyTiecCuoi.MVVM.View.Login"
                     xmlns:ControlBarView="clr-namespace:QuanLyTiecCuoi.MVVM.View.ControlBar">
 
+
 </ResourceDictionary>

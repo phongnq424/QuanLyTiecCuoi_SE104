@@ -1,0 +1,147 @@
+﻿<Window x:Class="QuanLyTiecCuoi.MVVM.View.TuyChinh.AddOrEditCaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.TuyChinh"
+        xmlns:controlBar="clr-namespace:QuanLyTiecCuoi.MVVM.View.ControlBar"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Thêm / Sửa Ca"
+        Height="350"
+        Width="600"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Background="Transparent">
+
+    <Border Background="#ffffee"
+            CornerRadius="15"
+            BorderBrush="Gray"
+            BorderThickness="1"
+            Padding="5">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!-- ControlBar -->
+                <RowDefinition Height="Auto" />
+                <!-- Tiêu đề -->
+                <RowDefinition Height="Auto" />
+                <!-- Tên ca -->
+                <RowDefinition Height="Auto" />
+                <!-- Giờ bắt đầu -->
+                <RowDefinition Height="Auto" />
+                <!-- Giờ kết thúc -->
+                <RowDefinition Height="Auto" />
+                <!-- Nút lưu -->
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Control Bar -->
+            <controlBar:ControlBarUserControl Grid.Row="0"
+                                              Grid.ColumnSpan="2"
+                                              Margin="0,0,0,10"
+                                              VerticalAlignment="Top"
+                                              HorizontalAlignment="Right" />
+
+            <!-- Tiêu đề -->
+            <TextBlock Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       Text="Thông Tin Ca"
+                       FontFamily="Cambria"
+                       FontSize="26"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Margin="0,10,0,30" />
+
+            <!-- Tên Ca -->
+            <TextBlock Grid.Row="2"
+                       Grid.Column="0"
+                       Text="Tên ca:"
+                       FontSize="18"
+                       FontFamily="Cambria"
+                       VerticalAlignment="Center"
+                       Margin="10,0,10,15" />
+            <Border Grid.Row="2"
+                    Grid.Column="1"
+                    Height="35"
+                    Margin="0,0,10,15"
+                    CornerRadius="10"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Background="White">
+                <TextBox FontSize="18"
+                         FontFamily="Cambria"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center"
+                         Padding="5,0"
+                         Text="{Binding CaInfo.TenCa, UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
+
+            <!-- Giờ Bắt Đầu -->
+            <TextBlock Grid.Row="3"
+                       Grid.Column="0"
+                       Text="Giờ bắt đầu:"
+                       FontSize="18"
+                       FontFamily="Cambria"
+                       VerticalAlignment="Center"
+                       Margin="10,0,10,15" />
+            <Border Grid.Row="3"
+                    Grid.Column="1"
+                    Height="35"
+                    Margin="0,0,10,15"
+                    CornerRadius="10"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Background="White">
+                <TextBox FontSize="18"
+                         FontFamily="Cambria"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center"
+                         Padding="5,0"
+                         Text="{Binding GioBatDauText, UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
+
+            <!-- Giờ Kết Thúc -->
+            <TextBlock Grid.Row="4"
+                       Grid.Column="0"
+                       Text="Giờ kết thúc:"
+                       FontSize="18"
+                       FontFamily="Cambria"
+                       VerticalAlignment="Center"
+                       Margin="10,0,10,15" />
+            <Border Grid.Row="4"
+                    Grid.Column="1"
+                    Height="35"
+                    Margin="0,0,10,15"
+                    CornerRadius="10"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Background="White">
+                <TextBox FontSize="18"
+                         FontFamily="Cambria"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center"
+                         Padding="5,0"
+                         Text="{Binding GioKetThucText, UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
+
+            <!-- Nút Lưu -->
+            <Button Grid.Row="5"
+                    Grid.Column="1"
+                    Content="Lưu"
+                    Command="{Binding LuuCommand}"
+                    Width="100"
+                    Height="35"
+                    HorizontalAlignment="Right"
+                    Margin="0,20,10,0"
+                    Style="{StaticResource ButtonStyle}" />
+        </Grid>
+    </Border>
+</Window>
