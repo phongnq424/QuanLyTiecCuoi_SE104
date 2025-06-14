@@ -41,5 +41,13 @@ namespace QuanLyTiecCuoi.MVVM.View
             var SanhVM = App.AppHost.Services.GetRequiredService<SanhViewModel>();
             NavigationService.Navigate(new DSSanhView(SanhVM));
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is SanhViewModel vm)
+            {
+                vm.RefreshDanhSachSanh(); 
+            }
+        }
     }
 }

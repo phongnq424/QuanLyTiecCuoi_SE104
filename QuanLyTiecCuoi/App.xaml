@@ -20,6 +20,7 @@
             <ImageSource x:Key="MaxiImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/maxi.png</ImageSource>
             <ImageSource x:Key="CloseImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/close.png</ImageSource>
             <ImageSource x:Key="ArrowDownImg">pack://application:,,,/resources/images/controlbarimg/arrow-down.png</ImageSource>
+            <local:STTConverter x:Key="STTConverter" />
         </ResourceDictionary>
 
     </Application.Resources>

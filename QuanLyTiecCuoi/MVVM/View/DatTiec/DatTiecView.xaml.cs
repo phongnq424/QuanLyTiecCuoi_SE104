@@ -1,11 +1,11 @@
-﻿using QuanLyTiecCuoi.Services;
-using QuanLyTiecCuoi.MVVM.ViewModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using QuanLyTiecCuoi.MVVM;
 using QuanLyTiecCuoi.Repository;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.MVVM.View.HoaDon;
 
 
 namespace QuanLyTiecCuoi.MVVM.View.DatTiec
@@ -37,7 +37,8 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 
         private void InHoaDon_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new ThemTiecView());
+            MessageBox.Show("Chuyển sang trang hóa đơn giúp em, sửa ở fille DatTiecView dòng 40");
+            // Kiểm tra xem có tiệc nào được chọn không: NavigationService?.Navigate(new ThemTiecView());
         }
         private DataGridRow editableRow = null;
 

@@ -45,6 +45,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 case "Món ăn": return "MonAn.TuyChinhMonAn";
                 case "Dịch vụ": return "DichVu.TuyChinhDichVu";
                 case "Quy định": return "TuyChinh.TuyChinhQuyDinhPage";
+                case "Ca": return "TuyChinh.CaPage";
                 default: return "";
                        
             }

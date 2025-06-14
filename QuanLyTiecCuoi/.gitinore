@@ -1,4 +1,18 @@
-﻿# User-specific files
+﻿
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+bin/
+obj/
+
+# Cache files
+*.cache
+# User-specific files
 .vs/
 .vscode/
 
@@ -9,21 +23,17 @@
 [Dd]istPublic/
 
 # Build directories
-bin/
-obj/
-
-# Visual Studio specific
-.vs2019/
-.vs2017/
-.vs/
+QuanLyTiecCuoi/bin/
+QuanLyTiecCuoi/obj/
+QuanLyTiecCuoi/obj/Debug/net8.0-windows/
 
 # User-specific files
-appsettings.json
+QuanLyTiecCuoi/appsettings.json
 
 # WPF output files
-*.obj
-*.exe
-*.dll
-*.pdb
-*.cache
-*.build
+QuanLyTiecCuoi/obj
+QuanLyTiecCuoi/*.exe
+QuanLyTiecCuoi/*.dll
+QuanLyTiecCuoi/*.pdb
+QuanLyTiecCuoi/*.cache
+QuanLyTiecCuoi/*.build

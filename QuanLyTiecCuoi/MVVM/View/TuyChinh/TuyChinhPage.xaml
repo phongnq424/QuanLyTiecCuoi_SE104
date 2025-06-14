@@ -49,17 +49,27 @@
                     GroupName="ProductTypeGroup"
                     Style="{StaticResource RadioButton2Style}"/>
                 <RadioButton
+                    MaxWidth="150"
                     HorizontalAlignment="Stretch"
                     Cursor="Hand"
-                    Content="Món ăn"
+                    Content="Ca"
                     Margin="5, 10"
                     Command="{Binding DoiTrangCommand}"
                     CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
                     IsChecked="False"
                     GroupName="ProductTypeGroup"
                     Style="{StaticResource RadioButton2Style}"/>
-                <RadioButton
-                    HorizontalAlignment="Stretch"
+                <RadioButton MaxWidth="170" HorizontalAlignment="Stretch"
+                             Cursor="Hand"
+                             Content="Món ăn"
+                             Margin="5, 10"
+                             Command="{Binding DoiTrangCommand}"
+                             CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                             IsChecked="False"
+                             GroupName="ProductTypeGroup"
+                             Style="{StaticResource RadioButton2Style}" />
+                <RadioButton MaxWidth="170"
+                             HorizontalAlignment="Stretch"
                     Cursor="Hand"
                     Content="Dịch vụ"
                     Margin="5, 10"
@@ -68,8 +78,8 @@
                     IsChecked="False"
                     GroupName="ProductTypeGroup"
                     Style="{StaticResource RadioButton2Style}"/>
-                <RadioButton
-                    HorizontalAlignment="Stretch"
+                <RadioButton MaxWidth="170"
+                             HorizontalAlignment="Stretch"
                     Cursor="Hand"
                     Content="Quy định"
                     Margin="5, 10"

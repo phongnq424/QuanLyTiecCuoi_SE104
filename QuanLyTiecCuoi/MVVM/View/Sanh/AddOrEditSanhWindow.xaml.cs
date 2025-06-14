@@ -73,6 +73,9 @@ namespace QuanLyTiecCuoi.MVVM.View
             // Tìm loại sảnh tương ứng
             SelectedLoaiSanh = DanhSachLoaiSanh.FirstOrDefault(ls => ls.MaLoaiSanh == selectedSanh.MaLoaiSanh);
 
+            // Ẩn nút chọn ảnh 
+            ChooseImageButton.Visibility = Visibility.Collapsed;
+
             // Clone thông tin sảnh
             SanhInfo = new Sanh
             {
@@ -81,6 +84,7 @@ namespace QuanLyTiecCuoi.MVVM.View
                 MaLoaiSanh = selectedSanh.MaLoaiSanh,
                 SoLuongBanToiDa = selectedSanh.SoLuongBanToiDa,
                 GhiChu = selectedSanh.GhiChu,
+                HinhAnh = selectedSanh.HinhAnh,
                 LoaiSanh = SelectedLoaiSanh
             };
 
