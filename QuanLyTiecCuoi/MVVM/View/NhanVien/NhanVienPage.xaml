@@ -79,7 +79,7 @@
                                                 </GridViewColumn.CellTemplate>
                                             </GridViewColumn>
                                             <GridViewColumn
-                                        Width="50">
+                                                 Width="50">
                                                 <GridViewColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button
@@ -124,23 +124,23 @@
                                            Width="170"
                                         Style="{StaticResource Header3Style}"/>
                                         <ComboBox 
-                                    x:Name="nhom_cbb"
-                                    ItemsSource="{Binding DanhSachTenNhom}"
-                                    Style="{StaticResource ComboBoxStyle1}"                                    
-                                    Margin="5,0,100,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Width="190" Height="30">
+                                            x:Name="nhom_cbb"
+                                            ItemsSource="{Binding DanhSachTenNhom}"
+                                            Style="{StaticResource ComboBoxStyle1}"                                    
+                                            Margin="5,0,100,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Width="190" Height="30">    
                                         </ComboBox>
                                     </StackPanel>
                                     <Button 
-                                HorizontalAlignment="Right"
-                                Width="200"
-                                Margin="20"
-                                Command="{Binding ThemNguoiDungCommand}"
-                                CommandParameter="{Binding SelectedItem, ElementName=nhom_cbb}"
-                                Style="{StaticResource ButtonAddServiceStyle}"
-                                Content="Thêm nhân viên">
+                                        HorizontalAlignment="Right"
+                                        Width="200"
+                                        Margin="20"
+                                        Command="{Binding ThemNguoiDungCommand}"
+                                        CommandParameter="{Binding SelectedItem, ElementName=nhom_cbb}"
+                                        Style="{StaticResource ButtonAddServiceStyle}"
+                                        Content="Thêm nhân viên">
 
                                     </Button>
 
@@ -233,17 +233,17 @@
                                                         <ItemsControl.ItemTemplate>
                                                             <DataTemplate>
                                                                 <Border 
-                                                        CornerRadius="5"
-                                                        BorderBrush="Black" 
-                                                        Background="Wheat" 
-                                                        Width="auto" Margin="5"
-                                                        VerticalAlignment="Top" BorderThickness="0.5" Height="auto">
+                                                                    CornerRadius="5"
+                                                                    BorderBrush="Black" 
+                                                                    Background="Wheat" 
+                                                                    Width="auto" Margin="5"
+                                                                    VerticalAlignment="Top" BorderThickness="0.5" Height="auto">
                                                                     <StackPanel Orientation="Horizontal">
-                                                                        <TextBlock Margin="5,0" FontSize="13" Text="{Binding CHUCNANG.TenChucNang}"></TextBlock>
+                                                                        <TextBlock Margin="5,0" FontSize="15" VerticalAlignment="Center" Text="{Binding CHUCNANG.TenChucNang}"></TextBlock>
                                                                         <Button  Style="{StaticResource XButtonStyle}"
-                                                                    Margin="0"
-                                                                    Command="{Binding DataContext.XoaPhanQuyenCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                                                    CommandParameter="{Binding}"/>
+                                                                            Margin="0"
+                                                                            Command="{Binding DataContext.XoaPhanQuyenCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                            CommandParameter="{Binding}"/>
                                                                     </StackPanel>
                                                                 </Border>
                                                             </DataTemplate>
