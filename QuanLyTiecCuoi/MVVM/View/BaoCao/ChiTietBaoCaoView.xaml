@@ -8,7 +8,7 @@
       mc:Ignorable="d"
       d:DesignHeight="800"
       d:DesignWidth="1400"
-      Background="Transparent">
+      Background="#ffffee">
 
     <Page.Resources>
         <Style TargetType="DataGrid">
@@ -27,8 +27,8 @@
             SnapsToDevicePixels="True">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="0.25*" />
+                <ColumnDefinition Width="0.6*" />
+                <ColumnDefinition Width="0.4*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -49,11 +49,6 @@
                        VerticalAlignment="Center"
                        Margin="20,10,0,5"
                        Style="{StaticResource Header2Style}" />
-            <controlBar:ControlBarUserControl Grid.Row="0"
-                                              Grid.Column="1"
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Right" 
-                                              Margin="0,0,12,0"/>
             <Border Grid.Row="1"
                     Grid.ColumnSpan="4"
                     BorderBrush="Black"
@@ -190,31 +185,68 @@
             </Border>
 
             <!-- Nút quay lại -->
-            <Button Grid.Row="4"
-                    Grid.Column="1"
-                    Width="200"
-                    Height="50"
-                    Content="Quay lại"
-                    FontSize="30"
-                    FontFamily="Cambria"
-                    FontWeight="Bold"
-                    Background="LightGray"
-                    HorizontalAlignment="Center"
-                    Margin="0,5,0,10"
-                    Command="{Binding ReturnCommand}">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                CornerRadius="20"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              RecognizesAccessKey="True" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+            <!-- Nút in + quay lại -->
+            <Grid Grid.Row="4"
+                  Grid.Column="1"
+                  HorizontalAlignment="Center"
+                  Margin="0,5,0,10"
+                  Width="440">
+                <!-- chiều rộng vừa đủ chứa 2 nút -->
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="40" />
+                    <!-- Khoảng cách giữa 2 nút -->
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                        Width="200"
+                        Height="50"
+                        Content="In báo cáo"
+                        FontSize="30"
+                        FontFamily="Cambria"
+                        FontWeight="Bold"
+                        Background="LightGray"
+                        Command="{Binding PrintCommand}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    CornerRadius="20"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Grid.Column="2"
+                        Width="200"
+                        Height="50"
+                        Content="Quay lại"
+                        FontSize="30"
+                        FontFamily="Cambria"
+                        FontWeight="Bold"
+                        Background="LightGray"
+                        Command="{Binding ReturnCommand}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    CornerRadius="20"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
 
         </Grid>
     </Border>

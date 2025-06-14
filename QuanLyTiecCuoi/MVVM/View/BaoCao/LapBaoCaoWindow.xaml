@@ -1,0 +1,122 @@
+﻿<Window x:Class="QuanLyTiecCuoi.MVVM.View.BaoCao.LapBaoCaoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Lập báo cáo"
+        Height="300"
+        Width="400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+
+    <Grid>
+        <Border CornerRadius="20"
+                BorderBrush="#673500"
+                BorderThickness="2"
+                Background="#ffffee"
+                Padding="20"
+                Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*" />
+                    <!-- Hàng 0: Dấu X -->
+                    <RowDefinition Height="0.2*" />
+                    <!-- Hàng 1: Tiêu đề -->
+                    <RowDefinition Height="0.3*" />
+                    <!-- Hàng 2: Tháng -->
+                    <RowDefinition Height="0.3*" />
+                    <!-- Hàng 3: Năm -->
+                    <!-- Hàng 4: Nút -->
+                </Grid.RowDefinitions>
+
+                <!-- Hàng 0: Dấu X -->
+                <StackPanel Grid.Row="0"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <Button Content="✕"
+                            Width="30"
+                            Height="30"
+                            FontWeight="Bold"
+                            Background="#ffffee"
+                            BorderThickness="0"
+                            Click="BtnClose_Click" />
+                </StackPanel>
+
+                <!-- Hàng 1: Tiêu đề -->
+                <TextBlock Grid.Row="1"
+                           Text="Lập báo cáo"
+                           FontFamily="Cambria"
+                           FontSize="25"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Margin="0,10,0,10" />
+                <!-- Hàng 2 + 3: Tháng và Năm chia 2 cột -->
+                <Grid Grid.Row="2"
+                      Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Cột 0: Tháng -->
+                    <StackPanel Orientation="Vertical"
+                                Grid.Column="0"
+                                Margin="5,0,10,0">
+                        <TextBlock Text="Tháng:"
+                                   FontFamily="Cambria"
+                                   FontSize="18"
+                                   Margin="0,0,0,5" />
+                        <ComboBox ItemsSource="{Binding ThangList}"
+                                  SelectedItem="{Binding SelectedThang, Mode=TwoWay}"
+                                  FontFamily="Cambria"
+                                  FontSize="18"
+                                  HorizontalContentAlignment="Center"
+                                  Height="35"
+                                  BorderBrush="#673500"
+                                  BorderThickness="1"
+                         
+                                  Background="White"
+                                  Foreground="Black" />
+                    </StackPanel>
+
+                    <!-- Cột 1: Năm -->
+                    <StackPanel Orientation="Vertical"
+                                Grid.Column="1"
+                                Margin="10,0,5,0">
+                        <TextBlock Text="Năm:"
+                                   FontFamily="Cambria"
+                                   FontSize="18"
+                                   Margin="0,0,0,5" />
+                        <ComboBox ItemsSource="{Binding NamList}"
+                                  SelectedItem="{Binding SelectedNam, Mode=TwoWay}"
+                                  FontFamily="Cambria"
+                                  FontSize="18"
+                                  HorizontalContentAlignment="Center"
+                                  Height="35"
+                                  BorderBrush="#673500"
+                                  BorderThickness="1"
+                                  Background="White"
+                                  Foreground="Black" />
+                    </StackPanel>
+                </Grid>
+
+                <!-- Hàng 3: Nút lệnh -->
+                <Button Grid.Row="3"
+                        Content="Lập báo cáo"
+                        Command="{Binding LapBaoCaoCommand}"
+                        FontSize="18"
+                        FontFamily="Cambria"
+                        Background="#673500"
+                        Foreground="White"
+                        Width="150"
+                        Height="40"
+                        Margin="0,30,0,0"
+                        HorizontalAlignment="Center" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

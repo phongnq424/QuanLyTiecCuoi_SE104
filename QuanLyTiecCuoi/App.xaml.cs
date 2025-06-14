@@ -22,6 +22,8 @@ using QuanLyTiecCuoi.MVVM.View.TuyChinh;
 using QuanLyTiecCuoi.MVVM.View.MainVindow;
 using QuanLyTiecCuoi.MVVM.View;
 using QuanLyTiecCuoi.MVVM.View.NhanVien;
+using System.Security.Cryptography;
+using QuanLyTiecCuoi.MVVM.ViewModel.BaoCao;
 
 
 namespace QuanLyTiecCuoi
@@ -60,7 +62,7 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<CaRepository>();
 
                     // Dùng BaoCaoService lấy dữ liệu từ AppDataRepository
-                    services.AddTransient<BaoCaoService>();
+                    services.AddSingleton<BaoCaoService>();
                     services.AddTransient<ChiTietBaoCaoService>();
                     services.AddTransient<HoaDonService>();
                     services.AddTransient<DangNhapService>();
@@ -75,9 +77,14 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<STTConverter>();
 
                     // Các ViewModel
-                    services.AddTransient<MainWindowViewModel>();
-                    services.AddTransient<BaoCaoViewModel>();
-                    services.AddTransient<ChiTietBaoCaoViewModel>();
+                    services.AddSingleton<MainWindowViewModel>();
+                    services.AddSingleton<BaoCaoViewModel>();
+                    services.AddTransient<Func<int, int, ChiTietBaoCaoViewModel>>(sp => (thang, nam) =>
+                    {
+                        var service = sp.GetRequiredService<ChiTietBaoCaoService>();
+                        return new ChiTietBaoCaoViewModel(service, thang, nam);
+                    });
+
                     services.AddTransient<LoginViewModel>();
                     services.AddTransient<HoaDonViewModel>();
                     services.AddTransient<ControlBarViewModel>();
@@ -92,11 +99,13 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<TuyChinhDichVuViewModel>();
                     services.AddTransient<QuyDinhViewModel>();
                     services.AddTransient<CaViewModel>();
+                    services.AddSingleton<DSBaoCaoViewModel>();
+                    services.AddTransient<LapBaoCaoViewModel>();
 
 
                     // Các View
-                    services.AddTransient<MainWindow>();
-                    services.AddTransient<BaoCaoPage>();
+                    services.AddSingleton<MainWindow>();
+                    services.AddSingleton<BaoCaoPage>();
                     services.AddTransient<HoaDonPage>();
                     services.AddTransient<ChiTietHoaDonWindow>();
                     services.AddTransient<TuyChinhPage>();
@@ -112,6 +121,8 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<TuyChinhDichVu>();
                     services.AddTransient<TuyChinhQuyDinhPage>();
                     services.AddTransient<CaPage>();
+                    services.AddSingleton<DSBaoCao>();
+                    
 
                     services.AddTransient<LoaiSanhRepository>();
                     services.AddTransient<SanhRepository>();

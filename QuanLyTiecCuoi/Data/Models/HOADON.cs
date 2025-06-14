@@ -21,6 +21,7 @@ namespace QuanLyTiecCuoi.Data.Models
         public int MaDatTiec { get; set; }
         public decimal TongTienDV { get; set; }
         public decimal TongTienHD { get; set; }
+        public decimal TienPhat { get; set; }
         public decimal TienPhaiThanhToan { get; set; }
 
         [ForeignKey("MaDatTiec")]

@@ -7,6 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="MVVM\View\BaoCao\DSBaoCaoView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\BaoCao\LapBaoCaoWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MVVM\View\LoaiSanh\AddOrEditLoaiSanhWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -42,6 +48,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="MVVM\View\BaoCao\DSBaoCaoView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\BaoCao\LapBaoCaoWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MVVM\View\LoaiSanh\AddOrEditLoaiSanhWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

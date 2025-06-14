@@ -15,7 +15,6 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 
 public class BaoCaoViewModel : BaseViewModel
 {
@@ -23,8 +22,8 @@ public class BaoCaoViewModel : BaseViewModel
 
     public ObservableCollection<string> MonthYearOptions { get; set; } = new();
     public ObservableCollection<string> MonthYearOptionsToDate { get; set; } = new();
-    public ISeries[] Series { get; set; } // Thay SeriesCollection bằng ISeries[]
-    public Axis[] XAxes { get; set; } // Thay Labels bằng Axis[]
+    public ISeries[] Series { get; set; }
+    public Axis[] XAxes { get; set; }
 
     public RelayCommand<object> NavigateCommand { get; private set; }
 
@@ -59,17 +58,17 @@ public class BaoCaoViewModel : BaseViewModel
 
         NavigateCommand = new RelayCommand<object>(_ => true, parameter => NavigateToDetailPage(parameter));
 
-        var start = new DateTime(2023, 1, 1);
-        var end = DateTime.Now;
+        // Lấy danh sách tháng/năm có trong DB
+        var availableMonths = _baoCaoService.GetAvailableMonthsAndYears();
 
-        while (start <= end)
+        foreach (var item in availableMonths)
         {
-            MonthYearOptions.Add(start.ToString("MM/yyyy"));
-            start = start.AddMonths(1);
+            var formatted = $"{item.Thang:00}/{item.Nam}";
+            MonthYearOptions.Add(formatted);
         }
 
         if (MonthYearOptions.Count > 0)
-            SelectedTuNgay = MonthYearOptions[0];
+            SelectedTuNgay = MonthYearOptions.First();
 
         UpdateMonthYearOptionsToDate();
     }
@@ -79,13 +78,14 @@ public class BaoCaoViewModel : BaseViewModel
         if (string.IsNullOrEmpty(SelectedTuNgay)) return;
 
         var start = DateTime.ParseExact("01/" + SelectedTuNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-        var end = DateTime.Now;
 
         MonthYearOptionsToDate.Clear();
-        while (start <= end)
+
+        foreach (var item in MonthYearOptions)
         {
-            MonthYearOptionsToDate.Add(start.ToString("MM/yyyy"));
-            start = start.AddMonths(1);
+            var itemDate = DateTime.ParseExact("01/" + item, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            if (itemDate >= start)
+                MonthYearOptionsToDate.Add(item);
         }
 
         if (!MonthYearOptionsToDate.Contains(SelectedDenNgay))
@@ -101,7 +101,7 @@ public class BaoCaoViewModel : BaseViewModel
         var den = DateTime.ParseExact("01/" + SelectedDenNgay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
         if (tu > den) return;
 
-        var reports = _baoCaoService.GetBaoCaoTuNgayDenNgay(tu, den);
+        var reports = _baoCaoService.GetBaoCaoTheoBoLoc(tuNgay: tu, denNgay: den);
 
         var labels = new List<string>();
         var weddingCounts = new List<int>();
@@ -115,7 +115,6 @@ public class BaoCaoViewModel : BaseViewModel
             revenues.Add(doanhThuTrieuDong);
         }
 
-        // Cấu hình Series cho biểu đồ
         Series = new ISeries[]
         {
             new ColumnSeries<int>
@@ -134,7 +133,6 @@ public class BaoCaoViewModel : BaseViewModel
             }
         };
 
-        // Cấu hình trục X
         XAxes = new Axis[]
         {
             new Axis
@@ -154,9 +152,8 @@ public class BaoCaoViewModel : BaseViewModel
         var vm = Application.Current.MainWindow.DataContext as MainWindowViewModel;
         if (vm != null)
         {
-            var chiTietPage = App.AppHost.Services.GetRequiredService<ChiTietBaoCaoPage>();
-            vm.CurrentView = chiTietPage;
+            var dsBaoCao = App.AppHost.Services.GetRequiredService<DSBaoCao>();
+            vm.CurrentView = dsBaoCao;
         }
     }
-
 }

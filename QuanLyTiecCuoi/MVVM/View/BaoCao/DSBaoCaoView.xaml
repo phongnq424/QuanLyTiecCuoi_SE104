@@ -1,0 +1,249 @@
+﻿<Page x:Class="QuanLyTiecCuoi.MVVM.View.BaoCao.DSBaoCao"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.BaoCao"
+      mc:Ignorable="d"
+      Background="Transparent"
+      d:DesignHeight="800"
+      d:DesignWidth="1200">
+
+    <Page.Resources>
+        <Style TargetType="DataGrid">
+            <Setter Property="FontSize"
+                    Value="23" />
+            <Setter Property="FontFamily"
+                    Value="Cambria" />
+        </Style>
+    </Page.Resources>
+
+    <Border CornerRadius="20"
+            BorderBrush="Black"
+            BorderThickness="2"
+            Margin="15"
+            Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Tiêu đề -->
+            <Grid Grid.Row="0"
+                  Margin="20,10,20,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Danh sách báo cáo tháng"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource Header2Style}" />
+            </Grid>
+
+
+
+
+            <!-- Bộ lọc tìm kiếm -->
+            <StackPanel Grid.Row="1"
+                        Margin="10,10"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical"
+                        Width="Auto">
+
+                <!-- Dòng 1: Từ tháng/năm - Đến tháng/năm -->
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Margin="5">
+                        <TextBlock Text="Từ tháng/năm:"
+                                   Style="{StaticResource Header3Style}"
+                                   VerticalAlignment="Center" />
+                        <ComboBox Width="300"
+                                  Margin="10,5"
+                                
+                                  ItemsSource="{Binding MonthYearOptions}"
+                                  SelectedItem="{Binding SelectedFromMonthYear}"
+                                  Style="{StaticResource RoundedComboBoxStyle}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="5">
+                        <TextBlock Text="Đến tháng/năm:"
+                                   Style="{StaticResource Header3Style}"
+                                   VerticalAlignment="Center" />
+                        <ComboBox Width="300"
+                                  Margin="10,5"
+                                  Style="{StaticResource RoundedComboBoxStyle}"
+                                  ItemsSource="{Binding MonthYearOptionsTo}"
+                                  SelectedItem="{Binding SelectedToMonthYear}" />
+                    </StackPanel>
+                </Grid>
+
+                <!-- Dòng 2: 4 ô – Doanh thu từ ... đến ... | Tiệc cưới từ ... đến ... -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="0.2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Doanh thu từ -->
+                    <StackPanel Grid.Column="0"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Left"
+                                Margin="-5,5,0,5"
+                                Grid.ColumnSpan="2">
+                        <TextBlock Text="Doanh thu từ:"
+                                   Style="{StaticResource Header3Style}"
+                                   VerticalAlignment="Center" />
+                        <TextBox Width="120"
+                                 Margin="10,5"
+                                 Style="{StaticResource TextBoxDescribeStyle}"
+                                 Text="{Binding MinDoanhThu}" />
+                    </StackPanel>
+
+                    <!-- Doanh thu đến -->
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,5,0,5">
+                        <TextBlock Text="đến:"
+                                   Style="{StaticResource Header3Style}"
+                                   VerticalAlignment="Center" />
+                        <TextBox Width="120"
+                                 Margin="10,5"
+                                 Style="{StaticResource TextBoxDescribeStyle}"
+                                 Text="{Binding MaxDoanhThu}" />
+                    </StackPanel>
+
+                    <!-- Tiệc cưới từ -->
+                    <StackPanel Grid.Column="2"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,5,0,5">
+                        <TextBlock Text="Tiệc cưới từ:"
+                                   Style="{StaticResource Header3Style}"
+                                   VerticalAlignment="Center" />
+                        <TextBox Width="120"
+                                 Margin="10,5"
+                                 Style="{StaticResource TextBoxDescribeStyle}"
+                                 Text="{Binding MinTiecCuoi}" />
+                    </StackPanel>
+
+                    <!-- Tiệc cưới đến -->
+                    <StackPanel Grid.Column="3"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,5,0,5">
+                        <TextBlock Text="đến:"
+                                   Style="{StaticResource Header3Style}"
+                                   VerticalAlignment="Center" />
+                        <TextBox Width="120"
+                                 Margin="10,5"
+                                 Style="{StaticResource TextBoxDescribeStyle}"
+                                 Text="{Binding MaxTiecCuoi}" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+
+
+
+
+            <!-- DataGrid -->
+            <DataGrid Grid.Row="2"
+                      Margin="20"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding DSBaoCao}"
+                      CanUserAddRows="False"
+                      SelectedItem="{Binding SelectedBaoCao}"
+                      HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="STT"
+                                        Binding="{Binding STT}"
+                                        Width="0.1*" />
+                    <DataGridTextColumn Header="Tháng"
+                                        Binding="{Binding Thang}"
+                                        Width="0.2*" />
+                    <DataGridTextColumn Header="Năm"
+                                        Binding="{Binding Nam}"
+                                        Width="0.2*" />
+                    <DataGridTextColumn Header="Tổng doanh thu"
+                                        Binding="{Binding TongDoanhThuFormatted}"
+                                        Width="0.25*" />
+                    <DataGridTextColumn Header="Tổng tiệc cưới"
+                                        Binding="{Binding TongTiecCuoi}"
+                                        Width="0.25*" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Nút quay lại -->
+            <Grid Grid.Row="3"
+                  Margin="10,5,30,10"
+                  VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.2*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Nút Lập báo cáo -->
+                <Button Grid.Column="1"
+                        Content="Lập báo cáo"
+                        Height="50"
+                        Width="200"
+                        FontSize="20"
+                        FontFamily="Cambria"
+                        FontWeight="Bold"
+                        Command="{Binding LapBaoCaoCommand}"
+                        Style="{StaticResource ButtonStyle}"
+                        Margin="10,0,10,0" />
+
+                <!-- Nút Xem chi tiết -->
+                <Button Grid.Column="2"
+                        Content="Xem chi tiết"
+                        Height="50"
+                        Width="200"
+                        FontSize="20"
+                        FontFamily="Cambria"
+                        FontWeight="Bold"
+                        Command="{Binding XemChiTietCommand}"
+                        Style="{StaticResource ButtonStyle}"
+                        Margin="10,0,10,0" />
+
+                <!-- Nút Quay lại -->
+                <Button Grid.Column="3"
+                        Content="Quay lại"
+                        Height="50"
+                        Width="200"
+                        FontSize="20"
+                        FontFamily="Cambria"
+                        FontWeight="Bold"
+                        Command="{Binding ReturnCommand}"
+                        Style="{StaticResource ButtonStyle}"
+                        Margin="10,0,10,0" />
+            </Grid>
+
+
+
+        </Grid>
+    </Border>
+</Page>

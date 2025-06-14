@@ -20,7 +20,7 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="0.25*" />
+                <ColumnDefinition Width="0.35*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -94,10 +94,10 @@
                                 Margin="15" />
 
             <Button Grid.Row="3"
-                    Width="220"
+                    Width="280"
                     Height="50"
                     Margin="5,5,5,10"
-                    Content="Chi tiết báo cáo"
+                    Content="Danh sách báo cáo"
                     FontSize="27"
                     FontFamily="Cambria"
                     FontWeight="Bold"

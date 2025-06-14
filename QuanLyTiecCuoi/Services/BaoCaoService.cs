@@ -1,8 +1,8 @@
-﻿using QuanLyTiecCuoi.MVVM.Model;
+﻿using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.MVVM.Model;
 using QuanLyTiecCuoi.Repository;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace QuanLyTiecCuoi.Services
@@ -16,41 +16,67 @@ namespace QuanLyTiecCuoi.Services
             _baoCaoRepo = baoCaoRepo;
         }
 
-        public List<BaoCaoModel> GetBaoCaoTuNgayDenNgay(DateTime tuNgay, DateTime denNgay)
+        public List<BaoCaoModel> GetBaoCaoTheoBoLoc(
+            DateTime? tuNgay = null,
+            DateTime? denNgay = null,
+            decimal? minDoanhThu = null,
+            decimal? maxDoanhThu = null,
+            int? minTiecCuoi = null,
+            int? maxTiecCuoi = null)
         {
-            var baoCaoThangs = _baoCaoRepo.GetBaoCaoThangs(tuNgay, denNgay);
+            var baoCaoThangs = _baoCaoRepo.GetByFilters(tuNgay, denNgay, minDoanhThu, maxDoanhThu, minTiecCuoi, maxTiecCuoi);
 
             var result = new List<BaoCaoModel>();
 
-            DateTime current = new DateTime(tuNgay.Year, tuNgay.Month, 1);
-
-            while (current <= denNgay)
+            foreach (var bc in baoCaoThangs)
             {
-                int thang = current.Month;
-                int nam = current.Year;
-
-                var baoCaoThang = baoCaoThangs.FirstOrDefault(b => b.Thang == thang && b.Nam == nam);
-
-                var model = new BaoCaoModel
+                result.Add(new BaoCaoModel
                 {
-                    Thang = thang,
-                    Nam = nam,
-                    TongDoanhThu = baoCaoThang?.TongDoanhThu ?? 0,
-                    TongTiecCuoi = baoCaoThang?.TongTiecCuoi ?? 0,
-                    ChiTietBaoCao = new List<ChiTietBaoCaoModel>()
-                };
-
-                // Giả sử có lấy thêm chi tiết từ repository tương tự
-
-                // Tính toán các chỉ số tỉ lệ, format...
-
-                result.Add(model);
-
-                current = current.AddMonths(1);
+                    Thang = bc.Thang,
+                    Nam = bc.Nam,
+                    TongDoanhThu = bc.TongDoanhThu,
+                    TongTiecCuoi = bc.TongTiecCuoi,
+                    ChiTietBaoCao = new List<ChiTietBaoCaoModel>() // Tuỳ bạn có muốn điền chi tiết không
+                });
             }
 
             return result;
         }
-    }
 
+        public void ThemBaoCao(BAOCAOTHANG baoCaoThang)
+        {
+            _baoCaoRepo.Add(baoCaoThang);
+        }
+
+        public void CapNhatBaoCao(BAOCAOTHANG baoCaoThang)
+        {
+            _baoCaoRepo.Update(baoCaoThang);
+        }
+
+        public void XoaBaoCao(BAOCAOTHANG baoCaoThang)
+        {
+            _baoCaoRepo.Delete(baoCaoThang);
+        }
+
+        public List<(int Thang, int Nam)> GetAvailableMonthsAndYears()
+        {
+            var data = _baoCaoRepo.GetAll();
+
+            return data
+                .Select(x => new { x.Thang, x.Nam })
+                .Distinct()
+                .OrderBy(x => x.Nam)
+                .ThenBy(x => x.Thang)
+                .Select(x => (x.Thang, x.Nam))
+                .ToList();
+        }
+        public bool CoHoaDonTrongThangNam(int thang, int nam)
+        {
+            return _baoCaoRepo.CoHoaDonTrongThangNam(thang, nam);
+        }
+
+
+
+
+    }
 }

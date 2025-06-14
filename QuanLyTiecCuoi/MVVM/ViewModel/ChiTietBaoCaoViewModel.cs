@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi;
 using QuanLyTiecCuoi.Core;
@@ -7,32 +10,18 @@ using QuanLyTiecCuoi.MVVM.View.BaoCao;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 using QuanLyTiecCuoi.Services;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
 
 public class ChiTietBaoCaoViewModel : BaseViewModel
 {
     private readonly ChiTietBaoCaoService _chiTietBaoCaoService;
 
     public RelayCommand<object> ReturnCommand { get; private set; }
-
-    private bool CanNavigateToReportPage(object parameter) => true;
-
-    private void NavigateToReportPage(object parameter)
-    {
-        var vm = Application.Current.MainWindow.DataContext as MainWindowViewModel;
-        if (vm != null)
-        {
-            var reportPage = App.AppHost.Services.GetRequiredService<BaoCaoPage>();
-            vm.CurrentView = reportPage;
-        }
-    }
-
-
-
+    public RelayCommand<object> PrintCommand { get; private set; }
 
     private ObservableCollection<ChiTietBaoCaoModel> _chiTietBaoCaoList;
     public ObservableCollection<ChiTietBaoCaoModel> ChiTietBaoCaoList
@@ -80,33 +69,59 @@ public class ChiTietBaoCaoViewModel : BaseViewModel
         set => SetProperty(ref _tongTiecCuoi, value);
     }
 
-    public ChiTietBaoCaoViewModel(ChiTietBaoCaoService chiTietBaoCaoService)
+    public ChiTietBaoCaoViewModel(ChiTietBaoCaoService chiTietBaoCaoService, int thang, int nam)
     {
         _chiTietBaoCaoService = chiTietBaoCaoService;
-        ReturnCommand = new RelayCommand<object>(CanNavigateToReportPage, NavigateToReportPage);
+
+        ReturnCommand = new RelayCommand<object>(_ => true, NavigateToReportPage);
+        PrintCommand = new RelayCommand<object>(_ => true, OnPrint);
         ThangList = new ObservableCollection<int>(Enumerable.Range(1, 12));
         NamList = new ObservableCollection<int> { 2023, 2024, 2025 };
 
-        SelectedThang = DateTime.Now.Month;
-        SelectedNam = DateTime.Now.Year;
+        SelectedThang = thang;
+        SelectedNam = nam;
 
-        LoadBaoCao();
+        LoadBaoCao(thang, nam);
     }
 
     private void TryLoadBaoCao()
     {
         if (SelectedThang > 0 && SelectedNam > 0)
-            LoadBaoCao();
+            LoadBaoCao(SelectedThang, SelectedNam);
     }
 
-    private void LoadBaoCao()
+    private void LoadBaoCao(int thang, int nam)
     {
-        var data = _chiTietBaoCaoService.GetChiTietBaoCaoByMonthYear(SelectedThang, SelectedNam);
+        var data = _chiTietBaoCaoService.GetChiTietBaoCaoByMonthYear(thang, nam);
 
         TongTiecCuoi = data.Sum(x => x.SoLuongTiecCuoi);
         double tongDoanhThu = data.Sum(x => x.DoanhThu);
         TongDoanhThuFormatted = tongDoanhThu.ToString("#,0.##") + " VND";
 
         ChiTietBaoCaoList = new ObservableCollection<ChiTietBaoCaoModel>(data);
+    }
+
+    private void NavigateToReportPage(object parameter)
+    {
+        var vm = Application.Current.MainWindow.DataContext as MainWindowViewModel;
+        if (vm != null)
+        {
+            var reportPage = App.AppHost.Services.GetRequiredService<DSBaoCao>();
+            vm.CurrentView = reportPage;
+        }
+    }
+    private void OnPrint(object parameter)
+    {
+        try
+        {
+            // Giả sử bạn có một hàm PrintReport trong service, truyền dữ liệu hiện tại
+            _chiTietBaoCaoService.PrintBaoCao(ChiTietBaoCaoList.ToList());
+
+            MessageBox.Show("In báo cáo thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Lỗi khi in báo cáo: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }
