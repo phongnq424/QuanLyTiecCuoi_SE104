@@ -11,7 +11,7 @@
     <!-- Viewbox giúp co giãn toàn bộ giao diện theo kích thước khung -->
     <Viewbox Stretch="Uniform">
         <Grid Width="1600" Height="1000">
-            <Border BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="20">
+            <Border BorderBrush="#673500" Background="#ffffee" BorderThickness="3" CornerRadius="40" Margin="20">
                 <Grid Margin="20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -22,9 +22,10 @@
                     <Grid Grid.Row="0" Margin="0 10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="98*"/>
+                            <ColumnDefinition Width="953*"/>
+                            <ColumnDefinition Width="131*"/>
+                            <ColumnDefinition Width="263*"/>
                         </Grid.ColumnDefinitions>
 
                         <Button Content="⮜" Width="50" Height="50" 
@@ -32,34 +33,35 @@
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Left"
                         Click="BackButton_Click"
-                        Margin="0 0 20 0"
                         Grid.Column="0"
                         Style="{StaticResource ButtonStyle}"/>
 
                         <TextBlock 
-                        Text="Serenité Wedding" 
-                        FontSize="60" 
-                        FontFamily="Cambria"
-                        FontWeight="SemiBold" 
-                        VerticalAlignment="Center"
-                        Margin="20 0"
-                        Grid.Column="1"/>
+                           Text="Serenité Wedding"
+                           FontWeight="Bold"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           VerticalAlignment="Bottom"
+                           Margin="10,0,0,0"
+                           Style="{StaticResource Header1Style}" />
 
                         <Button 
                         Command="{Binding UpdateCommand}"
                         Click="LuuTiec"
                         Content="Cập nhật" 
                         FontSize="24"
+                        FontFamily="Cambria"
                         Padding="20 5"
-                        Margin="0 0 40 0"
-                        HorizontalAlignment="Right"
+                        Margin="116,0,0,0"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        Grid.Column="3"
+                        Grid.Column="4"
                         Style="{StaticResource ButtonStyle}"/>
                     </Grid>
 
                     <!-- Content -->
-                    <Border Grid.Row="1" BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="0">
+                    <Border Grid.Row="1" Background ="White" BorderBrush="Black" BorderThickness="3" CornerRadius="40" Margin="0">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -69,7 +71,7 @@
                             <!-- Title -->
                             <TextBlock 
                             Text="Chỉnh Sửa Tiệc Cưới" 
-                            FontSize="36" 
+                            FontSize="40" 
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontFamily="Cambria"
@@ -87,7 +89,7 @@
                                 <!-- Left Form -->
                                 <StackPanel Grid.Column="0" Margin="10">
                                     <StackPanel.Resources>
-                                        <Style TargetType="TextBox"  BasedOn="{StaticResource TextBoxStyle1}" />
+                                        <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle1}"  />
                                         <Style TargetType="TextBlock">
                                             <Setter Property="FontSize" Value="32"/>
                                             <Setter Property="Margin" Value="0 5"/>

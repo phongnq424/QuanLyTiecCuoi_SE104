@@ -74,5 +74,9 @@ namespace QuanLyTiecCuoi.Repository
         {
             return _context.Sanhs.ToList();
         }
+        public bool IsSanhAvailable(int maSanh, DateTime ngay)
+        {
+            return !_context.DatTiecs.Any(dt => dt.MaSanh == maSanh && dt.NgayDaiTiec.Date == ngay.Date);
+        }
     }
 }
