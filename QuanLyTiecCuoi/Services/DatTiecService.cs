@@ -78,9 +78,9 @@ namespace QuanLyTiecCuoi.Services
         {
             _datTiecRepo.DeleteDatTiec(maDatTiec);
         }
-        public bool CheckSanhTrong(int maSanh, DateTime ngay, int maCa)
-        {
-            return _datTiecRepo.CheckSanhTrong(maSanh, ngay, maCa);
-        }
+        //public bool CheckSanhTrong(int maSanh, DateTime ngay, int maCa)
+        //{
+        //    return _datTiecRepo.CheckSanhTrong(maSanh, ngay, maCa);
+        //}
     }
 }
