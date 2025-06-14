@@ -4,6 +4,9 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.MVVM.View.MainVindow;
+using QuanLyTiecCuoi.MVVM.View.MonAn;
+using QuanLyTiecCuoi.MVVM.View.DichVu;
 
 namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 {
@@ -16,13 +19,22 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             InitializeComponent();
             viewModel = new ThemTiecViewModel();
             this.DataContext = viewModel;
-
+            Loaded += ThemTiecView_Loaded;
             // Load các combobox (ca, sảnh)
             viewModel.LoadDanhSachCa();
             viewModel.LoadDanhSachSanh();
             ShiftComboBox.ItemsSource = viewModel.DanhSachCa;
             HallComboBox.ItemsSource = viewModel.DanhSachSanh;
+            
+
         }
+        private void ThemTiecView_Loaded(object sender, RoutedEventArgs e)
+        {
+            SelectedMonAnText.Text = string.Join(", ", viewModel.MonAnDaChon.Select(m => m.TenMon));
+            SelectedDichVuText.Text = string.Join(", ", viewModel.DichVuDaChon.Select(d => d.TenDichVu));
+        }
+
+
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (sender is TextBox tb)
@@ -76,15 +88,25 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 
         private void MonAnButton_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.ChonMonAn();
-            SelectedMonAnText.Text = string.Join(", ", viewModel.MonAnDaChon);
+            var chonMonAnPage = new ChonMonAn(viewModel.TiecMoi, viewModel.MonAnDaChon);
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.MainFrame.Navigate(chonMonAnPage);
+            }
         }
+
 
         private void DichVuButton_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.ChonDichVu();
-            SelectedDichVuText.Text = string.Join(", ", viewModel.DichVuDaChon);
+            var chonDichVuPage = new ChonDichVu(viewModel.TiecMoi, viewModel.DichVuDaChon);
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.MainFrame.Navigate(chonDichVuPage);
+            }
         }
+
 
         private void LuuTiec(object sender, RoutedEventArgs e)
         {

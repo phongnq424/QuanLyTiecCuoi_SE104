@@ -78,9 +78,21 @@ namespace QuanLyTiecCuoi.Services
         {
             _datTiecRepo.DeleteDatTiec(maDatTiec);
         }
+<<<<<<< HEAD
         //public bool CheckSanhTrong(int maSanh, DateTime ngay, int maCa)
         //{
         //    return _datTiecRepo.CheckSanhTrong(maSanh, ngay, maCa);
         //}
+=======
+        public bool CheckSanhTrong(int maSanh, DateTime ngay, int maCa)
+        {
+            return _datTiecRepo.CheckSanhTrong(maSanh, ngay, maCa);
+        }
+
+        public static implicit operator int(DatTiecService v)
+        {
+            throw new NotImplementedException();
+        }
+>>>>>>> 9fc6a1243658817fa9b9c76ccb22ee4354a07a5e
     }
 }

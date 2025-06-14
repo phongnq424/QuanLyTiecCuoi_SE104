@@ -81,5 +81,14 @@ namespace QuanLyTiecCuoi.Repository
                 dt.NgayDaiTiec.Date == ngay.Date &&
                 dt.MaCa == maCa);
         }
+        public bool CheckSanhTrong(int maSanh, DateTime ngay, int maCa)
+        {
+            return !_context.DatTiecs.Any(dt =>
+                dt.MaSanh == maSanh &&
+                dt.NgayDaiTiec.Date == ngay.Date &&
+                dt.MaCa == maCa
+            );
+        }
+
     }
 }

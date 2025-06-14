@@ -2,7 +2,6 @@
 using QuanLyTiecCuoi.Services;
 using Microsoft.Win32;
 using System;
-using System.Data.SqlTypes;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -97,17 +96,29 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
 
         private void imgDichVu_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var dlg = new OpenFileDialog
-            {
-                Title = "Chọn ảnh dịch vụ",
-                Filter = "Image files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp"
-            };
+            // Mở ô nhập URL ảnh (giống ThemMonAn)
+            txtImagePath.Visibility = Visibility.Visible;
+            txtImagePath.Focus();
+            txtImagePath.SelectAll();
+        }
 
-            if (dlg.ShowDialog() == true)
+        private void TxtImagePath_LostFocus(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                _dichVuMoi.HinhAnh = dlg.FileName;
-                imgDichVu.Source = new BitmapImage(new Uri(dlg.FileName));
+                var imageUrl = txtImagePath.Text?.Trim();
+                if (!string.IsNullOrEmpty(imageUrl))
+                {
+                    imgDichVu.Source = new BitmapImage(new Uri(imageUrl));
+                    _dichVuMoi.HinhAnh = imageUrl;
+                }
             }
+            catch
+            {
+                MessageBox.Show("Không thể tải ảnh từ đường dẫn.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            txtImagePath.Visibility = Visibility.Collapsed;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)

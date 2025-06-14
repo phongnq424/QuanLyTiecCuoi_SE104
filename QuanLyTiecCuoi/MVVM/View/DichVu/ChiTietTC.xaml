@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Chi Tiết Dịch Vụ"
-        Height="380"
-        Width="270"
+        Height="550" Width="400"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
@@ -14,53 +13,66 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <Grid>
-        <Border CornerRadius="20" BorderBrush="#111" BorderThickness="2" Background="White" Padding="10">
-            <StackPanel>
-
+        <Border CornerRadius="20" Padding="5" BorderBrush="#673500" BorderThickness="2" Background="#FFF">
+            <StackPanel Background="#ffffee">
                 <!-- Header -->
-                <DockPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,10,10,0" Width="344">
                     <TextBlock Text="Chi tiết dịch vụ"
+                               TextAlignment="Center"
+                               Width="219" Height="32"
+                               FontSize="25"
+                               FontFamily="Cambria"
                                FontWeight="Bold"
-                               FontSize="16"
-                               DockPanel.Dock="Left"
-                               VerticalAlignment="Center"
-                               Margin="5,0,0,0"/>
+                               Margin="50,0,20,0"
+                               VerticalAlignment="Center"/>
                     <Button x:Name="btnClose"
-                            Style="{StaticResource ButtonStyle}"
                             Content="✕"
-                            Width="20"
-                            Height="20"
-                            DockPanel.Dock="Right"
-                            Click="BtnClose_Click"
-                            HorizontalAlignment="Right"/>
-                </DockPanel>
+                            Background="#ffffee"
+                            Width="18"
+                            Height="22"
+                            Margin="30,0,0,0"
+                            BorderThickness="0"
+                            Click="BtnClose_Click"/>
+                </StackPanel>
 
-                <!-- Image -->
+                <!-- Hình ảnh -->
                 <Image Source="{Binding HinhAnh}"
-                       Width="220" Height="150"
+                       Width="300" Height="270"
                        Stretch="UniformToFill"
-                       Margin="0,10"/>
+                       Margin="10"/>
 
-                <!-- Tên -->
+                <!-- Tên dịch vụ -->
                 <TextBlock Text="{Binding TenDichVu}"
                            FontWeight="Bold"
                            FontSize="20"
+                           FontFamily="Cambria"
                            TextAlignment="Center"
-                           Margin="0,5"/>
+                           Margin="5,10,5,0"/>
 
                 <!-- Giá -->
-                <TextBlock Text="{Binding DonGia, StringFormat={}{0:N0} VND}"
-                           FontSize="18"
-                           Foreground="DarkGreen"
+                <TextBlock Text="{Binding DonGia, StringFormat='Giá: {0:N0} VND'}"
+                           FontFamily="Cambria"
+                           FontSize="20"
                            TextAlignment="Center"
-                           Margin="0,5"/>
+                           Foreground="DarkGreen"
+                           Margin="5,10,5,0"/>
 
                 <!-- Mô tả -->
                 <TextBlock Text="{Binding MoTa}"
-                           FontSize="14"
+                           FontSize="16"
+                           FontFamily="Cambria"
                            TextAlignment="Center"
                            TextWrapping="Wrap"
-                           Margin="0,5"/>
+                           Margin="10,10,10,10"
+                           MaxHeight="150"
+                           Padding="5">
+                                    <TextBlock.Resources>
+                        <Style TargetType="ScrollViewer">
+                            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                        </Style>
+                    </TextBlock.Resources>
+                </TextBlock>
+
             </StackPanel>
         </Border>
     </Grid>

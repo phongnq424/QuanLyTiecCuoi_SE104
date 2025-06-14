@@ -185,14 +185,14 @@
                                         <TextBlock Text="Món ăn" VerticalAlignment="Center"/>
                                         <Button x:Name="MonAnButton" Width="50" Height="50" Click="MonAnButton_Click" Content="🍽" Margin="0 5" HorizontalAlignment="Left"/>
                                     </StackPanel>
-                                    <TextBlock x:Name="SelectedMonAnText" Margin="10 0" VerticalAlignment="Center" FontSize="30"/>
+                                    <TextBlock x:Name="SelectedMonAnText" Text="{Binding MonAnDaChonText}" Margin="10 0" VerticalAlignment="Center" FontSize="30"/>
 
                                     <!-- Dịch vụ -->
                                     <StackPanel Orientation="Horizontal" Margin="0 5">
                                         <TextBlock Text="Dịch vụ"/>
                                         <Button x:Name="DichVuButton" Width="50" Height="50" Click="DichVuButton_Click" Content="💒" Margin="0 5" HorizontalAlignment="Left"/>
                                     </StackPanel>
-                                    <TextBlock x:Name="SelectedDichVuText" Margin="10 0" VerticalAlignment="Center" FontSize="30"/>
+                                    <TextBlock x:Name="SelectedDichVuText" Text="{Binding DichVuDaChonText}" Margin="10 0" VerticalAlignment="Center" FontSize="30"/>
                                 </StackPanel>
                             </Grid>
                         </Grid>

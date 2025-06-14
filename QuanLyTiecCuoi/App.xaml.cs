@@ -70,6 +70,7 @@ namespace QuanLyTiecCuoi
                     services.AddScoped<ChiTietDichVuService>();
                     services.AddScoped<ChiTietMenuService>();
                     services.AddTransient<CaService>();
+                    services.AddTransient<STTConverter>();
 
 
                     // Các ViewModel
