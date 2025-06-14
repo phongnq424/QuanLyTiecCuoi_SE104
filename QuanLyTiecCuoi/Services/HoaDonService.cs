@@ -12,10 +12,17 @@ namespace QuanLyTiecCuoi.Services
     public class HoaDonService
     {
         private readonly HoaDonRepository _hoaDonRepository;
+        private readonly ThamSoRepository _thamSoRepository;
 
-        public HoaDonService(HoaDonRepository HoaDonRepo)
+        public HoaDonService(HoaDonRepository HoaDonRepo, ThamSoRepository thamSoRepository)
         {
             _hoaDonRepository = HoaDonRepo;
+            _thamSoRepository = thamSoRepository;
+        }
+
+        public async Task<THAMSO> LayThamSo()
+        {
+            return await _thamSoRepository.LayDanhSachThamSo();
         }
 
         public async Task<List<HOADON>> GetAllHoaDonsAsync()

@@ -6,10 +6,16 @@
       xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.TuyChinh"
       mc:Ignorable="d" 
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-      d:DesignHeight="796" d:DesignWidth="1600"
+      d:DesignHeight="780" d:DesignWidth="1600"
       Background="#ffffee"
       x:Name="QuyDinhPage"
       Title="TuyChinhQuyDinhPage">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding FirstLoadCommand}" 
+                                   CommandParameter="{Binding ElementName=QuyDinhPage}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <StackPanel>
             
@@ -21,25 +27,53 @@
                 <TextBlock Text="Áp dụng quy định phạt thanh toán trễ:"
                     Style="{StaticResource Header3Style}"/>
                 <CheckBox
-                        Content=""
-                        FontSize="20"
-                        FontFamily="Cambria"
-                        Margin="15,9,5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        IsChecked="{Binding UseDateFilter}"
-                        Foreground="black"
-                        Background="#FDE6C2"/>
+                    Content=""
+                    FontSize="20"
+                    FontFamily="Cambria"
+                    Margin="15,9,5,5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsChecked="{Binding ApDungQDPhat}"
+                    Foreground="black"
+                    Command="{Binding ThayDoiCommand}"
+                    Background="#FDE6C2"/>
             </StackPanel>
 
 
             <StackPanel Orientation="Horizontal" Grid.Row="0">
                 <TextBlock Text="Tỷ lệ phạt than toán trễ theo ngày:"
                     Style="{StaticResource Header3Style}"/>
-                <TextBox Text="{Binding TenDangNhapDuocChinhSua}"
-                    IsEnabled="False"
-                    Style="{StaticResource TextBoxDescribeStyle}"/>
+                <TextBox
+                    x:Name="TyLeTextBox"
+                    Text="{Binding TyLePhatText}"
+                    Style="{StaticResource TextBoxDescribeStyle}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction 
+                                    Command="{Binding ThayDoiCommand}"
+                                CommandParameter="{Binding Text, ElementName=TyLeTextBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <TextBlock Text="{Binding TyLePhatMoi, StringFormat={}{0:P4}}"
+                    Style="{StaticResource Header3Style}"/>
             </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button 
+                    Command="{Binding LuuThayDoiCommand}"
+                    Visibility="{Binding BtnSaveVisability}"
+                    Margin="20,5"
+                    Content="Lưu thay đổi" Style="{StaticResource ButtonAddServiceStyle}"> </Button>
+            </StackPanel>
+            <TextBlock Text="{Binding Error}"
+               HorizontalAlignment="Left"
+               Foreground="Red"
+               FontSize="14"
+               FontWeight="SemiBold"
+               Margin="20,5,0,0"
+               TextWrapping="Wrap"/>
+
 
             <StackPanel Orientation="Horizontal"></StackPanel>
         </StackPanel>

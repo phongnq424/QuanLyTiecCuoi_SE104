@@ -81,7 +81,5 @@ namespace QuanLyTiecCuoi.Repository
                 dt.NgayDaiTiec.Date == ngay.Date &&
                 dt.MaCa == maCa);
         }
-        
-
     }
 }
