@@ -56,6 +56,7 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<DichVuRepository>();
                     services.AddScoped<ChiTietMenuRepository>();
                     services.AddScoped<ChiTietDichVuRepository>();
+                    services.AddTransient<ThamSoRepository>();
                     services.AddTransient<CaRepository>();
 
                     // Dùng BaoCaoService lấy dữ liệu từ AppDataRepository
@@ -69,9 +70,9 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<MonAnService>();
                     services.AddScoped<ChiTietDichVuService>();
                     services.AddScoped<ChiTietMenuService>();
+                    services.AddTransient<ThamSoService>();
                     services.AddTransient<CaService>();
                     services.AddTransient<STTConverter>();
-
 
                     // Các ViewModel
                     services.AddTransient<MainWindowViewModel>();
@@ -89,6 +90,7 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<ChonDichVuViewModel>();
                     services.AddTransient<TuyChinhMonAnViewModel>();
                     services.AddTransient<TuyChinhDichVuViewModel>();
+                    services.AddTransient<QuyDinhViewModel>();
                     services.AddTransient<CaViewModel>();
 
 

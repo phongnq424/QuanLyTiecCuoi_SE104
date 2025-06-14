@@ -15,7 +15,7 @@
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding FirstLoadCommand}" 
-                                   CommandParameter="{Binding ElementName=DangNhapWindow}" />
+                                   CommandParameter="{Binding ElementName=TraCuuHoaDon}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Border

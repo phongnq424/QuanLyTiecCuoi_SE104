@@ -1,0 +1,138 @@
+﻿using QuanLyTiecCuoi.Core;
+using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.Services;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace QuanLyTiecCuoi.MVVM.ViewModel
+{
+    public class QuyDinhViewModel : BaseViewModel
+    {
+        private readonly ThamSoService _thamSoService;
+
+        private bool _ApDungQDPhat;
+        public bool ApDungQDPhat
+        {
+            get => _ApDungQDPhat; set { _ApDungQDPhat = value; OnPropertyChanged(); }    
+        }
+
+        private String _TyLePhatText;
+        public String TyLePhatText
+        {
+            get => _TyLePhatText; set { _TyLePhatText = value; OnPropertyChanged(); }
+        }
+
+        private Visibility _BtnSaveVisability = Visibility.Hidden;
+        public Visibility BtnSaveVisability
+        {
+            get => _BtnSaveVisability; set { _BtnSaveVisability = value; OnPropertyChanged(); }
+        }
+
+        private String _Error;
+        public String Error
+        {
+            get => _Error; set { _Error = value; OnPropertyChanged(); }
+        }
+
+        private THAMSO? _ThamSoHienTai;
+        private decimal _TyLePhatMoi;
+        public decimal TyLePhatMoi
+        {
+            get => _TyLePhatMoi; set { _TyLePhatMoi = value; OnPropertyChanged(); }
+        }
+
+
+
+        #region Command
+        public ICommand FirstLoadCommand { get; set; }  
+        public ICommand ThayDoiCommand { get; set; }
+        public ICommand LuuThayDoiCommand { get; set;}
+        #endregion
+
+        public QuyDinhViewModel(ThamSoService thamSoService)
+        {
+            _thamSoService = thamSoService;
+            FirstLoadCommand = new RelayCommand<Page>((p) => { return true; }, async (p) =>
+            {
+                _ThamSoHienTai = await _thamSoService.LayThamSo();
+                if (_ThamSoHienTai != null)
+                {
+                    ApDungQDPhat = _ThamSoHienTai.ApDungQDPhatThanhToanTre;
+                    TyLePhatText = _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000");
+                    TyLePhatMoi = _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay;
+                }
+            });
+
+            ThayDoiCommand = new RelayCommand<String?>((p) => { return true; },  (p) =>
+            {
+                if (_ThamSoHienTai == null) return;
+                if (p != null && p.Length != 0)
+                {
+                    TyLePhatText = p;
+                    bool hopLe = decimal.TryParse(TyLePhatText, out _);
+                    if (hopLe)
+                    {
+                        TyLePhatMoi = decimal.Parse(TyLePhatText);
+                        BtnSaveVisability = Visibility.Visible;
+                        Error = "";
+                    }
+                    else
+                    {
+                        Error = "Phải nhập vào số thập phân";
+                        BtnSaveVisability = Visibility.Visible;
+                        return;
+                    }
+                }
+                if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000"))
+                {
+                    return;
+                }
+
+                BtnSaveVisability = Visibility.Visible;
+
+            });
+
+            LuuThayDoiCommand = new RelayCommand<Page>((p) => { return true; }, async (p) =>
+            {
+                if(_ThamSoHienTai == null)
+                {
+                    MessageBox.Show("lỗi tham số null");
+                    return;
+                }
+                if(ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText ==_ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000"))
+                {
+                    Error = "Không có thông tin thay đổi.";
+                    return;
+                }
+
+                var thamsomoi = new THAMSO()
+                {
+                    Id = _ThamSoHienTai.Id,
+                    TyLePhatThanhToanTreTheoNgay = TyLePhatMoi,
+                    ApDungQDPhatThanhToanTre = ApDungQDPhat,
+                };
+
+
+                var res = await _thamSoService.CapNhatThamSo(thamsomoi);
+                if(res == null)
+                {
+                    Error = "Có lỗi xảy ra";
+                    return;
+                }
+
+                Error = "Thay đổi thành công";
+                BtnSaveVisability = Visibility.Hidden;
+                return;
+            });
+        }
+
+    }
+}

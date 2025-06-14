@@ -114,7 +114,7 @@
                                                         <ColumnDefinition Width="Auto" />
                                                         <ColumnDefinition Width="2*" />
                                                     </Grid.ColumnDefinitions>
-                                                    <Image Source="/Images/coffee.png" Width="180" Height="180" Grid.Column="0" />
+                                                    <Image Source="{Binding HinhAnh}" Width="180" Height="180" Grid.Column="0" />
                                                     <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
                                                         <TextBlock Text="{Binding TenDichVu}" FontWeight="Bold" FontSize="20" FontFamily="Cambria" />
                                                         <TextBlock Text="{Binding DonGia, StringFormat='Giá: {0:N0} VND'}" FontSize="15" Foreground="Gray" FontFamily="Cambria" />
