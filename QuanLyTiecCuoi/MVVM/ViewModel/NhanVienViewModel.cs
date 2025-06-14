@@ -1,5 +1,6 @@
 ﻿using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.MVVM.View.TuyChinh;
 using QuanLyTiecCuoi.Services;
 using System;
 using System.Collections.Generic;
@@ -119,6 +120,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ICommand ThemNhomCommand { get; set; }
         public ICommand ChinhSuaNhomCommand { get; set; }
         public ICommand XoaNhomCommand { get; set; }    
+        public ICommand ChuyenTabNhanVienCommand { get; set; }    
         #endregion
 
 
@@ -151,6 +153,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     GanDanhSachTenChucNang();
                 }
             });
+
 
             ThemNguoiDungCommand = new RelayCommand<String?>((p) => { return true; }, async (p) => {
                 _MaNhomCuaNguoiDungMoi = LayMaNhom(p);
@@ -248,7 +251,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             ThemNhomCommand = new RelayCommand<String?>((p) => { return true; }, async (p) =>
             {
-                if(p == null || p.Length == 0) return;
+                if (p == null || p.Length == 0) return;
                 var nhom = await _nhanVienService.LayNhomNguoiDungTheoTen(p);
                 if (nhom != null)
                 {
@@ -259,6 +262,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 {
                     TenNhom = p
                 };
+                AutoCloseMessageBox.ShowWaiting(2);
                 var res = await _nhanVienService.TaoNhomNguoiDungMoi(nhomMoi);
                 if(res == null)
                 {
@@ -266,7 +270,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     return;
                 }
                 await ReloadNhom();
+                MessageBox.Show("Thêm nhóm người dùng thành công");
                 TenNhomMoi = "";
+                return;
 
             });
 
@@ -288,6 +294,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             XoaNhomCommand = new RelayCommand<NHOMVAPHANQUYEN>((p) => { return true; }, async (p) =>
             {
+
                 if (p == null) return;
                 var user = await _nhanVienService.CoTonTaiNguoiDungThuocNhom(p.Nhom);
                 if(user != null)
@@ -304,11 +311,13 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
                 if (result == MessageBoxResult.Yes)
                 {
+                    AutoCloseMessageBox.ShowWaiting(2);
                     var res = await _nhanVienService.XoaNhom(p.Nhom);
+                    
                     if (res == true)
                     {
+                        MessageBox.Show("Xóa nhóm thành công");
                         await ReloadNhom();
-                        MessageBox.Show("Xóa nhóm thành công.");
                     }
                     else
                     {
@@ -316,6 +325,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     }
                     return;
                 }
+                
             });
 
         }
@@ -356,7 +366,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 return;
             }
             await ReloadNhom();
-            MessageBox.Show("Thêm nhóm không thành công.");
+            MessageBox.Show("Đổi tên nhóm thành công.");
             return;
         }
 
@@ -577,11 +587,12 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         private void GanDanhSachTenNhom()
         {
-            DanhSachTenNhom = new List<string>();
+            List<String> dstennhom = new List<string>();
             foreach(var i in DanhSachNhomNguoiDung)
             {
-                DanhSachTenNhom.Add(i.Nhom.TenNhom);
+                dstennhom.Add(i.Nhom.TenNhom);
             }
+            DanhSachTenNhom = dstennhom;
             OnPropertyChanged(nameof(DanhSachTenNhom));
         }
     }

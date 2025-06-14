@@ -21,6 +21,7 @@ using QuanLyTiecCuoi.Core;
 using QuanLyTiecCuoi.MVVM.View.TuyChinh;
 using QuanLyTiecCuoi.MVVM.View.MainVindow;
 using QuanLyTiecCuoi.MVVM.View;
+using QuanLyTiecCuoi.MVVM.View.NhanVien;
 
 
 namespace QuanLyTiecCuoi
@@ -106,8 +107,8 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<ChonDichVu>();
                     services.AddTransient<TuyChinhMonAn>();
                     services.AddTransient<TuyChinhDichVu>();
+                    services.AddTransient<TuyChinhQuyDinhPage>();
                     services.AddTransient<CaPage>();
-
 
                     services.AddTransient<LoaiSanhRepository>();
                     services.AddTransient<SanhRepository>();
