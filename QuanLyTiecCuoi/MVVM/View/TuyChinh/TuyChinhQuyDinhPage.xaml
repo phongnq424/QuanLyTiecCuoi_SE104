@@ -1,0 +1,47 @@
+﻿<Page x:Class="QuanLyTiecCuoi.MVVM.View.TuyChinh.TuyChinhQuyDinhPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.TuyChinh"
+      mc:Ignorable="d" 
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      d:DesignHeight="796" d:DesignWidth="1600"
+      Background="#ffffee"
+      x:Name="QuyDinhPage"
+      Title="TuyChinhQuyDinhPage">
+    <Grid>
+        <StackPanel>
+            
+        <TextBlock Text="Chỉnh sửa quy định" 
+                   VerticalAlignment="Top"
+                   Margin="20"
+                   Style="{StaticResource Header2Style}"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <TextBlock Text="Áp dụng quy định phạt thanh toán trễ:"
+                    Style="{StaticResource Header3Style}"/>
+                <CheckBox
+                        Content=""
+                        FontSize="20"
+                        FontFamily="Cambria"
+                        Margin="15,9,5,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        IsChecked="{Binding UseDateFilter}"
+                        Foreground="black"
+                        Background="#FDE6C2"/>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <TextBlock Text="Tỷ lệ phạt than toán trễ theo ngày:"
+                    Style="{StaticResource Header3Style}"/>
+                <TextBox Text="{Binding TenDangNhapDuocChinhSua}"
+                    IsEnabled="False"
+                    Style="{StaticResource TextBoxDescribeStyle}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"></StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

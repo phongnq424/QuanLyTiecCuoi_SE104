@@ -1,0 +1,341 @@
+﻿<Page x:Class="QuanLyTiecCuoi.MVVM.View.NhanVien.NhanVienPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.TuyChinh"
+      mc:Ignorable="d" 
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      x:Name="TraCuuHoaDon"
+      Background="Transparent"
+      d:DesignHeight="1000" d:DesignWidth="1600"
+      Title="NhanVienPage">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding FirstLoadCommand}" 
+                                   CommandParameter="{Binding ElementName=DangNhapWindow}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border
+        BorderBrush="#673500"
+        BorderThickness="2"
+        CornerRadius="40"
+        Background="#ffffee">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+
+                <TextBlock 
+                Text="Serenité Wedding"
+                Style="{StaticResource Header1Style}"/>
+            </Grid>
+            <Grid Grid.Row="1" Margin="30">
+                <TabControl Background="Transparent">
+                    <TabItem Style="{StaticResource TabItemMyStyle}"
+                     Tag="Nhân viên">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.75*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Border Margin="20">
+                                <ListView 
+                        x:Name="NhanVienList" 
+                        Background="White"
+                        Margin="0"
+                        FontSize="16"
+                        ItemsSource="{Binding DanhSachNguoiDung}"
+                        SelectedItem="{Binding NhanVienDuocChon}" >
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction 
+                                        Command="{Binding ChonNhanVienCommand}"
+                                        CommandParameter="{Binding SelectedItem, ElementName=NhanVienList}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Width="160" Header="Tên đăng nhập"
+                                                    HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock
+                                                Style="{StaticResource Header6Style}"
+                                                Text="{Binding TenDangNhap}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="160" Header="Tên nhóm"
+                                                HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock
+                                                Style="{StaticResource Header6Style}"
+                                                Text="{Binding NHOMNGUOIDUNG.TenNhom}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn
+                                        Width="50">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button
+                                                      Margin="0"
+                                                      Style="{StaticResource ButtonStyleDeleteBillInfor}"
+                                                      Command="{Binding DataContext.XoaNguoiDungCommand,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                      CommandParameter="{Binding}"></Button>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Border>
+
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0">
+                                    <TextBlock Text="Thêm nhân viên"
+                                       Margin="10,20"
+                                        Style="{StaticResource Header2Style}"/>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                        <TextBlock Text="Tên đăng nhập:"
+                                           Width="170"
+                                        Style="{StaticResource Header3Style}"/>
+                                        <TextBox Text="{Binding TenDangNhapMoi}"
+                                        Style="{StaticResource TextBoxDescribeStyle}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                        <TextBlock Text="Mật khẩu:"
+                                           Width="170"
+                                        Style="{StaticResource Header3Style}"/>
+                                        <TextBox Text="{Binding MatKhauMoi}"
+                                        Style="{StaticResource TextBoxDescribeStyle}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                        <TextBlock Text="Nhóm người dùng:"
+                                           Width="170"
+                                        Style="{StaticResource Header3Style}"/>
+                                        <ComboBox 
+                                    x:Name="nhom_cbb"
+                                    ItemsSource="{Binding DanhSachTenNhom}"
+                                    Style="{StaticResource ComboBoxStyle1}"                                    
+                                    Margin="5,0,100,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Width="190" Height="30">
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <Button 
+                                HorizontalAlignment="Right"
+                                Width="200"
+                                Margin="20"
+                                Command="{Binding ThemNguoiDungCommand}"
+                                CommandParameter="{Binding SelectedItem, ElementName=nhom_cbb}"
+                                Style="{StaticResource ButtonAddServiceStyle}"
+                                Content="Thêm nhân viên">
+
+                                    </Button>
+
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Visibility="{Binding ChinhSuaVisibility}">
+                                    <TextBlock Text="Chỉnh sửa nhân viên"
+                                 Margin="10,20"
+                                 Style="{StaticResource Header2Style}"/>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                        <TextBlock Text="Tên đăng nhập:"
+                                     Width="170"
+                                    Style="{StaticResource Header3Style}"/>
+                                        <TextBox Text="{Binding TenDangNhapDuocChinhSua}"
+                                         IsEnabled="False"
+                                    Style="{StaticResource TextBoxDescribeStyle}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                        <TextBlock Text="Nhóm người dùng:"
+                                    Width="170"
+                                    Style="{StaticResource Header3Style}"/>
+                                        <ComboBox 
+                                    x:Name="nhom2_cbb"
+                                    ItemsSource="{Binding DanhSachTenNhom}"
+                                    SelectedItem="{Binding NhomDuocChinhSua}"
+                                    Style="{StaticResource ComboBoxStyle1}"                                    
+                                    Margin="5,0,100,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Width="190" Height="30">
+                                        </ComboBox>
+                                    </StackPanel>
+
+                                    <Button 
+                                HorizontalAlignment="Right"
+                                Width="200"
+                                Margin="20"
+                                Command="{Binding ChinhSuaNguoiDungCommand}"
+                                CommandParameter="{Binding SelectedItem, ElementName=nhom2_cbb}"
+                                Style="{StaticResource ButtonAddServiceStyle}"
+                                Content="Lưu thay đổi">
+                                    </Button>
+
+                                </StackPanel>
+                            </Grid>
+
+                        </Grid>
+                    </TabItem>
+                    <TabItem Style="{StaticResource TabItemMyStyle}"
+                     Tag="Nhóm người dùng">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.75*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <ListView
+                        x:Name="NhomList"
+                        Grid.Column="0"
+                        Margin="10"
+                        ItemsSource="{Binding DanhSachNhomNguoiDung}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction 
+                                        Command="{Binding ChonNhomCommand}"
+                                        CommandParameter="{Binding SelectedItem, ElementName=NhomList}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="160" Header="Tên nhóm"
+                                                    HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                Style="{StaticResource Header6Style}"
+                                                Text="{Binding Nhom.TenNhom}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="280" Header="Chức năng"
+                                                HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <ItemsControl ItemsSource="{Binding PhanQuyen}">
+                                                        <ItemsControl.ItemsPanel>
+                                                            <ItemsPanelTemplate>
+                                                                <WrapPanel />
+                                                            </ItemsPanelTemplate>
+                                                        </ItemsControl.ItemsPanel>
+
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Border 
+                                                        CornerRadius="5"
+                                                        BorderBrush="Black" 
+                                                        Background="Wheat" 
+                                                        Width="auto" Margin="5"
+                                                        VerticalAlignment="Top" BorderThickness="0.5" Height="auto">
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <TextBlock Margin="5,0" FontSize="13" Text="{Binding CHUCNANG.TenChucNang}"></TextBlock>
+                                                                        <Button  Style="{StaticResource XButtonStyle}"
+                                                                    Margin="0"
+                                                                    Command="{Binding DataContext.XoaPhanQuyenCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                    CommandParameter="{Binding}"/>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn
+                                        Width="50">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button
+                                                      Margin="0"
+                                                      Style="{StaticResource ButtonStyleDeleteBillInfor}"
+                                                      Command="{Binding DataContext.XoaNhomCommand,RelativeSource={RelativeSource AncestorType=Page}}"
+                                                      CommandParameter="{Binding}"></Button>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+
+                            <StackPanel Grid.Column="1">
+
+                                <TextBlock Text="Thêm nhóm"
+                            Margin="10,20"
+                             Style="{StaticResource Header2Style}"/>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                    <TextBlock Text="Tên nhóm:"
+                                 Width="170"
+                                 Style="{StaticResource Header3Style}"/>
+                                    <TextBox x:Name="TenNhomMoi"
+                                    Text="{Binding TenNhomMoi, Mode=TwoWay}"
+                                    Style="{StaticResource TextBoxDescribeStyle}"/>
+                                    <Button 
+                                HorizontalAlignment="Right"
+                                Width="200"
+                                Margin="50,0"
+                                Command="{Binding ThemNhomCommand}"
+                                CommandParameter="{Binding Text, ElementName=TenNhomMoi}"
+                                Style="{StaticResource ButtonAddServiceStyle}"
+                                Content="Thêm nhóm"/>
+                                </StackPanel>
+
+                                <TextBlock Text="Chỉnh sửa nhóm"
+                            Margin="10,20"
+                             Style="{StaticResource Header2Style}"/>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                    <TextBlock Text="Tên nhóm:"
+                                 Width="170"
+                                 Style="{StaticResource Header3Style}"/>
+                                    <TextBox Text="{Binding TenNhomDuocChinhSua}"
+                                    Style="{StaticResource TextBoxDescribeStyle}"/>
+                                    <Button 
+                                HorizontalAlignment="Right"
+                                Width="200"
+                                Margin="50,0"
+                                Command="{Binding ChinhSuaNhomCommand}"
+                                Style="{StaticResource ButtonAddServiceStyle}"
+                                Content="Lưu tên nhóm">
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                    <TextBlock Text="Thêm chức năng:"
+                                Width="170"
+                                Style="{StaticResource Header3Style}"/>
+                                    <ComboBox 
+                                 x:Name="Chucnang_cbb"
+                                 ItemsSource="{Binding DanhSachTenChucNang}"
+                                 Style="{StaticResource ComboBoxStyle1}"                                    
+                                 Margin="5,0,5,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Center"
+                                 Width="190" Height="30">
+                                    </ComboBox>
+                                    <Button 
+                                HorizontalAlignment="Right"
+                                Width="200"
+                                Margin="50,0"
+                                Command="{Binding ChinhSuaNhomCommand}"
+                                CommandParameter="{Binding SelectedItem, ElementName=Chucnang_cbb}"
+                                Style="{StaticResource ButtonAddServiceStyle}"
+                                Content="Thêm chức năng"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>

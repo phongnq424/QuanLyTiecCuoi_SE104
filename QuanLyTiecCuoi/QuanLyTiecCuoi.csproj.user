@@ -25,10 +25,13 @@
     <Compile Update="MVVM\View\TuyChinh\AutoCloseMessageBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MVVM\View\TuyChinh\NhanVienPage.xaml.cs">
+    <Compile Update="MVVM\View\NhanVien\NhanVienPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MVVM\View\TuyChinh\TuyChinhPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\TuyChinh\TuyChinhQuyDinhPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

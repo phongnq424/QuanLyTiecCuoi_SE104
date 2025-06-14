@@ -41,11 +41,10 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         {
             switch (p)
             {
-                case "Nhân viên": return "TuyChinh.NhanVienPage";
                 case "Loại sảnh": return "DSLoaiSanhView";
                 case "Món ăn": return "MonAn.TuyChinhMonAn";
                 case "Dịch vụ": return "DichVu.TuyChinhDichVu";
-                case "Quy định": return "null";
+                case "Quy định": return "TuyChinh.TuyChinhQuyDinhPage";
                 default: return "";
                        
             }
