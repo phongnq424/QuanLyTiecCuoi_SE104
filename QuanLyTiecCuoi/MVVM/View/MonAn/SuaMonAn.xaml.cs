@@ -7,6 +7,8 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using QuanLyTiecCuoi.MVVM.Model;
 using QuanLyTiecCuoi.Data.Models;
+using Microsoft.Extensions.DependencyInjection;
+using QuanLyTiecCuoi.Services;
 
 namespace QuanLyTiecCuoi.MVVM.View.MonAn
 {
@@ -19,8 +21,9 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
         {
             InitializeComponent();
 
-            this.DataContext = _monAn;
+            
             _monAn = monAn;
+            this.DataContext = _monAn;
 
             // Nếu ảnh là URL (link online), cần xử lý đặc biệt
             if (!string.IsNullOrEmpty(monAn.HinhAnh))
@@ -35,6 +38,35 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
                 }
             }
         }
+        
+
+        private void TxtHinhAnh_LostFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var imageUrl = txtHinhAnh.Text?.Trim();
+                if (!string.IsNullOrEmpty(imageUrl))
+                {
+                    imgMonAn.Source = new BitmapImage(new Uri(imageUrl));
+                    _monAn.HinhAnh = imageUrl;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Không thể tải ảnh từ đường dẫn.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            txtHinhAnh.Visibility = Visibility.Collapsed;
+        }
+
+        private void Image_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            txtHinhAnh.Visibility = Visibility.Visible;
+            txtHinhAnh.Focus();
+            txtHinhAnh.SelectAll();
+        }
+
+
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -49,40 +81,53 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
         private void TxtTenMon_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             txtTenMon.IsReadOnly = false;
+            txtTenMon.Background = Brushes.White;
             txtTenMon.Focus();
         }
 
         private void TxtTenMon_LostFocus(object sender, RoutedEventArgs e)
         {
             txtTenMon.IsReadOnly = true;
+            txtTenMon.Background = Brushes.Transparent;
         }
 
         private void TxtDonGia_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             txtDonGia.IsReadOnly = false;
+            txtDonGia.Background = Brushes.White;
             txtDonGia.Focus();
         }
 
         private void TxtDonGia_LostFocus(object sender, RoutedEventArgs e)
         {
             txtDonGia.IsReadOnly = true;
-
-            // Convert lại về số nếu người dùng gõ chuỗi
-            if (decimal.TryParse(txtDonGia.Text, out decimal gia))
-            {
-                _monAn.DonGia = gia;
-            }
-            else
-            {
-                MessageBox.Show("Giá không hợp lệ.");
-                txtDonGia.Text = _monAn.DonGia.ToString();
-            }
+            txtDonGia.Background = Brushes.Transparent;
         }
 
-        private void ImgMonAn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ChangeButton_Click(object sender, RoutedEventArgs e)
         {
-            // Tùy chọn: Mở cửa sổ đổi ảnh?
-            MessageBox.Show("Tính năng chọn ảnh sẽ được thêm sau.");
+            try
+            {
+                var monAnService = App.AppHost.Services.GetService<MonAnService>();
+
+                if (monAnService != null)
+                {
+                    monAnService.CapNhatMonAn(_monAn); // Cập nhật vào database
+                    MessageBox.Show("Cập nhật thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy dịch vụ MonAnService", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+                this.Close(); // Đóng cửa sổ sau khi cập nhật
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+
     }
 }

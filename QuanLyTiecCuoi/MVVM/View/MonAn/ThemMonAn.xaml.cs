@@ -66,16 +66,29 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
             }
         }
 
-        private void ImgMonAn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Image_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
-
-            if (dlg.ShowDialog() == true)
+            txtHinhAnh.Visibility = Visibility.Visible;
+            txtHinhAnh.Focus();
+            txtHinhAnh.SelectAll();
+        }
+        private void TxtHinhAnh_LostFocus(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                _monAnMoi.HinhAnh = dlg.FileName;
-                imgMonAn.Source = new BitmapImage(new Uri(dlg.FileName));
+                var imageUrl = txtHinhAnh.Text?.Trim();
+                if (!string.IsNullOrEmpty(imageUrl))
+                {
+                    imgMonAn.Source = new BitmapImage(new Uri(imageUrl));
+                    _monAnMoi.HinhAnh = imageUrl;
+                }
             }
+            catch
+            {
+                MessageBox.Show("Không thể tải ảnh từ đường dẫn.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            txtHinhAnh.Visibility = Visibility.Collapsed;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)

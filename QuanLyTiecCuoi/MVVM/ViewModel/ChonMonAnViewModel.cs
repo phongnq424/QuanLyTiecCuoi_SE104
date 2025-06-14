@@ -60,11 +60,16 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
             }
         }
 
-        public ChonMonAnViewModel()
+        public ChonMonAnViewModel(DATTIEC datTiec, ObservableCollection<MONAN> monAnDaChon)
         {
+            _datTiec = datTiec;
             _monAnService = App.AppHost.Services.GetRequiredService<MonAnService>();
+            _chiTietMenuService = App.AppHost.Services.GetRequiredService<ChiTietMenuService>();
+
+            MonAnDaChon = monAnDaChon ?? new ObservableCollection<MONAN>();
             LoadDanhSachMonAn();
         }
+
 
         private void LoadDanhSachMonAn()
         {
@@ -97,25 +102,32 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
             }
         }
 
-        private int _maDatTiec;
+        private readonly DATTIEC _datTiec;
         private readonly ChiTietMenuService _chiTietMenuService;
 
         public void LuuChiTietMenu()
         {
+            if (_datTiec == null || _datTiec.MaDatTiec == 0)
+            {
+                MessageBox.Show("Không có thông tin đặt tiệc hợp lệ để lưu thực đơn.");
+                return;
+            }
+
             foreach (var monAn in MonAnDaChon)
             {
                 var chiTiet = new CHITIETMENU
                 {
-                    MaDatTiec = _maDatTiec,
+                    MaDatTiec = _datTiec.MaDatTiec,
                     MaMon = monAn.MaMon,
-                    SoLuong = 1,
-                    GhiChu = "" // hoặc để null nếu không cần
+                    SoLuong = 1, // Có thể cập nhật cho phép người dùng chọn
+                    GhiChu = ""  // Có thể mở TextBox cho từng món
                 };
 
                 _chiTietMenuService.ThemChiTietMenu(chiTiet);
             }
 
-            MessageBox.Show("Đã lưu món ăn vào thực đơn thành công!");
+            MessageBox.Show("Lưu thực đơn thành công!");
         }
+
     }
 }

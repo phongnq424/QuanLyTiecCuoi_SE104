@@ -30,8 +30,8 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
         {
             if (sender is Button btn && btn.DataContext is DICHVU dv)
             {
-                //var window = new ChiTietTC(); // nếu có window riêng
-                //window.ShowDialog();
+                var window = new ChiTietTC(dv); // nếu có window riêng
+                window.ShowDialog();
             }
         }
 

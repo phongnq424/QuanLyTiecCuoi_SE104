@@ -105,6 +105,7 @@
         </Grid>
 
         <Frame 
+            x:Name="MainFrame"
             Padding="30"
             NavigationUIVisibility="Hidden"
             Content="{Binding CurrentView}"

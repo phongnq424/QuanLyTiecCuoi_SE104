@@ -1,111 +1,126 @@
-﻿using QuanLyTiecCuoi.Data.Models;
+﻿using QuanLyTiecCuoi.Core;
+using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.Services;
-using QuanLyTiecCuoi.Core;
-using System.Collections.ObjectModel;
 using Microsoft.Extensions.DependencyInjection;
-using System.Windows;
+using System.Collections.ObjectModel;
 using System.Linq;
-using QuanLyTiecCuoi;
+using System.Collections.Generic;
 
-public class ChonDichVuViewModel : BaseViewModel
+namespace QuanLyTiecCuoi.MVVM.ViewModel.DichVu
 {
-    private readonly DichVuService _dichVuService;
-    private readonly ChiTietDichVuService _chiTietDichVuService;
-
-    private List<DICHVU> _allDichVu = new();
-    public ObservableCollection<DICHVU> DanhSachDichVu { get; set; } = new();
-    public ObservableCollection<DICHVU> DichVuDaChon { get; set; } = new();
-
-    private string _tuKhoaTimTen;
-    public string TuKhoaTimTen
+    public class ChonDichVuViewModel : BaseViewModel
     {
-        get => _tuKhoaTimTen;
-        set
+        private readonly DichVuService _dichVuService;
+        private readonly ChiTietDichVuService _chiTietDichVuService;
+        private readonly DATTIEC _datTiec;
+
+        private List<DICHVU> _allDichVu = new();
+
+        private ObservableCollection<DICHVU> _danhSachDichVu;
+        public ObservableCollection<DICHVU> DanhSachDichVu
         {
-            _tuKhoaTimTen = value;
-            OnPropertyChanged();
-            ThucHienTimKiem();
-        }
-    }
-
-    private string _tuKhoaTimGia;
-    public string TuKhoaTimGia
-    {
-        get => _tuKhoaTimGia;
-        set
-        {
-            _tuKhoaTimGia = value;
-            OnPropertyChanged();
-            ThucHienTimKiem();
-        }
-    }
-
-    private int _maDatTiec;
-    public int MaDatTiec
-    {
-        get => _maDatTiec;
-        set
-        {
-            _maDatTiec = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public ChonDichVuViewModel()
-    {
-        _dichVuService = App.AppHost.Services.GetRequiredService<DichVuService>();
-        _chiTietDichVuService = App.AppHost.Services.GetRequiredService<ChiTietDichVuService>();
-        LoadDanhSachDichVu();
-    }
-
-    private void LoadDanhSachDichVu()
-    {
-        _allDichVu = _dichVuService.GetAllDichVu();
-        DanhSachDichVu = new ObservableCollection<DICHVU>(_allDichVu);
-        OnPropertyChanged(nameof(DanhSachDichVu));
-    }
-
-    private void ThucHienTimKiem()
-    {
-        IEnumerable<DICHVU> ketQua = _allDichVu;
-
-        if (!string.IsNullOrWhiteSpace(TuKhoaTimTen))
-        {
-            ketQua = ketQua.Where(x => x.TenDichVu?.IndexOf(TuKhoaTimTen.Trim(), StringComparison.OrdinalIgnoreCase) >= 0);
-        }
-
-        if (!string.IsNullOrWhiteSpace(TuKhoaTimGia) && decimal.TryParse(TuKhoaTimGia.Trim(), out decimal gia))
-        {
-            ketQua = ketQua.Where(x => x.DonGia == gia);
-        }
-
-        DanhSachDichVu = new ObservableCollection<DICHVU>(ketQua);
-        OnPropertyChanged(nameof(DanhSachDichVu));
-    }
-
-    public void ChonDichVu(DICHVU dichVu)
-    {
-        if (!DichVuDaChon.Contains(dichVu))
-        {
-            DichVuDaChon.Add(dichVu);
-            OnPropertyChanged(nameof(DichVuDaChon));
-        }
-    }
-
-    public void LuuChiTietDichVu()
-    {
-        foreach (var dichVu in DichVuDaChon)
-        {
-            var chiTiet = new CHITIETDVTIEC
+            get => _danhSachDichVu;
+            set
             {
-                MaDatTiec = _maDatTiec,
-                MaDichVu = dichVu.MaDichVu,
-                SoLuong = 1 // hoặc cho chọn số lượng nếu có giao diện
-            };
-
-            _chiTietDichVuService.ThemChiTiet(chiTiet);
+                _danhSachDichVu = value;
+                OnPropertyChanged();
+            }
         }
 
-        MessageBox.Show("Đã lưu dịch vụ vào chi tiết đặt tiệc thành công!");
+        private ObservableCollection<DICHVU> _dichVuDaChon = new();
+        public ObservableCollection<DICHVU> DichVuDaChon
+        {
+            get => _dichVuDaChon;
+            set
+            {
+                _dichVuDaChon = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _tuKhoaTen;
+        public string TuKhoaTen
+        {
+            get => _tuKhoaTen;
+            set
+            {
+                _tuKhoaTen = value;
+                OnPropertyChanged();
+                ThucHienTimKiem();
+            }
+        }
+
+        private string _tuKhoaGia;
+        public string TuKhoaGia
+        {
+            get => _tuKhoaGia;
+            set
+            {
+                _tuKhoaGia = value;
+                OnPropertyChanged();
+                ThucHienTimKiem();
+            }
+        }
+
+        public ChonDichVuViewModel(DATTIEC datTiec, ObservableCollection<DICHVU> dichVuDaChon)
+        {
+            _datTiec = datTiec;
+            _dichVuService = App.AppHost.Services.GetRequiredService<DichVuService>();
+            _chiTietDichVuService = App.AppHost.Services.GetRequiredService<ChiTietDichVuService>();
+
+            DichVuDaChon = dichVuDaChon ?? new ObservableCollection<DICHVU>();
+            LoadDanhSachDichVu();
+        }
+
+        private void LoadDanhSachDichVu()
+        {
+            _allDichVu = _dichVuService.GetAllDichVu();
+            DanhSachDichVu = new ObservableCollection<DICHVU>(_allDichVu);
+        }
+
+        private void ThucHienTimKiem()
+        {
+            IEnumerable<DICHVU> ketQua = _allDichVu;
+
+            if (!string.IsNullOrWhiteSpace(TuKhoaTen))
+            {
+                ketQua = ketQua.Where(x => x.TenDichVu?.IndexOf(TuKhoaTen.Trim(), System.StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            if (!string.IsNullOrWhiteSpace(TuKhoaGia) && decimal.TryParse(TuKhoaGia.Trim(), out decimal gia))
+            {
+                ketQua = ketQua.Where(x => x.DonGia == gia);
+            }
+
+            DanhSachDichVu = new ObservableCollection<DICHVU>(ketQua);
+        }
+
+        public void ChonDichVu(DICHVU dichVu)
+        {
+            if (!DichVuDaChon.Contains(dichVu))
+            {
+                DichVuDaChon.Add(dichVu);
+            }
+        }
+
+        public void LuuChiTietDichVu()
+        {
+            if (_datTiec == null || _datTiec.MaDatTiec <= 0)
+                return;
+
+            foreach (var dichVu in DichVuDaChon)
+            {
+                var chiTiet = new CHITIETDVTIEC
+                {
+                    MaDatTiec = _datTiec.MaDatTiec,
+                    MaDichVu = dichVu.MaDichVu,
+                    SoLuong = 1, // hoặc bạn cho người dùng chọn số lượng
+                    DonGia = dichVu.DonGia,
+                    // ThanhTien = DonGia * SoLuong => sẽ được tính tự động nếu bạn có property readonly
+                };
+
+                _chiTietDichVuService.ThemChiTiet(chiTiet);
+            }
+        }
     }
 }

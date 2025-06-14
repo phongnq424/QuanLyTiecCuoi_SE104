@@ -5,7 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.DichVu"
       mc:Ignorable="d"
-      Title="ChonDichVu" d:DesignHeight="1000" d:DesignWidth="1600">
+      Title="ChonDichVu" d:DesignHeight="796" d:DesignWidth="1600">
 
     <Page.Resources>
         <Style x:Key="WindowButtonStyle" TargetType="Button">
@@ -35,38 +35,37 @@
         <Style x:Key="SearchBoxStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="15"/>
             <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="#CCC"/>
+            <Setter Property="BorderBrush" Value="#673500"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="5,2"/>
+            <Setter Property="Padding" Value="10,3"/>
         </Style>
     </Page.Resources>
 
-    <Viewbox Stretch="Uniform">
-        <Border Background="White" CornerRadius="12" BorderBrush="#AAA" BorderThickness="1" Width="1600" Height="1000">
+    <Grid Background="#ffffee">
+        <Border Background="#ffffee" CornerRadius="20" BorderBrush="#673500" BorderThickness="2" Margin="0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <DockPanel Grid.Row="0" Background="#F5F5F5" LastChildFill="True">
-                    <TextBlock Text="Chọn dịch vụ" FontWeight="Bold" FontSize="24" VerticalAlignment="Center" Margin="10,0"/>
+                <!-- Header -->
+                <DockPanel Grid.Row="0" LastChildFill="True">
+                    <TextBlock Text="Chọn dịch vụ" FontWeight="Bold" FontSize="35" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,400,0" />
 
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center">
-                        <Button Style="{StaticResource WindowButtonStyle}" Content="─" Click="Minimize_Click"/>
-                        <Button Style="{StaticResource WindowButtonStyle}" Content="□" Click="Maximize_Click"/>
                         <Button Style="{StaticResource WindowButtonStyle}" Content="✕" Click="Close_Click"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,10,0">
-                        <Border Style="{StaticResource SearchBoxStyle}" Margin="0,0,10,0">
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,30,0">
+                        <Border Style="{StaticResource SearchBoxStyle}" Margin="0,0,30,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtSearchName" Grid.Column="0" Width="150" BorderThickness="0" VerticalContentAlignment="Center" FontSize="20" FontStyle="Italic" Foreground="#888" Text="Tên dịch vụ" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
-                                <Button Grid.Column="1" Style="{StaticResource WindowButtonStyle}" Padding="0" Content="🔍"/>
+                                <TextBox x:Name="txtSearchName" Grid.Column="0" Width="150" BorderThickness="0" VerticalContentAlignment="Center" Foreground="#888" Text="Tên dịch vụ" FontSize="20" FontFamily="Cambria" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <Button Grid.Column="1" Style="{StaticResource WindowButtonStyle}" Content="🔍"/>
                             </Grid>
                         </Border>
 
@@ -76,91 +75,100 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" FontSize="20" Foreground="#888" Text="Đơn giá" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" Foreground="#888" Text="Đơn giá" FontSize="20" FontFamily="Cambria" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
                                 <Button Grid.Column="1" Style="{StaticResource WindowButtonStyle}" Content="🔍"/>
                             </Grid>
                         </Border>
                     </StackPanel>
                 </DockPanel>
 
+                <!-- Content -->
                 <Grid Grid.Row="1" Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0">
+                    <!-- Danh sách dịch vụ -->
+                    <Grid Grid.Column="0" Width="Auto" MinWidth="900">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Danh sách dịch vụ:" FontWeight="Bold" FontSize="24" Margin="0,0,0,5" Grid.Row="0"/>
+                        <TextBlock Text="Danh sách dịch vụ:" FontWeight="Bold" FontSize="24" FontFamily="Cambria" Margin="0,0,0,5" Grid.Row="0"/>
 
-                        <Border Grid.Row="1" BorderBrush="#AAA" BorderThickness="1" CornerRadius="8" Padding="10">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-
-                                <Border Grid.Row="0" Background="#DDD" CornerRadius="6" Padding="5" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                    <TextBlock Text="Danh sách dịch vụ" FontSize="24" FontWeight="Bold"/>
-                                </Border>
-
-                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                                    <ItemsControl ItemsSource="{Binding DanhSachDichVu}">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal" ItemWidth="350" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Border BorderBrush="#999" BorderThickness="1" CornerRadius="5" Width="330" Margin="10"
-                                                        MouseLeftButtonDown="DichVu_Click">
-                                                    <Grid Margin="5">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto" />
-                                                            <ColumnDefinition Width="*" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <Image Source="/Images/coffee.png" Width="100" Height="100" Grid.Column="0" />
-                                                        <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
-                                                            <TextBlock Text="{Binding TenDichVu}" FontWeight="Bold" FontSize="14" />
-                                                            <TextBlock Text="{Binding DonGia, StringFormat='Giá: {0:N0} VND'}" FontSize="11" Foreground="Gray" />
-                                                        </StackPanel>
-                                                    </Grid>
-                                                </Border>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </ScrollViewer>
-                            </Grid>
+                        <Border Grid.Row="1" BorderBrush="#673500" BorderThickness="2" CornerRadius="8" Padding="10">
+                            <ScrollViewer Background="White" VerticalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{Binding DanhSachDichVu}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal" ItemWidth="400" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderBrush="#673500" BorderThickness="1" CornerRadius="5" Width="400" MouseLeftButtonDown="DichVu_Click">
+                                                <Grid Margin="10" Background="White">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="2*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Source="{Binding HinhAnh}" Width="180" Height="180" Grid.Column="0" />
+                                                    <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding TenDichVu}" FontWeight="Bold" FontSize="20" FontFamily="Cambria" />
+                                                        <TextBlock Text="{Binding DonGia, StringFormat='Giá: {0:N0} VND'}" FontSize="15" Foreground="Gray" FontFamily="Cambria" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
                         </Border>
                     </Grid>
 
-                    <StackPanel Grid.Column="1" Margin="20,0,0,0">
-                        <TextBlock Text="Các dịch vụ đã chọn:" FontWeight="Bold" FontSize="24" Margin="0,0,0,5"/>
-                        <ListBox x:Name="lstSelectedFoods"
-                             ItemsSource="{Binding DichVuDaChon}"
-                             BorderBrush="#AAA"
-                             BorderThickness="1"
-                             Height="815"
-                             Width="Auto"
-                             Margin="0,0,0,10"
-                             FontSize="24"
-                             Foreground="Black"/>
+                    <!-- Danh sách đã chọn -->
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Các dịch vụ đã chọn:" FontWeight="Bold" FontSize="24" FontFamily="Cambria" Margin="0,0,0,5" Grid.Row="0"/>
+
+                        <Border Grid.Row="1"
+                                CornerRadius="10"
+                                BorderBrush="#673500"
+                                BorderThickness="2"
+                                Background="White"
+                                Margin="10,0,0,10">
+                            <ListBox x:Name="lstSelectedFoods"
+                                     ItemsSource="{Binding DichVuDaChon}"
+                                     DisplayMemberPath="TenDichVu"
+                                     BorderThickness="0"
+                                     FontSize="20"
+                                     FontFamily="Cambria"
+                                     Foreground="Black"
+                                     Margin="10,0,0,10"/>
+                        </Border>
 
                         <Button Content="OK"
-                            Style="{StaticResource ButtonStyle}"
-                            Width="100"
-                            Height="30"
-                            HorizontalAlignment="Right"
-                            Margin="0,10,0,0"
-                            Click="OkButton_Click"/>
-                    </StackPanel>
+                                FontSize="20"
+                                FontFamily="Cambria"
+                                Grid.Row="2"
+                                Width="150"
+                                Height="50"
+                                HorizontalAlignment="Right"
+                                Margin="0,10,0,0"
+                                Background="#673500"
+                                Foreground="White"
+                                BorderBrush="#673500"
+                                Click="OkButton_Click"/>
+                    </Grid>
                 </Grid>
             </Grid>
         </Border>
-    </Viewbox>
+    </Grid>
 </Page>

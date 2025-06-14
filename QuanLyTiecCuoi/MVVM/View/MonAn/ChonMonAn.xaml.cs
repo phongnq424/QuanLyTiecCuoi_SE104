@@ -1,5 +1,7 @@
 ﻿using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.MVVM.View.MainVindow;
 using QuanLyTiecCuoi.MVVM.ViewModel.MonAn;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,10 +12,10 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
     {
         private readonly ChonMonAnViewModel _viewModel;
 
-        public ChonMonAn()
+        public ChonMonAn(DATTIEC datTiec, ObservableCollection<MONAN> monAnDaChon)
         {
             InitializeComponent();
-            _viewModel = new ChonMonAnViewModel();
+            _viewModel = new ChonMonAnViewModel(datTiec, monAnDaChon);
             this.DataContext = _viewModel;
         }
 
@@ -28,7 +30,23 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             _viewModel.LuuChiTietMenu();
+
+            // Cách 1: nếu NavigationService hoạt động
+            if (this.NavigationService != null && this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
+            else
+            {
+                // Cách 2: fallback khi NavigationService null (dùng MainFrame của MainWindow)
+                var mainWindow = Application.Current.MainWindow as MainWindow;
+                if (mainWindow != null && mainWindow.MainFrame.CanGoBack)
+                {
+                    mainWindow.MainFrame.GoBack();
+                }
+            }
         }
+
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -68,27 +86,12 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
             }
         }
 
-        private void Minimize_Click(object sender, RoutedEventArgs e)
-        {
-            var window = Window.GetWindow(this);
-            if (window != null)
-                window.WindowState = WindowState.Minimized;
-        }
-
-        private void Maximize_Click(object sender, RoutedEventArgs e)
-        {
-            var window = Window.GetWindow(this);
-            if (window != null)
-                window.WindowState = (window.WindowState == WindowState.Maximized)
-                    ? WindowState.Normal
-                    : WindowState.Maximized;
-        }
-
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            var window = Window.GetWindow(this);
-            if (window != null)
-                window.Close();
+            if (this.NavigationService != null && this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
         }
     }
 }

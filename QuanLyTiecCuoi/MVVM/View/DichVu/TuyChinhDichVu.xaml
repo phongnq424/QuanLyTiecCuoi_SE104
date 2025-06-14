@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.DichVu"
       mc:Ignorable="d" 
-      d:DesignHeight="796" d:DesignWidth="1600"
+      d:DesignHeight="600" d:DesignWidth="1600"
       Title="TuyChinhDichVu">
 
     <Page.Resources>
@@ -42,8 +42,8 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="#FFFDF9">
-        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="20">
+    <Grid Background="#FFFFee">
+        <Border BorderBrush="#673500" BorderThickness="1" CornerRadius="10" Margin="0">
             <Grid Grid.Row="1" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
@@ -53,11 +53,11 @@
                 <StackPanel Grid.Column="0">
                     <Border BorderBrush="#AAA" BorderThickness="1" CornerRadius="8" Padding="10">
                         <StackPanel>
-                            <Border Background="#DDD" CornerRadius="6" Padding="5" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                <TextBlock Text="Danh sách dịch vụ" FontWeight="Bold"/>
+                            <Border CornerRadius="6" Padding="5" HorizontalAlignment="Center" Margin="0,0,0,10">
+                                <TextBlock Text="Danh sách dịch vụ" FontWeight="Bold" FontSize="35" FontFamily="Cambria"/>
                             </Border>
 
-                            <ScrollViewer Height="700" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer Background="White" Height="420" VerticalScrollBarVisibility="Auto">
                                 <ItemsControl x:Name="itemsControlDichVu" ItemsSource="{Binding DanhSachDichVu}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -87,13 +87,13 @@
 
                 <StackPanel Grid.Column="1" Margin="20,0,0,0">
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom" VerticalAlignment="Center" Margin="0,0,0,0">
-                        <Border Style="{StaticResource SearchBoxStyle}" Margin="0,10,10,10">
+                        <Border Style="{StaticResource SearchBoxStyle}" Margin="0,10,10,10" Width="156" RenderTransformOrigin="0.498,0.531">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtSearchName" Grid.Column="0" Width="150" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Tên dịch vụ" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <TextBox x:Name="txtSearchName" Grid.Column="0" BorderThickness="0" VerticalContentAlignment="Center" FontSize="15" FontFamily="Cambria" Foreground="#888" Text="Tên dịch vụ" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus" Grid.ColumnSpan="2"/>
                                 <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Padding="0" Content="🔍"/>
                             </Grid>
                         </Border>
@@ -104,12 +104,24 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Đơn giá" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontSize="15" FontFamily="Cambria" Foreground="#888" Text="Đơn giá" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
                                 <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Content="🔍"/>
                             </Grid>
                         </Border>
                     </StackPanel>
-                    <Button x:Name="btnThemDichVu" Content="Thêm dịch vụ" Width="100" Height="30" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="0,10,0,0" Click="BtnThemDichVu_Click"/>
+                    <Button x:Name="btnThemDichVu" 
+                            Content="Thêm dịch vụ" 
+                            FontSize="20"
+                            FontFamily="Cambria"
+                            Background="#673500"
+                            Foreground="White"
+                            BorderBrush="#673500"
+                            Width="150" 
+                            Height="40" 
+                            DockPanel.Dock="Bottom" 
+                            HorizontalAlignment="Center" 
+                            Margin="0,10,0,0" 
+                            Click="BtnThemDichVu_Click"/>
                 </StackPanel>
             </Grid>
         </Border>

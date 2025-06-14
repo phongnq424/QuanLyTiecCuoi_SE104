@@ -20,7 +20,6 @@ namespace QuanLyTiecCuoi.Repository
         public List<MONAN> GetAll()
         {
             var result = _context.MonAns.AsNoTracking().ToList();
-            MessageBox.Show($"[DEBUG] Số lượng món ăn từ DB: {result.Count}");
             return result;
         }
 

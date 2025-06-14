@@ -14,7 +14,8 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)

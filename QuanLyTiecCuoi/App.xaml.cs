@@ -72,6 +72,7 @@ namespace QuanLyTiecCuoi
                     services.AddScoped<ChiTietMenuService>();
                     services.AddTransient<ThamSoService>();
                     services.AddTransient<CaService>();
+                    services.AddTransient<STTConverter>();
 
                     // Các ViewModel
                     services.AddTransient<MainWindowViewModel>();
