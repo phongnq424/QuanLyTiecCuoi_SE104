@@ -5,31 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.DichVu"
         mc:Ignorable="d"
-        Title="Thêm dịch vụ" Height="350" Width="250"
+        Title="Thêm dịch vụ" Height="550" Width="400"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
-    <Window.Resources>
-        <!-- Converter đơn giản để chuyển empty string => Visible -->
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
-        <!-- Style cho tất cả TextBox dùng Watermark -->
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <Style x:Key="WatermarkTextBoxStyle" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Cambria"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Grid>
-                            <!-- Host phần nhập -->
                             <ScrollViewer x:Name="PART_ContentHost" />
-
-                            <!-- Watermark TextBlock -->
                             <TextBlock Text="{TemplateBinding Tag}"
-                                   Foreground="LightGray"
-                                   IsHitTestVisible="False"
-                                   Margin="0,0,0,0"
-                                   VerticalAlignment="Center"
-                                   Visibility="{Binding Text.IsEmpty, 
+                                       Foreground="LightGray"
+                                       IsHitTestVisible="False"
+                                       VerticalAlignment="Center"
+                                       FontFamily="Cambria"
+                                       FontSize="20"
+                                       Visibility="{Binding Text.IsEmpty, 
                                               RelativeSource={RelativeSource TemplatedParent},
                                               Converter={StaticResource BoolToVis}}"/>
                         </Grid>
@@ -38,78 +36,96 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid>
-        <Border CornerRadius="20" BorderBrush="#111" BorderThickness="2"  Background="#FFF">
 
+    <Grid>
+        <Border CornerRadius="20" BorderBrush="#673500" BorderThickness="2" Background="#ffffee">
             <StackPanel>
-                <StackPanel DockPanel.Dock ="Right" Orientation="Horizontal">
-                    <TextBlock Text="Thêm dịch vụ" 
-                               TextAlignment="Center" Width="201" Height="14" FontWeight="Bold" Margin="15,0,0,0"/>
+
+                <!-- Header -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="80,10,0,0" Width="336">
+                    <TextBlock Text="Thêm dịch vụ"
+                               FontFamily="Cambria"
+                               FontSize="25"
+                               FontWeight="Bold"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Margin="50,0,20,0"
+                               VerticalAlignment="Center"/>
                     <Button x:Name="btnClose"
-                            Content="✕" 
-                            Width="20" 
-                            Height="20" 
-                            Margin="0,10,0,0"
+                            Content="✕"
+                            Background="#ffffee"
+                            Width="29"
+                            Height="24"
+                            Margin="70,5,0,5"
+                            BorderThickness="0"
                             Click="BtnClose_Click"/>
                 </StackPanel>
-                <Image 
-                    x:Name="imgDichVu"
-                    Source="{Binding ImagePath}" 
-                    Width="200" Height="170" 
-                    Stretch="UniformToFill" 
-                    
-                    Margin="5"
-                    MouseLeftButtonDown="imgDichVu_MouseLeftButtonDown"/>
-                <TextBox 
-                            Style="{StaticResource WatermarkTextBoxStyle}"
-                            Tag="Tên dịch vụ"
-                            Text="{Binding TenDichVu, Mode=TwoWay}"
-                            x:Name="txtTenDichVu"
-                            FontWeight="Bold" 
-                            FontSize="15" 
-                            
-                            TextAlignment="Center" 
-                            Margin="5,5,5,0"
-                            IsReadOnly="True"
-                            Background="Transparent"
-                            BorderThickness="1"
-                            MouseDoubleClick="TxtTenDichVu_MouseDoubleClick"
-                            LostFocus="TxtTenDichVu_LostFocus"/>
-                <TextBox 
-                     x:Name="txtDonGia"
-                    Style="{StaticResource WatermarkTextBoxStyle}"
-                    Tag="Đơn giá"
-                     Text="{Binding DonGia}" 
-                     
-                     FontSize="15" 
-                     TextAlignment="Center" 
-                     Margin="5,5,5,0"
-                     IsReadOnly="True"
-                     Background="Transparent"
-                     BorderThickness="1"
-                     MouseDoubleClick="TxtDonGia_MouseDoubleClick"
-                     LostFocus="TxtDonGia_LostFocus"/>
-                <TextBox 
-                     x:Name="txtMoTa"
-                    Style="{StaticResource WatermarkTextBoxStyle}"
-                    Tag="Mô tả"
-                     Text="{Binding MoTa}" 
-     
-                     FontSize="15" 
-                     TextAlignment="Center" 
-                     Margin="5,5,5,0"
-                     IsReadOnly="True"
-                     Background="Transparent"
-                     BorderThickness="1"
-                     MouseDoubleClick="TxtMoTa_MouseDoubleClick"
-                     LostFocus="TxtMoTa_LostFocus"/>
-                <Button Height="20" Width="40"
-                        Content ="Thêm"
-                        Margin="0,10,20,0"
-                        HorizontalAlignment="Right"
+
+                <!-- Hình ảnh -->
+                <Label HorizontalAlignment="Center" MouseDoubleClick="imgDichVu_MouseLeftButtonDown">
+                    <Image x:Name="imgDichVu"
+                           Source="{Binding ImagePath}"
+                           Width="300" Height="270"
+                           Stretch="UniformToFill"
+                           Margin="10"/>
+                </Label>
+                <TextBox x:Name="txtImagePath"
+                         Text="{Binding ImagePath, Mode=TwoWay}"
+                         Visibility="Collapsed"
+                         FontSize="14"
+                         Margin="10,0,10,10"
+                         Tag="Dán đường link ảnh tại đây" />
+
+                <!-- Tên dịch vụ -->
+                <TextBox Style="{StaticResource WatermarkTextBoxStyle}"
+                         Tag="Tên dịch vụ"
+                         Text="{Binding TenDichVu, Mode=TwoWay}"
+                         x:Name="txtTenDichVu"
+                         TextAlignment="Center"
+                         Margin="10,5"
+                         IsReadOnly="True"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         MouseDoubleClick="TxtTenDichVu_MouseDoubleClick"
+                         LostFocus="TxtTenDichVu_LostFocus"/>
+
+                <!-- Đơn giá -->
+                <TextBox Style="{StaticResource WatermarkTextBoxStyle}"
+                         Tag="Đơn giá"
+                         Text="{Binding DonGia, StringFormat='Giá: {0:N0} VND'}"
+                         x:Name="txtDonGia"
+                         TextAlignment="Center"
+                         Margin="10,5"
+                         IsReadOnly="True"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         MouseDoubleClick="TxtDonGia_MouseDoubleClick"
+                         LostFocus="TxtDonGia_LostFocus"/>
+
+                <!-- Mô tả -->
+                <TextBox Style="{StaticResource WatermarkTextBoxStyle}"
+                         Tag="Mô tả"
+                         Text="{Binding MoTa}"
+                         x:Name="txtMoTa"
+                         TextAlignment="Center"
+                         Margin="10,5"
+                         IsReadOnly="True"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         MouseDoubleClick="TxtMoTa_MouseDoubleClick"
+                         LostFocus="TxtMoTa_LostFocus"/>
+
+                <!-- Nút thêm -->
+                <Button Content="Thêm"
+                        FontSize="18"
+                        FontFamily="Cambria"
+                        Background="#673500"
+                        Foreground="White"
+                        Width="100" Height="35"
+                        Margin="20,40,20,10"
+                        HorizontalAlignment="Center"
                         Click="AddButton_Click"/>
             </StackPanel>
         </Border>
-
     </Grid>
 </Window>

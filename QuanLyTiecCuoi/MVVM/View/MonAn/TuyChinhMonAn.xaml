@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.MonAn"
       mc:Ignorable="d" 
-      d:DesignHeight="796" d:DesignWidth="1600"
+      d:DesignHeight="600" d:DesignWidth="1600"
       Title="TuyChinhMonAn">
 
     <Page.Resources>
@@ -32,7 +32,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <Style x:Key="SearchBoxStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="15"/>
             <Setter Property="Background" Value="White"/>
@@ -41,8 +41,9 @@
             <Setter Property="Padding" Value="5,2"/>
         </Style>
     </Page.Resources>
-    <Grid Background="#FFFDF9">
-        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="20">
+
+    <Grid Background="#FFFFee">
+        <Border BorderBrush="#673500" BorderThickness="1" CornerRadius="20" Margin="5">
             <Grid Grid.Row="1" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
@@ -50,14 +51,13 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0">
-                    
                     <Border BorderBrush="#AAA" BorderThickness="1" CornerRadius="8" Padding="10">
                         <StackPanel>
-                            <Border Background="#DDD" CornerRadius="6" Padding="5" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                <TextBlock Text="Danh sách món ăn" FontWeight="Bold"/>
+                            <Border CornerRadius="6" Padding="5" HorizontalAlignment="Center" Margin="0,0,0,10">
+                                <TextBlock Text="Danh sách món ăn" FontWeight="Bold" FontSize="35" FontFamily="Cambria"/>
                             </Border>
 
-                            <ScrollViewer Height="700" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer Background="White" Height="420" VerticalScrollBarVisibility="Auto">
                                 <ItemsControl x:Name="itemsControlMonAn" ItemsSource="{Binding DanhSachMonAn}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -68,89 +68,62 @@
                                         <DataTemplate>
                                             <Border Width="150" Margin="5" BorderBrush="#AAA" BorderThickness="1" CornerRadius="5">
                                                 <StackPanel>
-                                                    <!-- Ảnh món ăn -->
-                                                    <Image Source="{Binding HinhAnh}" 
-                           Width="120" Height="120" 
-                           Stretch="UniformToFill" 
-                           Margin="5"/>
-
-                                                    <!-- Tên món ăn -->
-                                                    <TextBlock Text="{Binding TenMon}" 
-                               FontWeight="Bold" 
-                               FontSize="14" 
-                               TextAlignment="Center" 
-                               Margin="5,0"/>
-
-                                                    <!-- 3 nút: Xóa, Chỉnh sửa, Chi tiết -->
-                                                    <StackPanel Orientation="Horizontal" 
-                                HorizontalAlignment="Center" 
-                                Margin="0,5,0,5">
-                                                        <Button Content="🗑️" 
-                                Width="30" Height="30" 
-                                Margin="2"
-                                ToolTip="Xóa"
-                                Click="BtnXoa_Click"/>
-                                                        <Button Content="✎" 
-                                Width="30" Height="30" 
-                                Margin="2"
-                                ToolTip="Chỉnh sửa"
-                                Click="BtnChinhSua_Click"/>
-                                                        <Button Content="ℹ️" 
-                                Width="30" Height="30" 
-                                Margin="2"
-                                ToolTip="Chi tiết"
-                                Click="BtnChiTiet_Click"/>
+                                                    <Image Source="{Binding HinhAnh}" Width="120" Height="120" Stretch="UniformToFill" Margin="5"/>
+                                                    <TextBlock Text="{Binding TenMon}" FontWeight="Bold" FontSize="14" TextAlignment="Center" Margin="5,0"/>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,5">
+                                                        <Button Content="🗑️" Width="30" Height="30" Margin="2" ToolTip="Xóa" Click="BtnXoa_Click"/>
+                                                        <Button Content="✎" Width="30" Height="30" Margin="2" ToolTip="Chỉnh sửa" Click="BtnChinhSua_Click"/>
+                                                        <Button Content="ℹ️" Width="30" Height="30" Margin="2" ToolTip="Chi tiết" Click="BtnChiTiet_Click"/>
                                                     </StackPanel>
                                                 </StackPanel>
                                             </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-
                             </ScrollViewer>
-
                         </StackPanel>
                     </Border>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Margin="20,0,0,0">
-
                     <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom" VerticalAlignment="Center" Margin="0,0,0,0">
-                        <!-- Tên món ăn -->
-                        <Border Style="{StaticResource SearchBoxStyle}" Margin="0,10,10,10">
+                        <Border Style="{StaticResource SearchBoxStyle}" Margin="0,10,10,10" Width="156" RenderTransformOrigin="0.498,0.531">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtSearchName" Grid.Column="0" Width="150" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Tên món ăn" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <TextBox x:Name="txtSearchName" Grid.Column="0" BorderThickness="0" VerticalContentAlignment="Center" FontSize="15" FontFamily="Cambria" Foreground="#888" Text="Tên món ăn" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus" Grid.ColumnSpan="2"/>
                                 <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Padding="0" Content="🔍"/>
                             </Grid>
                         </Border>
 
-                        <!-- Đơn giá -->
                         <Border Style="{StaticResource SearchBoxStyle}" Margin="0,10,20,10" Width="135">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontStyle="Italic" Foreground="#888" Text="Đơn giá" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontSize="15" FontFamily="Cambria" Foreground="#888" Text="Đơn giá" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
                                 <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Content="🔍"/>
                             </Grid>
                         </Border>
                     </StackPanel>
                     <Button x:Name="btnThemMonAn"
-                        Content="Thêm món ăn"
-                             Width="100"
-                             Height="30"
-                             DockPanel.Dock ="Bottom"
-                             HorizontalAlignment="Center"
-                             Margin="0,10,0,0"
+                            Content="Thêm món ăn"
+                            FontSize="20"
+                            FontFamily="Cambria"
+                            Background="#673500"
+                            Foreground="White"
+                            BorderBrush="#673500"
+                            Width="150"
+                            Height="40"
+                            DockPanel.Dock="Bottom"
+                            HorizontalAlignment="Center"
+                            Margin="0,10,0,0"
                             Click="BtnThemMonAn_Click"/>
                 </StackPanel>
             </Grid>
         </Border>
     </Grid>
 </Page>
-

@@ -18,8 +18,11 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ObservableCollection<CASANH> DanhSachCa { get; set; } = new();
         public ObservableCollection<SANH> DanhSachSanh { get; set; } = new();
 
-        public List<string> MonAnDaChon { get; set; } = new();
-        public List<string> DichVuDaChon { get; set; } = new();
+        public ObservableCollection<MONAN> MonAnDaChon { get; set; } = new();
+        public ObservableCollection<DICHVU> DichVuDaChon { get; set; } = new();
+        public string MonAnDaChonText => string.Join(", ", MonAnDaChon.Select(m => m.TenMon));
+        public string DichVuDaChonText => string.Join(", ", DichVuDaChon.Select(d => d.TenDichVu));
+
 
         public ThemTiecViewModel()
         {
@@ -59,14 +62,22 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
         }
 
-        public void ChonMonAn()
+        public void ChonMonAn(IEnumerable<MONAN> danhSachMonAn)
         {
-            MonAnDaChon = new List<string> { "Gà quay", "Lẩu hải sản", "Bò sốt tiêu" };
+            MonAnDaChon.Clear();
+            foreach (var mon in danhSachMonAn)
+            {
+                MonAnDaChon.Add(mon);
+            }
         }
 
-        public void ChonDichVu()
+        public void ChonDichVu(IEnumerable<DICHVU> danhSachDichVu)
         {
-            DichVuDaChon = new List<string> { "Ca sĩ", "Xe hoa", "MC chuyên nghiệp" };
+            DichVuDaChon.Clear();
+            foreach (var dv in danhSachDichVu)
+            {
+                DichVuDaChon.Add(dv);
+            }
         }
         public event Action DanhSachChanged;
         public bool ThemTiecMoi()

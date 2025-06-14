@@ -5,68 +5,109 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyTiecCuoi.MVVM.View.DichVu"
         mc:Ignorable="d"
-        Title="Chỉnh sửa dịch vụ" Height="350" Width="250"
+        Title="Chỉnh sửa dịch vụ" Height="550" Width="400"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
-    <Grid>
-        <Border CornerRadius="20" BorderBrush="#111" BorderThickness="2"  Background="#FFF">
 
-            <StackPanel>
-                <StackPanel DockPanel.Dock ="Right" Orientation="Horizontal">
-                    <TextBlock Text="Chỉnh sửa dịch vụ" 
-                               TextAlignment="Center" Width="201" Height="14" FontWeight="Bold" Margin="15,0,0,0"/>
+    <Grid>
+        <Border CornerRadius="20" Padding="6" BorderBrush="#673500" BorderThickness="2" Background="#FFF">
+            <StackPanel Background="#ffffee">
+                <!-- Header -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,10,10,0" Width="344">
+                    <TextBlock Text="Chỉnh sửa dịch vụ"
+                               TextAlignment="Center"
+                               Width="219" Height="32"
+                               FontSize="25"
+                               FontFamily="Cambria"
+                               FontWeight="Bold"
+                               Margin="50,0,20,0"
+                               VerticalAlignment="Center"/>
                     <Button x:Name="btnClose"
-                            Content="✕" 
-                            Width="20" 
-                            Height="20" 
-                            Margin="0,10,0,0"
+                            Content="✕"
+                            Background="#ffffee"
+                            Width="18"
+                            Height="22"
+                            Margin="30,0,0,0"
+                            BorderThickness="0"
                             Click="BtnClose_Click"/>
                 </StackPanel>
-                <Image 
-                    x:Name="imgDichVu"
-                    Source="{Binding ImagePath}" 
-                    Width="200" Height="170" 
-                    Stretch="UniformToFill" 
-                    Margin="5"
-                    MouseLeftButtonDown="ImgDichVu_MouseLeftButtonDown"/>
-                <TextBox 
-                            Text="{Binding TenDichVu}"
-                            x:Name="txtTenDichVu"
-                            FontWeight="Bold" 
-                            FontSize="15" 
-                            TextAlignment="Center" 
-                            Margin="5,5,5,0"
-                            IsReadOnly="True"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            MouseDoubleClick="TxtTenDichVu_MouseDoubleClick"
-                            LostFocus="TxtTenDichVu_LostFocus"/>
-                <TextBox 
-                     x:Name="txtDonGia"
-                     Text="{Binding DonGia}" 
-                     FontSize="15" 
-                     TextAlignment="Center" 
-                     Margin="5,5,5,0"
-                     IsReadOnly="True"
-                     Background="Transparent"
-                     BorderThickness="0"
-                     MouseDoubleClick="TxtDonGia_MouseDoubleClick"
-                     LostFocus="TxtDonGia_LostFocus"/>
-                <TextBox 
-                     x:Name="txtMoTa"
-                     Text="{Binding MoTa}" 
-                     FontSize="15" 
-                     TextAlignment="Center" 
-                     Margin="5,5,5,0"
-                     IsReadOnly="True"
-                     Background="Transparent"
-                     BorderThickness="0"
-                     MouseDoubleClick="TxtMoTa_MouseDoubleClick"
-                     LostFocus="TxtMoTa_LostFocus"/>
+
+                <!-- Hình ảnh -->
+                <Label HorizontalAlignment="Center" MouseDoubleClick="ImgDichVu_MouseDoubleClick">
+                    <Image x:Name="imgDichVu"
+                           Source="{Binding HinhAnh}"
+                           Width="300" Height="270"
+                           Stretch="UniformToFill"
+                           Margin="10"/>
+                </Label>
+
+                <!-- Textbox nhập ảnh -->
+                <TextBox x:Name="txtImagePath"
+                         Text="{Binding HinhAnh, Mode=TwoWay}"
+                         Visibility="Collapsed"
+                         FontSize="14"
+                         Margin="10,0,10,10"
+                         LostFocus="TxtImagePath_LostFocus"
+                         Tag="Dán đường link ảnh tại đây" />
+
+                <!-- Tên dịch vụ -->
+                <TextBox x:Name="txtTenDichVu"
+                         Text="{Binding TenDichVu, UpdateSourceTrigger=PropertyChanged}"
+                         FontFamily="Cambria"
+                         FontWeight="Bold"
+                         FontSize="22"
+                         Foreground="Black"
+                         TextAlignment="Center"
+                         Margin="10,10,10,0"
+                         IsReadOnly="True"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         MouseDoubleClick="TxtTenDichVu_MouseDoubleClick"
+                         LostFocus="TxtTenDichVu_LostFocus"/>
+
+                <!-- Đơn giá -->
+                <TextBox x:Name="txtDonGia"
+                         Text="{Binding DonGia, StringFormat='Giá: {0:N0} VND'}"
+                         FontFamily="Cambria"
+                         FontWeight="Bold"
+                         FontSize="20"
+                         TextAlignment="Center"
+                         Foreground="Black"
+                         Margin="10,10,10,0"
+                         IsReadOnly="True"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         MouseDoubleClick="TxtDonGia_MouseDoubleClick"
+                         LostFocus="TxtDonGia_LostFocus"/>
+
+                <!-- Mô tả -->
+                <TextBox x:Name="txtMoTa"
+                         Text="{Binding MoTa, UpdateSourceTrigger=PropertyChanged}"
+                         FontFamily="Cambria"
+                         FontSize="18"
+                         FontWeight="Normal"
+                         TextAlignment="Center"
+                         Foreground="Black"
+                         Margin="10,10,10,0"
+                         IsReadOnly="True"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         MouseDoubleClick="TxtMoTa_MouseDoubleClick"
+                         LostFocus="TxtMoTa_LostFocus"/>
+
+                <!-- Nút chỉnh sửa -->
+                <Button Content="Chỉnh sửa"
+                        FontSize="18"
+                        FontFamily="Cambria"
+                        Background="#673500"
+                        Foreground="White"
+                        Width="124" Height="35"
+                        Margin="20,40,20,10"
+                        HorizontalAlignment="Center"
+                        Click="ChangeButton_Click"/>
             </StackPanel>
         </Border>
-
     </Grid>
 </Window>

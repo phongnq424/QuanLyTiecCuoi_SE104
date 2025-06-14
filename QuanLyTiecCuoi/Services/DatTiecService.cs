@@ -82,5 +82,10 @@ namespace QuanLyTiecCuoi.Services
         {
             return _datTiecRepo.CheckSanhTrong(maSanh, ngay, maCa);
         }
+
+        public static implicit operator int(DatTiecService v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

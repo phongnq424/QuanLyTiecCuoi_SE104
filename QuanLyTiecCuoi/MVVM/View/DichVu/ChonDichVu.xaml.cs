@@ -1,8 +1,10 @@
 ﻿using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.MVVM.ViewModel.DichVu;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+
 
 namespace QuanLyTiecCuoi.MVVM.View.DichVu
 {
@@ -10,24 +12,29 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
     {
         private readonly ChonDichVuViewModel _viewModel;
 
-        public ChonDichVu()
+        public ChonDichVu(DATTIEC datTiec, ObservableCollection<DICHVU> dichVuDaChon)
         {
             InitializeComponent();
-            _viewModel = new ChonDichVuViewModel();
+            _viewModel = new ChonDichVuViewModel(datTiec, dichVuDaChon);
             this.DataContext = _viewModel;
         }
 
+
         private void DichVu_Click(object sender, MouseButtonEventArgs e)
         {
-            if (sender is Border border && border.DataContext is DICHVU dv)
+            if (sender is Border border && border.DataContext is DICHVU dichVu)
             {
-                _viewModel.ChonDichVu(dv);
+                _viewModel.ChonDichVu(dichVu);
             }
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             _viewModel.LuuChiTietDichVu();
+            if (this.NavigationService != null && this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
         }
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
@@ -49,46 +56,31 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
                     {
                         tb.Text = "Tên dịch vụ";
                         tb.Foreground = System.Windows.Media.Brushes.Gray;
-                        _viewModel.TuKhoaTimTen = "";
+                        _viewModel.TuKhoaTen = "";
                     }
                     else if (tb.Name == "txtSearchPrice")
                     {
                         tb.Text = "Đơn giá";
                         tb.Foreground = System.Windows.Media.Brushes.Gray;
-                        _viewModel.TuKhoaTimGia = "";
+                        _viewModel.TuKhoaGia = "";
                     }
                 }
                 else
                 {
                     if (tb.Name == "txtSearchName")
-                        _viewModel.TuKhoaTimTen = tb.Text;
+                        _viewModel.TuKhoaTen = tb.Text;
                     else if (tb.Name == "txtSearchPrice")
-                        _viewModel.TuKhoaTimGia = tb.Text;
+                        _viewModel.TuKhoaGia = tb.Text;
                 }
             }
         }
 
-        private void Minimize_Click(object sender, RoutedEventArgs e)
-        {
-            var window = Window.GetWindow(this);
-            if (window != null)
-                window.WindowState = WindowState.Minimized;
-        }
-
-        private void Maximize_Click(object sender, RoutedEventArgs e)
-        {
-            var window = Window.GetWindow(this);
-            if (window != null)
-                window.WindowState = (window.WindowState == WindowState.Maximized)
-                    ? WindowState.Normal
-                    : WindowState.Maximized;
-        }
-
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            var window = Window.GetWindow(this);
-            if (window != null)
-                window.Close();
+            if (this.NavigationService != null && this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
         }
     }
 }

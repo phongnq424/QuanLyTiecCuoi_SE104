@@ -102,7 +102,7 @@
 
             <Frame 
                 Grid.Row="2"
-                Padding="5"
+                Padding="10"
                 NavigationUIVisibility="Hidden"
                 Content="{Binding CurrentView}"
                 HorizontalAlignment="Stretch"
