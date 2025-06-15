@@ -62,6 +62,7 @@
                       SelectedItem="{Binding SelectedLoaiSanh, Mode=TwoWay}"
                       AutoGenerateColumns="False" 
                       Margin="10" 
+                      IsReadOnly="True"
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Stretch"
                       CanUserAddRows="False"
