@@ -36,9 +36,14 @@ namespace QuanLyTiecCuoi.MVVM.View
 
         private void btnCTSanh_Click(object sender, RoutedEventArgs e)
         {
-            var SanhVM = App.AppHost.Services.GetRequiredService<SanhViewModel>();
-            NavigationService.Navigate(new DSSanhView(SanhVM));
+            var vm = (MainWindowViewModel)Application.Current.MainWindow.DataContext;
+
+            var chucnang = vm.DanhSachChucNang
+                             .FirstOrDefault(c => c.TenManHinhDuocLoad == "DSSanhView");
+            if (chucnang != null)
+                vm.DieuHuongCommand.Execute(chucnang);
         }
+
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -72,6 +77,21 @@ namespace QuanLyTiecCuoi.MVVM.View
                         }
                     };
                     (App.Current.MainWindow as MainWindow)?.MainFrame.Navigate(themView);
+                    var mainVM = (App.Current.MainWindow as MainWindow)?.DataContext as MainWindowViewModel;
+                    if (mainVM != null)
+                    {
+                        foreach (var cn in mainVM.DanhSachChucNang)
+                            cn.IsChecked = false;
+
+                        var chucNangDatTiec = mainVM.DanhSachChucNang
+                            .FirstOrDefault(c => c.TenChucNang == "Đặt tiệc");
+
+                        if (chucNangDatTiec != null)
+                        {
+                            chucNangDatTiec.IsChecked = true;
+                            mainVM.DangChon = chucNangDatTiec;
+                        }
+                    }
                 }
                 else
                 {
@@ -79,6 +99,7 @@ namespace QuanLyTiecCuoi.MVVM.View
                     return;
                 }
             }
+
         }
     }
 }

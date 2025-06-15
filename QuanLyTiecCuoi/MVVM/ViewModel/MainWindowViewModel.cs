@@ -51,11 +51,20 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
         }
 
-        private ObservableCollection<CHUCNANG> _DanhSachChucNang;
-        public ObservableCollection<CHUCNANG> DanhSachChucNang
+        public ObservableCollection<ChucNangVM> DanhSachChucNang { get; set; }
+
+        private ChucNangVM _dangChon;
+        public ChucNangVM DangChon
         {
-            get => _DanhSachChucNang;
-            set { _DanhSachChucNang = value; OnPropertyChanged(); }
+            get => _dangChon;
+            set
+            {
+                if (_dangChon != value)
+                {
+                    _dangChon = value;
+                    OnPropertyChanged(nameof(DangChon));
+                }
+            }
         }
 
         public static NGUOIDUNG NguoiDungHienTai;
@@ -63,10 +72,29 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         {
             _DangNhapService = dangNhapService;
 
-            FirstLoadCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            FirstLoadCM = new RelayCommand<Window>((p) => true, async (p) =>
             {
-                DanhSachChucNang = new ObservableCollection<CHUCNANG>(await _DangNhapService.LayChucNangNguoiDung(NguoiDungHienTai));
+                var danhSach = await _DangNhapService.LayChucNangNguoiDung(NguoiDungHienTai);
+                DanhSachChucNang = new ObservableCollection<ChucNangVM>(
+                    danhSach.Select(c => new ChucNangVM
+                    {
+                        MaChucNang = c.MaChucNang,
+                        TenChucNang = c.TenChucNang,
+                        TenManHinhDuocLoad = c.TenManHinhDuocLoad
+                    })
+                );
+                OnPropertyChanged(nameof(DanhSachChucNang));
+
+                // Mặc định load màn hình đầu tiên
+                if (DanhSachChucNang.Any())
+                {
+                    var chucNangDauTien = DanhSachChucNang[0];
+                    chucNangDauTien.IsChecked = true;
+                    DangChon = chucNangDauTien;
+                    CurrentView = LoadViewByName(chucNangDauTien.TenManHinhDuocLoad);
+                }
             });
+
 
             DangXuatCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
@@ -74,9 +102,17 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             });
 
 
-            DieuHuongCommand = new RelayCommand<CHUCNANG>((p) => { return true; }, (p) =>
+            DieuHuongCommand = new RelayCommand<ChucNangVM>((p) => { return true; }, (p) =>
             {
-                CurrentView = LoadViewByName(p.TenManHinhDuocLoad);
+                if (p is ChucNangVM chon)
+                {
+                    foreach (var cn in DanhSachChucNang)
+                        cn.IsChecked = false;
+
+                    chon.IsChecked = true;
+                    DangChon = chon;
+                    CurrentView = LoadViewByName(chon.TenManHinhDuocLoad);
+                }
             });
             _DangNhapService = dangNhapService;
         }
