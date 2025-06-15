@@ -65,6 +65,7 @@ namespace QuanLyTiecCuoi.Services
                 throw new ArgumentNullException(nameof(datTiec));
 
             _datTiecRepo.AddDatTiec(datTiec);
+
         }
         public List<CASANH> GetAllCaSanhs()
         {

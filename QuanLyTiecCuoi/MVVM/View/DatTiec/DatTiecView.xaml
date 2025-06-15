@@ -120,7 +120,7 @@
                             <DataGridTextColumn Header="Cô dâu" Binding="{Binding TenCoDau}" Width="*" />
                             <DataGridTextColumn Header="Chú rể" Binding="{Binding TenChuRe}" Width="*" />
                             <DataGridTextColumn Header="SĐT" Binding="{Binding SDT}" Width="*" />
-                            <DataGridTextColumn Header="Đặt cọc" Binding="{Binding TienDatCoc}" Width="*" />
+                            <DataGridTextColumn Header="Đặt cọc" Binding="{Binding TienDatCoc, StringFormat=N0}" Width="*" />
                             <DataGridTextColumn Header="Ca" Binding="{Binding CaSanh.TenCa}" Width="*" />
                             <DataGridTextColumn Header="Sảnh" Binding="{Binding Sanh.TenSanh}" Width="*" />
                             <DataGridTextColumn Header="Ngày đãi" Width="*">

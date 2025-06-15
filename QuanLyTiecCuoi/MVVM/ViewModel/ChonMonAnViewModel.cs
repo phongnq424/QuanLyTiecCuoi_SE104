@@ -109,7 +109,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
         {
             if (_datTiec == null || _datTiec.MaDatTiec == 0)
             {
-                MessageBox.Show("Không có thông tin đặt tiệc hợp lệ để lưu thực đơn.");
                 return;
             }
 

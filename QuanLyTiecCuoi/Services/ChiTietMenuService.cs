@@ -7,10 +7,27 @@ namespace QuanLyTiecCuoi.Services
     public class ChiTietMenuService
     {
         private readonly ChiTietMenuRepository _repository;
+        private readonly MonAnRepository _monAnRepository;
 
-        public ChiTietMenuService(ChiTietMenuRepository repository)
+
+        public ChiTietMenuService(ChiTietMenuRepository repository, MonAnRepository monAnRepository)
         {
             _repository = repository;
+            _monAnRepository = monAnRepository;
+        }
+        public List<MONAN> LayDanhSachMonAnTheoDatTiec(int maDatTiec)
+        {
+            var chiTietMenus = _repository.GetByMaDatTiec(maDatTiec);
+            var danhSachMonAn = new List<MONAN>();
+
+            foreach (var ct in chiTietMenus)
+            {
+                var monAn = _monAnRepository.GetById(ct.MaMon);
+                if (monAn != null)
+                    danhSachMonAn.Add(monAn);
+            }
+
+            return danhSachMonAn;
         }
 
         /// <summary>

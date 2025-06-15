@@ -47,7 +47,6 @@
                            Style="{StaticResource Header1Style}" />
 
                         <Button 
-                        Command="{Binding UpdateCommand}"
                         Click="LuuTiec"
                         Content="Cập nhật" 
                         FontSize="24"
@@ -286,7 +285,7 @@
                                                         <TextBlock FontSize="20"
                                                            FontFamily="Cambria"
                                                            Margin="10,2">
-                                                        <Run Text="{Binding TenMonAn}"/>
+                                                        <Run Text="{Binding TenMon}"/>
                                                         </TextBlock>
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
