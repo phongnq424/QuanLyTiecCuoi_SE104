@@ -38,8 +38,8 @@ namespace QuanLyTiecCuoi.Services
                     SoLuongTiecCuoi = item.SoLuongTiecCuoi,
                     DoanhThu = (double)item.DoanhThu,
                     DoanhThuFormatted = item.DoanhThu.ToString("#,0.##") + " VND",
-                    TiLeDoanhThu = tongDoanhThu == 0 ? 0 : (double)(item.DoanhThu / tongDoanhThu),
-                    TiLeTiecCuoi = tongTiecCuoi == 0 ? 0 : (double)item.SoLuongTiecCuoi / tongTiecCuoi
+                    TiLeDoanhThu = tongDoanhThu == 0 ? 0 : (double)(item.DoanhThu / tongDoanhThu) * 100,
+                    TiLeTiecCuoi = tongTiecCuoi == 0 ? 0 : (double)item.SoLuongTiecCuoi / tongTiecCuoi * 100
                 };
                 result.Add(model);
             }
@@ -113,8 +113,8 @@ namespace QuanLyTiecCuoi.Services
                 row.Cells.Add(new TableCell(new Paragraph(new Run(item.NgayBaoCao.ToString("dd/MM/yyyy")))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Center });
                 row.Cells.Add(new TableCell(new Paragraph(new Run(item.SoLuongTiecCuoi.ToString()))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Center });
                 row.Cells.Add(new TableCell(new Paragraph(new Run(item.DoanhThuFormatted))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Right });
-                row.Cells.Add(new TableCell(new Paragraph(new Run((item.TiLeDoanhThu * 100).ToString("0.##") + "%"))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Right });
-                row.Cells.Add(new TableCell(new Paragraph(new Run((item.TiLeTiecCuoi * 100).ToString("0.##") + "%"))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Right });
+                row.Cells.Add(new TableCell(new Paragraph(new Run((item.TiLeDoanhThu).ToString("0.##") + "%"))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Right });
+                row.Cells.Add(new TableCell(new Paragraph(new Run((item.TiLeTiecCuoi).ToString("0.##") + "%"))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Right });
                 bodyGroup.Rows.Add(row);
             }
             table.RowGroups.Add(bodyGroup);
