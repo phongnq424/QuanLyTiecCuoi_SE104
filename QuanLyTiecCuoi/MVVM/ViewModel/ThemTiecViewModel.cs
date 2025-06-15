@@ -20,9 +20,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         public ObservableCollection<MONAN> MonAnDaChon { get; set; } = new();
         public ObservableCollection<DICHVU> DichVuDaChon { get; set; } = new();
-        public string MonAnDaChonText => string.Join(", ", MonAnDaChon.Select(m => m.TenMon));
-        public string DichVuDaChonText => string.Join(", ", DichVuDaChon.Select(d => d.TenDichVu));
-
 
         public ThemTiecViewModel()
         {
@@ -69,6 +66,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             {
                 MonAnDaChon.Add(mon);
             }
+            OnPropertyChanged(nameof(MonAnDaChon));
         }
 
         public void ChonDichVu(IEnumerable<DICHVU> danhSachDichVu)
@@ -78,6 +76,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             {
                 DichVuDaChon.Add(dv);
             }
+            OnPropertyChanged(nameof(DichVuDaChon)); // thêm dòng này
         }
         public event Action DanhSachChanged;
         public bool ThemTiecMoi()
@@ -87,7 +86,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             try
             {
                 _datTiecService.AddDatTiec(TiecMoi);
-                DanhSachChanged?.Invoke(); // Thông báo danh sách đã thay đổi
+                DanhSachChanged?.Invoke();
                 return true;
             }
             catch (Exception ex)

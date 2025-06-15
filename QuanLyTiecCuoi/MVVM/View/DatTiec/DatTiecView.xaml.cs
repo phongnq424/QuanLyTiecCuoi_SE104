@@ -6,6 +6,9 @@ using QuanLyTiecCuoi.Repository;
 using System.Windows.Input;
 using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.MVVM.View.HoaDon;
+using Microsoft.Extensions.DependencyInjection;
+using QuanLyTiecCuoi.MVVM.ViewModel;
+using QuanLyTiecCuoi.Services;
 
 
 namespace QuanLyTiecCuoi.MVVM.View.DatTiec
@@ -37,8 +40,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 
         private void InHoaDon_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Chuyển sang trang hóa đơn giúp em, sửa ở fille DatTiecView dòng 40");
-            // Kiểm tra xem có tiệc nào được chọn không: NavigationService?.Navigate(new ThemTiecView());
+            
         }
         private DataGridRow editableRow = null;
 
@@ -60,16 +62,6 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                         (this.DataContext as DatTiecViewModel)?.LoadDanhSachDatTiec();
                     };
                     NavigationService?.Navigate(suaTiecView);
-                    //MyDataGrid.SelectedItem = row.Item;
-
-                    //// Bật cho phép chỉnh sửa
-                    //MyDataGrid.IsReadOnly = false;
-
-                    //var result = MessageBox.Show("Bạn có thể chỉnh sửa thông tin dòng này.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                    //if (result == MessageBoxResult.OK)
-                    //{
-                    //    FocusCell(row, "TenCoDau");
-                    //}
                 }
             }
         }

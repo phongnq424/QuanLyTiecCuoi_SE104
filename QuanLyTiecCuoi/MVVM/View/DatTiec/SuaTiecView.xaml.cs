@@ -4,6 +4,9 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.MVVM.View.MainVindow;
+using QuanLyTiecCuoi.MVVM.View.MonAn;
+using QuanLyTiecCuoi.MVVM.View.DichVu;
 
 
 namespace QuanLyTiecCuoi.MVVM.View.DatTiec
@@ -21,47 +24,42 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             // Load các combobox (ca, sảnh)
             viewModel.LoadDanhSachCa();
             viewModel.LoadDanhSachSanh();
+
+            // Gán dữ liệu cho ComboBox
             ShiftComboBox.ItemsSource = viewModel.DanhSachCa;
             HallComboBox.ItemsSource = viewModel.DanhSachSanh;
+
+            FilterDatePicker.SelectedDate = viewModel.TiecMoi.NgayDaiTiec;
+
+            ShiftComboBox.DisplayMemberPath = "TenCa";
+            ShiftComboBox.SelectedValuePath = "MaCa";
+            ShiftComboBox.SelectedValue = viewModel.TiecMoi.MaCa;
+
+            HallComboBox.DisplayMemberPath = "TenSanh";
+            HallComboBox.SelectedValuePath = "MaSanh";
+            HallComboBox.SelectedValue = viewModel.TiecMoi.MaSanh;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.GoBack();
         }
-        private void Edit_Click(object sender, RoutedEventArgs e) 
-        {
-            FilterDatePicker.Visibility = Visibility.Visible; // Hiển thị DatePicker khi nhấn nút Edit
-            editBtn.Visibility = Visibility.Collapsed; // Ẩn nút Edit
-        }
+
         private void FilterDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             if (FilterDatePicker.SelectedDate.HasValue)
             {
                 var selectedDate = FilterDatePicker.SelectedDate.Value;
                 viewModel.TiecMoi.NgayDaiTiec = selectedDate;
-                SelectedDateText.Text = selectedDate.ToString("dd/MM/yyyy");
-                FilterDatePicker.Visibility = Visibility.Collapsed; // Ẩn sau khi chọn
             }
         }
-        private void ShiftButton_Click(object sender, RoutedEventArgs e)
-        {
-            ShiftPopup.IsOpen = true;
-        }
-
         private void ShiftComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ShiftComboBox.SelectedItem is CASANH ca)
             {
                 viewModel.TiecMoi.MaCa = ca.MaCa;
-                SelectedShiftText.Text = ca.TenCa;
                 ShiftComboBox.DisplayMemberPath = "TenCa";
             }
-        }
-
-        private void HallButton_Click(object sender, RoutedEventArgs e)
-        {
-            HallPopup.IsOpen = true;
         }
 
         private void HallComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,22 +67,28 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             if (HallComboBox.SelectedItem is SANH sanh)
             {
                 viewModel.TiecMoi.MaSanh = sanh.MaSanh;
-                SelectedHallText.Text = sanh.TenSanh;
                 HallComboBox.DisplayMemberPath = "TenSanh";
             }
         }
-
         private void MonAnButton_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.ChonMonAn();
-            SelectedMonAnText.Text = string.Join(", ", viewModel.MonAnDaChon);
+            var chonMonAnPage = new ChonMonAn(viewModel.TiecMoi, viewModel.MonAnDaChon);
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.MainFrame.Navigate(chonMonAnPage);
+            }
         }
 
         private void DichVuButton_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.ChonDichVu();
-            SelectedDichVuText.Text = string.Join(", ", viewModel.DichVuDaChon);
-        }
+                var chonDichVuPage = new ChonDichVu(viewModel.TiecMoi, viewModel.DichVuDaChon);
+                var mainWindow = Application.Current.MainWindow as MainWindow;
+                if (mainWindow != null)
+                {
+                    mainWindow.MainFrame.Navigate(chonDichVuPage);
+                }
+            }
 
         private void LuuTiec(object sender, RoutedEventArgs e)
         {

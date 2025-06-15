@@ -89,33 +89,93 @@
                                 <!-- Left Form -->
                                 <StackPanel Grid.Column="0" Margin="10">
                                     <StackPanel.Resources>
-                                        <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle1}"  />
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="FontSize" Value="22"/>
+                                            <Setter Property="FontFamily" Value="Cambria"/>
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Padding" Value="5,0"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
+                                            <Setter Property="BorderBrush" Value="#673500"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="TextBox">
+                                                        <Border 
+                            CornerRadius="8" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                                                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          Margin="0" 
+                                          VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="FontSize" Value="32"/>
                                             <Setter Property="Margin" Value="0 5"/>
                                             <Setter Property="FontFamily" Value="Cambria"/>
                                             <Setter Property="FontWeight" Value="SemiBold"/>
-                                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
                                         </Style>
                                     </StackPanel.Resources>
 
-                                    <TextBlock Text="Cô dâu"/>
-                                    <TextBox Text="{Binding TiecMoi.TenCoDau}" />
+                                    <Grid Margin="0 5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Cô dâu" Grid.Column="0" Margin="30 20"/>
+                                        <TextBox Text="{Binding TiecMoi.TenCoDau}" Grid.Column="1" Margin="0 20"/>
+                                    </Grid>
 
-                                    <TextBlock Text="Chú rể"/>
-                                    <TextBox Text="{Binding TiecMoi.TenChuRe}" />
+                                    <Grid Margin="0 5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Chú rể" Grid.Column="0" Margin="30 20"/>
+                                        <TextBox Text="{Binding TiecMoi.TenChuRe}" Grid.Column="1" Margin="0 20"/>
+                                    </Grid>
 
-                                    <TextBlock Text="Số điện thoại"/>
-                                    <TextBox Text="{Binding TiecMoi.SDT}"/>
+                                    <Grid Margin="0 5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Số điện thoại" Grid.Column="0" Margin="30 20"/>
+                                        <TextBox Text="{Binding TiecMoi.SDT}" Grid.Column="1" Margin="0 20"/>
+                                    </Grid>
 
-                                    <TextBlock Text="Tiền đặt cọc"/>
-                                    <TextBox Text="{Binding TiecMoi.TienDatCoc}"/>
+                                    <Grid Margin="0 5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Tiền đặt cọc" Grid.Column="0" Margin="30 20"/>
+                                        <TextBox Text="{Binding TiecMoi.TienDatCoc}" Grid.Column="1"  Margin="0 20"/>
+                                    </Grid>
 
-                                    <TextBlock Text="Số lượng bàn"/>
-                                    <TextBox Text="{Binding TiecMoi.SoLuongBan}" />
+                                    <Grid Margin="0 5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Số lượng bàn" Grid.Column="0" Margin="30 20"/>
+                                        <TextBox Text="{Binding TiecMoi.SoLuongBan}" Grid.Column="1"  Margin="0 20"/>
+                                    </Grid>
 
-                                    <TextBlock Text="Số bàn dự trữ"/>
-                                    <TextBox Text="{Binding TiecMoi.SoBanDuTru}"/>
+                                    <Grid Margin="0 5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Số bàn dự trữ" Grid.Column="0" Margin="30 20"/>
+                                        <TextBox Text="{Binding TiecMoi.SoBanDuTru}" Grid.Column="1" Margin="0 20"/>
+                                    </Grid>
                                 </StackPanel>
 
                                 <!-- Right Form -->
@@ -133,66 +193,138 @@
                                     </StackPanel.Resources>
 
                                     <!-- Ngày đãi tiệc -->
+                                    <Grid Margin="0 10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
 
-                                    <StackPanel Orientation="Horizontal" Margin="0 5">
-                                        <TextBlock Text="Ngày đãi tiệc"
-                                                   VerticalAlignment="Center"/>
-                                        <Button x:Name="editBtn"
-                                            Content="✏" Click="Edit_Click"/>
+                                        <TextBlock Text="Ngày đãi tiệc" Grid.Column="0" VerticalAlignment="Center"/>
                                         <DatePicker
-                                            Margin="20 0"
-                                            Width="250"
-                                            FontSize="26"
+                                            SelectedDate="{Binding NgayDaiTiec}"
+                                            Grid.Column="1"
+                                            Width="400"
+                                            Height="40"
+                                            FontSize="20"
+                                            FontFamily="Cambria"
                                             VerticalAlignment="Center"
+                                            SelectedDateChanged="FilterDatePicker_SelectedDateChanged"
                                             x:Name="FilterDatePicker"
-                                            Visibility="Collapsed"
-                                            SelectedDateChanged="FilterDatePicker_SelectedDateChanged"/>
-                                    </StackPanel>
-                                    <TextBlock x:Name="SelectedDateText" 
-                                               Margin="10 0" VerticalAlignment="Center" FontSize="30"
-                                               Text="{Binding TiecMoi.NgayDaiTiec}"/>
+                                            Margin="0 10"/>
+                                    </Grid>
 
                                     <!-- Ca -->
-                                    <StackPanel Orientation="Horizontal" Margin="0 5">
-                                        <TextBlock Text="Ca" VerticalAlignment="Center"/>
-                                        <Button x:Name="ShiftButton" Click="ShiftButton_Click" Width="50" Height="50" Content="⌚"/>
-                                        <Popup x:Name="ShiftPopup" PlacementTarget="{Binding ElementName=ShiftButton}" Placement="Bottom" StaysOpen="False">
-                                            <Border BorderBrush="Gray" BorderThickness="1" Background="White">
-                                                <ComboBox Name="ShiftComboBox" Width="260" Height="40" FontSize="20" SelectionChanged="ShiftComboBox_SelectionChanged"/>
-                                            </Border>
-                                        </Popup>
-                                    </StackPanel>
-                                    <TextBlock x:Name="SelectedShiftText" 
-                                               Margin="10 0" VerticalAlignment="Center" FontSize="20"
-                                               Text="{Binding TiecMoi.MaCa}"/>
+                                    <Grid Margin="0 10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="103*"/>
+                                            <ColumnDefinition Width="348*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="Ca" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <ComboBox 
+                                            x:Name="ShiftComboBox"
+                                            ItemsSource="{Binding DanhSachCa}"
+                                            DisplayMemberPath="TenCa"
+                                            SelectedItem="{Binding CaDuocChon, Mode=OneWay}" 
+                                            Grid.Column="1"
+                                            Width="400"
+                                            Height="40" 
+                                            FontSize="20" 
+                                            FontFamily="Cambria" 
+                                            Margin="25,10,25,10" 
+                                            VerticalContentAlignment="Center"
+                                            SelectionChanged="ShiftComboBox_SelectionChanged" Grid.ColumnSpan="2"/>
+                                    </Grid>
 
                                     <!-- Sảnh -->
-                                    <StackPanel Orientation="Horizontal" Margin="0 5">
-                                        <TextBlock Text="Sảnh" VerticalAlignment="Center"/>
-                                        <Button x:Name="HallButton" Click="HallButton_Click" Width="50" Height="50" Content="🏛"/>
-                                        <Popup x:Name="HallPopup" PlacementTarget="{Binding ElementName=HallButton}" Placement="Bottom" StaysOpen="False">
-                                            <Border BorderBrush="Gray" BorderThickness="1" Background="White">
-                                                <ComboBox x:Name="HallComboBox" Width="260" Height="40" FontSize="20" SelectionChanged="HallComboBox_SelectionChanged"/>
-                                            </Border>
-                                        </Popup>
-                                    </StackPanel>
-                                    <TextBlock x:Name="SelectedHallText" Margin="10 0"
-                                               VerticalAlignment="Center" FontSize="30"
-                                               Text="{Binding TiecMoi.MaSanh}"/>
+
+                                    <Grid Margin="0 10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="Sảnh" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <ComboBox 
+                                            x:Name="HallComboBox"
+                                            ItemsSource="{Binding DanhSachSanh}"
+                                            DisplayMemberPath="TenSanh"
+                                            SelectedItem="{Binding SanhDuocChon, Mode=OneWay}" 
+                                            Grid.Column="1"
+                                            Width="400"
+                                            Height="40" 
+                                            FontSize="20" 
+                                            FontFamily="Cambria" 
+                                            Margin="0 10" 
+                                            VerticalContentAlignment="Center"
+                                            SelectionChanged="HallComboBox_SelectionChanged"/>
+                                    </Grid>
 
                                     <!-- Món ăn -->
-                                    <StackPanel Orientation="Horizontal" Margin="0 5">
-                                        <TextBlock Text="Món ăn" VerticalAlignment="Center"/>
-                                        <Button x:Name="MonAnButton" Width="50" Height="50" Click="MonAnButton_Click" Content="🍽" Margin="0 5" HorizontalAlignment="Left"/>
-                                    </StackPanel>
-                                    <TextBlock x:Name="SelectedMonAnText" Margin="10 0" VerticalAlignment="Center" FontSize="30"/>
+                                    <StackPanel Margin="0,10" VerticalAlignment="Top">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="Món ăn"
+                                               FontSize="32"
+                                               FontFamily="Cambria"
+                                               VerticalAlignment="Center"
+                                               Margin="0,0,20,0"/>
+                                            <Button x:Name="MonAnButton"
+                                                Width="50"
+                                                Height="50"
+                                                Click="MonAnButton_Click"
+                                                Content="🍽"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"/>
+                                        </StackPanel>
 
-                                    <!-- Dịch vụ -->
-                                    <StackPanel Orientation="Horizontal" Margin="0 5">
-                                        <TextBlock Text="Dịch vụ"/>
-                                        <Button x:Name="DichVuButton" Width="50" Height="50" Click="DichVuButton_Click" Content="💒" Margin="0 5" HorizontalAlignment="Left"/>
+                                        <!-- Danh sách món ăn đã chọn -->
+                                        <ScrollViewer Height="100" VerticalScrollBarVisibility="Auto">
+                                            <ItemsControl ItemsSource="{Binding MonAnDaChon}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock FontSize="20"
+                                                           FontFamily="Cambria"
+                                                           Margin="10,2">
+                                                        <Run Text="{Binding TenMonAn}"/>
+                                                        </TextBlock>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </ScrollViewer>
                                     </StackPanel>
-                                    <TextBlock x:Name="SelectedDichVuText" Margin="10 0" VerticalAlignment="Center" FontSize="30"/>
+
+                                    <!--Dịch vụ-->
+                                    <StackPanel Margin="0,10" VerticalAlignment="Top">
+                                        <!-- Label + Button -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="Dịch vụ"
+                                               FontSize="32"
+                                               FontFamily="Cambria"
+                                               VerticalAlignment="Center"
+                                               Margin="0,0,20,0"/>
+                                            <Button x:Name="DichVuButton"
+                                                Width="50"
+                                                Height="50"
+                                                Click="DichVuButton_Click"
+                                                Content="💒"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <!-- Danh sách dịch vụ đã chọn -->
+                                        <ScrollViewer Height="100" VerticalScrollBarVisibility="Auto">
+                                            <ItemsControl ItemsSource="{Binding DichVuDaChon}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding TenDichVu}" 
+                                                           FontSize="20"
+                                                           FontFamily="Cambria"
+                                                           Margin="10,2"/>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </ScrollViewer>
+                                    </StackPanel>
                                 </StackPanel>
                             </Grid>
                         </Grid>

@@ -67,8 +67,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.DichVu
             _datTiec = datTiec;
             _dichVuService = App.AppHost.Services.GetRequiredService<DichVuService>();
             _chiTietDichVuService = App.AppHost.Services.GetRequiredService<ChiTietDichVuService>();
-
-            DichVuDaChon = dichVuDaChon ?? new ObservableCollection<DICHVU>();
+            _dichVuDaChon = dichVuDaChon;
+          //  DichVuDaChon = dichVuDaChon ?? new ObservableCollection<DICHVU>();
             LoadDanhSachDichVu();
         }
 

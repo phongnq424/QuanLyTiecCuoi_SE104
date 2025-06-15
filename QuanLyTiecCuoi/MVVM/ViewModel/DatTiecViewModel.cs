@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.Core;
 using System.Windows;
+using System.Windows.Documents;
 public class DatTiecViewModel : BaseViewModel
 {
     private readonly DatTiecService _datTiecService;
@@ -51,14 +52,83 @@ public class DatTiecViewModel : BaseViewModel
         NavigateCommand = new RelayCommand<object>(_ => true, NavigateToDatTiecPage);
         LoadDanhSachDatTiec();
     }
-
+    public RelayCommand<DATTIEC> InHoaDonCommand { get; private set; }
     public DatTiecViewModel()
     {
         _datTiecService = App.AppHost.Services.GetRequiredService<DatTiecService>();
         NavigateCommand = new RelayCommand<object>(_ => true, NavigateToDatTiecPage);
+        InHoaDonCommand = new RelayCommand<DATTIEC>(x => true, InHoaDon);
         LoadDanhSachDatTiec();
     }
+    private void InHoaDon(DATTIEC datTiec)
+    {
+        if (datTiec == null) return;
 
+        var hoaDon = _datTiecService.GetHoaDonTheoMaDatTiec(datTiec.MaDatTiec);
+        if (hoaDon == null)
+        {
+            MessageBox.Show("Không tìm thấy hóa đơn cho tiệc này.");
+            return;
+        }
+
+        FlowDocument document = TaoDocument(hoaDon);
+        PrintDialog printDialog = new PrintDialog();
+        if (printDialog.ShowDialog() == true)
+        {
+            printDialog.PrintDocument(((IDocumentPaginatorSource)document).DocumentPaginator, "Hóa đơn");
+        }
+    }
+    private FlowDocument TaoDocument(HOADON hoaDon)
+    {
+        FlowDocument doc = new FlowDocument
+        {
+            FontFamily = new System.Windows.Media.FontFamily("Tahoma"),
+            FontSize = 12,
+            PagePadding = new Thickness(20),
+            PageWidth = 300,
+            ColumnWidth = double.PositiveInfinity
+        };
+
+        Paragraph title = new Paragraph(new Run("HÓA ĐƠN THANH TOÁN"))
+        {
+            FontSize = 18,
+            FontWeight = FontWeights.Bold,
+            TextAlignment = TextAlignment.Center,
+            Margin = new Thickness(0, 0, 0, 20)
+        };
+        doc.Blocks.Add(title);
+
+        doc.Blocks.Add(new Paragraph(new Run("SereniteWedding\nKhu phố 6, P.Linh Trung, Tp.Thủ Đức, TP.HCM"))
+        {
+            TextAlignment = TextAlignment.Center
+        });
+
+        Paragraph content = new Paragraph();
+        content.Inlines.Add(new Bold(new Run("Ngày thanh toán: ")));
+        content.Inlines.Add(new Run(hoaDon.NgayThanhToan?.ToString("dd/MM/yyyy") ?? "N/A"));
+        content.Inlines.Add(new LineBreak());
+
+        content.Inlines.Add(new Bold(new Run("Khách hàng: ")));
+        content.Inlines.Add(new Run(hoaDon.DATTIEC?.TenChuRe + " & " + hoaDon.DATTIEC?.TenCoDau));
+        content.Inlines.Add(new LineBreak());
+
+        content.Inlines.Add(new Bold(new Run("Tổng tiền: ")));
+        content.Inlines.Add(new Run($"{hoaDon.TongTienHD:C0}"));
+
+        doc.Blocks.Add(content);
+
+        return doc;
+    }
+    private DATTIEC _datTiecDangChon;
+    public DATTIEC DatTiecDangChon
+    {
+        get => _datTiecDangChon;
+        set
+        {
+            _datTiecDangChon = value;
+            OnPropertyChanged();
+        }
+    }
     public void LoadDanhSachDatTiec()
     {
         _allDatTiec = _datTiecService.GetAllDatTiec();

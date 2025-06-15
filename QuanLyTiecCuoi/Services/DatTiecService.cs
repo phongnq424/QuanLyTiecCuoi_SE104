@@ -1,4 +1,5 @@
-﻿using QuanLyTiecCuoi.Data.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.MVVM.Model;
 using QuanLyTiecCuoi.Repository;
 using System;
@@ -87,6 +88,10 @@ namespace QuanLyTiecCuoi.Services
         public static implicit operator int(DatTiecService v)
         {
             throw new NotImplementedException();
+        }
+        public HOADON? GetHoaDonTheoMaDatTiec(int maDatTiec)
+        {
+            return _datTiecRepo.GetHoaDonTheoMaDatTiec(maDatTiec);
         }
     }
 }

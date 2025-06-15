@@ -81,5 +81,9 @@ namespace QuanLyTiecCuoi.Repository
                 dt.NgayDaiTiec.Date == ngay.Date &&
                 dt.MaCa == maCa);
         }
+        public HOADON? GetHoaDonTheoMaDatTiec(int maDatTiec)
+        {
+            return _context.HoaDons.FirstOrDefault(hd => hd.MaDatTiec == maDatTiec);
+        }
     }
 }

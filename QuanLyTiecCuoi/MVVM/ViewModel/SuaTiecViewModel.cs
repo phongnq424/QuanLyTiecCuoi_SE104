@@ -18,8 +18,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ObservableCollection<CASANH> DanhSachCa { get; set; } = new();
         public ObservableCollection<SANH> DanhSachSanh { get; set; } = new();
 
-        public List<string> MonAnDaChon { get; set; } = new();
-        public List<string> DichVuDaChon { get; set; } = new();
+        public ObservableCollection<MONAN> MonAnDaChon { get; set; } = new();
+        public ObservableCollection<DICHVU> DichVuDaChon { get; set; } = new();
 
         public SuaTiecViewModel(DATTIEC tiecCanSua)
         {
@@ -74,18 +74,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 Console.WriteLine("Lỗi LoadDanhSachSanh: " + ex.Message);
             }
         }
-
-        public void ChonMonAn()
-        {
-            // Giả lập danh sách món ăn đã chọn (sau này có thể mở form chọn món ăn)
-            MonAnDaChon = new List<string> { "Gỏi cuốn", "Tôm chiên", "Chè sen" };
-        }
-
-        public void ChonDichVu()
-        {
-            // Giả lập danh sách dịch vụ đã chọn
-            DichVuDaChon = new List<string> { "Ban nhạc", "Chụp ảnh", "MC" };
-        }
         public event Action DanhSachChanged;
         public bool CapNhatTiec()
         {
@@ -102,6 +90,15 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 Console.WriteLine("Lỗi khi cập nhật tiệc: " + ex.Message);
                 return false;
             }
+        }
+        public CASANH? CaDuocChon
+        {
+            get => DanhSachCa.FirstOrDefault(c => c.MaCa == TiecMoi.MaCa);
+        }
+
+        public SANH? SanhDuocChon
+        {
+            get => DanhSachSanh.FirstOrDefault(s => s.MaSanh == TiecMoi.MaSanh);
         }
     }
 }

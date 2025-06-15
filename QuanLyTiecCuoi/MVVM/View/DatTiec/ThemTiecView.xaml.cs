@@ -19,19 +19,9 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             InitializeComponent();
             viewModel = new ThemTiecViewModel();
             this.DataContext = viewModel;
-            Loaded += ThemTiecView_Loaded;
-            // Load các combobox (ca, sảnh)
-            viewModel.LoadDanhSachCa();
-            viewModel.LoadDanhSachSanh();
-            ShiftComboBox.ItemsSource = viewModel.DanhSachCa;
-            HallComboBox.ItemsSource = viewModel.DanhSachSanh;
-            
-
         }
         private void ThemTiecView_Loaded(object sender, RoutedEventArgs e)
         {
-            SelectedMonAnText.Text = string.Join(", ", viewModel.MonAnDaChon.Select(m => m.TenMon));
-            SelectedDichVuText.Text = string.Join(", ", viewModel.DichVuDaChon.Select(d => d.TenDichVu));
         }
 
 
@@ -52,13 +42,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             {
                 var selectedDate = FilterDatePicker.SelectedDate.Value;
                 viewModel.TiecMoi.NgayDaiTiec = selectedDate;
-                SelectedDateText.Text = selectedDate.ToString("dd/MM/yyyy");
-                FilterDatePicker.Visibility = Visibility.Collapsed; // Ẩn sau khi chọn
             }
-        }
-        private void ShiftButton_Click(object sender, RoutedEventArgs e)
-        {
-            ShiftPopup.IsOpen = true;
         }
 
         private void ShiftComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -66,14 +50,8 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             if (ShiftComboBox.SelectedItem is CASANH ca)
             {
                 viewModel.TiecMoi.MaCa = ca.MaCa;
-                SelectedShiftText.Text = ca.TenCa;
                 ShiftComboBox.DisplayMemberPath = "TenCa";
             }
-        }
-
-        private void HallButton_Click(object sender, RoutedEventArgs e)
-        {
-            HallPopup.IsOpen = true;
         }
 
         private void HallComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -81,7 +59,6 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             if (HallComboBox.SelectedItem is SANH sanh)
             {
                 viewModel.TiecMoi.MaSanh = sanh.MaSanh;
-                SelectedHallText.Text = sanh.TenSanh;
                 HallComboBox.DisplayMemberPath = "TenSanh";
             }
         }
