@@ -100,6 +100,7 @@ namespace QuanLyTiecCuoi.Services
             await _chiTietBaoCaoRepo.AddRangeAsync(chiTietList);
         }
 
+
         public List<(int Thang, int Nam)> GetAvailableMonthsAndYears()
         {
             var data = _baoCaoRepo.GetAll();

@@ -45,69 +45,93 @@ namespace QuanLyTiecCuoi.Services
             }
             return result;
         }
-        public void PrintBaoCao(List<ChiTietBaoCaoModel> data)
+        public void PrintBaoCao(List<ChiTietBaoCaoModel> data, int thang, int nam, double tongDoanhThu, int tongTiecCuoi)
         {
-            // Tạo FlowDocument để trình bày báo cáo
-            FlowDocument doc = new FlowDocument();
+            FlowDocument doc = new FlowDocument
+            {
+                FontFamily = new System.Windows.Media.FontFamily("Cambria"),
+                FontSize = 14,
+                PagePadding = new Thickness(50)
+            };
 
-            // Thiết lập font, margin,...
-            doc.FontFamily = new System.Windows.Media.FontFamily("Cambria");
-            doc.FontSize = 14;
-            doc.PagePadding = new Thickness(50);
-
-            // Tiêu đề
-            Paragraph title = new Paragraph(new Run("Báo cáo chi tiết"));
-            title.FontSize = 24;
-            title.FontWeight = FontWeights.Bold;
-            title.TextAlignment = TextAlignment.Center;
+            // Tiêu đề chính
+            Paragraph title = new Paragraph(new Run("BÁO CÁO CHI TIẾT THÁNG " + thang + " NĂM " + nam))
+            {
+                FontSize = 24,
+                FontWeight = FontWeights.Bold,
+                TextAlignment = TextAlignment.Center,
+                Margin = new Thickness(0, 0, 0, 20)
+            };
             doc.Blocks.Add(title);
 
-            // Tạo bảng báo cáo
-            Table table = new Table();
-            table.CellSpacing = 5;
-            doc.Blocks.Add(table);
+            // Thông tin tổng quan
+            Paragraph summary = new Paragraph
+            {
+                Margin = new Thickness(0, 0, 0, 20)
+            };
+            summary.Inlines.Add(new Run("Tổng doanh thu: ") { FontWeight = FontWeights.Bold });
+            summary.Inlines.Add(new Run(string.Format("{0:N0} VND", tongDoanhThu)));
+            summary.Inlines.Add(new LineBreak());
+            summary.Inlines.Add(new Run("Tổng số tiệc cưới: ") { FontWeight = FontWeights.Bold });
+            summary.Inlines.Add(new Run(tongTiecCuoi.ToString()));
+            doc.Blocks.Add(summary);
 
-            // Thêm 6 cột cho các trường: STT, Ngày, Số lượng, Doanh thu, Tỉ lệ doanh thu, Tỉ lệ tiệc cưới
+            // Tạo bảng
+            Table table = new Table
+            {
+                CellSpacing = 0,
+                BorderThickness = new Thickness(1),
+                BorderBrush = System.Windows.Media.Brushes.Black
+            };
+
+            // Cấu hình số cột
             int columns = 6;
             for (int i = 0; i < columns; i++)
-                table.Columns.Add(new TableColumn());
+            {
+                var column = new TableColumn();
+                table.Columns.Add(column);
+            }
 
-            // Header row
-            TableRow headerRow = new TableRow();
-            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("STT"))) { FontWeight = FontWeights.Bold });
-            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Ngày"))) { FontWeight = FontWeights.Bold });
-            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Số lượng tiệc cưới"))) { FontWeight = FontWeights.Bold });
-            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Doanh thu"))) { FontWeight = FontWeights.Bold });
-            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Tỉ lệ doanh thu"))) { FontWeight = FontWeights.Bold });
-            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Tỉ lệ tiệc cưới"))) { FontWeight = FontWeights.Bold });
+            // Header
+            TableRowGroup headerGroup = new TableRowGroup();
+            TableRow headerRow = new TableRow { FontWeight = FontWeights.Bold, Background = System.Windows.Media.Brushes.LightGray };
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("STT"))) { TextAlignment = TextAlignment.Center, Padding = new Thickness(4) });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Ngày"))) { TextAlignment = TextAlignment.Center, Padding = new Thickness(4) });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Số lượng TC"))) { TextAlignment = TextAlignment.Center, Padding = new Thickness(4) });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Doanh thu"))) { TextAlignment = TextAlignment.Center, Padding = new Thickness(4) });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Tỉ lệ doanh thu"))) { TextAlignment = TextAlignment.Center, Padding = new Thickness(4) });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Tỉ lệ tiệc cưới"))) { TextAlignment = TextAlignment.Center, Padding = new Thickness(4) });
+            headerGroup.Rows.Add(headerRow);
+            table.RowGroups.Add(headerGroup);
 
-            TableRowGroup trg = new TableRowGroup();
-            trg.Rows.Add(headerRow);
-
+            // Dữ liệu
+            TableRowGroup bodyGroup = new TableRowGroup();
             foreach (var item in data)
             {
                 TableRow row = new TableRow();
-                row.Cells.Add(new TableCell(new Paragraph(new Run(item.STT.ToString()))));
-                row.Cells.Add(new TableCell(new Paragraph(new Run(item.NgayBaoCao.ToString("dd/MM/yyyy")))));
-                row.Cells.Add(new TableCell(new Paragraph(new Run(item.SoLuongTiecCuoi.ToString()))));
-                row.Cells.Add(new TableCell(new Paragraph(new Run(item.DoanhThuFormatted))));
-                row.Cells.Add(new TableCell(new Paragraph(new Run((item.TiLeDoanhThu * 100).ToString("0.##") + "%"))));
-                row.Cells.Add(new TableCell(new Paragraph(new Run((item.TiLeTiecCuoi * 100).ToString("0.##") + "%"))));
-                trg.Rows.Add(row);
+                row.Cells.Add(new TableCell(new Paragraph(new Run(item.STT.ToString()))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Center });
+                row.Cells.Add(new TableCell(new Paragraph(new Run(item.NgayBaoCao.ToString("dd/MM/yyyy")))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Center });
+                row.Cells.Add(new TableCell(new Paragraph(new Run(item.SoLuongTiecCuoi.ToString()))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Center });
+                row.Cells.Add(new TableCell(new Paragraph(new Run(item.DoanhThuFormatted))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Right });
+                row.Cells.Add(new TableCell(new Paragraph(new Run((item.TiLeDoanhThu * 100).ToString("0.##") + "%"))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Right });
+                row.Cells.Add(new TableCell(new Paragraph(new Run((item.TiLeTiecCuoi * 100).ToString("0.##") + "%"))) { Padding = new Thickness(4), TextAlignment = TextAlignment.Right });
+                bodyGroup.Rows.Add(row);
             }
-            table.RowGroups.Add(trg);
+            table.RowGroups.Add(bodyGroup);
 
-            // Tạo đối tượng PrintDialog để chọn máy in
+            doc.Blocks.Add(table);
+
+            // In
             PrintDialog printDialog = new PrintDialog();
             if (printDialog.ShowDialog() == true)
             {
-                // Tự động scale document vừa trang in
                 doc.PageHeight = printDialog.PrintableAreaHeight;
                 doc.PageWidth = printDialog.PrintableAreaWidth;
+                doc.ColumnWidth = printDialog.PrintableAreaWidth; // fix vỡ layout
 
-                // In document
                 printDialog.PrintDocument(((IDocumentPaginatorSource)doc).DocumentPaginator, "In Báo Cáo Chi Tiết");
             }
         }
+
     }
 }

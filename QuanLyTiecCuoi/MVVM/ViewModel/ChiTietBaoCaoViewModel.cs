@@ -19,6 +19,8 @@ using System.Windows;
 public class ChiTietBaoCaoViewModel : BaseViewModel
 {
     private readonly ChiTietBaoCaoService _chiTietBaoCaoService;
+    private readonly BaoCaoService _baoCaoService;
+
 
     public RelayCommand<object> ReturnCommand { get; private set; }
     public RelayCommand<object> PrintCommand { get; private set; }
@@ -69,20 +71,40 @@ public class ChiTietBaoCaoViewModel : BaseViewModel
         set => SetProperty(ref _tongTiecCuoi, value);
     }
 
-    public ChiTietBaoCaoViewModel(ChiTietBaoCaoService chiTietBaoCaoService, int thang, int nam)
+    public ChiTietBaoCaoViewModel(ChiTietBaoCaoService chiTietBaoCaoService, BaoCaoService baoCaoService, int thang, int nam)
     {
         _chiTietBaoCaoService = chiTietBaoCaoService;
-
+        _baoCaoService = baoCaoService;
         ReturnCommand = new RelayCommand<object>(_ => true, NavigateToReportPage);
         PrintCommand = new RelayCommand<object>(_ => true, OnPrint);
-        ThangList = new ObservableCollection<int>(Enumerable.Range(1, 12));
-        NamList = new ObservableCollection<int> { 2023, 2024, 2025 };
+        ThangList = new ObservableCollection<int>();
+        NamList = new ObservableCollection<int>();
+
+        LoadThangNamOptions();
 
         SelectedThang = thang;
         SelectedNam = nam;
 
         LoadBaoCao(thang, nam);
     }
+
+    private void LoadThangNamOptions()
+    {
+        var options = _baoCaoService.GetAvailableMonthsAndYears();
+
+        ThangList.Clear();
+        NamList.Clear();
+
+        foreach (var opt in options)
+        {
+            if (!ThangList.Contains(opt.Thang))
+                ThangList.Add(opt.Thang);
+
+            if (!NamList.Contains(opt.Nam))
+                NamList.Add(opt.Nam);
+        }
+    }
+
 
     private void TryLoadBaoCao()
     {
@@ -114,14 +136,21 @@ public class ChiTietBaoCaoViewModel : BaseViewModel
     {
         try
         {
-            // Giả sử bạn có một hàm PrintReport trong service, truyền dữ liệu hiện tại
-            _chiTietBaoCaoService.PrintBaoCao(ChiTietBaoCaoList.ToList());
+            double tongDoanhThu = ChiTietBaoCaoList.Sum(x => x.DoanhThu);
+            int tongTiecCuoi = ChiTietBaoCaoList.Sum(x => x.SoLuongTiecCuoi);
 
-            MessageBox.Show("In báo cáo thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            _chiTietBaoCaoService.PrintBaoCao(
+                ChiTietBaoCaoList.ToList(),
+                SelectedThang,
+                SelectedNam,
+                tongDoanhThu,
+                tongTiecCuoi
+            );
         }
         catch (Exception ex)
         {
             MessageBox.Show($"Lỗi khi in báo cáo: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
+
 }
