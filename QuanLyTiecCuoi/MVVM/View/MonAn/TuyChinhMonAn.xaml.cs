@@ -73,15 +73,36 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
             if (sender is TextBox tb && (tb.Text == "Tên món ăn" || tb.Text == "Đơn giá"))
             {
                 tb.Text = "";
+                tb.Foreground = System.Windows.Media.Brushes.Black;
             }
         }
 
         private void SearchBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (sender is TextBox tb && string.IsNullOrWhiteSpace(tb.Text))
+            if (sender is TextBox tb)
             {
-                if (tb.Name == "txtSearchName") tb.Text = "Tên món ăn";
-                if (tb.Name == "txtSearchPrice") tb.Text = "Đơn giá";
+                if (string.IsNullOrWhiteSpace(tb.Text))
+                {
+                    if (tb.Name == "txtSearchName")
+                    {
+                        tb.Text = "Tên món ăn";
+                        tb.Foreground = System.Windows.Media.Brushes.Gray;
+                        _viewModel.TuKhoaTen = "";
+                    }
+                    else if (tb.Name == "txtSearchPrice")
+                    {
+                        tb.Text = "Đơn giá";
+                        tb.Foreground = System.Windows.Media.Brushes.Gray;
+                        _viewModel.TuKhoaGia = "";
+                    }
+                }
+                else
+                {
+                    if (tb.Name == "txtSearchName")
+                        _viewModel.TuKhoaTen = tb.Text;
+                    else if (tb.Name == "txtSearchPrice")
+                        _viewModel.TuKhoaGia = tb.Text;
+                }
             }
         }
     }

@@ -7,6 +7,8 @@ using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.MVVM.View.MainVindow;
 using QuanLyTiecCuoi.MVVM.View.MonAn;
 using QuanLyTiecCuoi.MVVM.View.DichVu;
+using QuanLyTiecCuoi.MVVM.ViewModel;
+using QuanLyTiecCuoi.Services;
 
 namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 {
@@ -111,6 +113,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                 mainWindow.MainFrame.Navigate(chonDichVuPage);
             }
         }
+        
         private void LuuTiec(object sender, RoutedEventArgs e)
         {
             if (viewModel.ThemTiecMoi())
