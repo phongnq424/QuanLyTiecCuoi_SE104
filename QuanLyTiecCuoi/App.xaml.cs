@@ -110,7 +110,7 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<LoaiSanhViewModel>();
 
                     // Các View
-                    services.AddSingleton<MainWindow>();
+                    services.AddTransient<MainWindow>();
                     services.AddTransient<BaoCaoPage>();
                     services.AddTransient<HoaDonPage>();
                     services.AddTransient<ChiTietHoaDonWindow>();

@@ -49,11 +49,24 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             get => _TyLePhatMoi; set { _TyLePhatMoi = value; OnPropertyChanged(); }
         }
 
+        private decimal _PhanTramDatCoc;
+        public decimal PhanTramDatCoc
+        {
+            get => _PhanTramDatCoc; set { _PhanTramDatCoc = value; OnPropertyChanged(); }
+        }
+
+        private String _PhanTramDatCocText;
+        public String PhanTramDatCocText
+        {
+            get => _PhanTramDatCocText; set { _PhanTramDatCocText = value; OnPropertyChanged(); }
+        }
 
 
         #region Command
         public ICommand FirstLoadCommand { get; set; }  
-        public ICommand ThayDoiCommand { get; set; }
+        public ICommand ThayDoiTyLePhatCommand { get; set; }
+        public ICommand ThayDoiApDungQDPhatCommand { get; set; }
+        public ICommand ThayDoiTyLeCocCommand { get; set; }
         public ICommand LuuThayDoiCommand { get; set;}
         #endregion
 
@@ -68,10 +81,15 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     ApDungQDPhat = _ThamSoHienTai.ApDungQDPhatThanhToanTre;
                     TyLePhatText = _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000");
                     TyLePhatMoi = _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay;
+                    PhanTramDatCoc = _ThamSoHienTai.PhanTramDatCoc;
+                    PhanTramDatCocText = PhanTramDatCoc.ToString("0.0000");
+
+                    Error = "";
+                    BtnSaveVisability = Visibility.Hidden;
                 }
             });
 
-            ThayDoiCommand = new RelayCommand<String?>((p) => { return true; },  (p) =>
+            ThayDoiTyLePhatCommand = new RelayCommand<String?>((p) => { return true; },  (p) =>
             {
                 if (_ThamSoHienTai == null) return;
                 if (p != null && p.Length != 0)
@@ -91,7 +109,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                         return;
                     }
                 }
-                if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000"))
+                if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000")
+                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000"))
                 {
                     return;
                 }
@@ -100,6 +119,49 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             });
 
+            ThayDoiApDungQDPhatCommand = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000")
+                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000"))
+                {
+                    return;
+                }
+
+                BtnSaveVisability = Visibility.Visible;
+            });
+
+            ThayDoiTyLeCocCommand = new RelayCommand<String?>((p) => { return true; }, (p) =>
+            {
+                if (_ThamSoHienTai == null) return;
+                if (p != null && p.Length != 0)
+                {
+                    PhanTramDatCocText = p;
+                    bool hopLe = decimal.TryParse(PhanTramDatCocText, out _);
+                    if (hopLe)
+                    {
+                        PhanTramDatCoc = decimal.Parse(PhanTramDatCocText);
+                        BtnSaveVisability = Visibility.Visible;
+                        Error = "";
+                    }
+                    else
+                    {
+                        Error = "Phải nhập vào số thập phân";
+                        BtnSaveVisability = Visibility.Visible;
+                        return;
+                    }
+                }
+                if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000") 
+                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000"))
+                {
+                    return;
+                }
+
+                BtnSaveVisability = Visibility.Visible;
+
+            });
+
+
+
             LuuThayDoiCommand = new RelayCommand<Page>((p) => { return true; }, async (p) =>
             {
                 if(_ThamSoHienTai == null)
@@ -107,7 +169,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     MessageBox.Show("lỗi tham số null");
                     return;
                 }
-                if(ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText ==_ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000"))
+                if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000")
+                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000"))
                 {
                     Error = "Không có thông tin thay đổi.";
                     return;
@@ -118,6 +181,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     Id = _ThamSoHienTai.Id,
                     TyLePhatThanhToanTreTheoNgay = TyLePhatMoi,
                     ApDungQDPhatThanhToanTre = ApDungQDPhat,
+                    PhanTramDatCoc = PhanTramDatCoc,
                 };
 
 

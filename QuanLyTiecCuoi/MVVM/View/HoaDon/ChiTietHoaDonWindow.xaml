@@ -22,14 +22,11 @@
         Background="White">
 
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="155*"/>
-                <ColumnDefinition Width="11*"/>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Border
@@ -71,9 +68,6 @@
                                     Style="{StaticResource Header3Style}"/>
                             <TextBlock Text="{Binding HoaDonDuocChon.MaHoaDon}"
                                     Style="{StaticResource Header4Style}"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Mã đặt tiêc:"
                                     Style="{StaticResource Header3Style}"/>
                             <TextBlock Text="{Binding HoaDonDuocChon.MaDatTiec}"
@@ -81,9 +75,15 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Ngày đặt tiệc:"
+                                    Style="{StaticResource Header3Style}"/>
+                            <TextBlock Text="{Binding TiecDuocChon.NgayDaiTiec, StringFormat='dd/MM/yyyy'}"
+                                    Style="{StaticResource Header4Style}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Số lượng bàn:"
                                     Style="{StaticResource Header3Style}"/>
-                            <TextBlock Text="{Binding HoaDonDuocChon.DATTIEC.SoLuongBan}"
+                            <TextBlock Text="{Binding HoaDonDuocChon.SoLuongBan}"
                                     Style="{StaticResource Header4Style}"/>
                         </StackPanel>
                     </StackPanel>
@@ -328,6 +328,7 @@
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <xctk:IntegerUpDown
+                                                        Minimum="1"
                                                         IsEnabled="{Binding DataContext.CoTheThayDoiSL, RelativeSource={RelativeSource AncestorType=Window}}"
                                                         Value="{Binding SoLuong}"
                                                         Name="myUpDownControl">
@@ -435,23 +436,33 @@
 
 
             </Grid>
+
+            <TextBlock Text="{Binding ThongBaoPhatText}"
+               HorizontalAlignment="Left"
+               Grid.Row="3"
+               Foreground="Red"
+               FontSize="14"
+               FontWeight="SemiBold"
+               Margin="20,5,0,0"
+               TextWrapping="Wrap"/>
             <Button
                 Visibility="{Binding BtnLuuVisibility}"
-                Grid.Row="3"
+                Grid.Row="4"
                 Margin="30,10,0,10"
                 HorizontalAlignment="Left"
                 Content="Lưu thay đổi"
                 Command="{Binding LuuThayDoiHoaDonCommand}"
                 Style="{StaticResource ButtonStyle}"/>
 
-            <StackPanel Grid.Row="3"
-                    HorizontalAlignment="Left"
+            <StackPanel Grid.Row="4"
+                    HorizontalAlignment="Right"
                         Margin="596,0,0,0"
                         Orientation="Horizontal" Grid.ColumnSpan="2">
 
                 <Button
                     Grid.Row="3"
                     Content="Xác nhận thanh toán"
+                    HorizontalAlignment="Right"
                     Visibility="{Binding BtnDaThanhToanVisibility}"
                     Command="{Binding ThanhToanCommand}"
                     CommandParameter="{Binding ElementName=MangHinhHoaDon}"
@@ -459,6 +470,7 @@
 
                 <Button
                     Grid.Row="3"
+                    HorizontalAlignment="Right"
                     Content="In hóa đơn"
                     Command="{Binding InHoaDonCommand}"
                     Style="{StaticResource ButtonStyle}"/>

@@ -35,7 +35,7 @@
                     VerticalAlignment="Center"
                     IsChecked="{Binding ApDungQDPhat}"
                     Foreground="black"
-                    Command="{Binding ThayDoiCommand}"
+                    Command="{Binding ThayDoiApDungQDPhatCommand}"
                     Background="#FDE6C2"/>
             </StackPanel>
 
@@ -50,12 +50,31 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged">
                             <i:InvokeCommandAction 
-                                    Command="{Binding ThayDoiCommand}"
+                                    Command="{Binding ThayDoiTyLePhatCommand}"
                                 CommandParameter="{Binding Text, ElementName=TyLeTextBox}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBox>
                 <TextBlock Text="{Binding TyLePhatMoi, StringFormat={}{0:P4}}"
+                    Style="{StaticResource Header3Style}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <TextBlock Text="Tỷ lệ đặt cọc so với tông tiền thanh toán:"
+                    Style="{StaticResource Header3Style}"/>
+                <TextBox
+                    x:Name="TyLeCocTextBox"
+                    Text="{Binding PhanTramDatCocText}"
+                    Style="{StaticResource TextBoxDescribeStyle}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction 
+                                    Command="{Binding ThayDoiTyLeCocCommand}"
+                                CommandParameter="{Binding Text, ElementName=TyLeCocTextBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <TextBlock Text="{Binding PhanTramDatCoc, StringFormat={}{0:P4}}"
                     Style="{StaticResource Header3Style}"/>
             </StackPanel>
 
@@ -69,7 +88,8 @@
             <TextBlock Text="{Binding Error}"
                HorizontalAlignment="Left"
                Foreground="Red"
-               FontSize="14"
+               FontSize="16"
+               FontFamily="Cambria"
                FontWeight="SemiBold"
                Margin="20,5,0,0"
                TextWrapping="Wrap"/>
