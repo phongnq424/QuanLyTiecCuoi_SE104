@@ -37,7 +37,7 @@
                       Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <!-- Cột cho "Giới thiệu" -->
-                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="30" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
 
@@ -46,13 +46,12 @@
                    
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Tìm kiếm theo: "
+                    <TextBlock Text="🔎"
                                Margin="0,0,5,0"
                                VerticalAlignment="Center"
                                FontSize="20"
                                FontFamily="Cambria"
-                               Grid.Column="0"
-                               FontStyle="Italic" />
+                               Grid.Column="0" />
 
                     <!-- Tên Sảnh -->
                     <StackPanel Orientation="Horizontal"
@@ -63,11 +62,10 @@
                                    VerticalAlignment="Center"
                                    FontSize="20"
                                    FontFamily="Cambria" />
-                        <TextBox Width="150"
-                                 Margin="0,0,10,0"
-                                 FontSize="20"
-                                 FontFamily="Cambria"
-                                 Text="{Binding FilterTenSanh, UpdateSourceTrigger=PropertyChanged}" />
+                        <Border Width="200" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                            <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
+                                Text="{Binding FilterTenSanh, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Border>
                     </StackPanel>
 
                     <!-- Giờ bắt đầu và kết thúc -->
@@ -79,10 +77,10 @@
                                    VerticalAlignment="Center"
                                    FontSize="20"
                                    FontFamily="Cambria" />
-                        <TextBox Width="150"
-                                 FontSize="20"
-                                 FontFamily="Cambria"
-                                 Text="{Binding FilterGioBatDau, UpdateSourceTrigger=PropertyChanged}" />
+                        <Border Width="200" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                            <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
+                                Text="{Binding FilterGioBatDau, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Border>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
                                 Margin="10,0,0,5"
@@ -92,10 +90,10 @@
                                    VerticalAlignment="Center"
                                    FontSize="20"
                                    FontFamily="Cambria" />
-                        <TextBox Width="150"
-                                 FontSize="20"
-                                 FontFamily="Cambria"
-                                 Text="{Binding FilterGioKetThuc, UpdateSourceTrigger=PropertyChanged}" />
+                        <Border Width="200" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                            <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
+                                Text="{Binding FilterGioKetThuc, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Border>
                     </StackPanel>
 
 
@@ -153,9 +151,9 @@
                       Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.4*" />
-                        <ColumnDefinition Width="0.2*" />
-                        <ColumnDefinition Width="0.2*" />
-                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.25*" />
+                        <ColumnDefinition Width="0.25*" />
+                        <ColumnDefinition Width="0.25*" />
                     </Grid.ColumnDefinitions>
 
                     <!-- Nút Quay Lại -->

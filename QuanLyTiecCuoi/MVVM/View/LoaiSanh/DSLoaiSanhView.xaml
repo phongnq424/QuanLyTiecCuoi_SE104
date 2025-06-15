@@ -41,15 +41,19 @@
                 <!-- Tên Loại Sảnh -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="1" >
                     <TextBlock Text="Tên Loại Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                    <TextBox Width="300" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
-                             Text="{Binding FilterTenLoaiSanh, UpdateSourceTrigger=PropertyChanged}" />
+                    <Border Width="300" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                        <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
+                            Text="{Binding FilterTenLoaiSanh, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Border>
                 </StackPanel>
 
                 <!-- Đơn Giá Bán Tối Thiểu -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="2" >
                     <TextBlock Text="Đơn giá bàn: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                    <TextBox Width="300" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria" 
-                             Text="{Binding FilterDonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged}" />
+                    <Border Width="300" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                        <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
+                            Text="{Binding FilterDonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Border>
                 </StackPanel>
             </Grid>
 

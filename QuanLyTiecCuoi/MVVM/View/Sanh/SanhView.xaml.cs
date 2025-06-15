@@ -15,6 +15,10 @@ using QuanLyTiecCuoi.MVVM.ViewModel;
 using System.Windows.Shapes;
 using QuanLyTiecCuoi.Services;
 using Microsoft.Extensions.DependencyInjection;
+using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.MVVM.View.DatTiec;
+using QuanLyTiecCuoi.MVVM.View.MainVindow;
+using QuanLyTiecCuoi.MVVM.Model;
 
 namespace QuanLyTiecCuoi.MVVM.View
 {
@@ -30,12 +34,6 @@ namespace QuanLyTiecCuoi.MVVM.View
             DataContext = vm;
         }
 
-        private void btnCTLoaiSanh_Click(object sender, RoutedEventArgs e)
-        {
-            var loaiSanhVM = App.AppHost.Services.GetRequiredService<LoaiSanhViewModel>();
-            NavigationService.Navigate(new DSLoaiSanhView(loaiSanhVM));
-        }
-
         private void btnCTSanh_Click(object sender, RoutedEventArgs e)
         {
             var SanhVM = App.AppHost.Services.GetRequiredService<SanhViewModel>();
@@ -47,6 +45,39 @@ namespace QuanLyTiecCuoi.MVVM.View
             if (DataContext is SanhViewModel vm)
             {
                 vm.RefreshDanhSachSanh(); 
+            }
+        }
+
+        private void SanhItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var border = sender as Border;
+            if (border != null)
+            {
+                var sanh = border.Tag as Sanh;
+                var viewModel = this.DataContext as SanhViewModel;
+
+                if (sanh != null && viewModel != null && viewModel.SelectedDate.HasValue && viewModel.SelectedCaSanh != null)
+                {
+                    var ngay = viewModel.SelectedDate.Value;
+                    var ca = viewModel.SelectedCaSanh.MaCa;
+
+                    // Mở giao diện thêm tiệc mới 
+                    var themView = new ThemTiecView(sanh, ngay, ca);
+                    themView.viewModel.DanhSachChanged += () =>
+                    {
+                        var current = (App.Current.MainWindow as MainWindow)?.MainFrame.Content;
+                        if (current is DatTiecView dtv)
+                        {
+                            (dtv.DataContext as DatTiecViewModel)?.LoadDanhSachDatTiec();
+                        }
+                    };
+                    (App.Current.MainWindow as MainWindow)?.MainFrame.Navigate(themView);
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn ngày và ca sảnh.");
+                    return;
+                }
             }
         }
     }

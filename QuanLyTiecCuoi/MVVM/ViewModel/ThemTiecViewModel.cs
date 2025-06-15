@@ -1,4 +1,5 @@
 using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.MVVM.Model;
 using QuanLyTiecCuoi.Services;
 using System;
 using System.Collections.ObjectModel;
@@ -24,6 +25,21 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ThemTiecViewModel()
         {
             _datTiecService = App.AppHost.Services.GetRequiredService<DatTiecService>();
+
+            LoadDanhSachCa();
+            LoadDanhSachSanh();
+        }
+
+        public ThemTiecViewModel(Sanh sanh, DateTime ngay, int maCa)
+        {
+            _datTiecService = App.AppHost.Services.GetRequiredService<DatTiecService>();
+
+            TiecMoi = new DATTIEC
+            {
+                MaSanh = sanh.MaSanh,
+                NgayDaiTiec = ngay,
+                MaCa = maCa
+            };
 
             LoadDanhSachCa();
             LoadDanhSachSanh();
