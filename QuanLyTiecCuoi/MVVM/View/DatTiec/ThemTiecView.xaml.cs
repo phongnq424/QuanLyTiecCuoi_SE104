@@ -19,6 +19,16 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             InitializeComponent();
             viewModel = new ThemTiecViewModel();
             this.DataContext = viewModel;
+            viewModel.LoadDanhSachCa();
+            viewModel.LoadDanhSachSanh();
+            ShiftComboBox.ItemsSource = viewModel.DanhSachCa;
+            HallComboBox.ItemsSource = viewModel.DanhSachSanh;
+
+            ShiftComboBox.DisplayMemberPath = "TenCa";
+            ShiftComboBox.SelectedValuePath = "MaCa";
+
+            HallComboBox.DisplayMemberPath = "TenSanh";
+            HallComboBox.SelectedValuePath = "MaSanh";
         }
         private void ThemTiecView_Loaded(object sender, RoutedEventArgs e)
         {
@@ -72,8 +82,6 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                 mainWindow.MainFrame.Navigate(chonMonAnPage);
             }
         }
-
-
         private void DichVuButton_Click(object sender, RoutedEventArgs e)
         {
             var chonDichVuPage = new ChonDichVu(viewModel.TiecMoi, viewModel.DichVuDaChon);
@@ -83,8 +91,6 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                 mainWindow.MainFrame.Navigate(chonDichVuPage);
             }
         }
-
-
         private void LuuTiec(object sender, RoutedEventArgs e)
         {
             if (viewModel.ThemTiecMoi())

@@ -1,5 +1,6 @@
 ﻿using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.Data;
+using System;
 
 namespace QuanLyTiecCuoi.Repository
 {
@@ -84,6 +85,11 @@ namespace QuanLyTiecCuoi.Repository
         public HOADON? GetHoaDonTheoMaDatTiec(int maDatTiec)
         {
             return _context.HoaDons.FirstOrDefault(hd => hd.MaDatTiec == maDatTiec);
+        }
+        public void AddHoaDon(HOADON hoaDon)
+        {
+            _context.HoaDons.Add(hoaDon);
+            _context.SaveChanges();
         }
     }
 }

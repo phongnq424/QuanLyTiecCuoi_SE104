@@ -82,11 +82,38 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public bool ThemTiecMoi()
         {
             if (TiecMoi == null) return false;
-
+           
             try
             {
                 _datTiecService.AddDatTiec(TiecMoi);
                 DanhSachChanged?.Invoke();
+
+                decimal tongTienMenu = 0;
+                foreach (var mon in MonAnDaChon)
+                {
+                    tongTienMenu += mon.DonGia;
+                }
+                decimal tongTienBan = tongTienMenu * TiecMoi.SoLuongBan;
+                decimal tongTienDV = 0;
+                decimal tienPhat = 0;
+                decimal tienDatCoc = TiecMoi.TienDatCoc;
+                foreach (var dv in DichVuDaChon)
+                {
+                    tongTienDV += dv.DonGia;
+                }
+
+                var hoaDon = new HOADON
+                {
+                    MaDatTiec = TiecMoi.MaDatTiec,
+                    DonGiaBan = tongTienMenu,
+                    TongTienBan = tongTienBan,
+                    TongTienDV = tongTienDV,
+                    TienPhat = 0,
+                    TongTienHD = tongTienDV + tongTienBan,
+                    TienPhaiThanhToan = tongTienBan + tongTienDV + tienPhat - tienDatCoc,
+                };
+                // Gọi hàm lưu hóa đơn
+                _datTiecService.AddHoaDon(hoaDon); // Cần service này
                 return true;
             }
             catch (Exception ex)

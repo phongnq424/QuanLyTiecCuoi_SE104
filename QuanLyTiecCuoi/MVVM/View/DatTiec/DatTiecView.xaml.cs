@@ -40,7 +40,19 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 
         private void InHoaDon_Click(object sender, RoutedEventArgs e)
         {
-            
+            // Lấy ViewModel đang dùng
+            if (DataContext is DatTiecViewModel vm)
+            {
+                // Lấy tiệc đang chọn từ DataGrid
+                if (MyDataGrid.SelectedItem is DATTIEC selectedTiec)
+                {
+                    vm.InHoaDonCommand.Execute(selectedTiec);
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn một tiệc cưới để in hóa đơn.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
         }
         private DataGridRow editableRow = null;
 

@@ -51,13 +51,13 @@ public class DatTiecViewModel : BaseViewModel
         _datTiecService = datTiecService;
         NavigateCommand = new RelayCommand<object>(_ => true, NavigateToDatTiecPage);
         LoadDanhSachDatTiec();
+        KhoiTaoLenh();
     }
     public RelayCommand<DATTIEC> InHoaDonCommand { get; private set; }
     public DatTiecViewModel()
     {
         _datTiecService = App.AppHost.Services.GetRequiredService<DatTiecService>();
-        NavigateCommand = new RelayCommand<object>(_ => true, NavigateToDatTiecPage);
-        InHoaDonCommand = new RelayCommand<DATTIEC>(x => true, InHoaDon);
+        KhoiTaoLenh();
         LoadDanhSachDatTiec();
     }
     private void InHoaDon(DATTIEC datTiec)
@@ -70,7 +70,26 @@ public class DatTiecViewModel : BaseViewModel
             MessageBox.Show("Không tìm thấy hóa đơn cho tiệc này.");
             return;
         }
+        DateTime ngayHienTai = DateTime.Now.Date;
+        DateTime ngayDaiTiec = datTiec.NgayDaiTiec.Date;
 
+        if (ngayHienTai < ngayDaiTiec)
+        {
+            MessageBox.Show("Tiệc chưa diễn ra.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+        if (!hoaDon.NgayThanhToan.HasValue)
+        {
+            decimal tongTien = hoaDon.TienPhaiThanhToan;
+            decimal tienPhat = 0;
+            decimal tienPhaiThanhToan = tongTien + tienPhat;
+
+            hoaDon.NgayThanhToan = ngayHienTai;
+            hoaDon.TienPhaiThanhToan = tienPhaiThanhToan;
+            hoaDon.TienPhat = tienPhat;
+            _datTiecService.UpdateHoaDonAsync(hoaDon);
+
+        }
         FlowDocument document = TaoDocument(hoaDon);
         PrintDialog printDialog = new PrintDialog();
         if (printDialog.ShowDialog() == true)
@@ -201,5 +220,10 @@ public class DatTiecViewModel : BaseViewModel
             // Xóa trong database (nếu bạn đã cài đặt repository hoặc service để xử lý)
             _datTiecService?.DeleteDatTiec(tiec.MaDatTiec); // gọi đến lớp xử lý thực tế nếu có
         }
+    }
+    private void KhoiTaoLenh()
+    {
+        NavigateCommand = new RelayCommand<object>(_ => true, NavigateToDatTiecPage);
+        InHoaDonCommand = new RelayCommand<DATTIEC>(x => true, InHoaDon);
     }
 }

@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LiveChartsCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.MVVM.Model;
 using QuanLyTiecCuoi.Repository;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -93,5 +96,16 @@ namespace QuanLyTiecCuoi.Services
         {
             return _datTiecRepo.GetHoaDonTheoMaDatTiec(maDatTiec);
         }
+        public void AddHoaDon(HOADON hoaDon)
+        {
+           _datTiecRepo.AddHoaDon(hoaDon);
+        }
+        HoaDonRepository _hoaDonRepository;
+        public async Task<HOADON?> UpdateHoaDonAsync(HOADON hoaDon)
+        {
+            _hoaDonRepository = App.AppHost.Services.GetRequiredService<HoaDonRepository>();
+            return await _hoaDonRepository.UpdateAsync(hoaDon);
+        }
+
     }
 }
