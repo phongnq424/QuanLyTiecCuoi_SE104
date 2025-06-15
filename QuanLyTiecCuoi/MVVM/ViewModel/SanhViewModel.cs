@@ -21,8 +21,11 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
     {
         private readonly LoaiSanhService _loaiSanhService;
         private readonly SanhService _sanhService;
+        private readonly CaService _caService;
+        private readonly DatTiecService _datTiecService;
         public ObservableCollection<LoaiSanh> DanhSachLoaiSanh { get; set; }
         public ObservableCollection<Sanh> DanhSachSanh { get; set; }
+        public ObservableCollection<CASANH> DanhSachCaSanh { get; set; }
         public ICollectionView DanhSachSanhView { get; set; }
 
         private Sanh _selectedSanh;
@@ -77,6 +80,44 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
         }
 
+        private CASANH _selectedCaSanh;
+        public CASANH SelectedCaSanh
+        {
+            get => _selectedCaSanh;
+            set 
+            { 
+                _selectedCaSanh = value; OnPropertyChanged();
+                DanhSachSanhView.Refresh();
+                OnPropertyChanged(nameof(SoLuongSanhTrong));
+            }
+        }
+
+        private DateTime? _selectedDate;
+        public DateTime? SelectedDate
+        {
+            get => _selectedDate;
+            set
+            {
+                _selectedDate = value; OnPropertyChanged();
+                DanhSachSanhView.Refresh();
+                OnPropertyChanged(nameof(SoLuongSanhTrong));
+            }
+        }
+
+        public int SoLuongSanhTrong
+        {
+            get
+            {
+                if (!SelectedDate.HasValue || SelectedCaSanh == null)
+                    return 0;
+
+                return DanhSachSanh.Where(s =>
+                    !_datTiecService.KiemTraSanhDaDat(s.MaSanh, SelectedDate.Value, SelectedCaSanh.MaCa)
+                ).Count();
+            }
+        }
+
+
         // Thuộc tính chỉ hiển thị (readonly) – binding lên TextBlock
         public decimal? DonGiaBanToiThieu => SelectedLoaiSanh?.DonGiaBanToiThieu;
 
@@ -87,14 +128,17 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ICommand DeleteSanhCommand { get; set; }
 
 
-        public SanhViewModel(SanhService sanhService, LoaiSanhService loaiSanhService)
+        public SanhViewModel(SanhService sanhService, LoaiSanhService loaiSanhService, CaService caService, DatTiecService datTiecService)
         {
             // Database
             _loaiSanhService = loaiSanhService;
             _sanhService = sanhService;
+            _caService = caService;
+            _datTiecService = datTiecService;
 
             DanhSachLoaiSanh = new ObservableCollection<LoaiSanh>(_loaiSanhService.GetAllLoaiSanh());
             DanhSachSanh = new ObservableCollection<Sanh>(_sanhService.GetAllSanh());
+            DanhSachCaSanh = new ObservableCollection<CASANH>(_caService.LayDanhSachCa("", "", ""));
 
             DanhSachSanhView = CollectionViewSource.GetDefaultView(DanhSachSanh);
             DanhSachSanhView.Filter = FilterSanh;
@@ -207,6 +251,12 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
         }
 
+        public bool KiemTraSanhDaDat(int maSanh, DateTime ngay, int maCa, out DATTIEC? datTiec)
+        {
+            datTiec = _datTiecService.LayPhieuDatTiec(maSanh, ngay, maCa);
+            return datTiec != null;
+        }
+
         private bool FilterSanh(object obj)
         {
             if (obj is not Sanh sanh) return false;
@@ -227,6 +277,16 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             if (decimal.TryParse(FilterDonGiaBanToiThieu, out decimal gia))
             {
                 matchGia = sanh.LoaiSanh?.DonGiaBanToiThieu <= gia;
+            }
+
+            // Filter theo ngày + ca
+            if (SelectedDate.HasValue && SelectedCaSanh != null)
+            {
+                var isSanhDaDat = _datTiecService
+                    .KiemTraSanhDaDat(sanh.MaSanh, SelectedDate.Value, SelectedCaSanh.MaCa);
+                
+                if (isSanhDaDat)
+                    return false;
             }
 
             return matchTen && matchLoai && matchSoLuong && matchGia;

@@ -21,15 +21,35 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             this.DataContext = viewModel;
             viewModel.LoadDanhSachCa();
             viewModel.LoadDanhSachSanh();
-            ShiftComboBox.ItemsSource = viewModel.DanhSachCa;
-            HallComboBox.ItemsSource = viewModel.DanhSachSanh;
+            //ShiftComboBox.ItemsSource = viewModel.DanhSachCa;
+            //HallComboBox.ItemsSource = viewModel.DanhSachSanh;
 
-            ShiftComboBox.DisplayMemberPath = "TenCa";
-            ShiftComboBox.SelectedValuePath = "MaCa";
+            //ShiftComboBox.DisplayMemberPath = "TenCa";
+            //ShiftComboBox.SelectedValuePath = "MaCa";
 
-            HallComboBox.DisplayMemberPath = "TenSanh";
-            HallComboBox.SelectedValuePath = "MaSanh";
+            //HallComboBox.DisplayMemberPath = "TenSanh";
+            //HallComboBox.SelectedValuePath = "MaSanh";
         }
+
+        public ThemTiecView(Sanh sanh, DateTime ngay, int maCa)
+        {
+            InitializeComponent();
+            viewModel = new ThemTiecViewModel(sanh, ngay, maCa);
+            this.DataContext = viewModel;
+
+            viewModel.LoadDanhSachCa();
+            viewModel.LoadDanhSachSanh();
+
+            //ShiftComboBox.ItemsSource = viewModel.DanhSachCa;
+            //HallComboBox.ItemsSource = viewModel.DanhSachSanh;
+
+            //ShiftComboBox.DisplayMemberPath = "TenCa";
+            //ShiftComboBox.SelectedValuePath = "MaCa";
+
+            //HallComboBox.DisplayMemberPath = "TenSanh";
+            //HallComboBox.SelectedValuePath = "MaSanh";
+        }
+
         private void ThemTiecView_Loaded(object sender, RoutedEventArgs e)
         {
         }
@@ -55,23 +75,23 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             }
         }
 
-        private void ShiftComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ShiftComboBox.SelectedItem is CASANH ca)
-            {
-                viewModel.TiecMoi.MaCa = ca.MaCa;
-                ShiftComboBox.DisplayMemberPath = "TenCa";
-            }
-        }
+        //private void ShiftComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (ShiftComboBox.SelectedItem is CASANH ca)
+        //    {
+        //        viewModel.TiecMoi.MaCa = ca.MaCa;
+        //        ShiftComboBox.DisplayMemberPath = "TenCa";
+        //    }
+        //}
 
-        private void HallComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (HallComboBox.SelectedItem is SANH sanh)
-            {
-                viewModel.TiecMoi.MaSanh = sanh.MaSanh;
-                HallComboBox.DisplayMemberPath = "TenSanh";
-            }
-        }
+        //private void HallComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (HallComboBox.SelectedItem is SANH sanh)
+        //    {
+        //        viewModel.TiecMoi.MaSanh = sanh.MaSanh;
+        //        HallComboBox.DisplayMemberPath = "TenSanh";
+        //    }
+        //}
 
         private void MonAnButton_Click(object sender, RoutedEventArgs e)
         {

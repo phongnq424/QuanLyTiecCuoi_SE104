@@ -54,6 +54,11 @@ namespace QuanLyTiecCuoi.Services
             return _datTiecRepo.GetDatTiecByPhone(SDT);
         }
 
+        public DATTIEC? LayPhieuDatTiec(int maSanh, DateTime ngay, int maCa)
+        {
+            return _datTiecRepo.GetDATTIEC(maSanh, ngay, maCa);
+        }
+
         public void AddDatTiec(DATTIEC datTiec)
         {
             if (datTiec == null)
@@ -83,9 +88,9 @@ namespace QuanLyTiecCuoi.Services
             _datTiecRepo.DeleteDatTiec(maDatTiec);
         }
 
-        public bool CheckSanhTrong(int maSanh, DateTime ngay, int maCa)
+        public bool KiemTraSanhDaDat(int maSanh, DateTime ngay, int maCa)
         {
-            return _datTiecRepo.CheckSanhTrong(maSanh, ngay, maCa);
+            return _datTiecRepo.KiemTraSanhDaDat(maSanh, ngay, maCa);
         }
 
         public static implicit operator int(DatTiecService v)

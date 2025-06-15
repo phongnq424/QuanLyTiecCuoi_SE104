@@ -16,6 +16,9 @@
     <Compile Update="MVVM\View\LoaiSanh\AddOrEditLoaiSanhWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MVVM\View\Sanh\QLDSSanhView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MVVM\View\Sanh\AddOrEditSanhWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -55,6 +58,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\LoaiSanh\AddOrEditLoaiSanhWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\Sanh\QLDSSanhView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\Sanh\AddOrEditSanhWindow.xaml">

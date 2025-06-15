@@ -60,6 +60,8 @@ namespace QuanLyTiecCuoi
                     services.AddScoped<ChiTietDichVuRepository>();
                     services.AddTransient<ThamSoRepository>();
                     services.AddTransient<CaRepository>();
+                    services.AddTransient<LoaiSanhRepository>();
+                    services.AddTransient<SanhRepository>();
 
                     // Dùng BaoCaoService lấy dữ liệu từ AppDataRepository
                     services.AddSingleton<BaoCaoService>();
@@ -74,6 +76,8 @@ namespace QuanLyTiecCuoi
                     services.AddScoped<ChiTietMenuService>();
                     services.AddTransient<ThamSoService>();
                     services.AddTransient<CaService>();
+                    services.AddTransient<LoaiSanhService>();
+                    services.AddTransient<SanhService>();
                     services.AddTransient<STTConverter>();
 
                     // Các ViewModel
@@ -101,7 +105,8 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<CaViewModel>();
                     services.AddSingleton<DSBaoCaoViewModel>();
                     services.AddTransient<LapBaoCaoViewModel>();
-
+                    services.AddTransient<SanhViewModel>();
+                    services.AddTransient<LoaiSanhViewModel>();
 
                     // Các View
                     services.AddSingleton<MainWindow>();
@@ -122,21 +127,10 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<TuyChinhQuyDinhPage>();
                     services.AddTransient<CaPage>();
                     services.AddSingleton<DSBaoCao>();
-                    
-
-                    services.AddTransient<LoaiSanhRepository>();
-                    services.AddTransient<SanhRepository>();
-
-                    services.AddTransient<LoaiSanhService>();
-                    services.AddTransient<SanhService>();
-
-                    services.AddTransient<LoaiSanhViewModel>();
-                    services.AddTransient<SanhViewModel>();
-
-                    services.AddTransient<MainWindow>();
                     services.AddTransient<SanhView>();
                     services.AddTransient<DSLoaiSanhView>();
                     services.AddTransient<DSSanhView>();
+                    services.AddTransient<QLDSSanhView>();
                     services.AddTransient<AddOrEditLoaiSanhWindow>();
                     services.AddTransient<AddOrEditSanhWindow>();
                 })

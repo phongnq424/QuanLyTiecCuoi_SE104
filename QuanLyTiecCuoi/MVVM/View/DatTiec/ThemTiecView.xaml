@@ -208,14 +208,13 @@
 
                                         <TextBlock Text="Ngày đãi tiệc" Grid.Column="0" VerticalAlignment="Center"/>
                                         <DatePicker
-                                            SelectedDate="{Binding NgayDaiTiec}"
+                                            SelectedDate="{Binding TiecMoi.NgayDaiTiec, Mode=TwoWay}"
                                             Grid.Column="1"
                                             Width="400"
                                             Height="40"
                                             FontSize="20"
                                             FontFamily="Cambria"
                                             VerticalAlignment="Center"
-                                            SelectedDateChanged="FilterDatePicker_SelectedDateChanged"
                                             x:Name="FilterDatePicker"
                                             Margin="0 10"/>
                                     </Grid>
@@ -228,15 +227,17 @@
 
                                         <TextBlock Text="Ca" Grid.Column="0" VerticalAlignment="Center"/>
                                         <ComboBox 
-                                            x:Name="ShiftComboBox"
+                                            ItemsSource="{Binding DanhSachCa}"
+                                            DisplayMemberPath="TenCa"
+                                            SelectedValuePath="MaCa"
+                                            SelectedValue="{Binding TiecMoi.MaCa, Mode=TwoWay}"
                                             Grid.Column="1"
                                             Width="400"
                                             Height="40" 
                                             FontSize="20" 
                                             FontFamily="Cambria" 
                                             Margin="0 10" 
-                                            VerticalContentAlignment="Center"
-                                            SelectionChanged="ShiftComboBox_SelectionChanged"/>
+                                            VerticalContentAlignment="Center"/>
                                     </Grid>
 
                                     <!-- Sảnh -->
@@ -249,15 +250,17 @@
 
                                         <TextBlock Text="Sảnh" Grid.Column="0" VerticalAlignment="Center"/>
                                         <ComboBox 
-                                            x:Name="HallComboBox"
+                                            ItemsSource="{Binding DanhSachSanh}"
+                                            DisplayMemberPath="TenSanh"
+                                            SelectedValuePath="MaSanh"
+                                            SelectedValue="{Binding TiecMoi.MaSanh, Mode=TwoWay}"
                                             Grid.Column="1"
                                             Width="400"
                                             Height="40" 
                                             FontSize="20" 
                                             FontFamily="Cambria" 
                                             Margin="0 10" 
-                                            VerticalContentAlignment="Center"
-                                            SelectionChanged="HallComboBox_SelectionChanged"/>
+                                            VerticalContentAlignment="Center"/>
                                     </Grid>
                                     
                                     <!-- Món ăn -->

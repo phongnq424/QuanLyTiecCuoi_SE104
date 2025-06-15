@@ -1,4 +1,4 @@
-﻿<Page x:Class="QuanLyTiecCuoi.MVVM.View.DSSanhView"
+﻿<Page x:Class="QuanLyTiecCuoi.MVVM.View.QLDSSanhView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,7 @@
       xmlns:vm="clr-namespace:QuanLyTiecCuoi.MVVM.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1600"
-      Title="Danh Sách Sảnh Tiệc">
+      Title="Quản Lý Danh Sách Sảnh Tiệc">
 
     <Page.Resources>
         <local:STTConverter x:Key="STTConverter" />
@@ -19,8 +19,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
             <!-- Tiêu đề -->
             <TextBlock Text="Danh Sách Sảnh" FontSize="35" FontFamily="Cambria" FontWeight="Bold" Margin="10" Grid.Row="0" />
 
@@ -46,7 +47,7 @@
                     <TextBlock Text="Tên Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
                     <Border Width="180" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
                         <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
-                            Text="{Binding FilterTenSanh, UpdateSourceTrigger=PropertyChanged}"/>
+                        Text="{Binding FilterTenSanh, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </StackPanel>
 
@@ -54,8 +55,8 @@
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="2" >
                     <TextBlock Text="Loại Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
                     <Border Width="100" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
-                        <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" Padding="5,0" BorderThickness="0" VerticalAlignment="Center"
-                            Text="{Binding FilterLoaiSanh, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
+                        Text="{Binding FilterLoaiSanh, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </StackPanel>
 
@@ -63,8 +64,8 @@
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="3" >
                     <TextBlock Text="Số lượng bàn: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
                     <Border Width="100" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
-                        <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" Padding="5,0" BorderThickness="0" VerticalAlignment="Center"
-                            Text="{Binding FilterSoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
+                        Text="{Binding FilterSoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </StackPanel>
 
@@ -73,22 +74,22 @@
                     <TextBlock Text="Đơn giá bàn: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
                     <Border Width="150" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
                         <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
-                            Text="{Binding FilterDonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged}"/>
+                        Text="{Binding FilterDonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </StackPanel>
             </Grid>
-            
+
             <!-- DataGrid để hiển thị danh sách sảnh -->
             <DataGrid ItemsSource="{Binding DanhSachSanhView}" 
-                  SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
-                  AutoGenerateColumns="False" 
-                  Margin="10,10,10,10"  
-                  HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch"
-                  AlternationCount="1000"
-                  CanUserAddRows="False"
-                  Grid.Row="2"
-                  FontSize="20" FontFamily="Cambria">
+              SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
+              AutoGenerateColumns="False" 
+              Margin="10,10,10,10"  
+              HorizontalAlignment="Stretch" 
+              VerticalAlignment="Stretch"
+              AlternationCount="1000"
+              CanUserAddRows="False"
+              Grid.Row="2"
+              FontSize="20" FontFamily="Cambria">
 
                 <DataGrid.Columns>
                     <!-- Cột STT -->
@@ -101,26 +102,47 @@
                     </DataGridTemplateColumn>
                     <!-- Cột Tên Sảnh -->
                     <DataGridTextColumn Header="Tên Sảnh" 
-                                    Width="*"
-                                    Binding="{Binding TenSanh}" />
+                                Width="*"
+                                Binding="{Binding TenSanh}" />
                     <!-- Cột Loại Sảnh -->
                     <DataGridTextColumn Header="Loại Sảnh" 
-                                    Width="0.5*"
-                                    Binding="{Binding LoaiSanh.TenLoaiSanh}" />
+                                Width="0.5*"
+                                Binding="{Binding LoaiSanh.TenLoaiSanh}" />
                     <!-- Cột Số Lượng Bàn Tối Đa -->
                     <DataGridTextColumn Header="Số Lượng Bàn Tối Đa" 
-                                    Width="*"
-                                    Binding="{Binding SoLuongBanToiDa}" />
+                                Width="*"
+                                Binding="{Binding SoLuongBanToiDa}" />
                     <!-- Cột Đơn Giá Bàn Tối Thiểu -->
                     <DataGridTextColumn Header="Đơn Giá Bàn Tối Thiểu" 
-                                    Width="*"
-                                    Binding="{Binding LoaiSanh.DonGiaBanToiThieu, StringFormat=N0}" />
+                                Width="*"
+                                Binding="{Binding LoaiSanh.DonGiaBanToiThieu, StringFormat=N0}" />
                     <!-- Cột Ghi Chú -->
                     <DataGridTextColumn Header="Ghi Chú" 
-                                    Width="*"
-                                    Binding="{Binding GhiChu}" />
+                                Width="*"
+                                Binding="{Binding GhiChu}" />
                 </DataGrid.Columns>
             </DataGrid>
+
+            <Grid Margin="10" VerticalAlignment="Bottom" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Nút Thêm Sảnh -->
+                <Button Grid.Column="1" Content="Thêm Sảnh" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                Command="{Binding AddSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
+
+                <!-- Nút Sửa Sảnh -->
+                <Button Grid.Column="2" Content="Sửa Sảnh" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                Command="{Binding EditSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
+
+                <!-- Nút Xóa Sảnh -->
+                <Button Grid.Column="3" Content="Xóa Sảnh" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
+                Command="{Binding DeleteSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
+            </Grid>
         </Grid>
     </Border>
 </Page>

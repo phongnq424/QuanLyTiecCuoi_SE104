@@ -1,5 +1,6 @@
 ﻿using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +39,14 @@ namespace QuanLyTiecCuoi.Repository
         public List<DATTIEC> GetDatTiecByPhone(string SDT)
         {
             return _context.DatTiecs.Where(d => d.SDT == SDT).ToList();
+        }
+
+        public DATTIEC? GetDATTIEC(int maSanh, DateTime ngay, int maCa)
+        {
+            return _context.DatTiecs
+                .Include(dt => dt.Sanh)
+                .Include(dt => dt.CaSanh)
+                .FirstOrDefault(dt => dt.MaSanh == maSanh && dt.NgayDaiTiec.Date == ngay.Date && dt.MaCa == maCa);
         }
 
         public void AddDatTiec(DATTIEC datTiec)
@@ -79,9 +88,9 @@ namespace QuanLyTiecCuoi.Repository
         {
             return _context.Sanhs.ToList();
         }
-        public bool CheckSanhTrong(int maSanh, DateTime ngay, int maCa)
+        public bool KiemTraSanhDaDat(int maSanh, DateTime ngay, int maCa)
         {
-            return !_context.DatTiecs.Any(dt =>
+            return _context.DatTiecs.Any(dt =>
                 dt.MaSanh == maSanh &&
                 dt.NgayDaiTiec.Date == ngay.Date &&
                 dt.MaCa == maCa);

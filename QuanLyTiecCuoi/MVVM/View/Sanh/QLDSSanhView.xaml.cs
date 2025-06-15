@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace QuanLyTiecCuoi.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for DSSanhView.xaml
+    /// Interaction logic for QLDSSanhView.xaml
     /// </summary>
-    public partial class DSSanhView : Page
+    public partial class QLDSSanhView : Page
     {
-        public DSSanhView(SanhViewModel vm)
+        public QLDSSanhView(SanhViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
