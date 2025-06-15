@@ -201,8 +201,7 @@
 
                                         <TextBlock Text="Ngày đãi tiệc" Grid.Column="0" VerticalAlignment="Center"/>
                                         <DatePicker
-                                            SelectedDate="{Binding TiecMoi.NgayDaiTiec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Text="{Binding TiecMoi.NgayDaiTiec, StringFormat=dd/MM/yyyy}" 
+                                            SelectedDate="{Binding TiecMoi.NgayDaiTiec}"
                                             Grid.Column="1"
                                             Width="400"
                                             Height="40"

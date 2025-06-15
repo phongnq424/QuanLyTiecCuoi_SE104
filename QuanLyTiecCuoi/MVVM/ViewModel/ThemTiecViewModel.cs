@@ -15,7 +15,10 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
     {
         private readonly DatTiecService _datTiecService;
 
-        public DATTIEC TiecMoi { get; set; } = new DATTIEC();
+        public DATTIEC TiecMoi { get; set; } = new DATTIEC() {
+            NgayDaiTiec = DateTime.Today
+        };
+
 
         public ObservableCollection<CASANH> DanhSachCa { get; set; } = new();
         public ObservableCollection<SANH> DanhSachSanh { get; set; } = new();
