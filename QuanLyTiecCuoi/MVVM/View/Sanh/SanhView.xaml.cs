@@ -38,11 +38,19 @@ namespace QuanLyTiecCuoi.MVVM.View
         {
             var vm = (MainWindowViewModel)Application.Current.MainWindow.DataContext;
 
-            var chucnang = vm.DanhSachChucNang
-                             .FirstOrDefault(c => c.TenManHinhDuocLoad == "DSSanhView");
-            if (chucnang != null)
-                vm.DieuHuongCommand.Execute(chucnang);
+            // Lọc danh sách các chức năng có tên màn hình là DSSanhView hoặc QLDSSanhView
+            var chucNangs = vm.DanhSachChucNang
+                              .Where(c => c.TenManHinhDuocLoad == "QLDSSanhView" || c.TenManHinhDuocLoad == "DSSanhView")
+                              .ToList();
+
+            // Ưu tiên QLDSSanhView nếu tồn tại, nếu không thì lấy DSSanhView
+            var chon = chucNangs.FirstOrDefault(c => c.TenManHinhDuocLoad == "QLDSSanhView")
+                    ?? chucNangs.FirstOrDefault(c => c.TenManHinhDuocLoad == "DSSanhView");
+
+            if (chon != null)
+                vm.DieuHuongCommand.Execute(chon);
         }
+
 
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

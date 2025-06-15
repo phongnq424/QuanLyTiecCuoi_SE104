@@ -81,7 +81,7 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<STTConverter>();
 
                     // Các ViewModel
-                    services.AddSingleton<MainWindowViewModel>();
+                    services.AddTransient<MainWindowViewModel>();
                     services.AddTransient<BaoCaoViewModel>();
                     services.AddTransient<Func<int, int, ChiTietBaoCaoViewModel>>(sp => (thang, nam) =>
                     {
@@ -110,7 +110,7 @@ namespace QuanLyTiecCuoi
                     services.AddTransient<LoaiSanhViewModel>();
 
                     // Các View
-                    services.AddSingleton<MainWindow>();
+                    services.AddTransient<MainWindow>();
                     services.AddTransient<BaoCaoPage>();
                     services.AddTransient<HoaDonPage>();
                     services.AddTransient<ChiTietHoaDonWindow>();
