@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using QuanLyTiecCuoi.Core;
 using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
@@ -78,13 +79,29 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
             OnPropertyChanged(nameof(DichVuDaChon)); // thêm dòng này
         }
+        private Boolean KiemTraSoBanHopLe()
+        {
+            if (TiecMoi?.MaSanh == 0 || TiecMoi?.SoLuongBan <= 0)
+                return false;
+
+            var sanh = DanhSachSanh.FirstOrDefault(s => s.MaSanh == TiecMoi.MaSanh);
+            if (sanh != null && (TiecMoi.SoLuongBan > sanh.SoLuongBanToiDa || (TiecMoi.SoLuongBan + TiecMoi.SoBanDuTru) > sanh.SoLuongBanToiDa))
+            {
+                MessageBox.Show($"Số bàn vượt quá sức chứa của sảnh ({sanh.SoLuongBanToiDa} bàn).", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            return true;
+        }
+
         public event Action DanhSachChanged;
         public bool ThemTiecMoi()
         {
             if (TiecMoi == null) return false;
-           
+            
             try
             {
+                if (!KiemTraSoBanHopLe())
+                    return false;
                 _datTiecService.AddDatTiec(TiecMoi);
                 DanhSachChanged?.Invoke();
 

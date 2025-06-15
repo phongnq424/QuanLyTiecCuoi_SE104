@@ -1,6 +1,7 @@
 ﻿using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.Data;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace QuanLyTiecCuoi.Repository
 {
@@ -15,7 +16,10 @@ namespace QuanLyTiecCuoi.Repository
 
         public List<DATTIEC> GetAllDatTiec()
         {
-            return _context.DatTiecs.ToList();
+            return _context.DatTiecs
+                .Include(dt => dt.CaSanh)
+                .Include(dt => dt.Sanh)
+                .ToList();
         }
 
         public DATTIEC? GetDatTiecById(int id)

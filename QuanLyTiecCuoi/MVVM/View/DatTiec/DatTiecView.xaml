@@ -98,6 +98,8 @@
                     <!-- ListView section -->
                     <DataGrid 
                         x:Name="MyDataGrid"
+                        FontSize="20"
+                        FontFamily="Cambria"
                         Background="White"
                         ItemsSource="{Binding DanhSachDatTiec}" 
                         SelectedItem="{Binding DatTiecDangChon, Mode=TwoWay}"
@@ -119,9 +121,13 @@
                             <DataGridTextColumn Header="Chú rể" Binding="{Binding TenChuRe}" Width="*" />
                             <DataGridTextColumn Header="SĐT" Binding="{Binding SDT}" Width="*" />
                             <DataGridTextColumn Header="Đặt cọc" Binding="{Binding TienDatCoc}" Width="*" />
-                            <DataGridTextColumn Header="Ca" Binding="{Binding MaCa}" Width="*" />
-                            <DataGridTextColumn Header="Sảnh" Binding="{Binding MaSanh}" Width="*" />
-                            <DataGridTextColumn Header="Ngày đãi" Binding="{Binding NgayDaiTiec}" Width="*" />
+                            <DataGridTextColumn Header="Ca" Binding="{Binding CaSanh.TenCa}" Width="*" />
+                            <DataGridTextColumn Header="Sảnh" Binding="{Binding Sanh.TenSanh}" Width="*" />
+                            <DataGridTextColumn Header="Ngày đãi" Width="*">
+                                <DataGridTextColumn.Binding>
+                                    <Binding Path="NgayDaiTiec" StringFormat="{}{0:dd/MM/yyyy}" />
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Số bàn" Binding="{Binding SoLuongBan}" Width="*" />
                             <DataGridTextColumn Header="Dự trữ" Binding="{Binding SoBanDuTru}" Width="*" />
                             <DataGridTemplateColumn Header=" " Width="0.5*">

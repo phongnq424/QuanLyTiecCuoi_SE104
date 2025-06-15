@@ -71,7 +71,7 @@
                             <!-- Title -->
                             <TextBlock 
                             Text="Chỉnh Sửa Tiệc Cưới" 
-                            FontSize="40" 
+                            FontSize="48" 
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontFamily="Cambria"
@@ -201,7 +201,8 @@
 
                                         <TextBlock Text="Ngày đãi tiệc" Grid.Column="0" VerticalAlignment="Center"/>
                                         <DatePicker
-                                            SelectedDate="{Binding NgayDaiTiec}"
+                                            SelectedDate="{Binding TiecMoi.NgayDaiTiec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding TiecMoi.NgayDaiTiec, StringFormat=dd/MM/yyyy}" 
                                             Grid.Column="1"
                                             Width="400"
                                             Height="40"

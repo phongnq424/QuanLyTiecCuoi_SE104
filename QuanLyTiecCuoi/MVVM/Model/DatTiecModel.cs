@@ -16,7 +16,6 @@ namespace QuanLyTiecCuoi.MVVM.Model
         public SqlMoney TienDatCoc { get; set; }
         public int MaSanh { get; set; }
         public int MaCa { get; set; }
-
         public DateTime NgayDatTiec { get; set; }
         public int SoLuongBan { get; set; }
         public int SoBanDuTru { get; set; }
