@@ -79,25 +79,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
         }
 
-        public void ChonMonAn(IEnumerable<MONAN> danhSachMonAn)
-        {
-            MonAnDaChon.Clear();
-            foreach (var mon in danhSachMonAn)
-            {
-                MonAnDaChon.Add(mon);
-            }
-            OnPropertyChanged(nameof(MonAnDaChon));
-        }
-
-        public void ChonDichVu(IEnumerable<DICHVU> danhSachDichVu)
-        {
-            DichVuDaChon.Clear();
-            foreach (var dv in danhSachDichVu)
-            {
-                DichVuDaChon.Add(dv);
-            }
-            OnPropertyChanged(nameof(DichVuDaChon)); // thêm dòng này
-        }
         private Boolean KiemTraSoBanHopLe()
         {
             if (TiecMoi?.MaSanh == 0 || TiecMoi?.SoLuongBan <= 0)
@@ -111,6 +92,21 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
             return true;
         }
+        private bool KiemTraNgayDai()
+        {
+            if (TiecMoi?.MaSanh == 0 || TiecMoi.NgayDaiTiec == null)
+                return false;
+
+            var soNgayConLai = (TiecMoi.NgayDaiTiec.Date - DateTime.Today).TotalDays;
+
+            if (soNgayConLai < 7)
+            {
+                MessageBox.Show("Ngày đãi tiệc phải cách ngày hôm nay ít nhất 7 ngày.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
 
         public event Action DanhSachChanged;
         public bool ThemTiecMoi()
@@ -119,7 +115,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             
             try
             {
-                if (!KiemTraSoBanHopLe())
+                if (!KiemTraSoBanHopLe() || !KiemTraNgayDai())
                     return false;
                 _datTiecService.AddDatTiec(TiecMoi);
                 DanhSachChanged?.Invoke();

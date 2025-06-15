@@ -13,7 +13,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
     public class SuaTiecViewModel : BaseViewModel
     {
         private readonly DatTiecService _datTiecService;
-
+        private readonly ChiTietMenuService _chiTietService;
         public DATTIEC TiecMoi { get; set; }
 
         public ObservableCollection<CASANH> DanhSachCa { get; set; } = new();
@@ -25,6 +25,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public SuaTiecViewModel(DATTIEC tiecCanSua)
         {
             _datTiecService = App.AppHost.Services.GetRequiredService<DatTiecService>();
+            _chiTietService = App.AppHost.Services.GetRequiredService<ChiTietMenuService>();
 
             // Tạo bản sao dữ liệu tiệc cưới để chỉnh sửa
             TiecMoi = new DATTIEC
@@ -45,7 +46,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             LoadDanhSachCa();
             LoadDanhSachSanh();
         }
-
+        
         public void LoadDanhSachCa()
         {
             try
@@ -73,6 +74,21 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
             return true;
         }
+        private bool KiemTraNgayDai()
+        {
+            if (TiecMoi?.MaSanh == 0 || TiecMoi.NgayDaiTiec == null)
+                return false;
+
+            var soNgayConLai = (TiecMoi.NgayDaiTiec.Date - DateTime.Today).TotalDays;
+
+            if (soNgayConLai < 7)
+            {
+                MessageBox.Show("Ngày đãi tiệc phải cách ngày hôm nay ít nhất 7 ngày.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
         public void LoadDanhSachSanh()
         {
             try
@@ -87,11 +103,12 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 Console.WriteLine("Lỗi LoadDanhSachSanh: " + ex.Message);
             }
         }
+
         public event Action DanhSachChanged;
         public bool CapNhatTiec()
         {
             if (TiecMoi == null) return false;
-            if (!KiemTraSoBanHopLe())
+            if (!KiemTraSoBanHopLe() || !KiemTraNgayDai())
                 return false;
             try
             {

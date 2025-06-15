@@ -21,7 +21,6 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             this.DataContext = viewModel;
             viewModel.LoadDanhSachCa();
             viewModel.LoadDanhSachSanh();
-            
             //ShiftComboBox.ItemsSource = viewModel.DanhSachCa;
             //HallComboBox.ItemsSource = viewModel.DanhSachSanh;
 

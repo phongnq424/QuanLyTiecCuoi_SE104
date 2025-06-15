@@ -26,12 +26,9 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
                 _viewModel.ChonMonAn(monAn);
             }
         }
-
-        private void OkButton_Click(object sender, RoutedEventArgs e)
+        private void Ok_Click(object sender, RoutedEventArgs e)
         {
             _viewModel.LuuChiTietMenu();
-
-            // Cách 1: nếu NavigationService hoạt động
             if (this.NavigationService != null && this.NavigationService.CanGoBack)
             {
                 this.NavigationService.GoBack();
