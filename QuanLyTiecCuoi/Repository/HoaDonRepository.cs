@@ -134,7 +134,7 @@ namespace QuanLyTiecCuoi.Repository
         /// </summary>
         public async Task<List<CHITIETMENU>> GetMenu(int maDatTiec)
         {
-            return await _context.ChiTietMenus.Where(h => h.MaDatTiec == maDatTiec).ToListAsync();
+            return await _context.ChiTietMenus.Where(h => h.MaDatTiec == maDatTiec).Include(ct => ct.MonAn).ToListAsync();
         }
 
         /// <summary>
