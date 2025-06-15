@@ -8,9 +8,26 @@ namespace QuanLyTiecCuoi.Services
     {
         private readonly ChiTietDichVuRepository _repository;
 
-        public ChiTietDichVuService(ChiTietDichVuRepository repository)
+        private readonly DichVuRepository _dichVuRepository;
+
+        public ChiTietDichVuService(ChiTietDichVuRepository repository, DichVuRepository dichVuRepository)
         {
             _repository = repository;
+            _dichVuRepository = dichVuRepository;
+        }
+        public List<DICHVU> LayDanhSachDichVuTheoDatTiec(int maDatTiec)
+        {
+            var chiTietDichVus = _repository.GetByMaDatTiec(maDatTiec);
+            var danhSachDichVu = new List<DICHVU>();
+
+            foreach (var ct in chiTietDichVus)
+            {
+                var dv = _dichVuRepository.GetById(ct.MaDichVu);
+                if (dv != null)
+                    danhSachDichVu.Add(dv);
+            }
+
+            return danhSachDichVu;
         }
 
         public void ThemChiTiet(CHITIETDVTIEC chiTiet)

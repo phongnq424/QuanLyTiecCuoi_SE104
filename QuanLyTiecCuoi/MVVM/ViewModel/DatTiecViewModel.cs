@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.Core;
 using System.Windows;
 using System.Windows.Documents;
+using System.Globalization;
+using System.Text;
 public class DatTiecViewModel : BaseViewModel
 {
     private readonly DatTiecService _datTiecService;
@@ -17,7 +19,7 @@ public class DatTiecViewModel : BaseViewModel
 
     public ObservableCollection<string> DanhSachTieuChi { get; set; } = new()
     {
-        "Tên cô dâu", "Tên chú rể", "Số điện thoại", "Ngày đãi"
+        "Tên cô dâu", "Tên chú rể", "Số điện thoại", "Ngày đãi", "Tên Ca", "Tên Sảnh"
     };
 
     private string _tieuChiDangChon = "Tên cô dâu";
@@ -165,29 +167,68 @@ public class DatTiecViewModel : BaseViewModel
         }
 
         var keyword = TuKhoaTimKiem.Trim();
+        keyword = RemoveDiacritics(keyword.ToLower());
         IEnumerable<DATTIEC> ketQua = _allDatTiec;
 
         switch (TieuChiDangChon)
         {
             case "Tên cô dâu":
-                ketQua = _allDatTiec.Where(x => x.TenCoDau?.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0);
+                ketQua = _allDatTiec.Where(x =>
+                    RemoveDiacritics(x.TenCoDau ?? "").ToLower().Contains(keyword));
                 break;
+
             case "Tên chú rể":
-                ketQua = _allDatTiec.Where(x => x.TenChuRe?.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0);
+                ketQua = _allDatTiec.Where(x =>
+                    RemoveDiacritics(x.TenChuRe ?? "").ToLower().Contains(keyword));
                 break;
+
             case "Số điện thoại":
                 ketQua = _allDatTiec.Where(x => x.SDT?.Contains(keyword) == true);
                 break;
+
             case "Ngày đãi":
-                ketQua = _allDatTiec.Where(x => x.NgayDaiTiec.ToString("dd/MM/yyyy").Contains(keyword));
+                ketQua = _allDatTiec.Where(x =>
+                    x.NgayDaiTiec.ToString("dd/MM/yyyy").Contains(keyword));
+                break;
+
+            case "Tên Ca":
+                ketQua = _allDatTiec.Where(x =>
+                    RemoveDiacritics(x.CaSanh?.TenCa ?? "").ToLower().Contains(keyword));
+                break;
+
+            case "Tên Sảnh":
+                ketQua = _allDatTiec.Where(x =>
+                    RemoveDiacritics(x.Sanh?.TenSanh ?? "").ToLower().Contains(keyword));
                 break;
         }
+
+
 
         DanhSachDatTiec = new ObservableCollection<DATTIEC>(ketQua);
         OnPropertyChanged(nameof(DanhSachDatTiec));
     }
 
-    private void NavigateToDatTiecPage(object parameter)
+        public static string RemoveDiacritics(string text)
+{
+            if (string.IsNullOrEmpty(text))
+                return string.Empty;
+
+            var normalized = text.Normalize(NormalizationForm.FormD);
+            var sb = new StringBuilder();
+
+            foreach (var c in normalized)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(c);
+                }
+            }
+
+    return sb.ToString().Normalize(NormalizationForm.FormC);
+}
+
+private void NavigateToDatTiecPage(object parameter)
     {
         var mainFrame = Application.Current.MainWindow.FindName("MainFrame") as Frame;
         if (mainFrame != null)

@@ -107,15 +107,26 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             return true;
         }
+        private bool KiemTraSDT()
+        {
+            string sdt = TiecMoi?.SDT.ToString();
+            if (string.IsNullOrWhiteSpace(sdt)) return false;
+            if (sdt.Length != 10 || !sdt.All(char.IsDigit) || sdt.First() != '0')
+            {
+                MessageBox.Show("Số điện thoại chưa đúng định dạng.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            return true;
+        }
 
         public event Action DanhSachChanged;
         public bool ThemTiecMoi()
         {
             if (TiecMoi == null) return false;
-            
+
             try
             {
-                if (!KiemTraSoBanHopLe() || !KiemTraNgayDai())
+                if (!KiemTraSoBanHopLe() || !KiemTraNgayDai() || !KiemTraSDT())
                     return false;
                 _datTiecService.AddDatTiec(TiecMoi);
                 DanhSachChanged?.Invoke();

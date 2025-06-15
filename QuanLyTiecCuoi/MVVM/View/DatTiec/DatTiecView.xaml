@@ -154,7 +154,7 @@
                         Margin="0,10,0,0" 
                         Grid.Row="3">
                         <Button Content="Thêm tiệc cưới" Click="Add_Click"  Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Cambria"/>
-                        <Button Content="In hóa đơn" Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Cambria" Click="InHoaDon_Click"/>
+                        <Button Content="Thanh toán" Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Cambria" Click="InHoaDon_Click"/>
                     </StackPanel>
                 </Grid>
             </Border>
