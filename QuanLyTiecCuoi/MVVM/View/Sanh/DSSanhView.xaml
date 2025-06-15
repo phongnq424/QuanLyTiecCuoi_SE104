@@ -82,6 +82,7 @@
             <DataGrid ItemsSource="{Binding DanhSachSanhView}" 
                   SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
                   AutoGenerateColumns="False" 
+                  IsReadOnly="True"
                   Margin="10,10,10,10"  
                   HorizontalAlignment="Stretch" 
                   VerticalAlignment="Stretch"

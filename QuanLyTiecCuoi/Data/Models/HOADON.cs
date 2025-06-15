@@ -17,6 +17,7 @@ namespace QuanLyTiecCuoi.Data.Models
         //Ngay thanh toan co the null
         //bỏ đơn giá bàn??
         public decimal DonGiaBan { get; set; }
+        public int SoLuongBan { get; set; }
         public decimal TongTienBan { get; set; }
         public int MaDatTiec { get; set; }
         public decimal TongTienDV { get; set; }

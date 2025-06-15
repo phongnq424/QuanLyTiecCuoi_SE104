@@ -30,7 +30,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.LuuChiTietDichVu();
+            //_viewModel.LuuChiTietDichVu();
             if (this.NavigationService != null && this.NavigationService.CanGoBack)
             {
                 this.NavigationService.GoBack();

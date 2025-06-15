@@ -173,10 +173,10 @@
                                                     Binding="{Binding DoanhThuFormatted}"
                                                     Width="0.2*" />
                                 <DataGridTextColumn Header="Tỉ lệ doanh thu"
-                                                    Binding="{Binding TiLeDoanhThu}"
+                                                    Binding="{Binding TiLeDoanhThuFormatted}"
                                                     Width="0.16*" />
                                 <DataGridTextColumn Header="Tỉ lệ tiệc cưới"
-                                                    Binding="{Binding TiLeTiecCuoi}"
+                                                    Binding="{Binding TiLeTiecCuoiFormatted}"
                                                     Width="0.16*" />
                             </DataGrid.Columns>
                         </DataGrid>

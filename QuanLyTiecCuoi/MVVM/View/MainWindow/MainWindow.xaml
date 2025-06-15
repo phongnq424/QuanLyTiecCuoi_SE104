@@ -69,22 +69,14 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border>
-                                    <RadioButton
-                                        Style="{StaticResource RadioButtonStyle}"
-                                        Content="{Binding TenChucNang}"
-                                        Margin="0,2.5"
-                                        IsChecked="False"
-                                        GroupName="DieuHuongGroup"
-                                        BorderBrush="#FFC3A1">
-                                        
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="Checked">
-                                                <i:InvokeCommandAction
-                                                    Command="{Binding DataContext.DieuHuongCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                                    CommandParameter="{Binding }" />
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </RadioButton>
+                                    <RadioButton Content="{Binding TenChucNang}"
+                                                 Style="{StaticResource RadioButtonStyle}"
+                                                 IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                 GroupName="DieuHuongGroup"
+                                                 Margin="0,2.5"
+                                                 BorderBrush="#FFC3A1"
+                                                 Command="{Binding DataContext.DieuHuongCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                 CommandParameter="{Binding}" />
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

@@ -29,6 +29,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ThemTiecViewModel()
         {
             _datTiecService = App.AppHost.Services.GetRequiredService<DatTiecService>();
+            _chiTietMenuService = App.AppHost.Services.GetRequiredService<ChiTietMenuService>();
+            _chiTietDichVuService = App.AppHost.Services.GetRequiredService<ChiTietDichVuService>();
 
             LoadDanhSachCa();
             LoadDanhSachSanh();
@@ -37,6 +39,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ThemTiecViewModel(Sanh sanh, DateTime ngay, int maCa)
         {
             _datTiecService = App.AppHost.Services.GetRequiredService<DatTiecService>();
+            _chiTietMenuService = App.AppHost.Services.GetRequiredService<ChiTietMenuService>();
+            _chiTietDichVuService = App.AppHost.Services.GetRequiredService<ChiTietDichVuService>();
+
 
             TiecMoi = new DATTIEC
             {
@@ -107,6 +112,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             return true;
         }
+
         private bool KiemTraSDT()
         {
             string sdt = TiecMoi?.SDT.ToString();
@@ -119,6 +125,47 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             return true;
         }
 
+        private readonly DATTIEC _datTiec;
+        private readonly ChiTietMenuService _chiTietMenuService;
+        private readonly ChiTietDichVuService _chiTietDichVuService;
+
+        public void LuuChiTietMenu()
+        {
+            if (TiecMoi == null || TiecMoi.MaDatTiec == 0)
+                return;
+
+            foreach (var monAn in MonAnDaChon)
+            {
+                var chiTiet = new CHITIETMENU
+                {
+                    MaDatTiec = TiecMoi.MaDatTiec,
+                    MaMon = monAn.MaMon,
+                    SoLuong = (TiecMoi.SoLuongBan + TiecMoi.SoBanDuTru),
+                    GhiChu = ""
+                };
+
+                _chiTietMenuService.ThemChiTietMenu(chiTiet);
+            }
+        }
+        public void LuuChiTietDichVu()
+        {
+            if (TiecMoi == null || TiecMoi.MaDatTiec == 0)
+                return;
+
+            foreach (var dv in DichVuDaChon)
+            {
+                var chiTietDV = new CHITIETDVTIEC
+                {
+                    MaDatTiec = TiecMoi.MaDatTiec,
+                    MaDichVu = dv.MaDichVu,
+                    SoLuong = 1, // Có thể cho phép chọn số lượng tùy ý
+                    DonGia = dv.DonGia,
+                };
+
+                _chiTietDichVuService.ThemChiTiet(chiTietDV);
+            }
+        }
+
         public event Action DanhSachChanged;
         public bool ThemTiecMoi()
         {
@@ -129,6 +176,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 if (!KiemTraSoBanHopLe() || !KiemTraNgayDai() || !KiemTraSDT())
                     return false;
                 _datTiecService.AddDatTiec(TiecMoi);
+                // lưu chi tiết 
+                LuuChiTietMenu();
+                LuuChiTietDichVu();
                 DanhSachChanged?.Invoke();
 
                 decimal tongTienMenu = 0;

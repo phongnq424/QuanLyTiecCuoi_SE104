@@ -4,7 +4,6 @@ using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.Services;
 using QuanLyTiecCuoi.MVVM.View.HoaDon;
 using QuanLyTiecCuoi.Repository;
-using QuanLyTiecCuoi.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
-using QuanLyTiecCuoi.Services;
 using System.Security.Permissions;
 using System.Windows;
 using System.Windows.Documents;
@@ -67,8 +65,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             set { _ChiTietDVTiecDuocChon = value; OnPropertyChanged(); }
         }
 
-        private DATTIEC _TiecDuocChon;
-        public DATTIEC TiecDuocChon
+        private DATTIEC? _TiecDuocChon;
+        public DATTIEC? TiecDuocChon
         {
             get => _TiecDuocChon;
             set { _TiecDuocChon = value; OnPropertyChanged(); }
@@ -94,6 +92,15 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             get => _DanhSachTenDV;
             set { _DanhSachTenDV = value; OnPropertyChanged(); }
         }
+
+        private String _ThongBaoPhatText = "";
+        public String ThongBaoPhatText
+        {
+            get => _ThongBaoPhatText; set { _ThongBaoPhatText = value; OnPropertyChanged(); }
+        }
+
+        private THAMSO? _thamSo;
+        private decimal _TienPhatThanhToanTre;
 
         private List<CHITIETDVTIEC> DanhSachDichVuTiecBiXoa;
 
@@ -156,13 +163,22 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 {
                     HoaDonDuocChon = p;
                     TiecDuocChon = await hoaDonService.GetDatTiec(p.MaDatTiec);
+                    if (TiecDuocChon == null)
+                    {
+                        MessageBox.Show("Có lỗi khi load hóa đơn");
+                        return;
+                    }
+
+                    _thamSo = await _HoaDonService.LayThamSo();
+
 
                     ChiTietDVTiecDuocChon = new ObservableCollection<CHITIETDVTIEC>(await hoaDonService.GetCTDVT(TiecDuocChon.MaDatTiec));
                     MenuTiecDuocChon = new ObservableCollection<CHITIETMENU>(await hoaDonService.GetMenu(TiecDuocChon.MaDatTiec));
                     DanhSachDichVu = new ObservableCollection<DICHVU>(await hoaDonService.GetDV());
                     GanDanhSachTenDV();
-                    _WindowService.ShowChiTietHoaDon(this);
+                    KiemTraPhatThanhToanTre();
                     DatThanhToanChoHoaDonDuocChon();
+                    _WindowService.ShowChiTietHoaDon(this);
                 }
             });
 
@@ -255,7 +271,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 if (HoaDonMoi != null)
                 {
                     HoaDonDuocChon = HoaDonMoi;
-                    Reload();
+                    await Reload();
                     BtnLuuVisibility = Visibility.Hidden;
 
                 }
@@ -272,13 +288,18 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     MessageBox.Show("Chưa lưu thay đổi");
                     return;
                 }
+                if(_TienPhatThanhToanTre != 0)
+                {
+                    HoaDonDuocChon.TienPhaiThanhToan = _TienPhatThanhToanTre;
+                    HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc + _TienPhatThanhToanTre;
+                }
                 var hd = await hoaDonService.ThanhToan(HoaDonDuocChon);
                 if (hd != null)
                 {
                     HoaDonDuocChon = hd;
                     OnPropertyChanged(nameof(HoaDonDuocChon));
                     MessageBox.Show("Xác nhận thanh toán thành công");
-                    Reload();
+                    await Reload();
                     DatThanhToanChoHoaDonDuocChon();
                     return;
                 }
@@ -292,7 +313,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     MessageBox.Show("Chưa lưu thay đổi");
                     return;
                 }
-                if (_BtnDaThanhToanVisibility == Visibility.Visible)
+                if (BtnDaThanhToanVisibility == Visibility.Visible)
                 {
                     MessageBox.Show("Hóa đơn chưa được xác nhận thanh toán");
                     return;
@@ -301,6 +322,36 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             });
 
         }
+
+        private void KiemTraPhatThanhToanTre()
+        {
+            if (_thamSo == null || TiecDuocChon == null || HoaDonDuocChon == null)
+                return;
+
+            if (_thamSo.ApDungQDPhatThanhToanTre && !HoaDonDuocChon.NgayThanhToan.HasValue)
+            {
+                var ngayDaiTiec = TiecDuocChon.NgayDaiTiec.Date;
+
+                if (DateTime.Now.Date > ngayDaiTiec)
+                {
+                    int soNgayTre = (DateTime.Now.Date - ngayDaiTiec).Days;
+
+                    decimal tongTien = TiecDuocChon.TienDatCoc + HoaDonDuocChon.TienPhaiThanhToan;
+                    _TienPhatThanhToanTre = soNgayTre * _thamSo.TyLePhatThanhToanTreTheoNgay * tongTien;
+                    TinhThanhTienDVHoaDon();
+
+                    ThongBaoPhatText = $"Hóa đơn bị phạt {_TienPhatThanhToanTre.ToString("N0")} VND vì thanh toán trễ {soNgayTre} ngày với mức phạt theo ngày {_thamSo.TyLePhatThanhToanTreTheoNgay.ToString("P4")}";
+                    return;
+                }
+            }
+            else if (HoaDonDuocChon.NgayThanhToan != null && HoaDonDuocChon.TienPhaiThanhToan != 0)
+            {
+                ThongBaoPhatText = $"Hóa đơn bị phạt {_TienPhatThanhToanTre.ToString("N0")} VND vì thanh toán trễ.";
+            }
+             _TienPhatThanhToanTre = 0;
+            ThongBaoPhatText = "";
+        }
+
 
         private void InHoaDon()
         {
@@ -319,7 +370,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 FontFamily = new System.Windows.Media.FontFamily("Tahoma"),
                 FontSize = 12,
                 PagePadding = new Thickness(20),
-                PageWidth = 300,
+                PageWidth = 600,
                 ColumnWidth = double.PositiveInfinity
             };
 
@@ -344,15 +395,80 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             content.Inlines.Add(new Bold(new Run("Ngày thanh toán: ")));
             content.Inlines.Add(new Run(HoaDonDuocChon.NgayThanhToan?.ToString("dd/MM/yyyy")));
             content.Inlines.Add(new LineBreak());
-            content.Inlines.Add(new Bold(new Run("Khách hàng: ")));
-            //content.Inlines.Add(new Run("Nguyễn Văn A"));
-            content.Inlines.Add(new LineBreak());
-            content.Inlines.Add(new Bold(new Run("Tổng tiền: ")));
+            content.Inlines.Add(new Bold(new Run("Tổng tiền thanh toán: ")));
             content.Inlines.Add(new Run($"{HoaDonDuocChon.TongTienHD:C0}"));
+            if(HoaDonDuocChon.TienPhat != 0)
+            {
+                content.Inlines.Add(new Bold(new Run("Tiền phạt: ")));
+                content.Inlines.Add(new Run($"{HoaDonDuocChon.TongTienHD:C0}"));
+            }
 
-            // Thêm các đoạn vào document
+            // Tạo bảng
+            Table table = new Table();
+            table.CellSpacing = 0;
+            table.Columns.Add(new TableColumn { Width = new GridLength(250) }); 
+            table.Columns.Add(new TableColumn { Width = new GridLength(100) }); 
+            table.Columns.Add(new TableColumn { Width = new GridLength(120) }); 
+            table.Columns.Add(new TableColumn { Width = new GridLength(130) }); 
+
+            // Tạo phần thân bảng
+            TableRowGroup group = new TableRowGroup();
+
+            // Dòng tiêu đề
+            group.Rows.Add(new TableRow());
+            group.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Tên dịch vụ")))) { TextAlignment = TextAlignment.Center });
+            group.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Số lượng")))) { TextAlignment = TextAlignment.Center });
+            group.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Đơn giá")))) { TextAlignment = TextAlignment.Center });
+            group.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Thành tiền")))) { TextAlignment = TextAlignment.Center });
+
+            // Dòng dữ liệu từ danh sách
+            foreach (var item in ChiTietDVTiecDuocChon)
+            {
+                TableRow row = new TableRow();
+                row.Cells.Add(new TableCell(new Paragraph(new Run(item.DichVu.TenDichVu))) { TextAlignment = TextAlignment.Left });
+                row.Cells.Add(new TableCell(new Paragraph(new Run(item.SoLuong.ToString()))) { TextAlignment = TextAlignment.Center });
+                row.Cells.Add(new TableCell(new Paragraph(new Run($"{item.DonGia:N0}"))) { TextAlignment = TextAlignment.Right });
+                row.Cells.Add(new TableCell(new Paragraph(new Run($"{item.ThanhTien:N0}"))) { TextAlignment = TextAlignment.Right });
+                group.Rows.Add(row);
+            }
+            table.RowGroups.Add(group);
+
+            Table table2 = new Table();
+            table2.CellSpacing = 0;
+            table2.Columns.Add(new TableColumn { Width = new GridLength(250) });
+            table2.Columns.Add(new TableColumn { Width = new GridLength(100) });
+
+            // Tạo phần thân bảng
+            TableRowGroup group2 = new TableRowGroup();
+
+            // Dòng tiêu đề
+            group2.Rows.Add(new TableRow());
+            group2.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Tên món")))) { TextAlignment = TextAlignment.Center });
+            group2.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Số lượng")))) { TextAlignment = TextAlignment.Center });
+            group2.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Đơn giá")))) { TextAlignment = TextAlignment.Center });
+            group2.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Thành tiền")))) { TextAlignment = TextAlignment.Center });
+
+            // Dòng dữ liệu từ danh sách
+            foreach (var item in MenuTiecDuocChon)
+            {
+                TableRow row = new TableRow();
+                row.Cells.Add(new TableCell(new Paragraph(new Run(item.MonAn.TenMon))) { TextAlignment = TextAlignment.Left });
+                row.Cells.Add(new TableCell(new Paragraph(new Run($"{item.MonAn.DonGia:N0}"))) { TextAlignment = TextAlignment.Right });
+                group2.Rows.Add(row);
+            }
+            table2.RowGroups.Add(group2);
+
+            // Thêm vào bảng
             doc.Blocks.Add(title);
             doc.Blocks.Add(content);
+            doc.Blocks.Add(new Paragraph(new Run("Chi tiết dịch vụ:")) { FontWeight = FontWeights.Bold, Margin = new Thickness(0, 20, 0, 5) });
+
+            // Thêm bảng vào FlowDocument
+            doc.Blocks.Add(table);
+            doc.Blocks.Add(new Paragraph(new Run("Chi tiết menu mỗi bàn:")) { FontWeight = FontWeights.Bold, Margin = new Thickness(0, 20, 0, 5) });
+            doc.Blocks.Add(table2);
+
+            // Thêm các đoạn vào document
 
             return doc;
         }
@@ -385,7 +501,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             decimal TongTienTatCaDichVu = ChiTietDVTiecDuocChon?.Sum(i => i.ThanhTien) ?? 0;
             HoaDonDuocChon.TongTienDV = TongTienTatCaDichVu;
             HoaDonDuocChon.TongTienHD = HoaDonDuocChon.TongTienDV + HoaDonDuocChon.TongTienBan;
-            HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc;
+            HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc + _TienPhatThanhToanTre;
             OnPropertyChanged(nameof(HoaDonDuocChon));
         }
 

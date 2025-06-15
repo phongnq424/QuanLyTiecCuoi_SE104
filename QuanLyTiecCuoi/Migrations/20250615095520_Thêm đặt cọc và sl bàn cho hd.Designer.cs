@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanLyTiecCuoi.Data;
 
@@ -11,9 +12,11 @@ using QuanLyTiecCuoi.Data;
 namespace QuanLyTiecCuoi.Migrations
 {
     [DbContext(typeof(WeddingDbContext))]
-    partial class WeddingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250615095520_Thêm đặt cọc và sl bàn cho hd")]
+    partial class Thêmđặtcọcvàslbànchohd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,9 +283,6 @@ namespace QuanLyTiecCuoi.Migrations
 
                     b.Property<DateTime?>("NgayThanhToan")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<int>("SoLuongBan")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("TienPhaiThanhToan")
                         .HasColumnType("decimal(65,30)");

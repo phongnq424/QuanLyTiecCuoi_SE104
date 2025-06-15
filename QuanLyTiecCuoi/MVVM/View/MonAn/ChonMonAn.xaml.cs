@@ -28,7 +28,7 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
         }
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.LuuChiTietMenu();
+            //_viewModel.LuuChiTietMenu();
             if (this.NavigationService != null && this.NavigationService.CanGoBack)
             {
                 this.NavigationService.GoBack();

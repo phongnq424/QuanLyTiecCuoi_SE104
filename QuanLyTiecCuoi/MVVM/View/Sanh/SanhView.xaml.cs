@@ -36,9 +36,22 @@ namespace QuanLyTiecCuoi.MVVM.View
 
         private void btnCTSanh_Click(object sender, RoutedEventArgs e)
         {
-            var SanhVM = App.AppHost.Services.GetRequiredService<SanhViewModel>();
-            NavigationService.Navigate(new DSSanhView(SanhVM));
+            var vm = (MainWindowViewModel)Application.Current.MainWindow.DataContext;
+
+            // Lọc danh sách các chức năng có tên màn hình là DSSanhView hoặc QLDSSanhView
+            var chucNangs = vm.DanhSachChucNang
+                              .Where(c => c.TenManHinhDuocLoad == "QLDSSanhView" || c.TenManHinhDuocLoad == "DSSanhView")
+                              .ToList();
+
+            // Ưu tiên QLDSSanhView nếu tồn tại, nếu không thì lấy DSSanhView
+            var chon = chucNangs.FirstOrDefault(c => c.TenManHinhDuocLoad == "QLDSSanhView")
+                    ?? chucNangs.FirstOrDefault(c => c.TenManHinhDuocLoad == "DSSanhView");
+
+            if (chon != null)
+                vm.DieuHuongCommand.Execute(chon);
         }
+
+
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -72,6 +85,21 @@ namespace QuanLyTiecCuoi.MVVM.View
                         }
                     };
                     (App.Current.MainWindow as MainWindow)?.MainFrame.Navigate(themView);
+                    var mainVM = (App.Current.MainWindow as MainWindow)?.DataContext as MainWindowViewModel;
+                    if (mainVM != null)
+                    {
+                        foreach (var cn in mainVM.DanhSachChucNang)
+                            cn.IsChecked = false;
+
+                        var chucNangDatTiec = mainVM.DanhSachChucNang
+                            .FirstOrDefault(c => c.TenChucNang == "Đặt tiệc");
+
+                        if (chucNangDatTiec != null)
+                        {
+                            chucNangDatTiec.IsChecked = true;
+                            mainVM.DangChon = chucNangDatTiec;
+                        }
+                    }
                 }
                 else
                 {
@@ -79,6 +107,7 @@ namespace QuanLyTiecCuoi.MVVM.View
                     return;
                 }
             }
+
         }
     }
 }

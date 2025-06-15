@@ -84,6 +84,7 @@
               SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
               AutoGenerateColumns="False" 
               Margin="10,10,10,10"  
+              IsReadOnly="True"
               HorizontalAlignment="Stretch" 
               VerticalAlignment="Stretch"
               AlternationCount="1000"

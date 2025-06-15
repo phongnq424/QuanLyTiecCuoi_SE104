@@ -18,5 +18,7 @@ namespace QuanLyTiecCuoi.MVVM.Model
         public string DoanhThuFormatted { get; set; }
         public double TiLeDoanhThu { get; set; }
         public double TiLeTiecCuoi { get; set; }
+        public string TiLeDoanhThuFormatted => $"{TiLeDoanhThu:0.##}%";
+        public string TiLeTiecCuoiFormatted => $"{TiLeTiecCuoi:0.##}%";
     }
 }

@@ -134,7 +134,7 @@ namespace QuanLyTiecCuoi.Repository
         /// </summary>
         public async Task<List<CHITIETMENU>> GetMenu(int maDatTiec)
         {
-            return await _context.ChiTietMenus.Where(h => h.MaDatTiec == maDatTiec).ToListAsync();
+            return await _context.ChiTietMenus.Where(h => h.MaDatTiec == maDatTiec).Include(ct => ct.MonAn).ToListAsync();
         }
 
         /// <summary>
@@ -179,6 +179,21 @@ namespace QuanLyTiecCuoi.Repository
                 return existing;
             }
             return null;
+        }
+
+        public async Task<List<HOADON>> GetByNgayThanhToanRangeAsync(DateTime from, DateTime to)
+        {
+            return await _context.HoaDons
+                .Where(h => h.NgayThanhToan >= from && h.NgayThanhToan < to)
+                .ToListAsync();
+        }
+        public async Task<List<HOADON>> GetByThangNamAsync(int thang, int nam)
+        {
+            return await _context.HoaDons
+                .Where(h => h.NgayThanhToan.HasValue &&
+                            h.NgayThanhToan.Value.Month == thang &&
+                            h.NgayThanhToan.Value.Year == nam)
+                .ToListAsync();
         }
 
 
