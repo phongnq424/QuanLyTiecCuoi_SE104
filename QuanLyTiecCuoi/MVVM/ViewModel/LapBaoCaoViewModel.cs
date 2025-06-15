@@ -4,12 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel.BaoCao
 {
     public class LapBaoCaoViewModel : BaseViewModel
     {
-        private readonly BaoCaoService _baoCaoService;
+        private readonly HoaDonService _hoaDonService;
 
         public ObservableCollection<int> ThangList { get; set; } = new();
         public ObservableCollection<int> NamList { get; set; } = new();
@@ -30,25 +31,47 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.BaoCao
 
         public ICommand LapBaoCaoCommand { get; }
 
-        public LapBaoCaoViewModel(BaoCaoService baoCaoService)
+        public LapBaoCaoViewModel(HoaDonService hoaDonService)
         {
-            _baoCaoService = baoCaoService;
+            _hoaDonService = hoaDonService;
 
-            var available = _baoCaoService.GetAvailableMonthsAndYears();
-            foreach (var thang in available.Select(x => x.Thang).Distinct().OrderBy(x => x))
-                ThangList.Add(thang);
-            foreach (var nam in available.Select(x => x.Nam).Distinct().OrderBy(x => x))
-                NamList.Add(nam);
-
-            SelectedThang = ThangList.FirstOrDefault();
-            SelectedNam = NamList.LastOrDefault();
+            LoadThangNamFromHoaDon();
 
             LapBaoCaoCommand = new RelayCommand<object>(_ => true, _ => ExecuteLapBaoCao());
         }
 
-        private void ExecuteLapBaoCao()
+        private async void LoadThangNamFromHoaDon()
         {
-            if (!_baoCaoService.CoHoaDonTrongThangNam(SelectedThang, SelectedNam))
+            var dsHoaDon = await _hoaDonService.GetAllHoaDonsAsync();
+
+            var thangList = dsHoaDon
+                .Where(hd => hd.NgayThanhToan.HasValue)
+                .Select(hd => hd.NgayThanhToan.Value.Month)
+                .Distinct()
+                .OrderBy(x => x);
+
+            var namList = dsHoaDon
+                .Where(hd => hd.NgayThanhToan.HasValue)
+                .Select(hd => hd.NgayThanhToan.Value.Year)
+                .Distinct()
+                .OrderBy(x => x);
+
+            foreach (var thang in thangList)
+                ThangList.Add(thang);
+            foreach (var nam in namList)
+                NamList.Add(nam);
+
+            SelectedThang = ThangList.FirstOrDefault();
+            SelectedNam = NamList.LastOrDefault();
+        }
+
+        private async void ExecuteLapBaoCao()
+        {
+            DateTime from = new DateTime(SelectedNam, SelectedThang, 1);
+            DateTime to = from.AddMonths(1);
+
+            var hoaDons = await _hoaDonService.GetHoaDonsByNgayThanhToanRangeAsync(from, to);
+            if (hoaDons == null || !hoaDons.Any())
             {
                 MessageBox.Show("Không có hóa đơn trong tháng/năm đã chọn.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -59,10 +82,10 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.BaoCao
                 .SingleOrDefault(x => x.IsActive)
                 ?.Close();
 
-            // Đánh dấu xác nhận thành công (báo hiệu cho DSBaoCaoViewModel biết)
             Application.Current.Properties["BaoCao_Thang"] = SelectedThang;
             Application.Current.Properties["BaoCao_Nam"] = SelectedNam;
             Application.Current.Properties["BaoCao_OK"] = true;
         }
+
     }
 }

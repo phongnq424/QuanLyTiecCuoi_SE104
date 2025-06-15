@@ -24,5 +24,20 @@ namespace QuanLyTiecCuoi.Repository
                 )
                 .ToList();
         }
+        public async Task AddRangeAsync(List<CHITIETBAOCAO> chiTietBaoCaoList)
+        {
+            _context.ChiTietBaoCaos.AddRange(chiTietBaoCaoList);
+            await _context.SaveChangesAsync();
+        }
+        public async Task DeleteByBaoCaoIdAsync(int maBaoCao)
+        {
+            var chiTietList = _context.ChiTietBaoCaos
+                .Where(c => c.MaBaoCao == maBaoCao)
+                .ToList();
+
+            _context.ChiTietBaoCaos.RemoveRange(chiTietList);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

@@ -83,13 +83,17 @@ namespace QuanLyTiecCuoi.Repository
             return query.OrderBy(b => b.Nam).ThenBy(b => b.Thang).ToList();
         }
 
-
-
-        public void Add(BAOCAOTHANG baoCaoThang)
+        public BAOCAOTHANG? GetByThangNam(int thang, int nam)
         {
-            _context.BaoCaoThangs.Add(baoCaoThang);
-            _context.SaveChanges();
+            return _context.BaoCaoThangs
+                .FirstOrDefault(b => b.Thang == thang && b.Nam == nam);
         }
+
+        public async Task AddAsync(BAOCAOTHANG baoCaoThang)
+{
+    _context.BaoCaoThangs.Add(baoCaoThang);
+    await _context.SaveChangesAsync();
+}
 
         public void Update(BAOCAOTHANG baoCaoThang)
         {

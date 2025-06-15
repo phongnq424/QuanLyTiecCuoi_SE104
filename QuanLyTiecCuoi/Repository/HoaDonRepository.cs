@@ -181,6 +181,21 @@ namespace QuanLyTiecCuoi.Repository
             return null;
         }
 
+        public async Task<List<HOADON>> GetByNgayThanhToanRangeAsync(DateTime from, DateTime to)
+        {
+            return await _context.HoaDons
+                .Where(h => h.NgayThanhToan >= from && h.NgayThanhToan < to)
+                .ToListAsync();
+        }
+        public async Task<List<HOADON>> GetByThangNamAsync(int thang, int nam)
+        {
+            return await _context.HoaDons
+                .Where(h => h.NgayThanhToan.HasValue &&
+                            h.NgayThanhToan.Value.Month == thang &&
+                            h.NgayThanhToan.Value.Year == nam)
+                .ToListAsync();
+        }
+
 
     }
 }

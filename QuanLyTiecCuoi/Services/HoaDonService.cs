@@ -135,6 +135,10 @@ namespace QuanLyTiecCuoi.Services
             }
             return null;
         }
+        public async Task<List<HOADON>> GetHoaDonsByNgayThanhToanRangeAsync(DateTime from, DateTime to)
+        {
+            return await _hoaDonRepository.GetByNgayThanhToanRangeAsync(from, to);
+        }
     }
 
 }

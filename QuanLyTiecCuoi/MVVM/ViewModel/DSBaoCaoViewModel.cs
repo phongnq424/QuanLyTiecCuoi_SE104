@@ -139,7 +139,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         }
 
-        private void OnLapBaoCao()
+        public async Task OnLapBaoCao()
         {
             var window = new LapBaoCaoWindow();
             var vm = App.AppHost.Services.GetRequiredService<LapBaoCaoViewModel>();
@@ -156,6 +156,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 int thang = (int)Application.Current.Properties["BaoCao_Thang"];
                 int nam = (int)Application.Current.Properties["BaoCao_Nam"];
 
+                var baoCaoService = App.AppHost.Services.GetRequiredService<BaoCaoService>();
+                await baoCaoService.TaoBaoCaoAsync(thang, nam);
+
                 LoadThangNamOptions();
                 ApplyFilter();
 
@@ -171,10 +174,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     mainVM.CurrentView = chiTietPage;
             }
         }
-
-
-
-
 
         private void LoadThangNamOptions()
         {
