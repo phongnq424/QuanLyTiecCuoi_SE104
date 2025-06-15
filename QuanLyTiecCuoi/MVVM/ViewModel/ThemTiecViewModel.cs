@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using QuanLyTiecCuoi.Core;
 using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
 
 namespace QuanLyTiecCuoi.MVVM.ViewModel
 {
@@ -14,7 +15,10 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
     {
         private readonly DatTiecService _datTiecService;
 
-        public DATTIEC TiecMoi { get; set; } = new DATTIEC();
+        public DATTIEC TiecMoi { get; set; } = new DATTIEC() {
+            NgayDaiTiec = DateTime.Today
+        };
+
 
         public ObservableCollection<CASANH> DanhSachCa { get; set; } = new();
         public ObservableCollection<SANH> DanhSachSanh { get; set; } = new();
@@ -94,13 +98,29 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
             OnPropertyChanged(nameof(DichVuDaChon)); // thêm dòng này
         }
+        private Boolean KiemTraSoBanHopLe()
+        {
+            if (TiecMoi?.MaSanh == 0 || TiecMoi?.SoLuongBan <= 0)
+                return false;
+
+            var sanh = DanhSachSanh.FirstOrDefault(s => s.MaSanh == TiecMoi.MaSanh);
+            if (sanh != null && (TiecMoi.SoLuongBan > sanh.SoLuongBanToiDa || (TiecMoi.SoLuongBan + TiecMoi.SoBanDuTru) > sanh.SoLuongBanToiDa))
+            {
+                MessageBox.Show($"Số bàn vượt quá sức chứa của sảnh ({sanh.SoLuongBanToiDa} bàn).", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            return true;
+        }
+
         public event Action DanhSachChanged;
         public bool ThemTiecMoi()
         {
             if (TiecMoi == null) return false;
-           
+            
             try
             {
+                if (!KiemTraSoBanHopLe())
+                    return false;
                 _datTiecService.AddDatTiec(TiecMoi);
                 DanhSachChanged?.Invoke();
 

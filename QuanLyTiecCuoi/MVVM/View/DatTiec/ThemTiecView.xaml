@@ -51,7 +51,7 @@
                         Command="{Binding LuuCommand}"
                         Click="LuuTiec"
                         Content="Đặt tiệc" 
-                        FontSize="24"
+                        FontSize="30"
                         FontFamily="Cambria"
                         Padding="20 5"
                         Margin="0 0 40 0"
@@ -76,8 +76,8 @@
 
                             <!-- Title -->
                             <TextBlock 
-                            Text="Biểu mẫu 2. Đặt Tiệc Cưới" 
-                            FontSize="40" 
+                            Text="Đặt Tiệc Cưới" 
+                            FontSize="48" 
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontFamily="Cambria"
@@ -208,7 +208,8 @@
 
                                         <TextBlock Text="Ngày đãi tiệc" Grid.Column="0" VerticalAlignment="Center"/>
                                         <DatePicker
-                                            SelectedDate="{Binding TiecMoi.NgayDaiTiec, Mode=TwoWay}"
+                                            SelectedDate="{Binding TiecMoi.NgayDaiTiec}"
+                                            SelectedDateFormat="Short"
                                             Grid.Column="1"
                                             Width="400"
                                             Height="40"

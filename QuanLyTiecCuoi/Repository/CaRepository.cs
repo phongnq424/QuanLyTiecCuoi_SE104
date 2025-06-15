@@ -39,6 +39,10 @@ namespace QuanLyTiecCuoi.Repository
             _context.CaSanhs.Add(ca);
             _context.SaveChanges();
         }
+        public List<CASANH> GetAllCa()
+        {
+            return _context.CaSanhs.ToList();
+        }
 
         public void UpdateCa(CASANH ca)
         {

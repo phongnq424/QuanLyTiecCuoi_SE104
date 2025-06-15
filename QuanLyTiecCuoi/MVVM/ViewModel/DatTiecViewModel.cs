@@ -225,5 +225,6 @@ public class DatTiecViewModel : BaseViewModel
     {
         NavigateCommand = new RelayCommand<object>(_ => true, NavigateToDatTiecPage);
         InHoaDonCommand = new RelayCommand<DATTIEC>(x => true, InHoaDon);
+
     }
 }
