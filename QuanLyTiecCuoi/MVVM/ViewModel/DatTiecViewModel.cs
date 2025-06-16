@@ -95,16 +95,19 @@ public class DatTiecViewModel : BaseViewModel
 
             _datTiecService.UpdateHoaDonAsync(hoaDon);
         }
-    // Tạo ViewModel và truyền vào ChiTietHoaDonWindow
-        var vm = new HoaDonViewModel(_hoaDonService, _windowService)
-        {
-            HoaDonDuocChon = hoaDon,
-            TiecDuocChon = datTiec,
-        };
+        var window = App.AppHost?.Services.GetService<ChiTietHoaDonWindow>();
+        var viewModel = App.AppHost?.Services.GetService<HoaDonViewModel>();
 
-        // Mở cửa sổ Chi tiết hóa đơn
-        var chiTietWindow = new ChiTietHoaDonWindow(vm);
-        chiTietWindow.ShowDialog();
+        if (window != null && viewModel != null)
+        {
+
+            window.DataContext = viewModel;
+
+            if(viewModel.ChonHoaDonCommand.CanExecute(hoaDon))
+            {
+                viewModel.ChonHoaDonCommand.Execute(hoaDon);
+            }
+        }
     }
 
 
