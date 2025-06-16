@@ -25,7 +25,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Tiêu đề -->
-                    <TextBlock Text="Serenité Wedding" Style="{StaticResource Header1Style}"
+                    <TextBlock Text="Serenité Wedding"          Style="{StaticResource Header1Style}"
                      VerticalAlignment="Center" Grid.Column="0"/>
 
                     <!-- Nút Chi Tiết Sảnh -->

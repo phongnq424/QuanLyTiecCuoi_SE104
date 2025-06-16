@@ -18,10 +18,9 @@
         </Style>
     </Page.Resources>
 
-    <Border CornerRadius="20"
+    <Border CornerRadius="40"
             BorderBrush="Black"
             BorderThickness="2"
-            Margin="15"
             Background="White">
         <Grid>
             <Grid.RowDefinitions>
@@ -113,8 +112,10 @@
                                    Style="{StaticResource Header3Style}"
                                    VerticalAlignment="Center" />
                         <TextBox Width="120"
+                                 Height="45"
                                  Margin="10,5"
                                  Style="{StaticResource TextBoxDescribeStyle}"
+                                 VerticalContentAlignment="Center"
                                  Text="{Binding MinDoanhThu}" />
                     </StackPanel>
 
@@ -127,6 +128,7 @@
                                    Style="{StaticResource Header3Style}"
                                    VerticalAlignment="Center" />
                         <TextBox Width="120"
+                                 VerticalContentAlignment="Center"
                                  Margin="10,5"
                                  Style="{StaticResource TextBoxDescribeStyle}"
                                  Text="{Binding MaxDoanhThu}" />
@@ -142,6 +144,7 @@
                                    VerticalAlignment="Center" />
                         <TextBox Width="120"
                                  Margin="10,5"
+                                 VerticalContentAlignment="Center"
                                  Style="{StaticResource TextBoxDescribeStyle}"
                                  Text="{Binding MinTiecCuoi}" />
                     </StackPanel>
@@ -156,6 +159,7 @@
                                    VerticalAlignment="Center" />
                         <TextBox Width="120"
                                  Margin="10,5"
+                                 VerticalContentAlignment="Center"
                                  Style="{StaticResource TextBoxDescribeStyle}"
                                  Text="{Binding MaxTiecCuoi}" />
                     </StackPanel>

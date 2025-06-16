@@ -7,15 +7,14 @@
       xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
       xmlns:controlBar="clr-namespace:QuanLyTiecCuoi.MVVM.View.ControlBar"
       mc:Ignorable="d"
-      d:DesignHeight="800"
-      d:DesignWidth="1400"
+      d:DesignHeight="1000"
+      d:DesignWidth="1600"
       Background="Transparent">
 
     <Border BorderBrush="#673500"
-            BorderThickness="3"
+            BorderThickness="2"
             Background="#ffffee"
-            CornerRadius="20"
-            Margin="15"
+            CornerRadius="40"
             SnapsToDevicePixels="True">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -86,37 +85,39 @@
                               SelectedItem="{Binding SelectedDenNgay, Mode=TwoWay}" />
                 </StackPanel>
             </Grid>
-
             <lvc:CartesianChart Grid.Row="2"
-                                Grid.ColumnSpan="2"
+                                    Grid.ColumnSpan="2"
                                 Series="{Binding Series}"
+                                XAxes="{Binding XAxes}"
                                 LegendPosition="Right"
                                 Margin="15" />
+            <TextBlock Grid.Row="3"
+                       Text="Biểu đồ số tiệc cưới và doanh thu"
+                       HorizontalAlignment="Center"
+                       Style="{StaticResource Header4Style}"
+                       FontSize="30"
+                       FontWeight="Bold"
+                       Margin="0,10,0,0" />
 
             <Button Grid.Row="3"
                     Width="280"
                     Height="50"
                     Margin="5,5,5,10"
-                    Content="Danh sách báo cáo"
-                    FontSize="27"
-                    FontFamily="Cambria"
-                    FontWeight="Bold"
-                    Background="LightGray"
+                    Content="Xem danh sách báo cáo"
                     HorizontalAlignment="Left"
                     Grid.Column="2"
                     Command="{Binding NavigateCommand}">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                CornerRadius="20"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              RecognizesAccessKey="True" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
+                <Button.Style>
+                    <Style BasedOn="{StaticResource ButtonStyle}"
+                           TargetType="Button">
+                        <Setter Property="FontSize"
+                                Value="30" />
+                        <Setter Property="FontWeight"
+                                Value="Bold" />
+                        <Setter Property="FontFamily"
+                                Value="Cambria" />
+                    </Style>
+                </Button.Style>
             </Button>
         </Grid>
     </Border>

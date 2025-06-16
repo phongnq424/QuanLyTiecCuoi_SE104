@@ -78,6 +78,7 @@
                                   Height="35"
                                   BorderBrush="#673500"
                                   BorderThickness="1"
+                                  Style="{StaticResource RoundedComboBoxStyle}"
                          
                                   Background="White"
                                   Foreground="Black" />
@@ -97,6 +98,7 @@
                                   FontSize="18"
                                   HorizontalContentAlignment="Center"
                                   Height="35"
+                                  Style="{StaticResource RoundedComboBoxStyle}"
                                   BorderBrush="#673500"
                                   BorderThickness="1"
                                   Background="White"
