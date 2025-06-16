@@ -93,7 +93,10 @@ namespace QuanLyTiecCuoi.Services
         {
             return _datTiecRepo.KiemTraSanhDaDat(maSanh, ngay, maCa);
         }
-
+        public LOAISANH GetLoaiSanhById(int maLoaiSanh)
+        {
+            return _datTiecRepo.GetLoaiSanhById(maLoaiSanh);
+        }
         public static implicit operator int(DatTiecService v)
         {
             throw new NotImplementedException();

@@ -79,7 +79,6 @@ public class DatTiecViewModel : BaseViewModel
             MessageBox.Show("Không tìm thấy hóa đơn cho tiệc này.");
             return;
         }
-
         DateTime ngayHienTai = DateTime.Now.Date;
         DateTime ngayDaiTiec = datTiec.NgayDaiTiec.Date;
 
@@ -108,6 +107,13 @@ public class DatTiecViewModel : BaseViewModel
                 viewModel.ChonHoaDonCommand.Execute(hoaDon);
             }
         }
+    }
+    private bool CheckNgayTT(DateTime ngay, DATTIEC datTiec)
+    {
+        var hoaDon = _datTiecService.GetHoaDonTheoMaDatTiec(datTiec.MaDatTiec);
+        if (hoaDon.NgayThanhToan.HasValue)
+            return false;
+        return true;
     }
 
 

@@ -38,6 +38,24 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             HallComboBox.DisplayMemberPath = "TenSanh";
             HallComboBox.SelectedValuePath = "MaSanh";
             HallComboBox.SelectedValue = viewModel.TiecMoi.MaSanh;
+
+            var daysDiff = (selectedTiec.NgayDaiTiec - DateTime.Today).TotalDays;
+            bool allowFullEdit = daysDiff > 7;
+
+            if (!allowFullEdit)
+            {
+                FilterDatePicker.IsEnabled = false;
+                ShiftComboBox.IsEnabled = false;
+                HallComboBox.IsEnabled = false;
+                MonAnButton.IsEnabled = false;
+                CoDau.IsEnabled = false;
+                ChuRe.IsEnabled = false;
+                SDT.IsEnabled = false;
+                SLB.IsEnabled = false;
+                DT.IsEnabled = false;
+
+                MessageBox.Show("Chỉ được phép chỉnh sửa dịch vụ vì cách ngày đãi tiệc không quá 7 ngày.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

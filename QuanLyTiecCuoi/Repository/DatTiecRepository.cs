@@ -95,6 +95,10 @@ namespace QuanLyTiecCuoi.Repository
                 dt.NgayDaiTiec.Date == ngay.Date &&
                 dt.MaCa == maCa);
         }
+        public LOAISANH GetLoaiSanhById(int maLoaiSanh)
+        {
+            return _context.LoaiSanhs.FirstOrDefault(ls => ls.MaLoaiSanh == maLoaiSanh);
+        }
         public HOADON? GetHoaDonTheoMaDatTiec(int maDatTiec)
         {
             return _context.HoaDons.FirstOrDefault(hd => hd.MaDatTiec == maDatTiec);

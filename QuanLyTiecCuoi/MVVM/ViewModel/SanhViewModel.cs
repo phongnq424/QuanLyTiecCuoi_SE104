@@ -111,9 +111,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 if (!SelectedDate.HasValue || SelectedCaSanh == null)
                     return 0;
 
-                return DanhSachSanh.Where(s =>
+                return DanhSachSanh.Count(s =>
                     !_datTiecService.KiemTraSanhDaDat(s.MaSanh, SelectedDate.Value, SelectedCaSanh.MaCa)
-                ).Count();
+                );
             }
         }
 

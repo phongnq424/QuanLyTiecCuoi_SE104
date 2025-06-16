@@ -25,6 +25,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         public ObservableCollection<MONAN> MonAnDaChon { get; set; } = new();
         public ObservableCollection<DICHVU> DichVuDaChon { get; set; } = new();
+        public ObservableCollection<decimal> TienDatCoc { get; set; } = new ObservableCollection<decimal>();
 
         public ThemTiecViewModel()
         {
@@ -94,6 +95,16 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 MessageBox.Show($"Số bàn vượt quá sức chứa của sảnh ({sanh.SoLuongBanToiDa} bàn).", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
+            var loaiSanh = _datTiecService.GetLoaiSanhById(sanh.MaLoaiSanh);
+            if (loaiSanh != null)
+            {
+                decimal tongTienBan = MonAnDaChon.Sum(mon => mon.DonGia) * TiecMoi.SoLuongBan;
+                if (tongTienBan < loaiSanh.DonGiaBanToiThieu)
+                {
+                    MessageBox.Show($"Tổng tiền bàn ({tongTienBan:N0}đ) phải >= đơn giá tối thiểu ({loaiSanh.DonGiaBanToiThieu:N0} đ).", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+            }
             return true;
         }
         private bool KiemTraNgayDai()
@@ -123,6 +134,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
             return true;
         }
+
 
         private readonly DATTIEC _datTiec;
         private readonly ChiTietMenuService _chiTietMenuService;
@@ -163,7 +175,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 _chiTietDichVuService.ThemChiTiet(chiTietDV);
             }
         }
-
+        
         public event Action DanhSachChanged;
         public bool ThemTiecMoi()
         {
@@ -173,6 +185,11 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             {
                 if (!KiemTraSoBanHopLe() || !KiemTraNgayDai() || !KiemTraSDT())
                     return false;
+                if (_datTiecService.KiemTraSanhDaDat(TiecMoi.MaSanh, TiecMoi.NgayDaiTiec, TiecMoi.MaCa))
+                {
+                    MessageBox.Show("Sảnh đã được đặt vào ngày và ca này. Vui lòng chọn sảnh khác.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
                 _datTiecService.AddDatTiec(TiecMoi);
                 // lưu chi tiết 
                 LuuChiTietMenu();

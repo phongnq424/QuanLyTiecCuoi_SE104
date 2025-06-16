@@ -14,6 +14,7 @@ namespace QuanLyTiecCuoi.MVVM.Model
         public string TenChuRe { get; set; }
         public string SDT { get; set; }
         public SqlMoney TienDatCoc { get; set; }
+
         public int MaSanh { get; set; }
         public int MaCa { get; set; }
         public DateTime NgayDatTiec { get; set; }
