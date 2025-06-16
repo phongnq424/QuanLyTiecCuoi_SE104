@@ -34,14 +34,22 @@
                     <ColumnDefinition Width="*"/>
                     <!-- Cột cho "Đơn Giá Bán Tối Thiểu" -->
                     <ColumnDefinition Width="*"/>
+                    <!-- Cột cho icon Xóa bộ lọc -->
+                    <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="🔎" Margin="0,0,5,0" FontSize="20" FontFamily="Cambria" Grid.Column="0"/>
+                <TextBlock Text="🔎" Margin="0,0,5,0" FontSize="20" FontFamily="Cambria" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
+                <Border Width="40" Height="40" Background="Transparent" CornerRadius="20" BorderBrush="Black" BorderThickness="1"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" 
+                        ToolTip="Xóa bộ lọc" MouseLeftButtonDown="ClearFilter_Click" Grid.Column="3">
+                    <TextBlock Text="❌" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13"/>
+                </Border>
+                
                 <!-- Tên Loại Sảnh -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="1" >
                     <TextBlock Text="Tên Loại Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                    <Border Width="300" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                    <Border Width="300" Height="40" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Black" BorderThickness="1" Background="White">
                         <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
                             Text="{Binding FilterTenLoaiSanh, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
@@ -50,9 +58,10 @@
                 <!-- Đơn Giá Bán Tối Thiểu -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="2" >
                     <TextBlock Text="Đơn giá bàn: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                    <Border Width="300" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                    <Border Width="300" Height="40" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Black" BorderThickness="1" Background="White">
                         <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
-                            Text="{Binding FilterDonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Text="{Binding FilterDonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged}"
+                                 PreviewTextInput="NumberOnly_PreviewTextInput"/>
                     </Border>
                 </StackPanel>
             </Grid>

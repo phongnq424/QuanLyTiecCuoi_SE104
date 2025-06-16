@@ -184,20 +184,20 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã đặt tiệc" Binding="{Binding MaDatTiec}" Width="*" />
-                            <DataGridTextColumn Header="Cô dâu" Binding="{Binding TenCoDau}" Width="*" />
-                            <DataGridTextColumn Header="Chú rể" Binding="{Binding TenChuRe}" Width="*" />
+                            <DataGridTextColumn Header="Mã đặt tiệc" Binding="{Binding MaDatTiec}" Width="0.7*" />
+                            <DataGridTextColumn Header="Cô dâu" Binding="{Binding TenCoDau}" Width="1.3*" />
+                            <DataGridTextColumn Header="Chú rể" Binding="{Binding TenChuRe}" Width="1.3*" />
                             <DataGridTextColumn Header="SĐT" Binding="{Binding SDT}" Width="*" />
-                            <DataGridTextColumn Header="Đặt cọc" Binding="{Binding TienDatCoc, StringFormat=N0}" Width="*" />
-                            <DataGridTextColumn Header="Ca" Binding="{Binding CaSanh.TenCa}" Width="*" />
-                            <DataGridTextColumn Header="Sảnh" Binding="{Binding Sanh.TenSanh}" Width="*" />
+                            <DataGridTextColumn Header="Tiền đặt cọc" Binding="{Binding TienDatCoc, StringFormat=N0}" Width="*" />
+                            <DataGridTextColumn Header="Ca" Binding="{Binding CaSanh.TenCa}" Width="0.7*" />
+                            <DataGridTextColumn Header="Sảnh" Binding="{Binding Sanh.TenSanh}" Width="1.3*" />
                             <DataGridTextColumn Header="Ngày đãi" Width="*">
                                 <DataGridTextColumn.Binding>
                                     <Binding Path="NgayDaiTiec" StringFormat="{}{0:dd/MM/yyyy}" />
                                 </DataGridTextColumn.Binding>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Số bàn" Binding="{Binding SoLuongBan}" Width="*" />
-                            <DataGridTextColumn Header="Dự trữ" Binding="{Binding SoBanDuTru}" Width="*" />
+                            <DataGridTextColumn Header="Số bàn" Binding="{Binding SoLuongBan}" Width="0.5*" />
+                            <DataGridTextColumn Header="Dự trữ" Binding="{Binding SoBanDuTru}" Width="0.5*" />
                             <DataGridTemplateColumn Header=" " Width="0.5*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

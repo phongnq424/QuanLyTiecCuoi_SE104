@@ -18,6 +18,11 @@ namespace QuanLyTiecCuoi.Repository
             _context = context;
         }
 
+        public bool IsUsedByAnyDatTiec(int maSanh)
+        {
+            return _context.DatTiecs.Any(dt => dt.MaSanh == maSanh);
+        }
+
         public List<SANH> GetAll()
         {
             return _context.Sanhs.Include(s => s.LoaiSanh).ToList();

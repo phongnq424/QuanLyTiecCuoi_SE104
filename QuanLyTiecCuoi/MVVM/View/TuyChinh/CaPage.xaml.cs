@@ -26,5 +26,15 @@ namespace QuanLyTiecCuoi.MVVM.View.TuyChinh
             InitializeComponent();
             DataContext = vm;
         }
+
+        private void ClearFilter_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is CaViewModel vm)
+            {
+                vm.FilterTenSanh = string.Empty;
+                vm.FilterGioBatDau = string.Empty;
+                vm.FilterGioKetThuc = string.Empty;
+            }
+        }
     }
 }
