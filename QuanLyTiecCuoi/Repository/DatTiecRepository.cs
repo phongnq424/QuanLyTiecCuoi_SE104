@@ -125,6 +125,7 @@ namespace QuanLyTiecCuoi.Repository
             decimal tiLeDC = _context.ThamSos.FirstOrDefault().PhanTramDatCoc;
             datTiec.TienDatCoc = tongTien * tiLeDC; // Giả sử tiền đặt cọc là 30% tổng tiền
 
+
             var hoaDon = new HOADON
             {
                 MaDatTiec = datTiec.MaDatTiec,
@@ -133,6 +134,7 @@ namespace QuanLyTiecCuoi.Repository
                 TongTienDV = tongTienDV,
                 TienPhat = 0,
                 TongTienHD = tongTienDV + tongTienBan,
+                SoLuongBan = datTiec.SoLuongBan,
                 TienPhaiThanhToan = tongTienBan + tongTienDV - datTiec.TienDatCoc,
             };
             _context.HoaDons.Add(hoaDon);

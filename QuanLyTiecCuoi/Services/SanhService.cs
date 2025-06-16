@@ -18,6 +18,11 @@ namespace QuanLyTiecCuoi.Services
             _sanhRepo = sanhRepo;
         }
 
+        public bool IsSanhDangDuocSuDung(int maSanh)
+        {
+            return _sanhRepo.IsUsedByAnyDatTiec(maSanh);
+        }
+
         // Lấy tất cả các Sảnh
         public ObservableCollection<Sanh> GetAllSanh()
         {

@@ -26,5 +26,26 @@ namespace QuanLyTiecCuoi.MVVM.View
             InitializeComponent();
             DataContext = vm;
         }
+
+        private void ClearFilter_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is SanhViewModel vm)
+            {
+                vm.FilterTenSanh = string.Empty;
+                vm.FilterLoaiSanh = null;
+                vm.FilterSoLuongBanToiDa = string.Empty;
+                vm.FilterDonGiaBanToiThieu = string.Empty;
+            }
+        }
+
+        private void NumberOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextNumeric(e.Text);
+        }
+
+        private static bool IsTextNumeric(string text)
+        {
+            return text.All(char.IsDigit);
+        }
     }
 }

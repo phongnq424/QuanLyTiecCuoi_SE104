@@ -109,7 +109,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         // Thêm mới Loại
         private void AddLoaiSanh()
         {
-            var window = new AddOrEditLoaiSanhWindow();
+            var window = new AddOrEditLoaiSanhWindow(DanhSachLoaiSanh.ToList());
             if (window.ShowDialog() == true)
             {
                 var newLoaiSanh = window.LoaiSanhInfo;
@@ -146,6 +146,18 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             if (result == MessageBoxResult.Yes)
             {
+                bool dangDuocSuDung = _loaiSanhService.IsLoaiSanhDangDuocSuDung(SelectedLoaiSanh.MaLoaiSanh);
+                if (dangDuocSuDung)
+                {
+                    MessageBox.Show(
+                        $"Loại sảnh '{SelectedLoaiSanh.TenLoaiSanh}' đang được sử dụng trong danh sách sảnh.\nKhông thể xóa.",
+                        "Không thể xóa",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning
+                    );
+                    return;
+                }
+
                 try
                 {
                     // Xóa khỏi database

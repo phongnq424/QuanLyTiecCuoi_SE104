@@ -42,8 +42,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             set { _filterTenSanh = value; OnPropertyChanged(nameof(FilterTenSanh)); DanhSachSanhView.Refresh(); }
         }
 
-        private string _filterLoaiSanh;
-        public string FilterLoaiSanh
+        private LoaiSanh _filterLoaiSanh;
+        public LoaiSanh FilterLoaiSanh
         {
             get => _filterLoaiSanh;
             set { _filterLoaiSanh = value; OnPropertyChanged(nameof(FilterLoaiSanh)); DanhSachSanhView.Refresh(); }
@@ -185,7 +185,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         // Thêm Sảnh mới
         private void AddSanh()
         {
-            var window = new AddOrEditSanhWindow(DanhSachLoaiSanh.ToList());
+            var window = new AddOrEditSanhWindow(DanhSachLoaiSanh.ToList(), DanhSachSanh.ToList());
             if (window.ShowDialog() == true)
             {
                 var newSanh = window.SanhInfo;
@@ -222,6 +222,17 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             if (result == MessageBoxResult.Yes)
             {
+                if (_sanhService.IsSanhDangDuocSuDung(SelectedSanh.MaSanh))
+                {
+                    MessageBox.Show(
+                        $"Sảnh '{SelectedSanh.TenSanh}' đang được sử dụng trong phiếu đặt tiệc.\nKhông thể xóa.",
+                        "Không thể xóa",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning
+                    );
+                    return;
+                }
+
                 try
                 {
                     // Xóa ảnh nếu tồn tại
@@ -264,8 +275,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             bool matchTen = string.IsNullOrWhiteSpace(FilterTenSanh) ||
                             sanh.TenSanh?.IndexOf(FilterTenSanh, StringComparison.OrdinalIgnoreCase) >= 0;
 
-            bool matchLoai = string.IsNullOrWhiteSpace(FilterLoaiSanh) ||
-                             sanh.LoaiSanh?.TenLoaiSanh?.IndexOf(FilterLoaiSanh, StringComparison.OrdinalIgnoreCase) >= 0;
+            bool matchLoai = FilterLoaiSanh == null ||
+                 sanh.LoaiSanh?.MaLoaiSanh == FilterLoaiSanh.MaLoaiSanh;
 
             bool matchSoLuong = true;
             if (int.TryParse(FilterSoLuongBanToiDa, out int soLuong))

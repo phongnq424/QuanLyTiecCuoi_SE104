@@ -82,18 +82,6 @@ public class DatTiecViewModel : BaseViewModel
         DateTime ngayHienTai = DateTime.Now.Date;
         DateTime ngayDaiTiec = datTiec.NgayDaiTiec.Date;
 
-        if (!hoaDon.NgayThanhToan.HasValue)
-        {
-            decimal tongTien = hoaDon.TienPhaiThanhToan;
-            decimal tienPhat = 0;
-            decimal tienPhaiThanhToan = tongTien + tienPhat;
-
-            hoaDon.NgayThanhToan = ngayHienTai;
-            hoaDon.TienPhaiThanhToan = tienPhaiThanhToan;
-            hoaDon.TienPhat = tienPhat;
-
-            _datTiecService.UpdateHoaDonAsync(hoaDon);
-        }
         var window = App.AppHost?.Services.GetService<ChiTietHoaDonWindow>();
         var viewModel = App.AppHost?.Services.GetService<HoaDonViewModel>();
 

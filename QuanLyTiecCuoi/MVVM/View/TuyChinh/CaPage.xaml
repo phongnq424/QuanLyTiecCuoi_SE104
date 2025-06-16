@@ -38,12 +38,10 @@
                     <Grid.ColumnDefinitions>
                         <!-- Cột cho "Giới thiệu" -->
                         <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="0.9*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
-
-                        <ColumnDefinition Width="*" />
-
-                   
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="🔎"
@@ -52,6 +50,12 @@
                                FontSize="20"
                                FontFamily="Cambria"
                                Grid.Column="0" />
+
+                    <Border Width="40" Height="40" Background="Transparent" CornerRadius="20" BorderBrush="Black" BorderThickness="1"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Margin="20,0,0,0"
+                            ToolTip="Xóa bộ lọc" MouseLeftButtonDown="ClearFilter_Click" Grid.Column="5">
+                        <TextBlock Text="❌" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13"/>
+                    </Border>
 
                     <!-- Tên Sảnh -->
                     <StackPanel Orientation="Horizontal"
@@ -62,7 +66,7 @@
                                    VerticalAlignment="Center"
                                    FontSize="20"
                                    FontFamily="Cambria" />
-                        <Border Width="200" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                        <Border Width="200" Height="40" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
                             <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
                                 Text="{Binding FilterTenSanh, UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>
@@ -70,27 +74,27 @@
 
                     <!-- Giờ bắt đầu và kết thúc -->
                     <StackPanel Orientation="Horizontal"
-                                Margin="10,0,0,5"
+                                Margin="10,0,0,0"
                                 Grid.Column="2">
                         <TextBlock Text="Giờ bắt đầu: "
                                    Margin="0,0,5,0"
                                    VerticalAlignment="Center"
                                    FontSize="20"
                                    FontFamily="Cambria" />
-                        <Border Width="200" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                        <Border Width="200" Height="40" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
                             <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
                                 Text="{Binding FilterGioBatDau, UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
-                                Margin="10,0,0,5"
+                                Margin="10,0,0,0"
                                 Grid.Column="3">
                         <TextBlock Text="Giờ kết thúc: "
                                    Margin="0,0,5,0"
                                    VerticalAlignment="Center"
                                    FontSize="20"
                                    FontFamily="Cambria" />
-                        <Border Width="200" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                        <Border Width="200" Height="40" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
                             <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
                                 Text="{Binding FilterGioKetThuc, UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>

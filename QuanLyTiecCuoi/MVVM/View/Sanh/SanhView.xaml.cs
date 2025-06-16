@@ -34,6 +34,15 @@ namespace QuanLyTiecCuoi.MVVM.View
             DataContext = vm;
         }
 
+        private void ClearFilter_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is SanhViewModel vm)
+            {
+                vm.SelectedDate = null;
+                vm.SelectedCaSanh = null;
+            }
+        }
+
         private void btnCTSanh_Click(object sender, RoutedEventArgs e)
         {
             var vm = (MainWindowViewModel)Application.Current.MainWindow.DataContext;
