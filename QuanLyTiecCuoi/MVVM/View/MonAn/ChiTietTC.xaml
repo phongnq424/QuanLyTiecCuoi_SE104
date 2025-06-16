@@ -38,7 +38,7 @@
                FontFamily="Cambria"
                TextAlignment="Center" 
                Margin="5,10,5,0"/>
-                <TextBlock Text="{Binding DonGia,StringFormat='Giá: {0:N0} VND'}" 
+                <TextBlock Text="{Binding DonGia,StringFormat=' {0:N0} VND'}" 
 
                     FontFamily="Cambria"
                     FontSize="20" 

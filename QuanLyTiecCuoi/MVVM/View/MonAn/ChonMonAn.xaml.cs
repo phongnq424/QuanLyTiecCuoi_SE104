@@ -23,19 +23,18 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
         {
             if (sender is Border border && border.DataContext is MONAN monAn)
             {
-                _viewModel.ChonMonAn(monAn);
+                _viewModel?.ChonMonAn(monAn);
             }
         }
+
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            //_viewModel.LuuChiTietMenu();
             if (this.NavigationService != null && this.NavigationService.CanGoBack)
             {
                 this.NavigationService.GoBack();
             }
             else
             {
-                // Cách 2: fallback khi NavigationService null (dùng MainFrame của MainWindow)
                 var mainWindow = Application.Current.MainWindow as MainWindow;
                 if (mainWindow != null && mainWindow.MainFrame.CanGoBack)
                 {
@@ -43,7 +42,6 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
                 }
             }
         }
-
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -64,21 +62,62 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
                     {
                         tb.Text = "Tên món ăn";
                         tb.Foreground = System.Windows.Media.Brushes.Gray;
-                        _viewModel.TuKhoaTen = "";
+                        if (_viewModel != null)
+                        {
+                            _viewModel.TuKhoaTen = "";
+                        }
                     }
                     else if (tb.Name == "txtSearchPrice")
                     {
                         tb.Text = "Đơn giá";
                         tb.Foreground = System.Windows.Media.Brushes.Gray;
-                        _viewModel.TuKhoaGia = "";
+                        if (_viewModel != null)
+                        {
+                            _viewModel.GiaMin = null;
+                            _viewModel.TuKhoaGia = "";
+                        }
                     }
                 }
                 else
                 {
                     if (tb.Name == "txtSearchName")
-                        _viewModel.TuKhoaTen = tb.Text;
+                    {
+                        if (_viewModel != null)
+                            _viewModel.TuKhoaTen = tb.Text;
+                    }
                     else if (tb.Name == "txtSearchPrice")
-                        _viewModel.TuKhoaGia = tb.Text;
+                    {
+                        if (_viewModel != null)
+                        {
+                            if (int.TryParse(tb.Text, out int gia))
+                            {
+                                _viewModel.GiaMin = gia;
+                                _viewModel.TuKhoaGia = tb.Text;
+                            }
+                            else
+                            {
+                                _viewModel.GiaMin = null;
+                                _viewModel.TuKhoaGia = "";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void txtSearchPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox tb && _viewModel != null)
+            {
+                if (int.TryParse(tb.Text, out int gia))
+                {
+                    _viewModel.GiaMin = gia;
+                    _viewModel.TuKhoaGia = tb.Text;
+                }
+                else
+                {
+                    _viewModel.GiaMin = null;
+                    _viewModel.TuKhoaGia = "";
                 }
             }
         }

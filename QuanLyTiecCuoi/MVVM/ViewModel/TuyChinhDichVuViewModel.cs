@@ -11,8 +11,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.DichVu
     public class TuyChinhDichVuViewModel : BaseViewModel
     {
         private readonly DichVuService _dichVuService;
-
         private List<DICHVU> _allDichVu = new();
+
         public ObservableCollection<DICHVU> DanhSachDichVu { get; set; } = new();
 
         private string _tuKhoaTen;
@@ -34,6 +34,26 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.DichVu
             set
             {
                 _tuKhoaGia = value;
+                OnPropertyChanged();
+                if (decimal.TryParse(value, out decimal gia))
+                {
+                    GiaMin = gia;
+                }
+                else
+                {
+                    GiaMin = null;
+                }
+                ThucHienTimKiem();
+            }
+        }
+
+        private decimal? _giaMin;
+        public decimal? GiaMin
+        {
+            get => _giaMin;
+            set
+            {
+                _giaMin = value;
                 OnPropertyChanged();
                 ThucHienTimKiem();
             }
@@ -61,9 +81,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.DichVu
                 ketQua = ketQua.Where(x => x.TenDichVu?.IndexOf(TuKhoaTen.Trim(), StringComparison.OrdinalIgnoreCase) >= 0);
             }
 
-            if (!string.IsNullOrWhiteSpace(TuKhoaGia) && decimal.TryParse(TuKhoaGia.Trim(), out decimal gia))
+            if (GiaMin.HasValue)
             {
-                ketQua = ketQua.Where(x => x.DonGia == gia);
+                ketQua = ketQua.Where(x => x.DonGia >= GiaMin.Value);
             }
 
             DanhSachDichVu = new ObservableCollection<DICHVU>(ketQua);

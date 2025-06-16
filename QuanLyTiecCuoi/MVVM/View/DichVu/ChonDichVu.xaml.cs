@@ -54,23 +54,64 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
                 {
                     if (tb.Name == "txtSearchName")
                     {
-                        tb.Text = "Tên dịch vụ";
+                        tb.Text = "Tên món ăn";
                         tb.Foreground = System.Windows.Media.Brushes.Gray;
-                        _viewModel.TuKhoaTen = "";
+                        if (_viewModel != null)
+                        {
+                            _viewModel.TuKhoaTen = "";
+                        }
                     }
                     else if (tb.Name == "txtSearchPrice")
                     {
                         tb.Text = "Đơn giá";
                         tb.Foreground = System.Windows.Media.Brushes.Gray;
-                        _viewModel.TuKhoaGia = "";
+                        if (_viewModel != null)
+                        {
+                            _viewModel.GiaMin = null;
+                            _viewModel.TuKhoaGia = "";
+                        }
                     }
                 }
                 else
                 {
                     if (tb.Name == "txtSearchName")
-                        _viewModel.TuKhoaTen = tb.Text;
+                    {
+                        if (_viewModel != null)
+                            _viewModel.TuKhoaTen = tb.Text;
+                    }
                     else if (tb.Name == "txtSearchPrice")
-                        _viewModel.TuKhoaGia = tb.Text;
+                    {
+                        if (_viewModel != null)
+                        {
+                            if (int.TryParse(tb.Text, out int gia))
+                            {
+                                _viewModel.GiaMin = gia;
+                                _viewModel.TuKhoaGia = tb.Text;
+                            }
+                            else
+                            {
+                                _viewModel.GiaMin = null;
+                                _viewModel.TuKhoaGia = "";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void txtSearchPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox tb && _viewModel != null)
+            {
+                if (int.TryParse(tb.Text, out int gia))
+                {
+                    _viewModel.GiaMin = gia;
+                    _viewModel.TuKhoaGia = tb.Text;
+                }
+                else
+                {
+                    _viewModel.GiaMin = null;
+                    _viewModel.TuKhoaGia = "";
                 }
             }
         }

@@ -35,6 +35,26 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
             {
                 _tuKhoaGia = value;
                 OnPropertyChanged();
+                if (decimal.TryParse(value, out decimal gia))
+                {
+                    GiaMin = gia;
+                }
+                else
+                {
+                    GiaMin = null;
+                }
+                ThucHienTimKiem();
+            }
+        }
+
+        private decimal? _giaMin;
+        public decimal? GiaMin
+        {
+            get => _giaMin;
+            set
+            {
+                _giaMin = value;
+                OnPropertyChanged();
                 ThucHienTimKiem();
             }
         }
@@ -61,9 +81,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
                 ketQua = ketQua.Where(x => x.TenMon?.IndexOf(TuKhoaTen.Trim(), System.StringComparison.OrdinalIgnoreCase) >= 0);
             }
 
-            if (!string.IsNullOrWhiteSpace(TuKhoaGia) && decimal.TryParse(TuKhoaGia.Trim(), out decimal gia))
+            if (GiaMin.HasValue)
             {
-                ketQua = ketQua.Where(x => x.DonGia == gia);
+                ketQua = ketQua.Where(x => x.DonGia >= GiaMin.Value);
             }
 
             DanhSachMonAn = new ObservableCollection<MONAN>(ketQua);
@@ -86,7 +106,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
 
         public void SuaMonAn(MONAN monAn)
         {
-            // Gợi ý: mở dialog hoặc page mới để sửa món ăn
             MessageBox.Show($"Mở giao diện chỉnh sửa cho: {monAn.TenMon}", "Sửa món ăn");
         }
     }

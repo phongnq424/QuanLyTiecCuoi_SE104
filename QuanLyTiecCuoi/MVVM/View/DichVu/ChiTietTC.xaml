@@ -50,7 +50,7 @@
                            Margin="5,10,5,0"/>
 
                 <!-- Giá -->
-                <TextBlock Text="{Binding DonGia, StringFormat='Giá: {0:N0} VND'}"
+                <TextBlock Text="{Binding DonGia, StringFormat=' {0:N0} VND'}"
                            FontFamily="Cambria"
                            FontSize="20"
                            TextAlignment="Center"
