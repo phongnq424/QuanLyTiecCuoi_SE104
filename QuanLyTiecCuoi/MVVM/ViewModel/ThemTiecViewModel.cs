@@ -201,6 +201,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     TongTienBan = tongTienBan,
                     TongTienDV = tongTienDV,
                     TienPhat = 0,
+                    SoLuongBan = TiecMoi.SoLuongBan,
                     TongTienHD = tongTienDV + tongTienBan,
                     TienPhaiThanhToan = tongTienBan + tongTienDV + tienPhat - tienDatCoc,
                 };

@@ -13,7 +13,7 @@
         Background="Transparent"
         x:Name="MangHinhHoaDon"
         Title="ChiTietHoaDonWindow"
-        Height="700"
+        Height="800"
         Width="1000">
     <Border
         BorderThickness="2"
@@ -25,12 +25,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition/>
+                <RowDefinition />
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
-            <Border
-                Grid.Row="0"
+            <Border Grid.Row="0"
                 Height="50"
                 CornerRadius="30,30,0,0"
                 BorderThickness="0,0,0,2"
@@ -47,8 +46,7 @@
                         Style="{StaticResource Header2Style}"></TextBlock>
                 </Grid>
             </Border>
-            <Border
-                Grid.Row="1"
+            <Border Grid.Row="1"
                 Margin="30,20,30,10"
                 Padding="10"
                 CornerRadius="30"
@@ -74,17 +72,32 @@
                                     Style="{StaticResource Header4Style}"/>
                         </StackPanel>
 
+
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Ngày đặt tiệc:"
+                            <TextBlock Text="Số lượng bàn dự kiến:"
                                     Style="{StaticResource Header3Style}"/>
-                            <TextBlock Text="{Binding TiecDuocChon.NgayDaiTiec, StringFormat='dd/MM/yyyy'}"
-                                    Style="{StaticResource Header4Style}"/>
+                            <TextBlock Text="{Binding TiecDuocChon.SoLuongBan}"
+                                     Style="{StaticResource Header4Style}"/>
+                        </StackPanel>  
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Số lượng bàn dự trữ:"
+                                    Style="{StaticResource Header3Style}"/>
+                            <TextBlock Text="{Binding TiecDuocChon.SoBanDuTru}"
+                                     Style="{StaticResource Header4Style}"/>
                         </StackPanel>
+
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Số lượng bàn:"
+                            <TextBlock Text="Số lượng bàn sử dụng:"
                                     Style="{StaticResource Header3Style}"/>
-                            <TextBlock Text="{Binding HoaDonDuocChon.SoLuongBan}"
-                                    Style="{StaticResource Header4Style}"/>
+                            <TextBox 
+                                x:Name="SLban"
+                                Text="{Binding HoaDonDuocChon.SoLuongBan}" Width="80"
+                                Style="{StaticResource TextBoxDescribeStyle}">
+                            </TextBox>
+                            <Button Content="Áp dụng"
+                                    Command="{Binding ThayDoiSoLuongBanCommand}"
+                                    CommandParameter="{Binding Text, ElementName=SLban}"
+                                    Style="{StaticResource ButtonAddServiceStyle}"></Button>
                         </StackPanel>
                     </StackPanel>
 
@@ -104,6 +117,12 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Ngày đặt tiệc:"
+                                    Style="{StaticResource Header3Style}"/>
+                            <TextBlock Text="{Binding TiecDuocChon.NgayDaiTiec, StringFormat='dd/MM/yyyy'}"
+                                    Style="{StaticResource Header4Style}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Tiền đặt cọc:"
                                     Style="{StaticResource Header3Style}"/>
                             <TextBlock Text="{Binding HoaDonDuocChon.DATTIEC.TienDatCoc,StringFormat={}{0:C0}}" Language="vi-VN"
@@ -114,7 +133,8 @@
 
             </Border>
 
-            <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,157,0,0" Grid.RowSpan="2">
+            <Grid Grid.Row="2" 
+                  Height="auto" Grid.ColumnSpan="2" Margin="0" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="60"/>
@@ -392,7 +412,7 @@
                 <StackPanel
                     VerticalAlignment="Center"
                     Orientation="Horizontal"
-                    Margin="30,0"
+                    Margin="10,0,0,0"
                     Grid.Row="1"
                         Grid.Column="0">
 
@@ -430,21 +450,19 @@
                         Text="Ngày thanh toán: "
                         Style="{StaticResource Header3Style}"/>
                     <TextBlock
-                        Text="{Binding HoaDonDuocChon.NgayThanhToan, StringFormat={}{0:C0}}" Language="vi-VN"
+                        Text="{Binding HoaDonDuocChon.NgayThanhToan, StringFormat='dd/MM/yyyy'}"
                         Style="{StaticResource Header4Style}"/>
                 </StackPanel>
-
-
             </Grid>
 
-            <TextBlock Text="{Binding ThongBaoPhatText}"
+            <TextBlock Grid.Row="3"
+                Text="{Binding ThongBaoPhatText}"
                HorizontalAlignment="Left"
-               Grid.Row="3"
                Foreground="Red"
-               FontSize="14"
+               FontSize="16"
                FontWeight="SemiBold"
-               Margin="20,5,0,0"
-               TextWrapping="Wrap"/>
+               Margin="22,10,10,0"/>
+            
             <Button
                 Visibility="{Binding BtnLuuVisibility}"
                 Grid.Row="4"
@@ -460,7 +478,6 @@
                         Orientation="Horizontal" Grid.ColumnSpan="2">
 
                 <Button
-                    Grid.Row="3"
                     Content="Xác nhận thanh toán"
                     HorizontalAlignment="Right"
                     Visibility="{Binding BtnDaThanhToanVisibility}"
@@ -469,7 +486,6 @@
                     Style="{StaticResource ButtonStyle}"/>
 
                 <Button
-                    Grid.Row="3"
                     HorizontalAlignment="Right"
                     Content="In hóa đơn"
                     Command="{Binding InHoaDonCommand}"
