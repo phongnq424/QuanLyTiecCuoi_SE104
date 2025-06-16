@@ -116,7 +116,9 @@
                                  Margin="10,5"
                                  Style="{StaticResource TextBoxDescribeStyle}"
                                  VerticalContentAlignment="Center"
-                                 Text="{Binding MinDoanhThu}" />
+                                 Text="{Binding MinDoanhThu}"
+                                 PreviewTextInput="DecimalOnly_PreviewTextInput"
+                                 DataObject.Pasting="TextBox_Pasting" />
                     </StackPanel>
 
                     <!-- Doanh thu đến -->

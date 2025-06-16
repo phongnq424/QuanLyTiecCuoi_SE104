@@ -25,5 +25,6 @@ namespace QuanLyTiecCuoi.Data.Models
 
         [ForeignKey("MaMon")]
         public virtual MONAN MonAn { get; set; }
+        public bool isDelelte { get; set; }
     }
 }
