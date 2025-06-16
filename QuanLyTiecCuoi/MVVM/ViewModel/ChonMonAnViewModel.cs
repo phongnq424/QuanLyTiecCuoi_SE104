@@ -11,6 +11,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
     public class ChonMonAnViewModel : BaseViewModel
     {
         private readonly MonAnService _monAnService;
+        private readonly ChiTietMenuService _chiTietMenuService;
+        private readonly DATTIEC _datTiec;
 
         private List<MONAN> _allMonAn = new();
 
@@ -56,6 +58,26 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
             {
                 _tuKhoaGia = value;
                 OnPropertyChanged();
+                if (decimal.TryParse(value, out decimal gia))
+                {
+                    GiaMin = gia;
+                }
+                else
+                {
+                    GiaMin = null;
+                }
+                ThucHienTimKiem();
+            }
+        }
+
+        private decimal? _giaMin;
+        public decimal? GiaMin
+        {
+            get => _giaMin;
+            set
+            {
+                _giaMin = value;
+                OnPropertyChanged();
                 ThucHienTimKiem();
             }
         }
@@ -69,7 +91,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
             MonAnDaChon = monAnDaChon ?? new ObservableCollection<MONAN>();
             LoadDanhSachMonAn();
         }
-
 
         private void LoadDanhSachMonAn()
         {
@@ -86,9 +107,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
                 ketQua = ketQua.Where(x => x.TenMon?.IndexOf(TuKhoaTen.Trim(), System.StringComparison.OrdinalIgnoreCase) >= 0);
             }
 
-            if (!string.IsNullOrWhiteSpace(TuKhoaGia) && decimal.TryParse(TuKhoaGia.Trim(), out decimal gia))
+            if (GiaMin.HasValue)
             {
-                ketQua = ketQua.Where(x => x.DonGia == gia);
+                ketQua = ketQua.Where(x => x.DonGia >= GiaMin.Value);
             }
 
             DanhSachMonAn = new ObservableCollection<MONAN>(ketQua);
@@ -101,9 +122,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
                 MonAnDaChon.Add(monAn);
             }
         }
-
-        private readonly DATTIEC _datTiec;
-        private readonly ChiTietMenuService _chiTietMenuService;
 
         public void LuuChiTietMenu()
         {
@@ -118,8 +136,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
                 {
                     MaDatTiec = _datTiec.MaDatTiec,
                     MaMon = monAn.MaMon,
-                    SoLuong = 1, // Có thể cập nhật cho phép người dùng chọn
-                    GhiChu = ""  // Có thể mở TextBox cho từng món
+                    SoLuong = 1,
+                    GhiChu = ""
                 };
 
                 _chiTietMenuService.ThemChiTietMenu(chiTiet);
@@ -127,6 +145,5 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.MonAn
 
             MessageBox.Show("Lưu thực đơn thành công!");
         }
-
     }
 }

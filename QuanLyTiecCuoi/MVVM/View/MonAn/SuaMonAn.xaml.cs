@@ -96,6 +96,7 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
             txtDonGia.IsReadOnly = false;
             txtDonGia.Background = Brushes.White;
             txtDonGia.Focus();
+            txtDonGia.SelectAll();
         }
 
         private void TxtDonGia_LostFocus(object sender, RoutedEventArgs e)

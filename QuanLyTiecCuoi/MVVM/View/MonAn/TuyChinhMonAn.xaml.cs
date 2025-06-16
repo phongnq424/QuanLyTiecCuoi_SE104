@@ -1,46 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using QuanLyTiecCuoi.Data.Models;
-using QuanLyTiecCuoi.MVVM.Model;
 using QuanLyTiecCuoi.MVVM.ViewModel.MonAn;
 
 namespace QuanLyTiecCuoi.MVVM.View.MonAn
 {
-    /// <summary>
-    /// Interaction logic for TuyChinhMonAn.xaml
-    /// </summary>
     public partial class TuyChinhMonAn : Page
     {
-        private TuyChinhMonAnViewModel _viewModel;
-        
+        private readonly TuyChinhMonAnViewModel _viewModel;
 
         public TuyChinhMonAn()
         {
             InitializeComponent();
             _viewModel = new TuyChinhMonAnViewModel();
             this.DataContext = _viewModel;
-
         }
 
         private void BtnXoa_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn && btn.DataContext is MONAN monAn)
             {
-                _viewModel.XoaMonAn(monAn);
+                _viewModel?.XoaMonAn(monAn);
             }
         }
 
@@ -49,6 +30,7 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
             if (sender is Button btn && btn.DataContext is MONAN monAn)
             {
                 var window = new ChiTietTC(monAn);
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 window.ShowDialog();
             }
         }
@@ -57,7 +39,8 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
         {
             if (sender is Button btn && btn.DataContext is MONAN monAn)
             {
-                var window = new SuaMonAn(monAn); // truyền dữ liệu nếu cần
+                var window = new SuaMonAn(monAn);
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 window.ShowDialog();
             }
         }
@@ -65,6 +48,7 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
         private void BtnThemMonAn_Click(object sender, RoutedEventArgs e)
         {
             var window = new ThemMonAn();
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
         }
 
@@ -87,27 +71,60 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
                     {
                         tb.Text = "Tên món ăn";
                         tb.Foreground = System.Windows.Media.Brushes.Gray;
-                        _viewModel.TuKhoaTen = "";
+                        if (_viewModel != null) _viewModel.TuKhoaTen = "";
                     }
                     else if (tb.Name == "txtSearchPrice")
                     {
                         tb.Text = "Đơn giá";
                         tb.Foreground = System.Windows.Media.Brushes.Gray;
-                        _viewModel.TuKhoaGia = "";
+                        if (_viewModel != null)
+                        {
+                            _viewModel.GiaMin = null;
+                            _viewModel.TuKhoaGia = "";
+                        }
                     }
                 }
                 else
                 {
-                    if (tb.Name == "txtSearchName")
-                        _viewModel.TuKhoaTen = tb.Text;
-                    else if (tb.Name == "txtSearchPrice")
-                        _viewModel.TuKhoaGia = tb.Text;
+                    if (_viewModel != null)
+                    {
+                        if (tb.Name == "txtSearchName")
+                        {
+                            _viewModel.TuKhoaTen = tb.Text;
+                        }
+                        else if (tb.Name == "txtSearchPrice")
+                        {
+                            if (decimal.TryParse(tb.Text, out decimal gia))
+                            {
+                                _viewModel.GiaMin = gia;
+                                _viewModel.TuKhoaGia = tb.Text;
+                            }
+                            else
+                            {
+                                _viewModel.GiaMin = null;
+                                _viewModel.TuKhoaGia = "";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void txtSearchPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox tb && _viewModel != null)
+            {
+                if (decimal.TryParse(tb.Text, out decimal gia))
+                {
+                    _viewModel.GiaMin = gia;
+                    _viewModel.TuKhoaGia = tb.Text;
+                }
+                else
+                {
+                    _viewModel.GiaMin = null;
+                    _viewModel.TuKhoaGia = "";
                 }
             }
         }
     }
-
-
-
 }
-

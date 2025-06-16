@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
+using LiveChartsCore.Defaults;
 
 public class BaoCaoViewModel : BaseViewModel
 {
@@ -116,32 +117,36 @@ public class BaoCaoViewModel : BaseViewModel
         }
 
         Series = new ISeries[]
-        {
-            new ColumnSeries<int>
-            {
-                Name = "Số tiệc cưới",
-                Values = weddingCounts,
-                Stroke = null,
-                Fill = new SolidColorPaint(SKColors.Blue)
-            },
-            new ColumnSeries<double>
-            {
-                Name = "Doanh thu (triệu VNĐ)",
-                Values = revenues,
-                Stroke = null,
-                Fill = new SolidColorPaint(SKColors.Green)
-            }
-        };
+{
+    new ColumnSeries<ObservableValue>
+    {
+        Name = "Số tiệc cưới",
+        Values = weddingCounts.Select(v => new ObservableValue(v)).ToArray(),
+        Fill = new SolidColorPaint(SKColors.Blue),
+        Stroke = null
+    },
+    new ColumnSeries<ObservableValue>
+    {
+        Name = "Doanh thu (triệu VNĐ)",
+        Values = revenues.Select(v => new ObservableValue(v)).ToArray(),
+        Fill = new SolidColorPaint(SKColors.Green),
+        Stroke = null
+    }
+};
 
         XAxes = new Axis[]
+{
+        new Axis
         {
-            new Axis
-            {
-                Labels = labels,
-                LabelsRotation = 45,
-                TextSize = 12
-            }
-        };
+            Labels = labels,
+            LabelsRotation = 45,
+            TextSize = 12,
+            LabelsPaint = new SolidColorPaint(SKColors.Black),
+            UnitWidth = 1,
+            SeparatorsPaint = new SolidColorPaint(SKColors.LightGray),
+            MinStep = 1,
+        }
+    };
 
         OnPropertyChanged(nameof(Series));
         OnPropertyChanged(nameof(XAxes));

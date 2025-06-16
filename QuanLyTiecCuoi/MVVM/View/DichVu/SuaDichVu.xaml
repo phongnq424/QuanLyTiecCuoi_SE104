@@ -69,7 +69,7 @@
 
                 <!-- Đơn giá -->
                 <TextBox x:Name="txtDonGia"
-                         Text="{Binding DonGia, StringFormat='Giá: {0:N0} VND'}"
+                         Text="{Binding DonGia, StringFormat=' {0:N0} VND'}"
                          FontFamily="Cambria"
                          FontWeight="Bold"
                          FontSize="20"

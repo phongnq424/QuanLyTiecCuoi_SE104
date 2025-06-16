@@ -104,7 +104,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="txtSearchPrice" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontSize="15" FontFamily="Cambria" Foreground="#888" Text="Đơn giá" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                                <TextBox x:Name="txtSearchPrice" TextChanged="txtSearchPrice_TextChanged" Grid.Column="0" Width="100" BorderThickness="0" VerticalContentAlignment="Center" FontSize="15" FontFamily="Cambria" Foreground="#888" Text="Đơn giá" GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
                                 <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Content="🔍"/>
                             </Grid>
                         </Border>

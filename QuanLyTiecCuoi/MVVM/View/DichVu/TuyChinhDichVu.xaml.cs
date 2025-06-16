@@ -1,6 +1,6 @@
 ﻿using QuanLyTiecCuoi.MVVM.ViewModel.DichVu;
 using QuanLyTiecCuoi.Data.Models;
-using QuanLyTiecCuoi.MVVM.Model; // nếu có DichVuModel
+using QuanLyTiecCuoi.MVVM.Model;
 using System.Windows;
 using System.Windows.Controls;
 using QuanLyTiecCuoi.MVVM.View.MonAn;
@@ -22,7 +22,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
         {
             if (sender is Button btn && btn.DataContext is DICHVU dv)
             {
-                _viewModel.XoaDichVu(dv);
+                _viewModel?.XoaDichVu(dv);
             }
         }
 
@@ -30,7 +30,8 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
         {
             if (sender is Button btn && btn.DataContext is DICHVU dv)
             {
-                var window = new ChiTietTC(dv); // nếu có window riêng
+                var window = new ChiTietTC(dv);
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 window.ShowDialog();
             }
         }
@@ -39,16 +40,35 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
         {
             if (sender is Button btn && btn.DataContext is DICHVU dv)
             {
-                var window = new SuaDichVu(dv); // truyền dữ liệu nếu cần
+                var window = new SuaDichVu(dv);
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 window.ShowDialog();
             }
         }
 
         private void BtnThemDichVu_Click(object sender, RoutedEventArgs e)
         {
-            var window = new ThemDichVu(); 
+            var window = new ThemDichVu();
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
         }
+        private void txtSearchPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox tb && _viewModel != null)
+            {
+                if (decimal.TryParse(tb.Text, out decimal gia))
+                {
+                    _viewModel.GiaMin = gia;
+                    _viewModel.TuKhoaGia = tb.Text;
+                }
+                else
+                {
+                    _viewModel.GiaMin = null;
+                    _viewModel.TuKhoaGia = "";
+                }
+            }
+        }
+
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -69,21 +89,41 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
                     {
                         tb.Text = "Tên dịch vụ";
                         tb.Foreground = System.Windows.Media.Brushes.Gray;
-                        _viewModel.TuKhoaTen = "";
+                        if (_viewModel != null) _viewModel.TuKhoaTen = "";
                     }
                     else if (tb.Name == "txtSearchPrice")
                     {
                         tb.Text = "Đơn giá";
                         tb.Foreground = System.Windows.Media.Brushes.Gray;
-                        _viewModel.TuKhoaGia = "";
+                        if (_viewModel != null)
+                        {
+                            _viewModel.TuKhoaGia = "";
+                            _viewModel.GiaMin = null;
+                        }
                     }
                 }
                 else
                 {
-                    if (tb.Name == "txtSearchName")
-                        _viewModel.TuKhoaTen = tb.Text;
-                    else if (tb.Name == "txtSearchPrice")
-                        _viewModel.TuKhoaGia = tb.Text;
+                    if (_viewModel != null)
+                    {
+                        if (tb.Name == "txtSearchName")
+                        {
+                            _viewModel.TuKhoaTen = tb.Text;
+                        }
+                        else if (tb.Name == "txtSearchPrice")
+                        {
+                            if (int.TryParse(tb.Text, out int gia))
+                            {
+                                _viewModel.GiaMin = gia;
+                                _viewModel.TuKhoaGia = tb.Text;
+                            }
+                            else
+                            {
+                                _viewModel.GiaMin = null;
+                                _viewModel.TuKhoaGia = "";
+                            }
+                        }
+                    }
                 }
             }
         }
