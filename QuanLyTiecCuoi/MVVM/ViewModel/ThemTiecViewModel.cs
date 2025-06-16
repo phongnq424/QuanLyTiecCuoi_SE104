@@ -68,7 +68,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 Console.WriteLine("Lỗi LoadDanhSachCa: " + ex.Message);
             }
         }
-
         public void LoadDanhSachSanh()
         {
             try

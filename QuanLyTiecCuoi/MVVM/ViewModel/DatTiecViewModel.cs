@@ -10,6 +10,9 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Globalization;
 using System.Text;
+using QuanLyTiecCuoi.MVVM.View.MainVindow;
+using QuanLyTiecCuoi.MVVM.View.HoaDon;
+using QuanLyTiecCuoi.MVVM.ViewModel;
 public class DatTiecViewModel : BaseViewModel
 {
     private readonly DatTiecService _datTiecService;
@@ -19,10 +22,12 @@ public class DatTiecViewModel : BaseViewModel
 
     public ObservableCollection<string> DanhSachTieuChi { get; set; } = new()
     {
-        "Tên cô dâu", "Tên chú rể", "Số điện thoại", "Ngày đãi", "Tên Ca", "Tên Sảnh"
+        "--Chọn tiêu chí--", "Tên cô dâu", "Tên chú rể", "Số điện thoại", "Ngày đãi", "Tên Ca", "Tên Sảnh"
     };
+    public ObservableCollection<CASANH> DanhSachCa { get; set; } = new();
+    public ObservableCollection<SANH> DanhSachSanh { get; set; } = new();
 
-    private string _tieuChiDangChon = "Tên cô dâu";
+    private string _tieuChiDangChon = "--Chọn tiêu chí--";
     public string TieuChiDangChon
     {
         get => _tieuChiDangChon;
@@ -62,6 +67,8 @@ public class DatTiecViewModel : BaseViewModel
         KhoiTaoLenh();
         LoadDanhSachDatTiec();
     }
+    private readonly HoaDonService _hoaDonService;
+    private readonly IWindowService _windowService;
     private void InHoaDon(DATTIEC datTiec)
     {
         if (datTiec == null) return;
@@ -72,14 +79,10 @@ public class DatTiecViewModel : BaseViewModel
             MessageBox.Show("Không tìm thấy hóa đơn cho tiệc này.");
             return;
         }
+
         DateTime ngayHienTai = DateTime.Now.Date;
         DateTime ngayDaiTiec = datTiec.NgayDaiTiec.Date;
 
-        if (ngayHienTai < ngayDaiTiec)
-        {
-            MessageBox.Show("Tiệc chưa diễn ra.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-            return;
-        }
         if (!hoaDon.NgayThanhToan.HasValue)
         {
             decimal tongTien = hoaDon.TienPhaiThanhToan;
@@ -89,57 +92,22 @@ public class DatTiecViewModel : BaseViewModel
             hoaDon.NgayThanhToan = ngayHienTai;
             hoaDon.TienPhaiThanhToan = tienPhaiThanhToan;
             hoaDon.TienPhat = tienPhat;
+
             _datTiecService.UpdateHoaDonAsync(hoaDon);
-
         }
-        FlowDocument document = TaoDocument(hoaDon);
-        PrintDialog printDialog = new PrintDialog();
-        if (printDialog.ShowDialog() == true)
+    // Tạo ViewModel và truyền vào ChiTietHoaDonWindow
+        var vm = new HoaDonViewModel(_hoaDonService, _windowService)
         {
-            printDialog.PrintDocument(((IDocumentPaginatorSource)document).DocumentPaginator, "Hóa đơn");
-        }
-    }
-    private FlowDocument TaoDocument(HOADON hoaDon)
-    {
-        FlowDocument doc = new FlowDocument
-        {
-            FontFamily = new System.Windows.Media.FontFamily("Tahoma"),
-            FontSize = 12,
-            PagePadding = new Thickness(20),
-            PageWidth = 300,
-            ColumnWidth = double.PositiveInfinity
+            HoaDonDuocChon = hoaDon,
+            TiecDuocChon = datTiec,
         };
 
-        Paragraph title = new Paragraph(new Run("HÓA ĐƠN THANH TOÁN"))
-        {
-            FontSize = 18,
-            FontWeight = FontWeights.Bold,
-            TextAlignment = TextAlignment.Center,
-            Margin = new Thickness(0, 0, 0, 20)
-        };
-        doc.Blocks.Add(title);
-
-        doc.Blocks.Add(new Paragraph(new Run("SereniteWedding\nKhu phố 6, P.Linh Trung, Tp.Thủ Đức, TP.HCM"))
-        {
-            TextAlignment = TextAlignment.Center
-        });
-
-        Paragraph content = new Paragraph();
-        content.Inlines.Add(new Bold(new Run("Ngày thanh toán: ")));
-        content.Inlines.Add(new Run(hoaDon.NgayThanhToan?.ToString("dd/MM/yyyy") ?? "N/A"));
-        content.Inlines.Add(new LineBreak());
-
-        content.Inlines.Add(new Bold(new Run("Khách hàng: ")));
-        content.Inlines.Add(new Run(hoaDon.DATTIEC?.TenChuRe + " & " + hoaDon.DATTIEC?.TenCoDau));
-        content.Inlines.Add(new LineBreak());
-
-        content.Inlines.Add(new Bold(new Run("Tổng tiền: ")));
-        content.Inlines.Add(new Run($"{hoaDon.TongTienHD:C0}"));
-
-        doc.Blocks.Add(content);
-
-        return doc;
+        // Mở cửa sổ Chi tiết hóa đơn
+        var chiTietWindow = new ChiTietHoaDonWindow(vm);
+        chiTietWindow.ShowDialog();
     }
+
+
     private DATTIEC _datTiecDangChon;
     public DATTIEC DatTiecDangChon
     {
@@ -156,17 +124,51 @@ public class DatTiecViewModel : BaseViewModel
         DanhSachDatTiec = new ObservableCollection<DATTIEC>(_allDatTiec);
         OnPropertyChanged(nameof(DanhSachDatTiec));
     }
+    private CASANH _caDuocChon;
+    public CASANH CaDuocChon
+    {
+        get => _caDuocChon;
+        set
+        {
+            _caDuocChon = value;
+            OnPropertyChanged();
+            if (TieuChiDangChon == "Tên Ca")
+                ThucHienTimKiem();
+        }
+    }
+
+    private SANH _sanhDuocChon;
+    public SANH SanhDuocChon
+    {
+        get => _sanhDuocChon;
+        set
+        {
+            _sanhDuocChon = value;
+            OnPropertyChanged();
+            if (TieuChiDangChon == "Tên Sảnh")
+                ThucHienTimKiem();
+        }
+    }
 
     private void ThucHienTimKiem()
     {
-        if (string.IsNullOrWhiteSpace(TuKhoaTimKiem))
+        // Nếu chưa chọn tiêu chí cụ thể, không làm gì
+        if (TieuChiDangChon == "Chọn tiêu chí")
         {
             DanhSachDatTiec = new ObservableCollection<DATTIEC>(_allDatTiec);
             OnPropertyChanged(nameof(DanhSachDatTiec));
             return;
         }
 
-        var keyword = TuKhoaTimKiem.Trim();
+        // Trường hợp không có từ khóa (text search)
+        if (string.IsNullOrWhiteSpace(TuKhoaTimKiem) && CaDuocChon == null && SanhDuocChon == null)
+        {
+            DanhSachDatTiec = new ObservableCollection<DATTIEC>(_allDatTiec);
+            OnPropertyChanged(nameof(DanhSachDatTiec));
+            return;
+        }
+
+        var keyword = TuKhoaTimKiem?.Trim() ?? "";
         keyword = RemoveDiacritics(keyword.ToLower());
         IEnumerable<DATTIEC> ketQua = _allDatTiec;
 
@@ -192,23 +194,54 @@ public class DatTiecViewModel : BaseViewModel
                 break;
 
             case "Tên Ca":
-                ketQua = _allDatTiec.Where(x =>
-                    RemoveDiacritics(x.CaSanh?.TenCa ?? "").ToLower().Contains(keyword));
+                if (CaDuocChon != null)
+                    ketQua = _allDatTiec.Where(x => x.MaCa == CaDuocChon.MaCa);
+                else
+                    ketQua = Enumerable.Empty<DATTIEC>();
                 break;
 
             case "Tên Sảnh":
-                ketQua = _allDatTiec.Where(x =>
-                    RemoveDiacritics(x.Sanh?.TenSanh ?? "").ToLower().Contains(keyword));
+                if (SanhDuocChon != null)
+                    ketQua = _allDatTiec.Where(x => x.MaSanh == SanhDuocChon.MaSanh);
+                else
+                    ketQua = Enumerable.Empty<DATTIEC>();
                 break;
         }
-
-
 
         DanhSachDatTiec = new ObservableCollection<DATTIEC>(ketQua);
         OnPropertyChanged(nameof(DanhSachDatTiec));
     }
 
-        public static string RemoveDiacritics(string text)
+    public void LoadDanhSachCa()
+        {
+            try
+            {
+                var danhSachCa = _datTiecService.GetAllCaSanhs();
+                DanhSachCa.Clear();
+                foreach (var ca in danhSachCa)
+                    DanhSachCa.Add(ca);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi LoadDanhSachCa: " + ex.Message);
+            }
+        }
+        public void LoadDanhSachSanh()
+        {
+            try
+            {
+                var danhSachSanh = _datTiecService.GetAllSanhs();
+                DanhSachSanh.Clear();
+                foreach (var sanh in danhSachSanh)
+                    DanhSachSanh.Add(sanh);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi LoadDanhSachSanh: " + ex.Message);
+            }
+        }
+
+    public static string RemoveDiacritics(string text)
 {
             if (string.IsNullOrEmpty(text))
                 return string.Empty;

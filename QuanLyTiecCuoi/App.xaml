@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="/Theme/Styles/DatePickerStyle.xaml"/>
                 <ResourceDictionary Source="/Theme/Styles/TabItemStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <ImageSource x:Key="MaximizeMouseOverImg">pack://application:,,,/resources/images/controlbarimg/maximouseover.png</ImageSource>
             <ImageSource x:Key="MinimizeMouseOverImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/minimize_mouseover.png</ImageSource>
             <ImageSource x:Key="CloseMouseOverImg">pack://application:,,,/QuanLyTiecCuoi;component/resources/images/controlbarimg/close_mouseover.png</ImageSource>
@@ -22,6 +23,8 @@
             <ImageSource x:Key="ArrowDownImg">pack://application:,,,/resources/images/controlbarimg/arrow-down.png</ImageSource>
             <local:STTConverter x:Key="STTConverter" />
         </ResourceDictionary>
+        
 
     </Application.Resources>
+    
 </Application>

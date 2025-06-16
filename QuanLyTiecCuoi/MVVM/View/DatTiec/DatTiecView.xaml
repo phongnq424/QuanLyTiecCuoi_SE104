@@ -65,6 +65,8 @@
                             Width="300" Height="40" 
                             FontSize="20"
                             FontFamily="Cambria"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
                             Margin="10"
                             ItemsSource="{Binding DanhSachTieuChi}"
                             SelectedItem="{Binding TieuChiDangChon}"
@@ -73,25 +75,90 @@
                                 <Style TargetType="ComboBox" BasedOn="{StaticResource RoundedComboBoxStyle}"/>
                             </ComboBox.Resources>
                         </ComboBox>
-                        <TextBox
-                            x:Name="FilterTextBox"
-                            Width="350"
-                            Margin="10"
-                            Text="{Binding TuKhoaTimKiem, UpdateSourceTrigger=PropertyChanged}"
-                            TextAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            FontStyle="Italic" 
-                            FontSize="20"
-                            FontFamily="Cambria"
-                            BorderThickness="1"/>
+                        <StackPanel x:Name="sFilterTextBox" Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,30,0">
+                            <Border>
+                                <Grid Width="350" Height="40">
+                                    <Grid>
+                                        <TextBox
+                                            x:Name="FilterTextBox"
+                                            Text="{Binding TuKhoaTimKiem, UpdateSourceTrigger=PropertyChanged}"
+                                            VerticalContentAlignment="Center"
+                                            TextAlignment="Left"
+                                            FontSize="16"
+                                            FontFamily="Cambria"
+                                            Padding="10,0,10,0"
+                                            BorderThickness="1"
+                                            GotFocus="SearchBox_GotFocus"
+                                            LostFocus="SearchBox_LostFocus"
+                                            TextChanged="SearchBox_TextChanged"/>
+
+                                        <!-- Hint Text -->
+                                        <TextBlock x:Name="HintTextBlock"
+                                           Text="Nhập thông tin..."
+                                           FontStyle="Italic"
+                                           FontSize="16"
+                                           FontFamily="Cambria"
+                                           Foreground="Gray"
+                                           Margin="15,0,0,0"
+                                           VerticalAlignment="Center"
+                                           IsHitTestVisible="False"
+                                           Visibility="Visible"/>
+                                    </Grid>
+
+                                    <Button
+                                        Content="🔍"
+                                        Width="40"
+                                        Height="40"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,5,0"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Cursor="Hand"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
                         <DatePicker
                             Margin="10 0"
-                            Width="250"
+                            Width="350"
                             FontSize="26"
                             VerticalAlignment="Center"
                             x:Name="FilterDatePicker"
                             Visibility="Collapsed"
                             SelectedDateChanged="FilterDatePicker_SelectedDateChanged"/>
+                        <ComboBox 
+                            x:Name="searchCa"
+                            ItemsSource="{Binding DanhSachCa}"
+                            DisplayMemberPath="TenCa"
+                            SelectedValuePath="MaCa"
+                            SelectedItem="{Binding CaDuocChon, Mode=TwoWay}"                            Width="350"
+                            Height="40" 
+                            FontSize="20" 
+                            FontFamily="Cambria"
+                            Margin="10 0" 
+                            VerticalContentAlignment="Center"
+                            Visibility="Collapsed">
+                            <ComboBox.Resources>
+                            <Style TargetType="ComboBox" BasedOn="{StaticResource RoundedComboBoxStyle}"/>
+                            </ComboBox.Resources>
+                        </ComboBox>
+                        <ComboBox 
+                            x:Name="searchSanh"
+                            ItemsSource="{Binding DanhSachSanh}"
+                            DisplayMemberPath="TenSanh"
+                            SelectedValuePath="MaSanh"
+                            SelectedItem="{Binding SanhDuocChon, Mode=TwoWay}"
+                            Width="350"
+                            Height="40" 
+                            FontSize="20" 
+                            FontFamily="Cambria"
+                            Margin="10 0" 
+                            VerticalContentAlignment="Center"
+                            Visibility="Collapsed">
+                            <ComboBox.Resources>
+                                <Style TargetType="ComboBox" BasedOn="{StaticResource RoundedComboBoxStyle}"/>
+                            </ComboBox.Resources>
+                        </ComboBox>
                     </StackPanel>
 
 
@@ -117,6 +184,7 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã đặt tiệc" Binding="{Binding MaDatTiec}" Width="*" />
                             <DataGridTextColumn Header="Cô dâu" Binding="{Binding TenCoDau}" Width="*" />
                             <DataGridTextColumn Header="Chú rể" Binding="{Binding TenChuRe}" Width="*" />
                             <DataGridTextColumn Header="SĐT" Binding="{Binding SDT}" Width="*" />

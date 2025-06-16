@@ -25,6 +25,8 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
         {
             InitializeComponent();
             DataContext = datTiecViewModel;
+            datTiecViewModel.LoadDanhSachCa();
+            datTiecViewModel.LoadDanhSachSanh();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -149,16 +151,39 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
         private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = FilterComboBox.SelectedItem as string;
+           
             if (selected == "Ngày đãi")
             {
-                FilterTextBox.Visibility = Visibility.Collapsed;
+                sFilterTextBox.Visibility = Visibility.Collapsed;
+                searchCa.Visibility = Visibility.Collapsed;
+                searchSanh.Visibility = Visibility.Collapsed;
                 FilterDatePicker.Visibility = Visibility.Visible;
+            }
+            else if (selected == "Tên Ca") 
+            {
+                sFilterTextBox.Visibility = Visibility.Collapsed;
+                searchCa.Visibility = Visibility.Visible;
+                searchCa.SelectedItem = null;
+                searchSanh.Visibility = Visibility.Collapsed;
+                FilterDatePicker.Visibility = Visibility.Collapsed;
+            }
+            else if (selected == "Tên Sảnh") 
+            {
+                sFilterTextBox.Visibility = Visibility.Collapsed;
+                searchCa.Visibility = Visibility.Collapsed;
+                searchSanh.Visibility = Visibility.Visible;
+                searchSanh.SelectedItem = null;
+                FilterDatePicker.Visibility = Visibility.Collapsed;
             }
             else
             {
-                FilterTextBox.Visibility = Visibility.Visible;
+                sFilterTextBox.Visibility = Visibility.Visible;
+                searchCa.Visibility = Visibility.Collapsed;
+                searchSanh.Visibility = Visibility.Collapsed;
                 FilterDatePicker.Visibility = Visibility.Collapsed;
             }
+            var viewModel = DataContext as DatTiecViewModel;
+            viewModel?.LoadDanhSachDatTiec();
         }
 
         private void FilterDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -178,6 +203,31 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                 // Nếu có chọn ngày => lọc theo ngày
                 DateTime selectedDate = datePicker.SelectedDate.Value.Date;
                 viewModel.LocTheoNgay(selectedDate);
+            }
+        }
+        private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            HintTextBlock.Visibility = Visibility.Collapsed;
+        }
+
+        private void SearchBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(FilterTextBox.Text))
+            {
+                HintTextBlock.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(FilterTextBox.Text))
+            {
+                if (!FilterTextBox.IsFocused)
+                    HintTextBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                HintTextBlock.Visibility = Visibility.Collapsed;
             }
         }
 
