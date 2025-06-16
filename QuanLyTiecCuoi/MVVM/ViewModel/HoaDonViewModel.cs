@@ -129,6 +129,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ICommand DoiSoLuongCommand { get; set; }
         public ICommand XoaDichVuCommand { get; set; }
         public ICommand LuuThayDoiHoaDonCommand { get; set; }
+        public ICommand ThayDoiSoLuongBanCommand { get; set; }
 
         #endregion
 
@@ -162,6 +163,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 if (p != null)
                 {
                     HoaDonDuocChon = p;
+                    _TienPhatThanhToanTre = 0;
                     TiecDuocChon = await hoaDonService.GetDatTiec(p.MaDatTiec);
                     if (TiecDuocChon == null)
                     {
@@ -266,7 +268,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     MessageBox.Show("Có lỗi xảy ra");
                     return;
                 }
-
+                HoaDonDuocChon.TienPhat = _TienPhatThanhToanTre;
                 var HoaDonMoi = await hoaDonService.UpdateHoaDonAsync(HoaDonDuocChon);
                 if (HoaDonMoi != null)
                 {
@@ -290,7 +292,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 }
                 if(_TienPhatThanhToanTre != 0)
                 {
-                    HoaDonDuocChon.TienPhaiThanhToan = _TienPhatThanhToanTre;
+                    HoaDonDuocChon.TienPhat = _TienPhatThanhToanTre;
                     HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc + _TienPhatThanhToanTre;
                 }
                 var hd = await hoaDonService.ThanhToan(HoaDonDuocChon);
@@ -321,12 +323,41 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 InHoaDon();
             });
 
+            ThayDoiSoLuongBanCommand = new RelayCommand<String?>((p) => { return true; }, (p) =>
+            {
+                if(p == null ||  p.Length == 0 || TiecDuocChon == null)
+                {
+                    return;
+                }
+
+                int soluong = 0;
+                if(int.TryParse(p, out soluong))
+                {
+                    if(TiecDuocChon.SoLuongBan > soluong || soluong > TiecDuocChon.SoLuongBan + TiecDuocChon.SoBanDuTru)
+                    {
+                        MessageBox.Show($"Số bàn thực tế sử dụng trong khoản {TiecDuocChon.SoLuongBan} đến {TiecDuocChon.SoBanDuTru + TiecDuocChon.SoLuongBan}");
+                        return;
+                    }
+                    HoaDonDuocChon.SoLuongBan = soluong;
+                    TinhThanhTienDVHoaDon();
+                }
+                else
+                {
+                    MessageBox.Show("Nhập vào số");
+                }
+            });
+
         }
 
         private void KiemTraPhatThanhToanTre()
         {
             if (_thamSo == null || TiecDuocChon == null || HoaDonDuocChon == null)
                 return;
+            if (HoaDonDuocChon.NgayThanhToan != null && HoaDonDuocChon.TienPhat != 0)
+            {
+                ThongBaoPhatText = $"Hóa đơn bị phạt {HoaDonDuocChon.TienPhat.ToString("N0")} VND vì thanh toán trễ.";
+                return;
+            }
 
             if (_thamSo.ApDungQDPhatThanhToanTre && !HoaDonDuocChon.NgayThanhToan.HasValue)
             {
@@ -338,16 +369,22 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
                     decimal tongTien = TiecDuocChon.TienDatCoc + HoaDonDuocChon.TienPhaiThanhToan;
                     _TienPhatThanhToanTre = soNgayTre * _thamSo.TyLePhatThanhToanTreTheoNgay * tongTien;
-                    TinhThanhTienDVHoaDon();
+
+
+                    if (HoaDonDuocChon.NgayThanhToan != null) return;
+                    decimal TongTienTatCaDichVu = ChiTietDVTiecDuocChon?.Sum(i => i.ThanhTien) ?? 0;
+                    HoaDonDuocChon.TongTienDV = TongTienTatCaDichVu;
+                    HoaDonDuocChon.TongTienBan = HoaDonDuocChon.DonGiaBan * HoaDonDuocChon.SoLuongBan;
+                    HoaDonDuocChon.TongTienHD = HoaDonDuocChon.TongTienDV + HoaDonDuocChon.TongTienBan;
+                    HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc + _TienPhatThanhToanTre;
+                    OnPropertyChanged(nameof(HoaDonDuocChon));
+
 
                     ThongBaoPhatText = $"Hóa đơn bị phạt {_TienPhatThanhToanTre.ToString("N0")} VND vì thanh toán trễ {soNgayTre} ngày với mức phạt theo ngày {_thamSo.TyLePhatThanhToanTreTheoNgay.ToString("P4")}";
                     return;
                 }
             }
-            else if (HoaDonDuocChon.NgayThanhToan != null && HoaDonDuocChon.TienPhaiThanhToan != 0)
-            {
-                ThongBaoPhatText = $"Hóa đơn bị phạt {_TienPhatThanhToanTre.ToString("N0")} VND vì thanh toán trễ.";
-            }
+
              _TienPhatThanhToanTre = 0;
             ThongBaoPhatText = "";
         }
@@ -370,7 +407,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 FontFamily = new System.Windows.Media.FontFamily("Tahoma"),
                 FontSize = 12,
                 PagePadding = new Thickness(20),
-                PageWidth = 600,
+                PageWidth = 800,
                 ColumnWidth = double.PositiveInfinity
             };
 
@@ -392,15 +429,20 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             // Nội dung mẫu
             Paragraph content = new Paragraph();
+            content.Inlines.Add(new Bold(new Run("Ngày đãi tiệc: ")));
+            content.Inlines.Add(new Run(TiecDuocChon?.NgayDaiTiec.ToString("dd/MM/yyyy")));
+            content.Inlines.Add(new LineBreak());
             content.Inlines.Add(new Bold(new Run("Ngày thanh toán: ")));
             content.Inlines.Add(new Run(HoaDonDuocChon.NgayThanhToan?.ToString("dd/MM/yyyy")));
             content.Inlines.Add(new LineBreak());
             content.Inlines.Add(new Bold(new Run("Tổng tiền thanh toán: ")));
             content.Inlines.Add(new Run($"{HoaDonDuocChon.TongTienHD:C0}"));
+            content.Inlines.Add(new LineBreak());
             if(HoaDonDuocChon.TienPhat != 0)
             {
-                content.Inlines.Add(new Bold(new Run("Tiền phạt: ")));
-                content.Inlines.Add(new Run($"{HoaDonDuocChon.TongTienHD:C0}"));
+                content.Inlines.Add(new Bold(new Run($"Tiền phạt: ")));
+                content.Inlines.Add(new Run($"{HoaDonDuocChon.TienPhat:C0}"));
+            content.Inlines.Add(new LineBreak());
             }
 
             // Tạo bảng
@@ -432,6 +474,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 group.Rows.Add(row);
             }
             table.RowGroups.Add(group);
+            Paragraph dv = new Paragraph();
+            dv.Inlines.Add(new Bold(new Run("Tổng tiền dịch vụ: ")));
+            dv.Inlines.Add(new Run($"{HoaDonDuocChon.TongTienDV:C0}"));
 
             Table table2 = new Table();
             table2.CellSpacing = 0;
@@ -444,9 +489,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             // Dòng tiêu đề
             group2.Rows.Add(new TableRow());
             group2.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Tên món")))) { TextAlignment = TextAlignment.Center });
-            group2.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Số lượng")))) { TextAlignment = TextAlignment.Center });
             group2.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Đơn giá")))) { TextAlignment = TextAlignment.Center });
-            group2.Rows[0].Cells.Add(new TableCell(new Paragraph(new Bold(new Run("Thành tiền")))) { TextAlignment = TextAlignment.Center });
 
             // Dòng dữ liệu từ danh sách
             foreach (var item in MenuTiecDuocChon)
@@ -457,6 +500,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 group2.Rows.Add(row);
             }
             table2.RowGroups.Add(group2);
+            Paragraph menu = new Paragraph();
+            menu.Inlines.Add(new Bold(new Run("Tổng tiền ăn: ")));
+            menu.Inlines.Add(new Run($"{HoaDonDuocChon.TongTienBan:C0}"));
 
             // Thêm vào bảng
             doc.Blocks.Add(title);
@@ -500,6 +546,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             BtnLuuVisibility = Visibility.Visible;
             decimal TongTienTatCaDichVu = ChiTietDVTiecDuocChon?.Sum(i => i.ThanhTien) ?? 0;
             HoaDonDuocChon.TongTienDV = TongTienTatCaDichVu;
+            HoaDonDuocChon.TongTienBan = HoaDonDuocChon.DonGiaBan * HoaDonDuocChon.SoLuongBan;
             HoaDonDuocChon.TongTienHD = HoaDonDuocChon.TongTienDV + HoaDonDuocChon.TongTienBan;
             HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc + _TienPhatThanhToanTre;
             OnPropertyChanged(nameof(HoaDonDuocChon));
@@ -518,9 +565,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
             else
             {
-                TextSoTienThanhToan = Visibility.Visible;
+                TextSoTienThanhToan = Visibility.Hidden;
                 BtnDaThanhToanVisibility = Visibility.Hidden;
-                TextNgayThanhToan = Visibility.Hidden;
+                TextNgayThanhToan = Visibility.Visible;
                 BtnLuuVisibility = Visibility.Hidden;
                 CoTheThayDoiSL = false;
                 OnPropertyChanged(nameof(CoTheThayDoiSL));
