@@ -99,8 +99,38 @@ namespace QuanLyTiecCuoi.Repository
         {
             return _context.HoaDons.FirstOrDefault(hd => hd.MaDatTiec == maDatTiec);
         }
-        public void AddHoaDon(HOADON hoaDon)
+        public void AddHoaDon(DATTIEC datTiec)
         {
+            var chiTietMenu = _context.ChiTietMenus.Where(ctm => ctm.MaDatTiec == datTiec.MaDatTiec).ToList();
+            var chiTietDichVu = _context.ChiTietDVTiecs.Where(ctdv => ctdv.MaDatTiec == datTiec.MaDatTiec).ToList();
+
+            decimal donGiaBan = 0;
+            foreach (var ct in chiTietMenu)
+            {
+                var monAn = _context.MonAns.Where(monAn => monAn.MaMon == ct.MaMon).FirstOrDefault();
+                donGiaBan += monAn.DonGia;
+            }
+            decimal tongTienBan = donGiaBan * datTiec.SoLuongBan;
+            decimal tongTienDV = 0;
+            foreach (var ctdv in chiTietDichVu)
+            {
+                var dichVu = _context.DichVus.Where(dichVu => dichVu.MaDichVu == ctdv.MaDichVu).FirstOrDefault();
+                tongTienDV += dichVu.DonGia;
+            }
+            decimal tongTien = tongTienBan + tongTienDV;
+            decimal tiLeDC = _context.ThamSos.FirstOrDefault().PhanTramDatCoc;
+            datTiec.TienDatCoc = tongTien * tiLeDC; // Giả sử tiền đặt cọc là 30% tổng tiền
+
+            var hoaDon = new HOADON
+            {
+                MaDatTiec = datTiec.MaDatTiec,
+                DonGiaBan = donGiaBan,
+                TongTienBan = tongTienBan,
+                TongTienDV = tongTienDV,
+                TienPhat = 0,
+                TongTienHD = tongTienDV + tongTienBan,
+                TienPhaiThanhToan = tongTienBan + tongTienDV - datTiec.TienDatCoc,
+            };
             _context.HoaDons.Add(hoaDon);
             _context.SaveChanges();
         }

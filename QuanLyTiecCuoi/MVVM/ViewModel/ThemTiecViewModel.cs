@@ -142,7 +142,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     SoLuong = (TiecMoi.SoLuongBan + TiecMoi.SoBanDuTru),
                     GhiChu = ""
                 };
-
                 _chiTietMenuService.ThemChiTietMenu(chiTiet);
             }
         }
@@ -178,34 +177,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 // lưu chi tiết 
                 LuuChiTietMenu();
                 LuuChiTietDichVu();
+                _datTiecService.AddHoaDon(TiecMoi);
                 DanhSachChanged?.Invoke();
-
-                decimal tongTienMenu = 0;
-                foreach (var mon in MonAnDaChon)
-                {
-                    tongTienMenu += mon.DonGia;
-                }
-                decimal tongTienBan = tongTienMenu * TiecMoi.SoLuongBan;
-                decimal tongTienDV = 0;
-                decimal tienPhat = 0;
-                decimal tienDatCoc = TiecMoi.TienDatCoc;
-                foreach (var dv in DichVuDaChon)
-                {
-                    tongTienDV += dv.DonGia;
-                }
-
-                var hoaDon = new HOADON
-                {
-                    MaDatTiec = TiecMoi.MaDatTiec,
-                    DonGiaBan = tongTienMenu,
-                    TongTienBan = tongTienBan,
-                    TongTienDV = tongTienDV,
-                    TienPhat = 0,
-                    TongTienHD = tongTienDV + tongTienBan,
-                    TienPhaiThanhToan = tongTienBan + tongTienDV + tienPhat - tienDatCoc,
-                };
-                // Gọi hàm lưu hóa đơn
-                _datTiecService.AddHoaDon(hoaDon); // Cần service này
                 return true;
             }
             catch (Exception ex)

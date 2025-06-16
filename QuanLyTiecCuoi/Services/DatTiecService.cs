@@ -102,9 +102,9 @@ namespace QuanLyTiecCuoi.Services
         {
             return _datTiecRepo.GetHoaDonTheoMaDatTiec(maDatTiec);
         }
-        public void AddHoaDon(HOADON hoaDon)
+        public void AddHoaDon(DATTIEC datTiec)
         {
-           _datTiecRepo.AddHoaDon(hoaDon);
+           _datTiecRepo.AddHoaDon(datTiec);
         }
         HoaDonRepository _hoaDonRepository;
         public async Task<HOADON?> UpdateHoaDonAsync(HOADON hoaDon)
