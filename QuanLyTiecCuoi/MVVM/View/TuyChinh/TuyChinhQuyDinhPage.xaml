@@ -45,7 +45,7 @@
 
 
             <StackPanel Orientation="Horizontal" Grid.Row="0">
-                <TextBlock Text="Tỷ lệ phạt than toán trễ theo ngày:"
+                <TextBlock Text="Tỷ lệ phạt thanh toán trễ theo ngày:"
                     Style="{StaticResource Header3Style}"/>
                 <TextBox
                     x:Name="TyLeTextBox"
@@ -61,6 +61,23 @@
                 </TextBox>
                 <TextBlock Text="{Binding TyLePhatMoi, StringFormat={}{0:P4}}"
                     Style="{StaticResource Header3Style}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <TextBlock Text="Số ngày trễ thanh toán tối đa:"
+                    Style="{StaticResource Header3Style}"/>
+                <TextBox
+                    x:Name="NgayTreToiDaTextBox"
+                    Text="{Binding SoNgayTreToiDaText}"
+                    Style="{StaticResource TextBoxDescribeStyle}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction 
+                                    Command="{Binding ThayDoiNgayTreToiDaCocCommand}"
+                                CommandParameter="{Binding Text, ElementName=NgayTreToiDaTextBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0">
@@ -81,7 +98,6 @@
                 <TextBlock Text="{Binding PhanTramDatCoc, StringFormat={}{0:P4}}"
                     Style="{StaticResource Header3Style}"/>
             </StackPanel>
-
             <StackPanel Orientation="Horizontal">
                 <Button 
                     Command="{Binding LuuThayDoiCommand}"
