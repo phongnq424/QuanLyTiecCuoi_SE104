@@ -34,14 +34,10 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             viewModel.LoadDanhSachCa();
             viewModel.LoadDanhSachSanh();
 
-            //ShiftComboBox.ItemsSource = viewModel.DanhSachCa;
-            //HallComboBox.ItemsSource = viewModel.DanhSachSanh;
-
-            //ShiftComboBox.DisplayMemberPath = "TenCa";
-            //ShiftComboBox.SelectedValuePath = "MaCa";
-
-            //HallComboBox.DisplayMemberPath = "TenSanh";
-            //HallComboBox.SelectedValuePath = "MaSanh";
+            ButtonBack.Visibility = Visibility.Collapsed;
+            FilterDatePicker.IsEnabled = false;
+            CaComboBox.IsEnabled = false;
+            SanhComboBox.IsEnabled = false;
         }
         private void ca_changed(object sender, SelectionChangedEventArgs e)
         {

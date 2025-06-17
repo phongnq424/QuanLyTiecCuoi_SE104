@@ -27,7 +27,8 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Content="⮜" Width="50" Height="50" 
+                        <Button x:Name="ButtonBack"
+                            Content="⮜" Width="50" Height="50" 
                         FontSize="24" 
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Left"
@@ -197,6 +198,7 @@
 
                                         <TextBlock Text="Ngày đãi tiệc" Grid.Column="0" VerticalAlignment="Center"/>
                                         <DatePicker
+                                            x:Name="FilterDatePicker"
                                             SelectedDate="{Binding TiecMoi.NgayDaiTiec, Mode=TwoWay}"
                                             SelectedDateFormat="Short"
                                             Grid.Column="1"
@@ -205,7 +207,6 @@
                                             FontSize="20"
                                             FontFamily="Cambria"
                                             VerticalAlignment="Center"
-                                            x:Name="FilterDatePicker"
                                             SelectedDateChanged ="FilterDatePicker_SelectedDateChanged" 
                                             Margin="0 10"/>
                                     </Grid>
@@ -218,6 +219,7 @@
 
                                         <TextBlock Text="Ca" Grid.Column="0" VerticalAlignment="Center"/>
                                         <ComboBox 
+                                            x:Name="CaComboBox"
                                             ItemsSource="{Binding DanhSachCa}"
                                             DisplayMemberPath="TenCa"
                                             SelectedValuePath="MaCa"
@@ -242,6 +244,7 @@
 
                                         <TextBlock Text="Sảnh" Grid.Column="0" VerticalAlignment="Center"/>
                                         <ComboBox 
+                                            x:Name="SanhComboBox"
                                             ItemsSource="{Binding DanhSachSanh}"
                                             DisplayMemberPath="TenSanh"
                                             SelectedValuePath="MaSanh"
