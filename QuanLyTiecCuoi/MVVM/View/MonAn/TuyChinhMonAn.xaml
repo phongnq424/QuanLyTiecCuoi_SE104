@@ -57,7 +57,7 @@
                                 <TextBlock Text="Danh sách món ăn" FontWeight="Bold" FontSize="35" FontFamily="Cambria"/>
                             </Border>
 
-                            <ScrollViewer Background="White" Height="420" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer Background="White" Height="400" VerticalScrollBarVisibility="Auto">
                                 <ItemsControl x:Name="itemsControlMonAn" ItemsSource="{Binding DanhSachMonAn}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>

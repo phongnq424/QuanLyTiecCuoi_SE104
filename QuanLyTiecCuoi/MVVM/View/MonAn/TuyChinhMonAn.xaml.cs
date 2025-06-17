@@ -47,9 +47,16 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
 
         private void BtnThemMonAn_Click(object sender, RoutedEventArgs e)
         {
-            var window = new ThemMonAn();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            var window = new ThemMonAn
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            // Nếu thêm thành công thì load lại danh sách
+            if (window.ShowDialog() == true)
+            {
+                _viewModel.LoadDanhSachMonAn(); // <-- Gọi hàm reload ViewModel
+            }
         }
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)

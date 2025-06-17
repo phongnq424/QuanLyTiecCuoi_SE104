@@ -48,10 +48,18 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
 
         private void BtnThemDichVu_Click(object sender, RoutedEventArgs e)
         {
-            var window = new ThemDichVu();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            var window = new ThemDichVu
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            // Nếu thêm thành công thì load lại danh sách
+            if (window.ShowDialog() == true)
+            {
+                _viewModel.LoadDanhSachDichVu(); // <-- Gọi lại hàm load
+            }
         }
+
         private void txtSearchPrice_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (sender is TextBox tb && _viewModel != null)

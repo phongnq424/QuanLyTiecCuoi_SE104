@@ -9,8 +9,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Loaded="Window_Loaded">
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
@@ -62,13 +61,20 @@
                 </StackPanel>
 
                 <!-- Hình ảnh -->
-                <Label HorizontalAlignment="Center" MouseDoubleClick="Image_MouseDoubleClick">
+                <Label HorizontalAlignment="Center" MouseDoubleClick="imgMonAn_MouseLeftButtonDown">
                     <Image x:Name="imgMonAn"
                            Source="{Binding HinhAnh}"
                            Width="300" Height="270"
                            Stretch="UniformToFill"
                            Margin="10" />
                 </Label>
+                <TextBox x:Name="txtImagePath"
+                         Text="{Binding HinhAnh, Mode=TwoWay}"
+                         Visibility="Collapsed"
+                         FontSize="14"
+                         Margin="10,0,10,10"
+                         LostFocus="TxtImagePath_LostFocus"
+                         Tag="Dán link ảnh tại đây" />
                 
                 <!-- Tên món ăn -->
                 <TextBox Style="{StaticResource WatermarkTextBoxStyle}"

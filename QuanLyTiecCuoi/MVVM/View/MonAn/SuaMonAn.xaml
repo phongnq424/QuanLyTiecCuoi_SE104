@@ -43,13 +43,13 @@
                        Margin="10"
                                 />
                     </Label>
-                <!--<TextBox x:Name="txtHinhAnh"
+                <TextBox x:Name="txtHinhAnh"
                      Text="{Binding HinhAnh, Mode=TwoWay}"
                      Visibility="Collapsed"
                      FontSize="14"
                      Margin="10,0,10,10"
                      LostFocus="TxtHinhAnh_LostFocus"
-                     Tag="Dán đường link ảnh tại đây" />-->
+                     Tag="Dán đường link ảnh tại đây" />
                 <!-- Tên món ăn -->
                 <TextBox x:Name="txtTenMon"
                          Text="{Binding TenMon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

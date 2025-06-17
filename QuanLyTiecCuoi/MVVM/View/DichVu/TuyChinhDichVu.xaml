@@ -43,7 +43,7 @@
     </Page.Resources>
 
     <Grid Background="#FFFFee">
-        <Border BorderBrush="#673500" BorderThickness="1" CornerRadius="10" Margin="0">
+        <Border BorderBrush="#673500" BorderThickness="1" CornerRadius="20" Margin="0">
             <Grid Grid.Row="1" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
@@ -57,7 +57,7 @@
                                 <TextBlock Text="Danh sách dịch vụ" FontWeight="Bold" FontSize="35" FontFamily="Cambria"/>
                             </Border>
 
-                            <ScrollViewer Background="White" Height="420" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer Background="White" Height="400" VerticalScrollBarVisibility="Auto">
                                 <ItemsControl x:Name="itemsControlDichVu" ItemsSource="{Binding DanhSachDichVu}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>

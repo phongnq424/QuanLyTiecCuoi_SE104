@@ -45,45 +45,29 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
 
         private void Image_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var dlg = new OpenFileDialog
-            {
-                Title = "Chọn ảnh món ăn",
-                Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png"
-            };
-
-            if (dlg.ShowDialog() == true)
-            {
-                string sourcePath = dlg.FileName;
-                string projectPath = AppDomain.CurrentDomain.BaseDirectory;
-                string imagesFolder = System.IO.Path.Combine(projectPath, "Resources", "Images", "MonAn");
-
-                // Tạo thư mục nếu chưa tồn tại
-                if (!Directory.Exists(imagesFolder))
-                    Directory.CreateDirectory(imagesFolder);
-
-                string fileName = System.IO.Path.GetFileName(sourcePath);
-                string destinationPath = System.IO.Path.Combine(imagesFolder, fileName);
-
-                try
-                {
-                    // Copy ảnh vào thư mục MonAn (ghi đè nếu trùng)
-                    File.Copy(sourcePath, destinationPath, true);
-
-                    // Gán đường dẫn tương đối để lưu vào database
-                    string relativePath = $"Resources/Images/MonAn/{fileName}";
-                    _monAn.HinhAnh = relativePath;
-
-                    // Hiển thị ảnh
-                    imgMonAn.Source = new BitmapImage(new Uri(System.IO.Path.Combine(projectPath, relativePath)));
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi khi sao chép ảnh: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
+            txtHinhAnh.Visibility = Visibility.Visible;
+            txtHinhAnh.Focus();
+            txtHinhAnh.SelectAll();
         }
 
+        private void TxtHinhAnh_LostFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var url = txtHinhAnh.Text?.Trim();
+                if (!string.IsNullOrEmpty(url))
+                {
+                    imgMonAn.Source = new BitmapImage(new Uri(url));
+                    _monAn.HinhAnh = url;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Không thể tải ảnh từ đường dẫn.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
+            txtHinhAnh.Visibility = Visibility.Collapsed;
+        }
 
 
 
