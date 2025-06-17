@@ -20,8 +20,9 @@ namespace QuanLyTiecCuoi.Services
 
         public void XoaMonAn(MONAN monAn)
         {
-            _repository.Delete(monAn);
+            _repository.SoftDelete(monAn);
         }
+
 
         public void ThemMonAn(MONAN monAn)
         {

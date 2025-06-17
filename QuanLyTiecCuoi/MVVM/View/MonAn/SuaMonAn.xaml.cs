@@ -9,6 +9,7 @@ using QuanLyTiecCuoi.MVVM.Model;
 using QuanLyTiecCuoi.Data.Models;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.Services;
+using System.IO;
 
 namespace QuanLyTiecCuoi.MVVM.View.MonAn
 {
@@ -38,33 +39,51 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
                 }
             }
         }
-        
 
-        private void TxtHinhAnh_LostFocus(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var imageUrl = txtHinhAnh.Text?.Trim();
-                if (!string.IsNullOrEmpty(imageUrl))
-                {
-                    imgMonAn.Source = new BitmapImage(new Uri(imageUrl));
-                    _monAn.HinhAnh = imageUrl;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Không thể tải ảnh từ đường dẫn.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
 
-            txtHinhAnh.Visibility = Visibility.Collapsed;
-        }
+
 
         private void Image_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            txtHinhAnh.Visibility = Visibility.Visible;
-            txtHinhAnh.Focus();
-            txtHinhAnh.SelectAll();
+            var dlg = new OpenFileDialog
+            {
+                Title = "Chọn ảnh món ăn",
+                Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                string sourcePath = dlg.FileName;
+                string projectPath = AppDomain.CurrentDomain.BaseDirectory;
+                string imagesFolder = System.IO.Path.Combine(projectPath, "Resources", "Images", "MonAn");
+
+                // Tạo thư mục nếu chưa tồn tại
+                if (!Directory.Exists(imagesFolder))
+                    Directory.CreateDirectory(imagesFolder);
+
+                string fileName = System.IO.Path.GetFileName(sourcePath);
+                string destinationPath = System.IO.Path.Combine(imagesFolder, fileName);
+
+                try
+                {
+                    // Copy ảnh vào thư mục MonAn (ghi đè nếu trùng)
+                    File.Copy(sourcePath, destinationPath, true);
+
+                    // Gán đường dẫn tương đối để lưu vào database
+                    string relativePath = $"Resources/Images/MonAn/{fileName}";
+                    _monAn.HinhAnh = relativePath;
+
+                    // Hiển thị ảnh
+                    imgMonAn.Source = new BitmapImage(new Uri(System.IO.Path.Combine(projectPath, relativePath)));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi sao chép ảnh: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
+
+
 
 
 
@@ -75,7 +94,10 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
         }
 
         private void TxtTenMon_MouseDoubleClick(object sender, MouseButtonEventArgs e)

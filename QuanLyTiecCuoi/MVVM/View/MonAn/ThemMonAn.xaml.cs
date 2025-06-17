@@ -26,7 +26,10 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -66,31 +69,35 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
                 _monAnMoi.DonGia = donGia;
             }
         }
+        private string _tempImagePath = null;
 
         private void Image_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            txtHinhAnh.Visibility = Visibility.Visible;
-            txtHinhAnh.Focus();
-            txtHinhAnh.SelectAll();
-        }
-        private void TxtHinhAnh_LostFocus(object sender, RoutedEventArgs e)
-        {
-            try
+            var openFileDialog = new OpenFileDialog
             {
-                var imageUrl = txtHinhAnh.Text?.Trim();
-                if (!string.IsNullOrEmpty(imageUrl))
+                Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png|All files (*.*)|*.*",
+                Title = "Chọn ảnh từ máy"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                _tempImagePath = openFileDialog.FileName;
+
+                try
                 {
-                    imgMonAn.Source = new BitmapImage(new Uri(imageUrl));
-                    _monAnMoi.HinhAnh = imageUrl;
+                    // Gán ảnh vào điều khiển Image (giả sử bạn có x:Name="imgMonAn" trong XAML)
+                    imgMonAn.Source = new BitmapImage(new Uri(_tempImagePath));
+                    MessageBox.Show(_tempImagePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Không thể tải ảnh: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch
-            {
-                MessageBox.Show("Không thể tải ảnh từ đường dẫn.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            txtHinhAnh.Visibility = Visibility.Collapsed;
         }
+
+        
+
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -100,12 +107,47 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
                 return;
             }
 
+                try
+                {
+                    string selectedFileName = System.IO.Path.GetFileName(_tempImagePath);
+                    string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                    string projectRoot = Directory.GetParent(baseDir).Parent.Parent.Parent.FullName;
+                    string targetFolder = System.IO.Path.Combine(projectRoot, "Resources", "Images", "MonAn");
+
+                    if (!Directory.Exists(targetFolder))
+                        Directory.CreateDirectory(targetFolder);
+
+                    string targetPath = System.IO.Path.Combine(targetFolder, selectedFileName);
+
+                    // Copy ảnh vào Resources
+                    File.Copy(_tempImagePath, targetPath, true);
+
+                    // Gán tên file cho HinhAnh
+                    _monAnMoi.HinhAnh = $"Resources/Images/MonAn/{selectedFileName}";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi lưu ảnh: {ex.Message}");
+                    return; // Dừng lại nếu lỗi
+                }
+            
+
             // Lưu vào database
             _monAnService.ThemMonAn(_monAnMoi);
-            MessageBox.Show("Thêm món ăn thành công!");
+                MessageBox.Show("Thêm món ăn thành công!");
 
-            this.DialogResult = true;
-            this.Close();
+                this.DialogResult = true;
+                this.Close();
+            
+            
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_monAnMoi.HinhAnh))
+            {
+                ImageHelper.LoadImageFromRelativePath(imgMonAn, _monAnMoi.HinhAnh);
+            }
+        }
+
     }
 }

@@ -18,8 +18,12 @@ namespace QuanLyTiecCuoi.Repository
 
         public List<DICHVU> GetAll()
         {
-            return _context.DichVus.AsNoTracking().ToList();
+            return _context.DichVus
+                           .AsNoTracking()
+                           .Where(dv => !dv.isDelelte)
+                           .ToList();
         }
+
 
         public DICHVU GetById(int id)
         {
@@ -38,10 +42,15 @@ namespace QuanLyTiecCuoi.Repository
             _context.SaveChanges();
         }
 
-        public void Delete(DICHVU dv)
+        public void SoftDelete(DICHVU dv)
         {
-            _context.DichVus.Remove(dv);
-            _context.SaveChanges();
+            var entity = _context.DichVus.FirstOrDefault(d => d.MaDichVu == dv.MaDichVu);
+            if (entity != null)
+            {
+                entity.isDelelte = true;
+                _context.SaveChanges();
+            }
         }
+
     }
 }

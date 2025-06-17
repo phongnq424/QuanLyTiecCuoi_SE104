@@ -19,9 +19,22 @@ namespace QuanLyTiecCuoi.Repository
 
         public List<MONAN> GetAll()
         {
-            var result = _context.MonAns.AsNoTracking().ToList();
-            return result;
+            return _context.MonAns
+                           .AsNoTracking()
+                           .Where(m => !m.isDelelte)
+                           .ToList();
         }
+        public void SoftDelete(MONAN monAn)
+        {
+            var entity = _context.MonAns.FirstOrDefault(m => m.MaMon == monAn.MaMon);
+            if (entity != null)
+            {
+                entity.isDelelte = true;
+                _context.SaveChanges();
+            }
+        }
+
+
 
         public MONAN GetById(int id)
         {

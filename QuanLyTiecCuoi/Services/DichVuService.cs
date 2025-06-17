@@ -35,7 +35,7 @@ namespace QuanLyTiecCuoi.Services
 
         public void XoaDichVu(DICHVU dichVu)
         {
-            _repository.Delete(dichVu);
+            _repository.SoftDelete(dichVu);
         }
     }
 }
