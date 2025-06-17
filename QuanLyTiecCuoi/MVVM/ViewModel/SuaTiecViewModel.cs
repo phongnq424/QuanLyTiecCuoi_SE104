@@ -75,6 +75,16 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 MessageBox.Show($"Số bàn vượt quá sức chứa của sảnh ({sanh.SoLuongBanToiDa} bàn).", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
+            var loaiSanh = _datTiecService.GetLoaiSanhById(sanh.MaLoaiSanh);
+            if (loaiSanh != null)
+            {
+                decimal tongTienBan = MonAnDaChon.Sum(mon => mon.DonGia) * TiecMoi.SoLuongBan;
+                if (tongTienBan < loaiSanh.DonGiaBanToiThieu)
+                {
+                    MessageBox.Show($"Tổng tiền bàn ({tongTienBan:N0}đ) phải >= đơn giá tối thiểu ({loaiSanh.DonGiaBanToiThieu:N0} đ).", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+            }
             return true;
         }
         private bool KiemTraNgayDai()
@@ -92,6 +102,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             return true;
         }
+
         private bool KiemTraSDT()
         {
             string sdt = TiecMoi?.SDT.ToString();
@@ -153,6 +164,20 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             if (TiecMoi == null) return false;
             if (!KiemTraSoBanHopLe() || !KiemTraNgayDai() || !KiemTraSDT())
                 return false;
+            // Lấy các tiệc khác trùng sảnh - ca - ngày
+            var tiecTrung = _datTiecService
+                .GetAllDatTiec() // bạn cần có 1 hàm trả về toàn bộ danh sách DATTIEC
+                .FirstOrDefault(dt =>
+                    dt.MaSanh == TiecMoi.MaSanh &&
+                    dt.NgayDaiTiec.Date == TiecMoi.NgayDaiTiec.Date &&
+                    dt.MaCa == TiecMoi.MaCa &&
+                    dt.MaDatTiec != TiecMoi.MaDatTiec); // loại trừ chính tiệc hiện tại
+
+            if (tiecTrung != null)
+            {
+                MessageBox.Show("Sảnh đã được đặt vào ngày và ca này. Vui lòng chọn sảnh khác.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
             try
             {
                 _datTiecService.UpdateDatTiec(TiecMoi);

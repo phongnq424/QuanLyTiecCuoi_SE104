@@ -128,7 +128,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="Cô dâu" Grid.Column="0" Margin="30 20"/>
-                                        <TextBox Text="{Binding TiecMoi.TenCoDau}" Grid.Column="1" Margin="0 20"/>
+                                        <TextBox x:Name ="CoDau" Text="{Binding TiecMoi.TenCoDau}" Grid.Column="1" Margin="0 20"/>
                                     </Grid>
 
                                     <Grid Margin="0 5">
@@ -137,7 +137,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="Chú rể" Grid.Column="0" Margin="30 20"/>
-                                        <TextBox Text="{Binding TiecMoi.TenChuRe}" Grid.Column="1" Margin="0 20"/>
+                                        <TextBox x:Name ="ChuRe" Text="{Binding TiecMoi.TenChuRe}" Grid.Column="1" Margin="0 20"/>
                                     </Grid>
 
                                     <Grid Margin="0 5">
@@ -146,25 +146,16 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="Số điện thoại" Grid.Column="0" Margin="30 20"/>
-                                        <TextBox Text="{Binding TiecMoi.SDT}" Grid.Column="1" Margin="0 20"/>
+                                        <TextBox x:Name ="SDT" Text="{Binding TiecMoi.SDT}" Grid.Column="1" Margin="0 20"/>
                                     </Grid>
-
-                                    <Grid Margin="0 5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Text="Tiền đặt cọc" Grid.Column="0" Margin="30 20"/>
-                                        <TextBox Text="{Binding TiecMoi.TienDatCoc, StringFormat=N0}" Grid.Column="1"  Margin="0 20"/>
-                                    </Grid>
-
+                                    
                                     <Grid Margin="0 5">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="Số lượng bàn" Grid.Column="0" Margin="30 20"/>
-                                        <TextBox Text="{Binding TiecMoi.SoLuongBan}" Grid.Column="1"  Margin="0 20"/>
+                                        <TextBox x:Name ="SLB" Text="{Binding TiecMoi.SoLuongBan}" Grid.Column="1"  Margin="0 20"/>
                                     </Grid>
 
                                     <Grid Margin="0 5">
@@ -173,7 +164,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="Số bàn dự trữ" Grid.Column="0" Margin="30 20"/>
-                                        <TextBox Text="{Binding TiecMoi.SoBanDuTru}" Grid.Column="1" Margin="0 20"/>
+                                        <TextBox x:Name ="DT" Text="{Binding TiecMoi.SoBanDuTru}" Grid.Column="1" Margin="0 20"/>
                                     </Grid>
                                 </StackPanel>
 

@@ -93,7 +93,10 @@ namespace QuanLyTiecCuoi.Services
         {
             return _datTiecRepo.KiemTraSanhDaDat(maSanh, ngay, maCa);
         }
-
+        public LOAISANH GetLoaiSanhById(int maLoaiSanh)
+        {
+            return _datTiecRepo.GetLoaiSanhById(maLoaiSanh);
+        }
         public static implicit operator int(DatTiecService v)
         {
             throw new NotImplementedException();
@@ -102,9 +105,9 @@ namespace QuanLyTiecCuoi.Services
         {
             return _datTiecRepo.GetHoaDonTheoMaDatTiec(maDatTiec);
         }
-        public void AddHoaDon(HOADON hoaDon)
+        public void AddHoaDon(DATTIEC datTiec)
         {
-           _datTiecRepo.AddHoaDon(hoaDon);
+           _datTiecRepo.AddHoaDon(datTiec);
         }
         HoaDonRepository _hoaDonRepository;
         public async Task<HOADON?> UpdateHoaDonAsync(HOADON hoaDon)

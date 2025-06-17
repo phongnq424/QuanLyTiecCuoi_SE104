@@ -46,7 +46,7 @@
         <!-- Loại Sảnh -->
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Loại sảnh:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,10,15"/>
         <ComboBox Grid.Row="2" Grid.Column="1" Height="40" FontSize="20" FontFamily="Cambria" Margin="0,0,10,15" VerticalContentAlignment="Center"
-                  ItemsSource="{Binding DanhSachLoaiSanh}"
+                  ItemsSource="{Binding DanhSachLoaiSanh}" Style="{StaticResource RoundedComboBoxStyle}"
                   SelectedItem="{Binding SelectedLoaiSanh, Mode=TwoWay}"
                   DisplayMemberPath="TenLoaiSanh"/>
 
@@ -61,7 +61,8 @@
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Số lượng bàn tối đa:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,10,15"/>
         <Border Grid.Row="4" Grid.Column="1" Height="40" Margin="0,0,10,15" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
             <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalContentAlignment="Center"
-             Text="{Binding SanhInfo.SoLuongBanToiDa,TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding SanhInfo.SoLuongBanToiDa,TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"
+                     PreviewTextInput="NumberOnly_PreviewTextInput"/>
         </Border>
 
         <!-- Ghi Chú -->
@@ -74,8 +75,15 @@
         <!-- Hình Ảnh -->
         <TextBlock Grid.Row="6" Grid.Column="0" Text="Hình ảnh:" FontSize="20" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,10,10,15"/>
         <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" Margin="0,0,10,0" VerticalAlignment="Center">
-            <TextBlock x:Name="ImageNameTextBlock" Text="{Binding SanhInfo.HinhAnh}" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria" Margin="0,0,0,0"/>
-            <Button x:Name="ChooseImageButton" Content="Chọn ảnh..." FontSize="18" FontFamily="Cambria" Width="150" Height="40" Click="btnChonAnh_Click"/>
+            <TextBlock x:Name="ImageNameTextBlock" Text="{Binding SanhInfo.HinhAnh}" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria" Margin="0,0,15,0"/>
+            <Button x:Name="ChooseImageButton" Content="Chọn ảnh..." FontSize="18" FontFamily="Cambria" 
+                        Background="#FFF0F0F0" BorderThickness="1" Width="150" Height="40" Click="btnChonAnh_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button> 
         </StackPanel>
 
         <!-- Nút Lưu -->

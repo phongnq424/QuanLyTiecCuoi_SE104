@@ -7,10 +7,8 @@ using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.Core;
 using System.Windows;
-using System.Windows.Documents;
 using System.Globalization;
 using System.Text;
-using QuanLyTiecCuoi.MVVM.View.MainVindow;
 using QuanLyTiecCuoi.MVVM.View.HoaDon;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 public class DatTiecViewModel : BaseViewModel
@@ -79,22 +77,9 @@ public class DatTiecViewModel : BaseViewModel
             MessageBox.Show("Không tìm thấy hóa đơn cho tiệc này.");
             return;
         }
-
         DateTime ngayHienTai = DateTime.Now.Date;
         DateTime ngayDaiTiec = datTiec.NgayDaiTiec.Date;
 
-        if (!hoaDon.NgayThanhToan.HasValue)
-        {
-            decimal tongTien = hoaDon.TienPhaiThanhToan;
-            decimal tienPhat = 0;
-            decimal tienPhaiThanhToan = tongTien + tienPhat;
-
-            hoaDon.NgayThanhToan = ngayHienTai;
-            hoaDon.TienPhaiThanhToan = tienPhaiThanhToan;
-            hoaDon.TienPhat = tienPhat;
-
-            _datTiecService.UpdateHoaDonAsync(hoaDon);
-        }
         var window = App.AppHost?.Services.GetService<ChiTietHoaDonWindow>();
         var viewModel = App.AppHost?.Services.GetService<HoaDonViewModel>();
 
@@ -109,7 +94,6 @@ public class DatTiecViewModel : BaseViewModel
             }
         }
     }
-
 
     private DATTIEC _datTiecDangChon;
     public DATTIEC DatTiecDangChon

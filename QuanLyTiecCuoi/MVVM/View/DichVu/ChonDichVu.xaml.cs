@@ -36,6 +36,21 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
                 this.NavigationService.GoBack();
             }
         }
+        private void lstSelectedServices_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (lstSelectedFoods.SelectedItem is DICHVU selectedDV)
+            {
+                // Trả lại món về danh sách gốc nếu chưa có
+                if (!_viewModel.DanhSachDichVu.Contains(selectedDV))
+                    _viewModel.DanhSachDichVu.Add(selectedDV);
+
+                // Xóa khỏi danh sách đã chọn
+                _viewModel.DichVuDaChon.Remove(selectedDV);
+
+                // Reset selection để lần sau click lại được
+                lstSelectedFoods.SelectedItem = null;
+            }
+        }
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {

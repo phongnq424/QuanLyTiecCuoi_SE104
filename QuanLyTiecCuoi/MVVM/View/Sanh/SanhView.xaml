@@ -25,7 +25,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Tiêu đề -->
-                    <TextBlock Text="Serenité Wedding"          Style="{StaticResource Header1Style}"
+                    <TextBlock Text="Serenité Wedding" Style="{StaticResource Header1Style}"
                      VerticalAlignment="Center" Grid.Column="0"/>
 
                     <!-- Nút Chi Tiết Sảnh -->
@@ -34,56 +34,68 @@
                 </Grid>
 
                 <!-- Bộ lọc ngày, ca -->
-                <Grid Margin="0,10,0,20" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <Grid Margin="20,10,20,30" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
+                        <!-- Cột cho icon Tra cứu -->
+                        <ColumnDefinition Width="Auto"/>
                         <!-- Cột cho "Chọn ngày" và DatePicker -->
                         <ColumnDefinition Width="Auto"/>
                         <!-- Cột cho "Chọn ca" và ComboBox -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Cột cho icon Xóa bộ lọc -->
                         <ColumnDefinition Width="Auto"/>
                         <!-- Cột cho "Tổng số Sảnh" và số lượng sảnh -->
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
+                    <Border Width="40" Height="40" Background="Transparent" CornerRadius="20" BorderBrush="Black" BorderThickness="1"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Margin="20,0,0,0"
+                            ToolTip="Xóa bộ lọc" MouseLeftButtonDown="ClearFilter_Click" Grid.Column="3">
+                        <TextBlock Text="❌" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13"/>
+                    </Border>
+
                     <!-- Chọn ngày -->
                     <StackPanel Orientation="Horizontal" Margin="200,0,0,0" Grid.Column="1" >
                         <TextBlock Text="Ngày: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                        <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" Width="200" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria"/>
+                        <Border CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White" Width="200" Height="40" Margin="0,0,10,0" >
+                            <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" VerticalContentAlignment="Center" Padding="5,2" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="Cambria"/>
+                        </Border>
                     </StackPanel>
-
+                    
                     <!-- Chọn ca -->
                     <StackPanel Orientation="Horizontal" Margin="50,0,0,0" Grid.Column="2" >
                         <TextBlock Text="Ca Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
                         <ComboBox ItemsSource="{Binding DanhSachCaSanh, Mode=TwoWay}" SelectedItem="{Binding SelectedCaSanh}" 
-                                  DisplayMemberPath="TenCa" Width="150" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria"/>
+                                  Style="{StaticResource RoundedComboBoxStyle}"
+                                  DisplayMemberPath="TenCa" Width="200" Margin="0,0,10,0" FontSize="20" FontFamily="Cambria"/>
                     </StackPanel>
 
                     <!-- Hiển thị tổng số Sảnh-->
-                    <StackPanel Orientation="Horizontal" Margin="30,0,10,0" Grid.Column="3" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal" Margin="30,0,10,0" Grid.Column="4" HorizontalAlignment="Right">
                         <TextBlock Text="Số Sảnh Trống:" Margin="0,0,5,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="20"/>
                         <TextBlock Text="{Binding SoLuongSanhTrong}" Margin="0,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="20"/>
                     </StackPanel>
                 </Grid>
 
                 <!-- Danh sách sảnh hiển thị bằng hình ảnh -->
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="700" Margin="0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
                     <ItemsControl ItemsSource="{Binding DanhSachSanh}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel IsItemsHost="True" />
+                                <WrapPanel />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
-                    
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" 
                                         MouseLeftButtonUp="SanhItem_MouseLeftButtonUp" Tag="{Binding}"
-                                        Margin="10" Background="White">
+                                        Margin="5" Background="White">
                                     <Grid Margin="15" >
                                         <!-- Cấu trúc hàng -->
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
-                                        
+
                                         <!-- Cấu trúc 2 cột: Hình ảnh và Thông tin -->
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="240"/>
@@ -120,7 +132,7 @@
                                                 <TextBlock Text="Đơn Giá Bàn Tối Thiểu:" FontWeight="Bold" Margin="0,0,5,0" FontSize="18" FontFamily="Cambria"/>
                                                 <TextBlock Text="{Binding LoaiSanh.DonGiaBanToiThieu, StringFormat=N0}" Margin="0,0,0,5" FontSize="18" FontFamily="Cambria"/>
                                             </StackPanel>
-                                        
+
                                             <!-- Ghi chú -->
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
                                                 <TextBlock Text="Ghi Chú:" FontWeight="Bold" Margin="0,0,5,0" FontSize="18" FontFamily="Cambria"/>

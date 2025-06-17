@@ -95,12 +95,64 @@ namespace QuanLyTiecCuoi.Repository
                 dt.NgayDaiTiec.Date == ngay.Date &&
                 dt.MaCa == maCa);
         }
+        public List<SANH> GetSanhsTrong(DateTime ngayDaiTiec, int maCa)
+        {
+            // Lấy danh sách mã sảnh đã được đặt vào ngày và ca đó
+            var sanhsDaDat = _context.DatTiecs
+                .Where(dt => dt.NgayDaiTiec.Date == ngayDaiTiec.Date && dt.MaCa == maCa)
+                .Select(dt => dt.MaSanh)
+                .ToList();
+
+            // Trả về các sảnh KHÔNG nằm trong danh sách đã đặt
+            var sanhsTrong = _context.Sanhs
+                .Where(s => !sanhsDaDat.Contains(s.MaSanh))
+                .ToList();
+
+            return sanhsTrong;
+        }
+
+        public LOAISANH GetLoaiSanhById(int maLoaiSanh)
+        {
+            return _context.LoaiSanhs.FirstOrDefault(ls => ls.MaLoaiSanh == maLoaiSanh);
+        }
         public HOADON? GetHoaDonTheoMaDatTiec(int maDatTiec)
         {
             return _context.HoaDons.FirstOrDefault(hd => hd.MaDatTiec == maDatTiec);
         }
-        public void AddHoaDon(HOADON hoaDon)
+        public void AddHoaDon(DATTIEC datTiec)
         {
+            var chiTietMenu = _context.ChiTietMenus.Where(ctm => ctm.MaDatTiec == datTiec.MaDatTiec).ToList();
+            var chiTietDichVu = _context.ChiTietDVTiecs.Where(ctdv => ctdv.MaDatTiec == datTiec.MaDatTiec).ToList();
+
+            decimal donGiaBan = 0;
+            foreach (var ct in chiTietMenu)
+            {
+                var monAn = _context.MonAns.Where(monAn => monAn.MaMon == ct.MaMon).FirstOrDefault();
+                donGiaBan += monAn.DonGia;
+            }
+            decimal tongTienBan = donGiaBan * datTiec.SoLuongBan;
+            decimal tongTienDV = 0;
+            foreach (var ctdv in chiTietDichVu)
+            {
+                var dichVu = _context.DichVus.Where(dichVu => dichVu.MaDichVu == ctdv.MaDichVu).FirstOrDefault();
+                tongTienDV += dichVu.DonGia;
+            }
+            decimal tongTien = tongTienBan + tongTienDV;
+            decimal tiLeDC = _context.ThamSos.FirstOrDefault().PhanTramDatCoc;
+            datTiec.TienDatCoc = tongTien * tiLeDC; // Giả sử tiền đặt cọc là 30% tổng tiền
+
+
+            var hoaDon = new HOADON
+            {
+                MaDatTiec = datTiec.MaDatTiec,
+                DonGiaBan = donGiaBan,
+                TongTienBan = tongTienBan,
+                TongTienDV = tongTienDV,
+                TienPhat = 0,
+                TongTienHD = tongTienDV + tongTienBan,
+                SoLuongBan = datTiec.SoLuongBan,
+                TienPhaiThanhToan = tongTienBan + tongTienDV - datTiec.TienDatCoc,
+            };
             _context.HoaDons.Add(hoaDon);
             _context.SaveChanges();
         }

@@ -19,15 +19,16 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
             <!-- Tiêu đề -->
             <TextBlock Text="Danh Sách Sảnh" FontSize="35" FontFamily="Cambria" FontWeight="Bold" Margin="10" Grid.Row="0" />
 
             <!-- Bộ lọc loại sảnh -->
-            <Grid Margin="10,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1">
+            <Grid Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <!-- Cột cho "Giới thiệu" -->
+                    <!-- Cột cho icon Tra cứu -->
                     <ColumnDefinition Width="30"/>
                     <!-- Cột cho "Tên Sảnh" -->
                     <ColumnDefinition Width="2*"/>
@@ -37,59 +38,71 @@
                     <ColumnDefinition Width="1.8*"/>
                     <!-- Cột cho "Đơn Giá Bàn Tối Thiểu" -->
                     <ColumnDefinition Width="2*"/>
+                    <!-- Cột cho icon Xóa bộ lọc -->
+                    <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="🔎" Margin="0,0,5,0" HorizontalAlignment="Right" FontSize="20" FontFamily="Cambria" Grid.Column="0"/>
+                <TextBlock Text="🔎" Margin="0,0,5,0" FontSize="20" FontFamily="Cambria" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Border Width="40" Height="40" Background="Transparent" CornerRadius="20" BorderBrush="Black" BorderThickness="1"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" 
+                    ToolTip="Xóa bộ lọc" MouseLeftButtonDown="ClearFilter_Click" Grid.Column="5">
+                    <TextBlock Text="❌" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13"/>
+                </Border>
 
                 <!-- Tên Sảnh -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="1" >
                     <TextBlock Text="Tên Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                    <Border Width="180" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                    <Border Width="180" Height="40" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Black" BorderThickness="1" Background="White">
                         <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
-                            Text="{Binding FilterTenSanh, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding FilterTenSanh, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </StackPanel>
 
                 <!-- Loại Sảnh -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="2" >
                     <TextBlock Text="Loại Sảnh: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                    <Border Width="100" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
-                        <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" Padding="5,0" BorderThickness="0" VerticalAlignment="Center"
-                            Text="{Binding FilterLoaiSanh, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Border>
+                    <ComboBox ItemsSource="{Binding DanhSachLoaiSanh}" Style="{StaticResource RoundedComboBoxStyle}"
+                          SelectedItem="{Binding FilterLoaiSanh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          SelectedValuePath="TenLoaiSanh"
+                          DisplayMemberPath="TenLoaiSanh"
+                          Width="100" Margin="0,0,10,0" 
+                          FontSize="20" FontFamily="Cambria"/>
                 </StackPanel>
 
                 <!-- Số Lượng Bàn Tối Đa -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="3" >
                     <TextBlock Text="Số lượng bàn: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                    <Border Width="100" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
-                        <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" Padding="5,0" BorderThickness="0" VerticalAlignment="Center"
-                            Text="{Binding FilterSoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Border Width="100" Height="40" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Black" BorderThickness="1" Background="White">
+                        <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
+                             Text="{Binding FilterSoLuongBanToiDa, UpdateSourceTrigger=PropertyChanged}" 
+                             PreviewTextInput="NumberOnly_PreviewTextInput"/>
                     </Border>
                 </StackPanel>
 
                 <!-- Đơn Giá Bàn Tối Thiểu -->
                 <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Column="4" >
                     <TextBlock Text="Đơn giá bàn: " Margin="0,0,5,0" VerticalAlignment="Center" FontSize="20" FontFamily="Cambria"/>
-                    <Border Width="150" Height="30" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White">
+                    <Border Width="150" Height="40" Margin="0,0,10,0" CornerRadius="10" BorderBrush="Black" BorderThickness="1" Background="White">
                         <TextBox FontSize="20" FontFamily="Cambria" Background="Transparent" BorderThickness="0" Padding="5,0" VerticalAlignment="Center"
-                            Text="{Binding FilterDonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding FilterDonGiaBanToiThieu, UpdateSourceTrigger=PropertyChanged}"
+                             PreviewTextInput="NumberOnly_PreviewTextInput"/>
                     </Border>
                 </StackPanel>
             </Grid>
-            
+
             <!-- DataGrid để hiển thị danh sách sảnh -->
             <DataGrid ItemsSource="{Binding DanhSachSanhView}" 
-                  SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
-                  AutoGenerateColumns="False" 
-                  IsReadOnly="True"
-                  Margin="10,10,10,10"  
-                  HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch"
-                  AlternationCount="1000"
-                  CanUserAddRows="False"
-                  Grid.Row="2"
-                  FontSize="20" FontFamily="Cambria">
+          SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
+          AutoGenerateColumns="False" 
+          Margin="10,10,10,10"  
+          IsReadOnly="True"
+          HorizontalAlignment="Stretch" 
+          VerticalAlignment="Stretch"
+          AlternationCount="1000"
+          CanUserAddRows="False"
+          Grid.Row="2"
+          FontSize="20" FontFamily="Cambria">
 
                 <DataGrid.Columns>
                     <!-- Cột STT -->
@@ -102,24 +115,24 @@
                     </DataGridTemplateColumn>
                     <!-- Cột Tên Sảnh -->
                     <DataGridTextColumn Header="Tên Sảnh" 
-                                    Width="*"
-                                    Binding="{Binding TenSanh}" />
+                            Width="*"
+                            Binding="{Binding TenSanh}" />
                     <!-- Cột Loại Sảnh -->
                     <DataGridTextColumn Header="Loại Sảnh" 
-                                    Width="0.5*"
-                                    Binding="{Binding LoaiSanh.TenLoaiSanh}" />
+                            Width="0.5*"
+                            Binding="{Binding LoaiSanh.TenLoaiSanh}" />
                     <!-- Cột Số Lượng Bàn Tối Đa -->
                     <DataGridTextColumn Header="Số Lượng Bàn Tối Đa" 
-                                    Width="*"
-                                    Binding="{Binding SoLuongBanToiDa}" />
+                            Width="*"
+                            Binding="{Binding SoLuongBanToiDa}" />
                     <!-- Cột Đơn Giá Bàn Tối Thiểu -->
                     <DataGridTextColumn Header="Đơn Giá Bàn Tối Thiểu" 
-                                    Width="*"
-                                    Binding="{Binding LoaiSanh.DonGiaBanToiThieu, StringFormat=N0}" />
+                            Width="*"
+                            Binding="{Binding LoaiSanh.DonGiaBanToiThieu, StringFormat=N0}" />
                     <!-- Cột Ghi Chú -->
                     <DataGridTextColumn Header="Ghi Chú" 
-                                    Width="*"
-                                    Binding="{Binding GhiChu}" />
+                            Width="*"
+                            Binding="{Binding GhiChu}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

@@ -158,7 +158,7 @@
                             <ListBox x:Name="lstSelectedFoods" Grid.Row="1"
                                  ItemsSource="{Binding MonAnDaChon}"
                                  DisplayMemberPath="TenMon"
-                                 
+                                 MouseLeftButtonUp="lstSelectedFoods_MouseLeftButtonUp"
                                  BorderThickness="0"
                              
                                  FontSize="20"

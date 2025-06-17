@@ -18,6 +18,12 @@ namespace QuanLyTiecCuoi.Repository
             _context = context;
         }
 
+        // Kiểm tra loại sảnh có đang được sử dụng trong bảng SANH hay không
+        public bool IsUsedByAnySanh(int maLoaiSanh)
+        {
+            return _context.Sanhs.Any(s => s.MaLoaiSanh == maLoaiSanh);
+        }
+
         // Lấy toàn bộ danh sách loại sảnh
         public List<LOAISANH> GetAll()
         {

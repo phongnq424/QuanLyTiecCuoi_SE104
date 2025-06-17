@@ -52,7 +52,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                 }
                 else
                 {
-                    MessageBox.Show("Vui lòng chọn một tiệc cưới để in hóa đơn.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Vui lòng chọn một tiệc cưới để thanh toán hóa đơn.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }
@@ -69,6 +69,17 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                 {
                     editableRow = row;
                     DATTIEC selected = row.Item as DATTIEC;
+                    if (selected.NgayDaiTiec <= DateTime.Today)
+                    {
+                        MessageBox.Show("Tiệc đã diễn ra, không được chỉnh sửa.");
+                        return;
+                    }
+                    if (IsTiecDaThanhToan(selected))
+                    {
+                        MessageBox.Show("Tiệc này đã thanh toán, không được chỉnh sửa.");
+                        return;
+                    }
+
                     var suaTiecView = new SuaTiecView(selected);
                     suaTiecView.viewModel.DanhSachChanged += () =>
                     {
@@ -78,6 +89,12 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                     NavigationService?.Navigate(suaTiecView);
                 }
             }
+        }
+        private bool IsTiecDaThanhToan(DATTIEC tiec)
+        {
+            var datTiecRepo = App.AppHost.Services.GetRequiredService<DatTiecRepository>();
+            var hoaDon = datTiecRepo.GetHoaDonTheoMaDatTiec(tiec.MaDatTiec);
+            return (hoaDon != null && hoaDon.NgayThanhToan.HasValue);
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

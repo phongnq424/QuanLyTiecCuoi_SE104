@@ -20,6 +20,11 @@ namespace QuanLyTiecCuoi.Services
             _loaiSanhRepo = loaiSanhRepo;
         }
 
+        public bool IsLoaiSanhDangDuocSuDung(int maLoaiSanh)
+        {
+            return _loaiSanhRepo.IsUsedByAnySanh(maLoaiSanh);
+        }
+
         // Lấy tất cả các LoaiSanh từ database
         public ObservableCollection<LoaiSanh> GetAllLoaiSanh()
         {

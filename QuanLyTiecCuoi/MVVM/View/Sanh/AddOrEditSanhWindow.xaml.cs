@@ -25,6 +25,8 @@ namespace QuanLyTiecCuoi.MVVM.View
         public Sanh SanhInfo { get; set; }
 
         private List<LoaiSanh> _danhSachLoaiSanh;
+        private List<Sanh> _danhSachSanh;
+        private bool _isEditMode = false;
         public List<LoaiSanh> DanhSachLoaiSanh
         {
             get => _danhSachLoaiSanh;
@@ -48,7 +50,7 @@ namespace QuanLyTiecCuoi.MVVM.View
                                              : "";
 
         // Constructor khi thêm mới
-        public AddOrEditSanhWindow(List<LoaiSanh> danhSachLoaiSanh)
+        public AddOrEditSanhWindow(List<LoaiSanh> danhSachLoaiSanh, List<Sanh> danhSachSanh)
         {
             InitializeComponent();
 
@@ -58,6 +60,9 @@ namespace QuanLyTiecCuoi.MVVM.View
             SelectedLoaiSanh = null;
 
             SanhInfo = new Sanh();
+
+            _danhSachSanh = danhSachSanh;
+            _isEditMode = false;
 
             DataContext = this;
         }
@@ -74,7 +79,7 @@ namespace QuanLyTiecCuoi.MVVM.View
             SelectedLoaiSanh = DanhSachLoaiSanh.FirstOrDefault(ls => ls.MaLoaiSanh == selectedSanh.MaLoaiSanh);
 
             // Ẩn nút chọn ảnh 
-            ChooseImageButton.Visibility = Visibility.Collapsed;
+            //ChooseImageButton.Visibility = Visibility.Collapsed;
 
             // Clone thông tin sảnh
             SanhInfo = new Sanh
@@ -87,6 +92,8 @@ namespace QuanLyTiecCuoi.MVVM.View
                 HinhAnh = selectedSanh.HinhAnh,
                 LoaiSanh = SelectedLoaiSanh
             };
+
+            _isEditMode = true;
 
             DataContext = this;
         }
@@ -113,12 +120,19 @@ namespace QuanLyTiecCuoi.MVVM.View
                 ImageNameTextBlock.Text = selectedFileName;
 
                 // Ẩn nút chọn ảnh 
-                ChooseImageButton.Visibility = Visibility.Collapsed;
+                //ChooseImageButton.Visibility = Visibility.Collapsed;
             }
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            // Kiểm tra trùng tên sảnh
+            if (!_isEditMode && _danhSachSanh != null && _danhSachSanh.Any(s => s.TenSanh.Equals(SanhInfo.TenSanh, StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show("Tên sảnh này đã tồn tại. Vui lòng nhập tên khác.", "Trùng tên", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             // Gán lại mã loại sảnh từ SelectedLoaiSanh
             if (SelectedLoaiSanh != null)
             {
@@ -162,5 +176,15 @@ namespace QuanLyTiecCuoi.MVVM.View
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        private void NumberOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextNumeric(e.Text);
+        }
+
+        private static bool IsTextNumeric(string text)
+        {
+            return text.All(char.IsDigit);
+        }
     }
 }

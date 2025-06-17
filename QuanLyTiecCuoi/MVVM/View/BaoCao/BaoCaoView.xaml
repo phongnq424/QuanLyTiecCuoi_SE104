@@ -58,7 +58,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Margin="0,0,10,0">
-                    <TextBlock Text="Từ:"
+                    <TextBlock Text="Từ tháng:"
                                VerticalAlignment="Center"
                                Style="{StaticResource Header3Style}" />
                     <ComboBox Margin="20,5,5,5"
@@ -74,7 +74,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Margin="10,0,0,0">
-                    <TextBlock Text="Đến:"
+                    <TextBlock Text="Đến tháng:"
                                VerticalAlignment="Center"
                                Style="{StaticResource Header3Style}" />
                     <ComboBox Margin="20,5,5,5"

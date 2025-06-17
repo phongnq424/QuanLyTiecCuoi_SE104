@@ -51,4 +51,9 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\Images\MonAn\" />
+    <Folder Include="Resources\Images\DichVu\" />
+  </ItemGroup>
+
 </Project>

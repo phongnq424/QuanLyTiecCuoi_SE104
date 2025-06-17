@@ -158,6 +158,7 @@
                             <ListBox x:Name="lstSelectedFoods"
                                      ItemsSource="{Binding DichVuDaChon}"
                                      DisplayMemberPath="TenDichVu"
+                                     MouseLeftButtonUp="lstSelectedServices_MouseLeftButtonUp"
                                      BorderThickness="0"
                                      FontSize="20"
                                      FontFamily="Cambria"
