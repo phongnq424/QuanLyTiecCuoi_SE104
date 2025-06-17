@@ -47,8 +47,8 @@
                     Width="auto"
                     Height="auto"
                     Source="/Resources/Images/appImage.png"></Image>
-                <TextBlock Text="{Binding NguoiDung.TenDangNhap}" Style="{StaticResource Header5Style}"/>
-                <TextBlock Text="{Binding NguoiDung.NHOMNGUOIDUNG.TenNhom}" Style="{StaticResource Header3Style}"/>
+                <TextBlock Text="{Binding NguoiDung.TenDangNhap}" Style="{StaticResource Header7Style}" HorizontalAlignment="Center" Margin="0,25,0,0"/>
+                <TextBlock Text="{Binding NguoiDung.NHOMNGUOIDUNG.TenNhom}" Style="{StaticResource Header7Style}" HorizontalAlignment="Center" Margin="0,5,0,0"/>
             </StackPanel>
 
 
@@ -91,7 +91,7 @@
                 VerticalAlignment="Top"
                 VerticalScrollBarVisibility="Auto"
                 HorizontalScrollBarVisibility="Disabled"
-                Height="600">
+                Height="370">
                 <ItemsControl ItemsSource="{Binding DanhSachChucNang}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>

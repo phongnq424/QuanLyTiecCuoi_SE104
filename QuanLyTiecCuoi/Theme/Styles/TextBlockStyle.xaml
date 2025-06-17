@@ -47,6 +47,21 @@
         <Setter Property="FontFamily"
                 Value="Cambria"/>
     </Style>
+    <Style x:Key="Header7Style"
+            TargetType="TextBlock">
+        <Setter Property="VerticalAlignment"
+                Value="Top"/>
+        <Setter Property="HorizontalAlignment"
+                Value="Left"/>
+        <Setter Property="Margin"
+                Value="0"/>
+        <Setter Property="FontSize"
+                Value="20"/>
+        <Setter Property="FontWeight"
+                Value="Bold"/>
+        <Setter Property="FontFamily"
+                Value="Cambria"/>
+    </Style>
 
 
     <Style x:Key="Header4Style"
