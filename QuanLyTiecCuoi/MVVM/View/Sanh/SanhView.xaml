@@ -29,7 +29,7 @@
                      VerticalAlignment="Center" Grid.Column="0"/>
 
                     <!-- Nút Chi Tiết Sảnh -->
-                    <Button Content="Chi tiết Sảnh" Style="{StaticResource ButtonStyle}" Width="180" Height="40" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" 
+                    <Button x:Name="btnChiTietSanh" Content="Chi tiết Sảnh" Style="{StaticResource ButtonStyle}" Width="180" Height="40" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" 
                             Click="btnCTSanh_Click"/>
                 </Grid>
 

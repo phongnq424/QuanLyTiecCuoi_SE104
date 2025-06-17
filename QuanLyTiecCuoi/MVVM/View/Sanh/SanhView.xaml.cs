@@ -46,12 +46,6 @@ namespace QuanLyTiecCuoi.MVVM.View
         private void btnCTSanh_Click(object sender, RoutedEventArgs e)
         {
             var vm = (MainWindowViewModel)Application.Current.MainWindow.DataContext;
-            
-            if (!(vm.DanhSachChucNang.Any(cn => cn.TenChucNang == "Sảnh" || vm.DanhSachChucNang.Any(cn => cn.TenChucNang == "Quản lý sảnh"))))
-            {
-                MessageBox.Show("Bạn không có chức năng xem Chi tiết Sảnh!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
 
             // Lọc danh sách các chức năng có tên màn hình là DSSanhView hoặc QLDSSanhView
             var chucNangs = vm.DanhSachChucNang
@@ -66,13 +60,19 @@ namespace QuanLyTiecCuoi.MVVM.View
                 vm.DieuHuongCommand.Execute(chon);
         }
 
-
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (DataContext is SanhViewModel vm)
             {
                 vm.RefreshDanhSachSanh(); 
+            }
+
+            var mainvm = (MainWindowViewModel)Application.Current.MainWindow.DataContext;
+
+            if (!(mainvm.DanhSachChucNang.Any(cn => cn.TenChucNang == "Sảnh" || mainvm.DanhSachChucNang.Any(cn => cn.TenChucNang == "Quản lý sảnh"))))
+            {
+                btnChiTietSanh.Visibility = Visibility.Collapsed;
+                return;
             }
         }
 
