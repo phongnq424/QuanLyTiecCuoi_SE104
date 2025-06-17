@@ -7,10 +7,8 @@ using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.Core;
 using System.Windows;
-using System.Windows.Documents;
 using System.Globalization;
 using System.Text;
-using QuanLyTiecCuoi.MVVM.View.MainVindow;
 using QuanLyTiecCuoi.MVVM.View.HoaDon;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 public class DatTiecViewModel : BaseViewModel
@@ -96,14 +94,6 @@ public class DatTiecViewModel : BaseViewModel
             }
         }
     }
-    private bool CheckNgayTT(DateTime ngay, DATTIEC datTiec)
-    {
-        var hoaDon = _datTiecService.GetHoaDonTheoMaDatTiec(datTiec.MaDatTiec);
-        if (hoaDon.NgayThanhToan.HasValue)
-            return false;
-        return true;
-    }
-
 
     private DATTIEC _datTiecDangChon;
     public DATTIEC DatTiecDangChon

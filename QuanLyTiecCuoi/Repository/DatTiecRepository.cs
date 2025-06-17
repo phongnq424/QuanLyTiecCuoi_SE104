@@ -95,6 +95,22 @@ namespace QuanLyTiecCuoi.Repository
                 dt.NgayDaiTiec.Date == ngay.Date &&
                 dt.MaCa == maCa);
         }
+        public List<SANH> GetSanhsTrong(DateTime ngayDaiTiec, int maCa)
+        {
+            // Lấy danh sách mã sảnh đã được đặt vào ngày và ca đó
+            var sanhsDaDat = _context.DatTiecs
+                .Where(dt => dt.NgayDaiTiec.Date == ngayDaiTiec.Date && dt.MaCa == maCa)
+                .Select(dt => dt.MaSanh)
+                .ToList();
+
+            // Trả về các sảnh KHÔNG nằm trong danh sách đã đặt
+            var sanhsTrong = _context.Sanhs
+                .Where(s => !sanhsDaDat.Contains(s.MaSanh))
+                .ToList();
+
+            return sanhsTrong;
+        }
+
         public LOAISANH GetLoaiSanhById(int maLoaiSanh)
         {
             return _context.LoaiSanhs.FirstOrDefault(ls => ls.MaLoaiSanh == maLoaiSanh);
