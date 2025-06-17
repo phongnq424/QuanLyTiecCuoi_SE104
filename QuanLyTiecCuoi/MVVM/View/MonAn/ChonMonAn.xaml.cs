@@ -42,6 +42,23 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
                 }
             }
         }
+        private void lstSelectedFoods_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (lstSelectedFoods.SelectedItem is MONAN selectedMon)
+            {
+                // Trả lại món về danh sách gốc nếu chưa có
+                if (!_viewModel.DanhSachMonAn.Contains(selectedMon))
+                    _viewModel.DanhSachMonAn.Add(selectedMon);
+
+                // Xóa khỏi danh sách đã chọn
+                _viewModel.MonAnDaChon.Remove(selectedMon);
+
+                // Reset selection để lần sau click lại được
+                lstSelectedFoods.SelectedItem = null;
+            }
+        }
+
+
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
