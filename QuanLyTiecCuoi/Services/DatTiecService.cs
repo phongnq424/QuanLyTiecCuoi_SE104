@@ -77,7 +77,7 @@ namespace QuanLyTiecCuoi.Services
             return _datTiecRepo.GetAllSanhs();
         }
         public List<SANH> GetSanhsTrong(DateTime ngayDaiTiec, int maCa)
-        { 
+        {
             return _datTiecRepo.GetSanhsTrong(ngayDaiTiec, maCa);
         }
         public void UpdateDatTiec(DATTIEC updatedTiec)
@@ -111,7 +111,11 @@ namespace QuanLyTiecCuoi.Services
         }
         public void AddHoaDon(DATTIEC datTiec)
         {
-           _datTiecRepo.AddHoaDon(datTiec);
+            _datTiecRepo.AddHoaDon(datTiec);
+        }
+        public void UpdateHoaDon(DATTIEC dAtTiec)
+        {
+            _datTiecRepo.UpdateHoaDon(dAtTiec.MaDatTiec);
         }
         HoaDonRepository _hoaDonRepository;
         public async Task<HOADON?> UpdateHoaDonAsync(HOADON hoaDon)

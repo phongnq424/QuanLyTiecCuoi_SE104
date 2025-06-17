@@ -105,13 +105,13 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 
         private void DichVuButton_Click(object sender, RoutedEventArgs e)
         {
-                var chonDichVuPage = new ChonDichVu(viewModel.TiecMoi, viewModel.DichVuDaChon);
-                var mainWindow = Application.Current.MainWindow as MainWindow;
-                if (mainWindow != null)
-                {
-                    mainWindow.MainFrame.Navigate(chonDichVuPage);
-                }
+            var chonDichVuPage = new ChonDichVu(viewModel.TiecMoi, viewModel.DichVuDaChon);
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.MainFrame.Navigate(chonDichVuPage);
             }
+        }
 
         private void LuuTiec(object sender, RoutedEventArgs e)
         {

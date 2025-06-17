@@ -45,5 +45,12 @@ namespace QuanLyTiecCuoi.Repository
                 _context.SaveChanges();
             }
         }
+        public void CapNhatChiTietMenu(int maDatTiec, List<CHITIETMENU> danhSachMoi)
+        {
+            // Xóa toàn bộ trước, sau đó thêm lại
+            DeleteByMaDatTiec(maDatTiec);
+            _context.ChiTietMenus.AddRange(danhSachMoi);
+            _context.SaveChanges();
+        }
     }
 }

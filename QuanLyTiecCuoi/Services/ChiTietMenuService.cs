@@ -63,5 +63,9 @@ namespace QuanLyTiecCuoi.Services
         {
             _repository.DeleteByMaDatTiec(maDatTiec);
         }
+        public void CapNhatChiTietMenu(int maDatTiec, List<CHITIETMENU> danhSachMoi)
+        {
+            _repository.CapNhatChiTietMenu(maDatTiec, danhSachMoi);
+        }
     }
 }

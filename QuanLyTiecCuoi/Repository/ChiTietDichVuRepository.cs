@@ -40,5 +40,11 @@ namespace QuanLyTiecCuoi.Repository
                 _context.SaveChanges();
             }
         }
+        public void CapNhatChiTietDichVu(int maDatTiec, List<CHITIETDVTIEC> danhSachMoi)
+        {
+            DeleteByMaDatTiec(maDatTiec);
+            _context.ChiTietDVTiecs.AddRange(danhSachMoi);
+            _context.SaveChanges();
+        }
     }
 }

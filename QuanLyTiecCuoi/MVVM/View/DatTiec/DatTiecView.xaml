@@ -272,7 +272,7 @@
                                 Style="{StaticResource ButtonStyle}"
                                 FontSize="20"
                                 FontFamily="Cambria" />
-                        <Button Content="Thanh toán"
+                        <Button Content="Xem hóa đơn"
                                 Style="{StaticResource ButtonStyle}"
                                 FontSize="20"
                                 FontFamily="Cambria"

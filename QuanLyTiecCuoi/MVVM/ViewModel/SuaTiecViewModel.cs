@@ -100,7 +100,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             var loaiSanh = _datTiecService.GetLoaiSanhById(sanh.MaLoaiSanh);
             if (loaiSanh != null)
             {
-                decimal tongTienBan = MonAnDaChon.Sum(mon => mon.DonGia) * TiecMoi.SoLuongBan;
+                decimal tongTienBan = MonAnDaChon.Sum(mon => mon.DonGia);
                 if (tongTienBan < loaiSanh.DonGiaBanToiThieu)
                 {
                     MessageBox.Show($"Tổng tiền bàn ({tongTienBan:N0}đ) phải >= đơn giá tối thiểu ({loaiSanh.DonGiaBanToiThieu:N0} đ).", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -168,6 +168,79 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
 
         public event Action DanhSachChanged;
+        private readonly HoaDonService _hoaDonService;
+
+        public void LuuChiTietMenu()
+        {
+            if (TiecMoi == null || TiecMoi.MaDatTiec == 0)
+                return;
+
+            if (MonAnDaChon == null || MonAnDaChon.Count == 0)
+                return;
+
+            if (_chiTietService == null)
+            {
+                Console.WriteLine("ChiTietMenuService chưa được khởi tạo.");
+                return;
+            }
+
+            try
+            {
+                var danhSachMoi = MonAnDaChon
+                    .Where(mon => mon != null)
+                    .Select(monAn => new CHITIETMENU
+                    {
+                        MaDatTiec = TiecMoi.MaDatTiec,
+                        MaMon = monAn.MaMon,
+                        SoLuong = TiecMoi.SoLuongBan + TiecMoi.SoBanDuTru,
+                        GhiChu = ""
+                    }).ToList();
+
+                _chiTietService.CapNhatChiTietMenu(TiecMoi.MaDatTiec, danhSachMoi);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi lưu ChiTietMenu: " + ex.Message);
+            }
+        }
+
+        public void LuuChiTietDichVu()
+        {
+            if (TiecMoi == null || TiecMoi.MaDatTiec == 0)
+                return;
+
+            if (DichVuDaChon == null || DichVuDaChon.Count == 0)
+                return;
+
+            if (_chiTietServiceDV == null)
+            {
+                Console.WriteLine("ChiTietDichVuService chưa được khởi tạo.");
+                return;
+            }
+
+            try
+            {
+                var danhSachMoi = DichVuDaChon
+                    .Where(dv => dv != null)
+                    .Select(dv => new CHITIETDVTIEC
+                    {
+                        MaDatTiec = TiecMoi.MaDatTiec,
+                        MaDichVu = dv.MaDichVu,
+                        SoLuong = 1, // hoặc cho người dùng chỉnh sửa nếu cần
+                        DonGia = dv.DonGia
+                    }).ToList();
+
+                _chiTietServiceDV.CapNhatChiTietDichVu(TiecMoi.MaDatTiec, danhSachMoi);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi lưu ChiTietDichVu: " + ex.Message);
+            }
+        }
+
+
+
+
         public bool CapNhatTiec()
         {
             if (TiecMoi == null) return false;
@@ -190,7 +263,10 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             try
             {
                 _datTiecService.UpdateDatTiec(TiecMoi);
-                DanhSachChanged?.Invoke(); 
+                DanhSachChanged?.Invoke();
+                LuuChiTietMenu();
+                LuuChiTietDichVu();
+                _datTiecService.UpdateHoaDon(TiecMoi);
                 return true;
             }
             catch (Exception ex)
@@ -199,6 +275,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 return false;
             }
         }
+
+
         public CASANH? CaDuocChon
         {
             get => DanhSachCa.FirstOrDefault(c => c.MaCa == TiecMoi.MaCa);

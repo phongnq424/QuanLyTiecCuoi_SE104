@@ -15,7 +15,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
     {
         private readonly DatTiecService _datTiecService;
 
-        public DATTIEC TiecMoi { get; set; } = new DATTIEC() {
+        public DATTIEC TiecMoi { get; set; } = new DATTIEC()
+        {
             NgayDaiTiec = DateTime.Today
         };
 
@@ -132,7 +133,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             var loaiSanh = _datTiecService.GetLoaiSanhById(sanh.MaLoaiSanh);
             if (loaiSanh != null)
             {
-                decimal tongTienBan = MonAnDaChon.Sum(mon => mon.DonGia) * TiecMoi.SoLuongBan;
+                decimal tongTienBan = MonAnDaChon.Sum(mon => mon.DonGia);
                 if (tongTienBan < loaiSanh.DonGiaBanToiThieu)
                 {
                     MessageBox.Show($"Tổng tiền bàn ({tongTienBan:N0}đ) phải >= đơn giá tối thiểu ({loaiSanh.DonGiaBanToiThieu:N0} đ).", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -185,7 +186,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 {
                     MaDatTiec = TiecMoi.MaDatTiec,
                     MaMon = monAn.MaMon,
-                    SoLuong = 1,
+                    SoLuong = (TiecMoi.SoLuongBan + TiecMoi.SoBanDuTru),
                     GhiChu = ""
                 };
                 _chiTietMenuService.ThemChiTietMenu(chiTiet);
@@ -202,14 +203,14 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 {
                     MaDatTiec = TiecMoi.MaDatTiec,
                     MaDichVu = dv.MaDichVu,
-                    SoLuong = 1, 
+                    SoLuong = 1, // Có thể cho phép chọn số lượng tùy ý
                     DonGia = dv.DonGia,
                 };
 
                 _chiTietDichVuService.ThemChiTiet(chiTietDV);
             }
         }
-        
+
         public event Action DanhSachChanged;
         public bool ThemTiecMoi()
         {
