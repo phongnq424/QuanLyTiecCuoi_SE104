@@ -269,7 +269,7 @@
                                         </StackPanel>
 
                                         <!-- Danh sách món ăn đã chọn -->
-                                        <ScrollViewer Height="100" VerticalScrollBarVisibility="Auto">
+                                        <ScrollViewer Height="150" VerticalScrollBarVisibility="Auto">
                                             <ItemsControl ItemsSource="{Binding MonAnDaChon}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
@@ -302,7 +302,7 @@
                                                 VerticalAlignment="Center"/>
                                         </StackPanel>
                                         <!-- Danh sách dịch vụ đã chọn -->
-                                        <ScrollViewer Height="100" VerticalScrollBarVisibility="Auto">
+                                        <ScrollViewer Height="150" VerticalScrollBarVisibility="Auto">
                                             <ItemsControl ItemsSource="{Binding DichVuDaChon}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>

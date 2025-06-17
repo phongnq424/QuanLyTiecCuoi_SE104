@@ -20,6 +20,8 @@ namespace QuanLyTiecCuoi.Repository
             return _context.DatTiecs
                 .Include(dt => dt.CaSanh)
                 .Include(dt => dt.Sanh)
+                .Where(dt => dt.NgayDaiTiec > DateTime.Now)
+                .OrderBy(dt => dt.NgayDaiTiec)
                 .ToList();
         }
 
@@ -81,9 +83,10 @@ namespace QuanLyTiecCuoi.Repository
         }
         public List<CASANH> GetAllCaSanhs()
         {
-            return _context.CaSanhs.ToList();
+            return _context.CaSanhs
+                .Where(ca => !ca.isDelelte) // Lọc ra các ca chưa bị xóa
+                .ToList();
         }
-
         public List<SANH> GetAllSanhs()
         {
             return _context.Sanhs.ToList();
@@ -105,7 +108,7 @@ namespace QuanLyTiecCuoi.Repository
 
             // Trả về các sảnh KHÔNG nằm trong danh sách đã đặt
             var sanhsTrong = _context.Sanhs
-                .Where(s => !sanhsDaDat.Contains(s.MaSanh))
+                .Where(s => (!sanhsDaDat.Contains(s.MaSanh) && s.isDelelte == false))
                 .ToList();
 
             return sanhsTrong;
@@ -155,6 +158,10 @@ namespace QuanLyTiecCuoi.Repository
             };
             _context.HoaDons.Add(hoaDon);
             _context.SaveChanges();
+        }
+        public SANH? GetSanhById(int maSanh)
+        {
+            return _context.Sanhs.FirstOrDefault(s => s.MaSanh == maSanh);
         }
     }
 }

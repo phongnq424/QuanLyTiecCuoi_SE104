@@ -43,7 +43,13 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             //HallComboBox.DisplayMemberPath = "TenSanh";
             //HallComboBox.SelectedValuePath = "MaSanh";
         }
-
+        private void ca_changed(object sender, SelectionChangedEventArgs e)
+        {
+            if (viewModel != null)
+            {
+                viewModel.LoadDanhSachSanh();
+            }
+        }
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (sender is TextBox tb)
@@ -57,6 +63,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
         }
         private void FilterDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            viewModel.LoadDanhSachSanh();
             if (FilterDatePicker.SelectedDate.HasValue)
             {
                 var selectedDate = FilterDatePicker.SelectedDate.Value;

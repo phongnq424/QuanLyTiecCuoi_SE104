@@ -76,6 +76,10 @@ namespace QuanLyTiecCuoi.Services
         {
             return _datTiecRepo.GetAllSanhs();
         }
+        public List<SANH> GetSanhsTrong(DateTime ngayDaiTiec, int maCa)
+        { 
+            return _datTiecRepo.GetSanhsTrong(ngayDaiTiec, maCa);
+        }
         public void UpdateDatTiec(DATTIEC updatedTiec)
         {
             if (updatedTiec == null)
@@ -114,6 +118,10 @@ namespace QuanLyTiecCuoi.Services
         {
             _hoaDonRepository = App.AppHost.Services.GetRequiredService<HoaDonRepository>();
             return await _hoaDonRepository.UpdateAsync(hoaDon);
+        }
+        public SANH? GetSanhById(int maSanh)
+        {
+            return _datTiecRepo.GetSanhById(maSanh);
         }
 
     }

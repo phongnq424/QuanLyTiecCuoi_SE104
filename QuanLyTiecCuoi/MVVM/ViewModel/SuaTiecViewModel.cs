@@ -49,7 +49,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             LoadDanhSachMonAn();
             LoadDanhSachDichVu();
         }
-        
+
         public void LoadDanhSachCa()
         {
             try
@@ -62,6 +62,28 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             catch (Exception ex)
             {
                 Console.WriteLine("Lỗi LoadDanhSachCa: " + ex.Message);
+            }
+        }
+        public void LoadDanhSachSanh()
+        {
+            try
+            {
+                var danhSachSanh = _datTiecService.GetSanhsTrong(TiecMoi.NgayDaiTiec, TiecMoi.MaCa).ToList();
+
+                // Thêm sảnh đã được chọn (nếu không có trong danh sách sảnh trống)
+                var sanhCu = _datTiecService.GetSanhById(TiecMoi.MaSanh);
+                if (sanhCu != null && !danhSachSanh.Any(s => s.MaSanh == sanhCu.MaSanh))
+                {
+                    danhSachSanh.Add(sanhCu);
+                }
+
+                DanhSachSanh.Clear();
+                foreach (var sanh in danhSachSanh)
+                    DanhSachSanh.Add(sanh);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi LoadDanhSachSanh: " + ex.Message);
             }
         }
         private Boolean KiemTraSoBanHopLe()
@@ -114,20 +136,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
             return true;
         }
-        public void LoadDanhSachSanh()
-        {
-            try
-            {
-                var danhSachSanh = _datTiecService.GetAllSanhs();
-                DanhSachSanh.Clear();
-                foreach (var sanh in danhSachSanh)
-                    DanhSachSanh.Add(sanh);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi LoadDanhSachSanh: " + ex.Message);
-            }
-        }
+
         public void LoadDanhSachMonAn()
         {
             try
@@ -194,10 +203,9 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         {
             get => DanhSachCa.FirstOrDefault(c => c.MaCa == TiecMoi.MaCa);
         }
-
         public SANH? SanhDuocChon
         {
-            get => DanhSachSanh.FirstOrDefault(s => s.MaSanh == TiecMoi.MaSanh);
+            get => DanhSachSanh.FirstOrDefault(c => c.MaSanh == TiecMoi.MaSanh);
         }
     }
 }

@@ -69,11 +69,44 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 Console.WriteLine("Lỗi LoadDanhSachCa: " + ex.Message);
             }
         }
+        private DateTime _ngayDaiTiec = DateTime.Today;
+        public DateTime NgayDaiTiec
+        {
+            get => _ngayDaiTiec;
+            set
+            {
+                if (_ngayDaiTiec != value)
+                {
+                    _ngayDaiTiec = value;
+                    TiecMoi.NgayDaiTiec = value;
+                    OnPropertyChanged();
+                    LoadDanhSachSanh(); // Gọi lại khi thay đổi
+                }
+            }
+        }
+
+        private int _maCa;
+        public int MaCa
+        {
+            get => _maCa;
+            set
+            {
+                if (_maCa != value)
+                {
+                    _maCa = value;
+                    TiecMoi.MaCa = value;
+                    OnPropertyChanged();
+                    LoadDanhSachSanh(); // Gọi lại khi thay đổi
+                }
+            }
+        }
         public void LoadDanhSachSanh()
         {
             try
             {
-                var danhSachSanh = _datTiecService.GetAllSanhs();
+                var danhSachSanh = _datTiecService.GetSanhsTrong(TiecMoi.NgayDaiTiec, TiecMoi.MaCa);
+                Console.WriteLine($"Số lượng sảnh: {danhSachSanh.Count()}"); // thêm dòng này
+
                 DanhSachSanh.Clear();
                 foreach (var sanh in danhSachSanh)
                     DanhSachSanh.Add(sanh);
@@ -83,6 +116,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 Console.WriteLine("Lỗi LoadDanhSachSanh: " + ex.Message);
             }
         }
+
 
         private Boolean KiemTraSoBanHopLe()
         {

@@ -31,12 +31,15 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 
             FilterDatePicker.SelectedDate = viewModel.TiecMoi.NgayDaiTiec;
 
+            // Thiết lập Display/Value path
             ShiftComboBox.DisplayMemberPath = "TenCa";
             ShiftComboBox.SelectedValuePath = "MaCa";
-            ShiftComboBox.SelectedValue = viewModel.TiecMoi.MaCa;
 
             HallComboBox.DisplayMemberPath = "TenSanh";
             HallComboBox.SelectedValuePath = "MaSanh";
+
+            // Thiết lập giá trị được chọn SAU KHI có ItemsSource
+            ShiftComboBox.SelectedValue = viewModel.TiecMoi.MaCa;
             HallComboBox.SelectedValue = viewModel.TiecMoi.MaSanh;
 
             var daysDiff = (selectedTiec.NgayDaiTiec - DateTime.Today).TotalDays;
@@ -69,6 +72,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             {
                 var selectedDate = FilterDatePicker.SelectedDate.Value;
                 viewModel.TiecMoi.NgayDaiTiec = selectedDate;
+                viewModel.LoadDanhSachSanh();
             }
         }
         private void ShiftComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -77,6 +81,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             {
                 viewModel.TiecMoi.MaCa = ca.MaCa;
                 ShiftComboBox.DisplayMemberPath = "TenCa";
+                viewModel.LoadDanhSachSanh();
             }
         }
 
