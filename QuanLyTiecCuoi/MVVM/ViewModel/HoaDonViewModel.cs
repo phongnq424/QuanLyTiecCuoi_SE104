@@ -107,6 +107,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private bool _CoTheThayDoiSL;
         public bool CoTheThayDoiSL { get => _CoTheThayDoiSL; set { _CoTheThayDoiSL = value; OnPropertyChanged(); } }
 
+        private bool _DangChonHoaDon = false;
+
         private Visibility _BtnLuuVisibility = Visibility.Hidden;
         public Visibility BtnLuuVisibility { get => _BtnLuuVisibility; set { _BtnLuuVisibility = value; OnPropertyChanged(); } }
 
@@ -160,27 +162,37 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             ChonHoaDonCommand = new RelayCommand<HOADON>((p) => { return true; }, async (p) =>
             {
-                if (p != null)
+                if (_DangChonHoaDon == true) return;
+                _DangChonHoaDon = true;
+
+                try
                 {
-                    HoaDonDuocChon = p;
-                    _TienPhatThanhToanTre = 0;
-                    TiecDuocChon = await hoaDonService.GetDatTiec(p.MaDatTiec);
-                    if (TiecDuocChon == null)
+                    if (p != null)
                     {
-                        MessageBox.Show("Có lỗi khi load hóa đơn");
-                        return;
+                        HoaDonDuocChon = p;
+                        _TienPhatThanhToanTre = 0;
+                        TiecDuocChon = await hoaDonService.GetDatTiec(p.MaDatTiec);
+                        if (TiecDuocChon == null)
+                        {
+                            MessageBox.Show("Có lỗi khi load hóa đơn");
+                            return;
+                        }
+
+                        _thamSo = await _HoaDonService.LayThamSo();
+
+
+                        ChiTietDVTiecDuocChon = new ObservableCollection<CHITIETDVTIEC>(await hoaDonService.GetCTDVT(TiecDuocChon.MaDatTiec));
+                        MenuTiecDuocChon = new ObservableCollection<CHITIETMENU>(await hoaDonService.GetMenu(TiecDuocChon.MaDatTiec));
+                        DanhSachDichVu = new ObservableCollection<DICHVU>(await hoaDonService.GetDV());
+                        GanDanhSachTenDV();
+                        KiemTraPhatThanhToanTre();
+                        DatThanhToanChoHoaDonDuocChon();
+                        _WindowService.ShowChiTietHoaDon(this);
                     }
-
-                    _thamSo = await _HoaDonService.LayThamSo();
-
-
-                    ChiTietDVTiecDuocChon = new ObservableCollection<CHITIETDVTIEC>(await hoaDonService.GetCTDVT(TiecDuocChon.MaDatTiec));
-                    MenuTiecDuocChon = new ObservableCollection<CHITIETMENU>(await hoaDonService.GetMenu(TiecDuocChon.MaDatTiec));
-                    DanhSachDichVu = new ObservableCollection<DICHVU>(await hoaDonService.GetDV());
-                    GanDanhSachTenDV();
-                    KiemTraPhatThanhToanTre();
-                    DatThanhToanChoHoaDonDuocChon();
-                    _WindowService.ShowChiTietHoaDon(this);
+                }
+                finally
+                {
+                    _DangChonHoaDon = false;
                 }
             });
 
@@ -285,6 +297,11 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             ThanhToanCommand = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
+                if(TiecDuocChon != null && TiecDuocChon.NgayDaiTiec.Date >= DateTime.Now.Date)
+                {
+                    MessageBox.Show("Hóa đơn chỉ được xác nhận thanh toán từ ngày đãi tiệc");
+                    return;
+                }
                 if (BtnLuuVisibility == Visibility.Visible)
                 {
                     MessageBox.Show("Chưa lưu thay đổi");

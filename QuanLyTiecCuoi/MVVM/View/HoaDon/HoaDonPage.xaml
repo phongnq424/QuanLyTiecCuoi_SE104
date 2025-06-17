@@ -23,7 +23,7 @@
         BorderThickness="2"
         CornerRadius="40"
         Background="#ffffee">
-        <Grid>
+        <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -31,9 +31,8 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
 
-            <TextBlock 
-                Text="Serenité Wedding"
-                Style="{StaticResource Header1Style}"/>
+                <TextBlock Text="Danh sách hóa đơn" FontSize="35" FontFamily="Cambria" FontWeight="Bold" Margin="10" Grid.Row="0" />
+
             </Grid>
             <StackPanel
                 Grid.Row="1"
@@ -96,9 +95,62 @@
                     </DatePicker>
                 </StackPanel>
             </StackPanel>
-            
 
             <Grid Grid.Row="2">
+                <DataGrid 
+                    x:Name="HoaDonGrid" 
+                    Background="White"
+                    Margin="50"
+                    FontSize="20"
+                    ItemsSource="{Binding DanhSachHoaDon}"
+                    SelectedItem="{Binding HoaDonDuocChon, Mode=TwoWay}"
+                    AutoGenerateColumns="False"
+                    SelectionMode="Single"
+                    SelectionUnit="FullRow"
+                    IsReadOnly="True">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction 
+                                Command="{Binding ChonHoaDonCommand}"
+                                CommandParameter="{Binding SelectedItem, ElementName=HoaDonGrid}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn 
+                            Header="Mã hóa đơn" Width="140"
+                            Binding="{Binding MaHoaDon, StringFormat=0000}" />
+
+                        <DataGridTextColumn 
+                            Header="Mã đặt tiệc" Width="140"
+                            Binding="{Binding MaDatTiec, StringFormat=0000}" />
+
+                        <DataGridTextColumn 
+                            Header="Ngày thanh toán" Width="200"
+                            Binding="{Binding NgayThanhToan, StringFormat=dd/MM/yyyy}" />
+
+                        <DataGridTextColumn 
+                            Header="Tổng tiền bàn" Width="200"
+                            Binding="{Binding TongTienBan, StringFormat=N0}"/>
+
+                        <DataGridTextColumn 
+                            Header="Tổng tiền dịch vụ" Width="240"
+                            Binding="{Binding TongTienDV, StringFormat=N0}"  />
+
+                        <DataGridTextColumn 
+                            Header="Tổng tiền hóa đơn" Width="240"
+                            Binding="{Binding TongTienHD, StringFormat=N0}" />
+
+                        <DataGridTextColumn 
+                            Header="Tiền phải thanh toán" Width="250"
+                            Binding="{Binding TienPhaiThanhToan, StringFormat=N0}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+
+            <!--<Grid Grid.Row="2">
                 <ListView 
                     x:Name="HoaDonList" 
                     Background="White"
@@ -197,7 +249,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </Grid>
+            </Grid>-->
         </Grid>
     </Border>
 </Page>

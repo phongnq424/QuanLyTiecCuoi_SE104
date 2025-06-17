@@ -10,6 +10,7 @@
         mc:Ignorable="d"
         WindowStyle="None"
         MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen"
         Background="Transparent"
         x:Name="MangHinhHoaDon"
         Title="ChiTietHoaDonWindow"
@@ -117,7 +118,7 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Ngày đặt tiệc:"
+                            <TextBlock Text="Ngày đãi tiệc:"
                                     Style="{StaticResource Header3Style}"/>
                             <TextBlock Text="{Binding TiecDuocChon.NgayDaiTiec, StringFormat='dd/MM/yyyy'}"
                                     Style="{StaticResource Header4Style}"/>
