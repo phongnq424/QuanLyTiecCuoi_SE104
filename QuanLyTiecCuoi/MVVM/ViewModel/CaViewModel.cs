@@ -84,7 +84,12 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             if (win.ShowDialog() == true)
             {
                 var caMoi = ((AddOrEditCaViewModel)win.DataContext).CaInfo;
-                _caService.ThemCa(caMoi);
+                if (!_caService.ThemCa(caMoi, out string error))
+                {
+                    MessageBox.Show(error, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 LoadCa();
             }
         }
@@ -95,19 +100,29 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             if (win.ShowDialog() == true)
             {
                 var caMoi = ((AddOrEditCaViewModel)win.DataContext).CaInfo;
-                _caService.CapNhatCa(caMoi);
+                if (!_caService.CapNhatCa(caMoi, out string error))
+                {
+                    MessageBox.Show(error, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 LoadCa();
             }
         }
-
 
         private void DeleteCa()
         {
             if (MessageBox.Show("Xác nhận xóa ca?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                _caService.XoaCa(SelectedSanh.MaCa);
+                if (!_caService.XoaCa(SelectedSanh.MaCa, out string error))
+                {
+                    MessageBox.Show(error, "Không thể xóa", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 LoadCa();
             }
         }
+
     }
 }

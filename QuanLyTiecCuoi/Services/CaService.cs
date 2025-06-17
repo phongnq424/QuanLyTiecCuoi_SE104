@@ -18,19 +18,36 @@ namespace QuanLyTiecCuoi.Services
             return _repo.GetFilteredCa(tenCa, gioBD, gioKT);
         }
 
-        public void ThemCa(CASANH ca)
+        public bool ThemCa(CASANH ca, out string error)
         {
+            error = null;
+            if (_repo.IsTimeConflict(ca))
+            {
+                error = "Thời gian ca bị trùng với một ca khác.";
+                return false;
+            }
+
             _repo.AddCa(ca);
+            return true;
         }
 
-        public void CapNhatCa(CASANH ca)
+        public bool CapNhatCa(CASANH ca, out string error)
         {
+            error = null;
+            if (_repo.IsTimeConflict(ca))
+            {
+                error = "Thời gian ca bị trùng với một ca khác.";
+                return false;
+            }
+
             _repo.UpdateCa(ca);
+            return true;
         }
 
-        public void XoaCa(int maCa)
+
+        public bool XoaCa(int maCa, out string error)
         {
-            _repo.DeleteCa(maCa);
+            return _repo.DeleteCa(maCa, out error);
         }
     }
 }
