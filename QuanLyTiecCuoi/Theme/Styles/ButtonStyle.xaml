@@ -449,9 +449,9 @@
         <Setter Property="Margin"
                 Value="-10,0,0,0"/>
         <Setter Property="Width"
-                Value="25"/>
+                Value="30"/>
         <Setter Property="Height"
-                Value="25"/>
+                Value="30"/>
         <Setter Property="VerticalAlignment"
                 Value="Center"/>
         <Setter Property="HorizontalAlignment"
@@ -502,15 +502,34 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="Gray"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid Margin="5" Width="22" Height="22">
-                        <Path Stroke="Black" StrokeThickness="1" Data="M 0 0 L 10 10 M 0 10 L 10 0" 
-                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Grid Margin="5" Width="25" Height="25">
+                        <Border Background="{TemplateBinding Background}"
+                                Padding="5"
+                                Width="40" Height="40" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                            <Path x:Name="XIcon"
+                              Stroke="{TemplateBinding Foreground}"
+                              StrokeThickness="1.5"
+                              Data="M 0 0 L 10 10 M 0 10 L 10 0"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                        </Border>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="XIcon" Property="Stroke" Value="Red"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="XIcon" Property="Stroke" Value="DarkRed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
