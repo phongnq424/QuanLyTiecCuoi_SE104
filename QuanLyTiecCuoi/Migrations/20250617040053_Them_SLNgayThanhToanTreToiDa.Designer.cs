@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanLyTiecCuoi.Data;
 
@@ -11,9 +12,11 @@ using QuanLyTiecCuoi.Data;
 namespace QuanLyTiecCuoi.Migrations
 {
     [DbContext(typeof(WeddingDbContext))]
-    partial class WeddingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250617040053_Them_SLNgayThanhToanTreToiDa")]
+    partial class Them_SLNgayThanhToanTreToiDa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

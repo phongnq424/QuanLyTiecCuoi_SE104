@@ -247,8 +247,5 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                 HintTextBlock.Visibility = Visibility.Collapsed;
             }
         }
-
-
-
     }
 }

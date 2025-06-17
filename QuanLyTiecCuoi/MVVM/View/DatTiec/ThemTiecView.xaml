@@ -36,16 +36,15 @@
                         Grid.Column="0"
                         Style="{StaticResource ButtonStyle}"/>
 
-                        <TextBlock 
-                           Text="Serenité Wedding"
-                           FontWeight="Bold"
-                           Grid.Row="0"
-                           Grid.Column="1"
-                           Grid.ColumnSpan="4"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Bottom"
-                           Margin="10,15,10,0"
-                           Style="{StaticResource Header1Style}" />
+                        <TextBlock Text="Đặt Tiệc Cưới"
+                                   FontSize="35"
+                                   FontFamily="Cambria"
+                                   FontWeight="Bold"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   Grid.ColumnSpan="2"
+                                   VerticalAlignment="Center"
+                                   Margin="10" />
 
                         <Button
                         Click="LuuTiec"

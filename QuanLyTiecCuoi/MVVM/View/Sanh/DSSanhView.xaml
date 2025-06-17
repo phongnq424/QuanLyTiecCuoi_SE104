@@ -92,21 +92,24 @@
             </Grid>
 
             <!-- DataGrid để hiển thị danh sách sảnh -->
-            <DataGrid ItemsSource="{Binding DanhSachSanhView}" 
-          SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
-          AutoGenerateColumns="False" 
-          Margin="10,10,10,10"  
-          IsReadOnly="True"
-          HorizontalAlignment="Stretch" 
-          VerticalAlignment="Stretch"
-          AlternationCount="1000"
-          CanUserAddRows="False"
-          Grid.Row="2"
-          FontSize="20" FontFamily="Cambria">
+            <DataGrid ItemsSource="{Binding DanhSachSanhView}"
+                      SelectedItem="{Binding SelectedSanh, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      Margin="10,10,10,10"
+                      IsReadOnly="True"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      AlternationCount="1000"
+                      CanUserAddRows="False"
+                      Grid.Row="2"
+                      FontSize="20"
+                      FontFamily="Cambria">
 
                 <DataGrid.Columns>
                     <!-- Cột STT -->
-                    <DataGridTemplateColumn Header="STT" Width="0.3*" IsReadOnly="True">
+                    <DataGridTemplateColumn Header="STT"
+                                            Width="0.3*"
+                                            IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=AlternationIndex, Converter={StaticResource STTConverter}}" />
@@ -114,25 +117,25 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <!-- Cột Tên Sảnh -->
-                    <DataGridTextColumn Header="Tên Sảnh" 
-                            Width="*"
-                            Binding="{Binding TenSanh}" />
+                    <DataGridTextColumn Header="Tên Sảnh"
+                                        Width="*"
+                                        Binding="{Binding TenSanh}" />
                     <!-- Cột Loại Sảnh -->
-                    <DataGridTextColumn Header="Loại Sảnh" 
-                            Width="0.5*"
-                            Binding="{Binding LoaiSanh.TenLoaiSanh}" />
+                    <DataGridTextColumn Header="Loại Sảnh"
+                                        Width="0.5*"
+                                        Binding="{Binding LoaiSanh.TenLoaiSanh}" />
                     <!-- Cột Số Lượng Bàn Tối Đa -->
-                    <DataGridTextColumn Header="Số Lượng Bàn Tối Đa" 
-                            Width="*"
-                            Binding="{Binding SoLuongBanToiDa}" />
+                    <DataGridTextColumn Header="Số Lượng Bàn Tối Đa"
+                                        Width="*"
+                                        Binding="{Binding SoLuongBanToiDa}" />
                     <!-- Cột Đơn Giá Bàn Tối Thiểu -->
-                    <DataGridTextColumn Header="Đơn Giá Bàn Tối Thiểu" 
-                            Width="*"
-                            Binding="{Binding LoaiSanh.DonGiaBanToiThieu, StringFormat=N0}" />
+                    <DataGridTextColumn Header="Đơn Giá Bàn Tối Thiểu"
+                                        Width="*"
+                                        Binding="{Binding LoaiSanh.DonGiaBanToiThieu, StringFormat=N0}" />
                     <!-- Cột Ghi Chú -->
-                    <DataGridTextColumn Header="Ghi Chú" 
-                            Width="*"
-                            Binding="{Binding GhiChu}" />
+                    <DataGridTextColumn Header="Ghi Chú"
+                                        Width="*"
+                                        Binding="{Binding GhiChu}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

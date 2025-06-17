@@ -21,19 +21,19 @@
         BorderThickness="2"
         CornerRadius="40"
         Background="#ffffee">
-        <Grid>
+        <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-
-                <TextBlock 
-                Text="Serenité Wedding"
-                Style="{StaticResource Header1Style}"/>
-            </Grid>
+            <TextBlock Text="Tùy Chỉnh"
+                       FontSize="35"
+                       FontFamily="Cambria"
+                       FontWeight="Bold"
+                       Margin="10"
+                       Grid.Row="0" />
 
             <StackPanel
                 Margin="10"

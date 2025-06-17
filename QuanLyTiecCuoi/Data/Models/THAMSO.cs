@@ -15,6 +15,7 @@ namespace QuanLyTiecCuoi.Data.Models
 
         public bool ApDungQDPhatThanhToanTre { get; set; }
         public decimal PhanTramDatCoc { get; set; }
+        public int SLNgayThanhToanTreToiDa { get; set; }
 
     }
 }

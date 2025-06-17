@@ -16,7 +16,7 @@
             Background="#ffffee"
             CornerRadius="40"
             SnapsToDevicePixels="True">
-        <Grid>
+        <Grid Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="0.35*" />
@@ -29,15 +29,12 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Serenité Wedding"
+            <TextBlock Text="Báo cáo thống kê"
+                       FontSize="35"
+                       FontFamily="Cambria"
                        FontWeight="Bold"
-                       Grid.Row="0"
-                       Grid.Column="0"
-                       Grid.ColumnSpan="4"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Bottom"
-                       Margin="10,15,10,0"
-                       Style="{StaticResource Header1Style}" />
+                       Margin="10"
+                       Grid.Row="0" />
             <StackPanel Orientation="Horizontal"
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
