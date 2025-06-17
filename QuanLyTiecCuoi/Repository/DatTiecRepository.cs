@@ -89,7 +89,9 @@ namespace QuanLyTiecCuoi.Repository
         }
         public List<SANH> GetAllSanhs()
         {
-            return _context.Sanhs.ToList();
+            return _context.Sanhs
+                .Where(s => !s.isDelelte) // Lọc ra các sảnh chưa bị xóa
+                .ToList();
         }
         public bool KiemTraSanhDaDat(int maSanh, DateTime ngay, int maCa)
         {
