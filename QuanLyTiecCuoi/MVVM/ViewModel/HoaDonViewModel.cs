@@ -182,6 +182,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
                         _thamSo = await _HoaDonService.LayThamSo();
 
+                        PHANQUYEN();
 
                         ChiTietDVTiecDuocChon = new ObservableCollection<CHITIETDVTIEC>(await hoaDonService.GetCTDVT(TiecDuocChon.MaDatTiec));
                         MenuTiecDuocChon = new ObservableCollection<CHITIETMENU>(await hoaDonService.GetMenu(TiecDuocChon.MaDatTiec));
@@ -200,7 +201,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             ThemDichVuCommand = new RelayCommand<String?>((p) => { return true; }, async (p) =>
             {
-                if (HoaDonDuocChon.NgayThanhToan != null) return;
+                if (HoaDonDuocChon.NgayThanhToan != null || TiecDuocChon == null || TiecDuocChon.NgayDaiTiec > DateTime.Now.Date) return;
                 if (p != null)
                 {
                     foreach (var i in ChiTietDVTiecDuocChon)
@@ -365,6 +366,14 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         }
 
+        private void PHANQUYEN()
+        {
+            if (MainWindowViewModel._DanhSachChucNang.Any(cn => cn.TenChucNang == "Hóa đơn"))
+                BtnLuuVisibility = Visibility.Hidden;
+            else
+                return;
+        }
+
         private void KiemTraPhatThanhToanTre()
         {
             if (_thamSo == null || TiecDuocChon == null || HoaDonDuocChon == null)
@@ -396,6 +405,11 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
                     ThongBaoPhatText = $"Hóa đơn bị phạt {_TienPhatThanhToanTre.ToString("N0")} VND vì thanh toán trễ {soNgayTre} ngày với mức phạt theo ngày {_thamSo.TyLePhatThanhToanTreTheoNgay.ToString("P4")} kể từ sau ngày đặt tiệc {_thamSo.SLNgayThanhToanTreToiDa} ngày ({ngayToiDaThanhToan:dd/MM/yyyy})";
                     return;
+                }
+                else
+                {
+                    _TienPhatThanhToanTre = 0;
+                    ThongBaoPhatText = "";
                 }
             }
             else
@@ -558,7 +572,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         private void TinhThanhTienDVHoaDon()
         {
-            if (HoaDonDuocChon.NgayThanhToan != null) return;
+            if (HoaDonDuocChon.NgayThanhToan != null || TiecDuocChon != null) return;
             int soNgayTre = (DateTime.Now.Date - ngayToiDaThanhToan).Days;
 
             BtnLuuVisibility = Visibility.Visible;
@@ -568,9 +582,13 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             HoaDonDuocChon.TongTienHD = HoaDonDuocChon.TongTienDV + HoaDonDuocChon.TongTienBan;
             if(_thamSo != null && _thamSo.ApDungQDPhatThanhToanTre)
             {
-                _TienPhatThanhToanTre = soNgayTre * _thamSo.TyLePhatThanhToanTreTheoNgay * HoaDonDuocChon.TongTienHD;
-                HoaDonDuocChon.TienPhat = _TienPhatThanhToanTre;
-                ThongBaoPhatText = $"Hóa đơn bị phạt {_TienPhatThanhToanTre.ToString("N0")} VND vì thanh toán trễ {soNgayTre} ngày với mức phạt theo ngày {_thamSo.TyLePhatThanhToanTreTheoNgay.ToString("P4")} kể từ sau ngày đặt tiệc {_thamSo.SLNgayThanhToanTreToiDa} ngày ({ngayToiDaThanhToan:dd/MM/yyyy})";
+                ngayToiDaThanhToan = TiecDuocChon.NgayDaiTiec.AddDays(_thamSo.SLNgayThanhToanTreToiDa);
+                if (DateTime.Now.Date > ngayToiDaThanhToan)
+                {
+                    _TienPhatThanhToanTre = soNgayTre * _thamSo.TyLePhatThanhToanTreTheoNgay * HoaDonDuocChon.TongTienHD;
+                    HoaDonDuocChon.TienPhat = _TienPhatThanhToanTre;
+                    ThongBaoPhatText = $"Hóa đơn bị phạt {_TienPhatThanhToanTre.ToString("N0")} VND vì thanh toán trễ {soNgayTre} ngày với mức phạt theo ngày {_thamSo.TyLePhatThanhToanTreTheoNgay.ToString("P4")} kể từ sau ngày đặt tiệc {_thamSo.SLNgayThanhToanTreToiDa} ngày ({ngayToiDaThanhToan:dd/MM/yyyy})";
+                }
             }
             HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc + _TienPhatThanhToanTre;
             OnPropertyChanged(nameof(HoaDonDuocChon));
@@ -579,12 +597,13 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private void DatThanhToanChoHoaDonDuocChon()
         {
             if (HoaDonDuocChon == null) return;
-            if (HoaDonDuocChon.NgayThanhToan == null)
+            if (HoaDonDuocChon.NgayThanhToan == null || TiecDuocChon == null || TiecDuocChon.NgayDaiTiec <= DateTime.Now.Date)
             {
                 TextSoTienThanhToan = Visibility.Visible;
                 BtnDaThanhToanVisibility = Visibility.Visible;
                 TextNgayThanhToan = Visibility.Hidden;
                 CoTheThayDoiSL = true;
+                PHANQUYEN();
                 OnPropertyChanged(nameof(CoTheThayDoiSL));
             }
             else
@@ -594,6 +613,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 TextNgayThanhToan = Visibility.Visible;
                 BtnLuuVisibility = Visibility.Hidden;
                 CoTheThayDoiSL = false;
+                PHANQUYEN();
                 OnPropertyChanged(nameof(CoTheThayDoiSL));
             }
         }
