@@ -24,5 +24,6 @@ namespace QuanLyTiecCuoi.Data.Models
 
         [ForeignKey("MaDichVu")]
         public virtual DICHVU DichVu { get; set; }
+        public bool isDelelte { get; set; }
     }
 }

@@ -37,5 +37,6 @@ namespace QuanLyTiecCuoi.Data.Models
 
         [ForeignKey("MaCa")]
         public virtual CASANH CaSanh { get; set; }
+        public bool isDelelte { get; set; }
     }
 }
