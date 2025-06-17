@@ -120,11 +120,11 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn 
                             Header="Mã hóa đơn" Width="140"
-                            Binding="{Binding MaHoaDon, StringFormat=0000}" />
+                            Binding="{Binding MaHoaDon}" />
 
                         <DataGridTextColumn 
                             Header="Mã đặt tiệc" Width="140"
-                            Binding="{Binding MaDatTiec, StringFormat=0000}" />
+                            Binding="{Binding MaDatTiec}" />
 
                         <DataGridTextColumn 
                             Header="Ngày thanh toán" Width="200"
