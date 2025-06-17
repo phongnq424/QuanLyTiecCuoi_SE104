@@ -227,7 +227,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     if (_sanhService.IsSanhDangDuocSuDung(SelectedSanh.MaSanh))
                     {
                         MessageBox.Show(
-                            $"Sảnh '{SelectedSanh.TenSanh}' đang được sử dụng trong phiếu đặt tiệc.\nKhông thể xóa.",
+                            $"Sảnh '{SelectedSanh.TenSanh}' đang được sử dụng trong phiếu đặt tiệc sắp tới.\nKhông thể xóa.",
                             "Không thể xóa",
                             MessageBoxButton.OK,
                             MessageBoxImage.Warning
