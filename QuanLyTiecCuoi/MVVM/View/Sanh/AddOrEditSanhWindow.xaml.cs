@@ -26,6 +26,7 @@ namespace QuanLyTiecCuoi.MVVM.View
 
         private List<LoaiSanh> _danhSachLoaiSanh;
         private List<Sanh> _danhSachSanh;
+        private bool _isEditMode = false;
         public List<LoaiSanh> DanhSachLoaiSanh
         {
             get => _danhSachLoaiSanh;
@@ -61,6 +62,7 @@ namespace QuanLyTiecCuoi.MVVM.View
             SanhInfo = new Sanh();
 
             _danhSachSanh = danhSachSanh;
+            _isEditMode = false;
 
             DataContext = this;
         }
@@ -90,6 +92,8 @@ namespace QuanLyTiecCuoi.MVVM.View
                 HinhAnh = selectedSanh.HinhAnh,
                 LoaiSanh = SelectedLoaiSanh
             };
+
+            _isEditMode = true;
 
             DataContext = this;
         }
@@ -123,7 +127,7 @@ namespace QuanLyTiecCuoi.MVVM.View
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             // Kiểm tra trùng tên sảnh
-            if (_danhSachSanh.Any(s => s.TenSanh.Equals(SanhInfo.TenSanh, StringComparison.OrdinalIgnoreCase)))
+            if (!_isEditMode && _danhSachSanh != null && _danhSachSanh.Any(s => s.TenSanh.Equals(SanhInfo.TenSanh, StringComparison.OrdinalIgnoreCase)))
             {
                 MessageBox.Show("Tên sảnh này đã tồn tại. Vui lòng nhập tên khác.", "Trùng tên", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

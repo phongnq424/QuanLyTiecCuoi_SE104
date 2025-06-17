@@ -34,7 +34,7 @@
                 </Grid>
 
                 <!-- Bộ lọc ngày, ca -->
-                <Grid Margin="20,10,20,20" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <Grid Margin="20,10,20,30" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <!-- Cột cho icon Tra cứu -->
                         <ColumnDefinition Width="Auto"/>
@@ -78,25 +78,24 @@
                 </Grid>
 
                 <!-- Danh sách sảnh hiển thị bằng hình ảnh -->
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="700" Margin="0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="500">
                     <ItemsControl ItemsSource="{Binding DanhSachSanh}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel IsItemsHost="True" />
+                                <WrapPanel />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
-                    
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" 
                                         MouseLeftButtonUp="SanhItem_MouseLeftButtonUp" Tag="{Binding}"
-                                        Margin="10" Background="White">
+                                        Margin="5" Background="White">
                                     <Grid Margin="15" >
                                         <!-- Cấu trúc hàng -->
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
-                                        
+
                                         <!-- Cấu trúc 2 cột: Hình ảnh và Thông tin -->
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="240"/>
@@ -133,7 +132,7 @@
                                                 <TextBlock Text="Đơn Giá Bàn Tối Thiểu:" FontWeight="Bold" Margin="0,0,5,0" FontSize="18" FontFamily="Cambria"/>
                                                 <TextBlock Text="{Binding LoaiSanh.DonGiaBanToiThieu, StringFormat=N0}" Margin="0,0,0,5" FontSize="18" FontFamily="Cambria"/>
                                             </StackPanel>
-                                        
+
                                             <!-- Ghi chú -->
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
                                                 <TextBlock Text="Ghi Chú:" FontWeight="Bold" Margin="0,0,5,0" FontSize="18" FontFamily="Cambria"/>

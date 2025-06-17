@@ -18,6 +18,7 @@ namespace QuanLyTiecCuoi.MVVM.View
     public partial class AddOrEditLoaiSanhWindow : Window
     {
         private List<LoaiSanh> _danhSachLoaiSanh;
+        private bool _isEditMode = false;
         public LoaiSanh LoaiSanhInfo { get; set; }
 
         // Constructor khi thêm mới
@@ -26,6 +27,7 @@ namespace QuanLyTiecCuoi.MVVM.View
             InitializeComponent();
             LoaiSanhInfo = new LoaiSanh();
             _danhSachLoaiSanh = danhSachLoaiSanh;
+            _isEditMode = false;
             DataContext = this;
         }
 
@@ -40,13 +42,14 @@ namespace QuanLyTiecCuoi.MVVM.View
                 TenLoaiSanh = selectedLoaiSanh.TenLoaiSanh,
                 DonGiaBanToiThieu = selectedLoaiSanh.DonGiaBanToiThieu
             };
+            _isEditMode = true;
             DataContext = this;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             // Kiểm tra trùng tên loại sảnh
-            if (_danhSachLoaiSanh.Any(s => s.TenLoaiSanh.Equals(LoaiSanhInfo.TenLoaiSanh, StringComparison.OrdinalIgnoreCase)))
+            if (!_isEditMode && _danhSachLoaiSanh != null && _danhSachLoaiSanh.Any(s => s.TenLoaiSanh.Equals(LoaiSanhInfo.TenLoaiSanh, StringComparison.OrdinalIgnoreCase)))
             {
                 MessageBox.Show("Tên loại sảnh này đã tồn tại. Vui lòng nhập tên khác.", "Trùng tên", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

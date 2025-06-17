@@ -135,27 +135,6 @@
                             Binding="{Binding GhiChu}" />
                 </DataGrid.Columns>
             </DataGrid>
-
-            <Grid Margin="10" VerticalAlignment="Bottom" Grid.Row="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <!-- Nút Thêm Sảnh -->
-                <Button Grid.Column="1" Content="Thêm Sảnh" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
-            Command="{Binding AddSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
-
-                <!-- Nút Sửa Sảnh -->
-                <Button Grid.Column="2" Content="Sửa Sảnh" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
-            Command="{Binding EditSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
-
-                <!-- Nút Xóa Sảnh -->
-                <Button Grid.Column="3" Content="Xóa Sảnh" Height="40" Width="150" FontSize="20" FontFamily="Cambria" HorizontalAlignment="Right"
-            Command="{Binding DeleteSanhCommand}" Style="{StaticResource ButtonStyle}" Margin="10,0,10,0" />
-            </Grid>
         </Grid>
     </Border>
 </Page>
