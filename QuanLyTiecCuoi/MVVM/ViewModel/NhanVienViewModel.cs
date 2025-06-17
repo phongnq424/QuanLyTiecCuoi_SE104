@@ -109,6 +109,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             get => _TenNhomMoi; set {  _TenNhomMoi = value; OnPropertyChanged(); }
         }
 
+        private bool _DangXoaPhanQuyen = false;
+
         #region Command
         public ICommand FirstLoadCommand { get; set; }
         public ICommand ThemNguoiDungCommand { get; set; }
@@ -232,14 +234,42 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
 
             XoaPhanQuyenCommand = new RelayCommand<PHANQUYEN>((p) => { return true; }, async (p) => {
-                if (p == null) return;
-                PHANQUYEN? res = await _nhanVienService.XoaPhanQuyen(p);
-                if (res == null)
+                if (_DangXoaPhanQuyen) return;
+                _DangXoaPhanQuyen = true;
+                try
                 {
-                    MessageBox.Show("Có lỗi xảy ra");
-                    return;
-                }
+                    if (p == null) return;
+                    CHUCNANG? chucnang = LayChucNangTheoMa(p.MaChucNang);
+                    if (chucnang == null)
+                    {
+                        MessageBox.Show("Có lỗi khi xóa phân quyền");
+                        return;
+                    }
+
+                    if(chucnang.TenChucNang == "Nhân viên")
+                    {
+                        bool coPhanQuyenNv = DanhSachNhomNguoiDung.Any(nhom =>
+                                nhom.PhanQuyen.Any(cn => cn.MaChucNang == chucnang.MaChucNang && cn.MaNhom != p.MaNhom));
+                        if(!coPhanQuyenNv)
+                        {
+                            MessageBox.Show("Đây là nhóm duy nhất có chức năng nhân viên nên không thể xóa");
+                            return;
+                        }
+                        
+                    }
+
+                    PHANQUYEN? res = await _nhanVienService.XoaPhanQuyen(p);
+                    if (res == null)
+                    {
+                        MessageBox.Show("Có lỗi xảy ra");
+                        return;
+                    }
                 XoaPhanQuyenUI(res);
+                }
+                finally
+                {
+                    _DangXoaPhanQuyen = false;
+                }
             });
 
             ChonNhomCommand = new RelayCommand<NHOMVAPHANQUYEN?>((p) => { return true; }, (p) =>
@@ -328,6 +358,16 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 
             });
 
+        }
+
+        private CHUCNANG? LayChucNangTheoMa(int maChucNang)
+        {
+            foreach(var i in DanhSachChucNang)
+            {
+                if (i.MaChucNang == maChucNang)
+                    return i;
+            }
+            return null;
         }
 
         private void XoaPhanQuyenUI(PHANQUYEN? res)

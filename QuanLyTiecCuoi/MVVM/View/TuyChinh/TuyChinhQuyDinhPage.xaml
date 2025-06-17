@@ -30,13 +30,17 @@
                     Content=""
                     FontSize="20"
                     FontFamily="Cambria"
-                    Margin="15,9,5,5"
+                    Margin="0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     IsChecked="{Binding ApDungQDPhat}"
                     Foreground="black"
                     Command="{Binding ThayDoiApDungQDPhatCommand}"
-                    Background="#FDE6C2"/>
+                    Background="#FDE6C2">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="2" ScaleY="2" />
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
             </StackPanel>
 
 
@@ -88,10 +92,10 @@
             <TextBlock Text="{Binding Error}"
                HorizontalAlignment="Left"
                Foreground="Red"
-               FontSize="16"
+               FontSize="22"
                FontFamily="Cambria"
                FontWeight="SemiBold"
-               Margin="20,5,0,0"
+               Margin="20,10,10,0"
                TextWrapping="Wrap"/>
 
 
