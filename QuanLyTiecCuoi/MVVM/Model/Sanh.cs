@@ -14,6 +14,7 @@ namespace QuanLyTiecCuoi.MVVM.Model
         public int? SoLuongBanToiDa { get; set; }
         public string GhiChu { get; set; }
         public string HinhAnh { get; set; }
+        public bool isDelelte { get; set; } = false;
 
         // Liên kết với LoaiSanh (navigation property - nếu cần hiển thị)
         public LoaiSanh LoaiSanh { get; set; }

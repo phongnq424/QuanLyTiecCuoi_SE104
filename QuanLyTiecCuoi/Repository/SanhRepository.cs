@@ -20,12 +20,12 @@ namespace QuanLyTiecCuoi.Repository
 
         public bool IsUsedByAnyDatTiec(int maSanh)
         {
-            return _context.DatTiecs.Any(dt => dt.MaSanh == maSanh);
+            return _context.DatTiecs.Any(dt => dt.MaSanh == maSanh && dt.NgayDaiTiec.Date >= DateTime.Now.Date);
         }
 
         public List<SANH> GetAll()
         {
-            return _context.Sanhs.Include(s => s.LoaiSanh).ToList();
+            return _context.Sanhs.Include(s => s.LoaiSanh).Where(s => !s.isDelelte).ToList();
         }
 
         public SANH GetById(int maSanh)
@@ -50,7 +50,8 @@ namespace QuanLyTiecCuoi.Repository
             var sanh = _context.Sanhs.Find(maSanh);
             if (sanh != null)
             {
-                _context.Sanhs.Remove(sanh);
+                sanh.isDelelte = true;
+                //_context.Sanhs.Remove(sanh);
                 _context.SaveChanges();
             }
         }

@@ -146,21 +146,20 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             if (result == MessageBoxResult.Yes)
             {
-                bool dangDuocSuDung = _loaiSanhService.IsLoaiSanhDangDuocSuDung(SelectedLoaiSanh.MaLoaiSanh);
-                if (dangDuocSuDung)
-                {
-                    MessageBox.Show(
-                        $"Loại sảnh '{SelectedLoaiSanh.TenLoaiSanh}' đang được sử dụng trong danh sách sảnh.\nKhông thể xóa.",
-                        "Không thể xóa",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Warning
-                    );
-                    return;
-                }
-
                 try
                 {
-                    // Xóa khỏi database
+                    if (_loaiSanhService.IsLoaiSanhDangDuocSuDung(SelectedLoaiSanh.MaLoaiSanh))
+                    {
+                        MessageBox.Show(
+                            $"Loại sảnh '{SelectedLoaiSanh.TenLoaiSanh}' đang được sử dụng trong danh sách sảnh.\nKhông thể xóa.",
+                            "Không thể xóa",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning
+                        );
+                        return;
+                    }
+
+                    // Xóa mềm database
                     _loaiSanhService.DeleteLoaiSanh(SelectedLoaiSanh);
 
                     // Refresh

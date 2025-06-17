@@ -222,19 +222,19 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             if (result == MessageBoxResult.Yes)
             {
-                if (_sanhService.IsSanhDangDuocSuDung(SelectedSanh.MaSanh))
-                {
-                    MessageBox.Show(
-                        $"Sảnh '{SelectedSanh.TenSanh}' đang được sử dụng trong phiếu đặt tiệc.\nKhông thể xóa.",
-                        "Không thể xóa",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Warning
-                    );
-                    return;
-                }
-
                 try
                 {
+                    if (_sanhService.IsSanhDangDuocSuDung(SelectedSanh.MaSanh))
+                    {
+                        MessageBox.Show(
+                            $"Sảnh '{SelectedSanh.TenSanh}' đang được sử dụng trong phiếu đặt tiệc.\nKhông thể xóa.",
+                            "Không thể xóa",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning
+                        );
+                        return;
+                    }
+
                     // Xóa ảnh nếu tồn tại
                     if (!string.IsNullOrWhiteSpace(SelectedSanh.HinhAnh))
                     {
@@ -248,7 +248,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                         }
                     }
 
-                    // Xóa khỏi database
+                    // Xóa mềm database
                     _sanhService.DeleteSanh(SelectedSanh);
 
                     // Refresh

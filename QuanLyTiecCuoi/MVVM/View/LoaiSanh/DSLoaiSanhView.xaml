@@ -101,7 +101,7 @@
 
             <Grid Margin="10" VerticalAlignment="Bottom" Grid.Row="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1.7*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
