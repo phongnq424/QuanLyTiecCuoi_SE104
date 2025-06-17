@@ -40,25 +40,20 @@
 
             <StackPanel
                 Grid.Row="0"
-                Width="225" Height="225"
+                Width="225" Height="auto"
                 Margin="25, 20, 25, 20">
                 <Image
                     Stretch="Fill"
                     Width="auto"
                     Height="auto"
                     Source="/Resources/Images/appImage.png"></Image>
-                <TextBlock Text="{Binding NguoiDungHienTai.TenDangNhap}" Style="{StaticResource Header3Style}"/>
-                <TextBlock Text="{Binding NguoiDungHienTai.NHOMNGUOIDUNG.TenNhom}" Style="{StaticResource Header3Style}"/>
+                <TextBlock Text="{Binding NguoiDung.TenDangNhap}" Style="{StaticResource Header5Style}"/>
+                <TextBlock Text="{Binding NguoiDung.NHOMNGUOIDUNG.TenNhom}" Style="{StaticResource Header3Style}"/>
             </StackPanel>
 
 
-            <ScrollViewer
+            <!--<StackPanel 
                 Grid.Row="1"
-                VerticalAlignment="Top"
-                VerticalScrollBarVisibility="Auto" 
-                Height="600">
-                
-            <StackPanel 
                 Height="660" 
                 Margin="0">
                 <ScrollViewer 
@@ -89,7 +84,33 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
-            </StackPanel>
+            </StackPanel>-->
+
+            <ScrollViewer 
+                Grid.Row="1"
+                VerticalAlignment="Top"
+                VerticalScrollBarVisibility="Auto"
+                HorizontalScrollBarVisibility="Disabled"
+                Height="600">
+                <ItemsControl ItemsSource="{Binding DanhSachChucNang}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton Content="{Binding TenChucNang}"
+                                    Style="{StaticResource RadioButtonStyle}"
+                                    IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                    GroupName="DieuHuongGroup"
+                                    Margin="0,2.5"
+                                    BorderBrush="#FFFFEE"
+                                    Command="{Binding DataContext.DieuHuongCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
 
             <Button

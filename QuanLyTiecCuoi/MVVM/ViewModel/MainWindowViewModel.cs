@@ -53,6 +53,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         public ObservableCollection<ChucNangVM> DanhSachChucNang { get; set; }
 
+        public static List<CHUCNANG> _DanhSachChucNang { get; set; }
+
         private ChucNangVM _dangChon;
         public ChucNangVM DangChon
         {
@@ -68,6 +70,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         }
 
         public static NGUOIDUNG NguoiDungHienTai;
+        private NGUOIDUNG _NguoiDung;
+        public NGUOIDUNG NguoiDung { get => _NguoiDung; set { _NguoiDung = value; OnPropertyChanged(); } }
         public MainWindowViewModel(DangNhapService dangNhapService)
         {
             _DangNhapService = dangNhapService;
@@ -75,6 +79,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             FirstLoadCM = new RelayCommand<Window>((p) => true, async (p) =>
             {
                 var danhSach = await _DangNhapService.LayChucNangNguoiDung(NguoiDungHienTai);
+                _DanhSachChucNang = danhSach;
                 DanhSachChucNang = new ObservableCollection<ChucNangVM>(
                     danhSach.Select(c => new ChucNangVM
                     {
@@ -83,6 +88,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                         TenManHinhDuocLoad = c.TenManHinhDuocLoad
                     })
                 );
+                NguoiDung = NguoiDungHienTai;
                 OnPropertyChanged(nameof(DanhSachChucNang));
 
                 // Mặc định load màn hình đầu tiên

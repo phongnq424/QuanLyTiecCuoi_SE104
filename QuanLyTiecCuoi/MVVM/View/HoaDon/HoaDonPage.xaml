@@ -119,32 +119,46 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn 
-                            Header="Mã hóa đơn" Width="140"
+                            Header="Mã hóa đơn" Width="120"
                             Binding="{Binding MaHoaDon}" />
 
                         <DataGridTextColumn 
-                            Header="Mã đặt tiệc" Width="140"
+                            Header="Mã đặt tiệc" Width="120"
                             Binding="{Binding MaDatTiec}" />
 
                         <DataGridTextColumn 
-                            Header="Ngày thanh toán" Width="200"
+                            Header="Ngày thanh toán" Width="170"
                             Binding="{Binding NgayThanhToan, StringFormat=dd/MM/yyyy}" />
 
                         <DataGridTextColumn 
-                            Header="Tổng tiền bàn" Width="200"
+                            Header="Tổng tiền bàn" Width="180"
                             Binding="{Binding TongTienBan, StringFormat=N0}"/>
 
                         <DataGridTextColumn 
-                            Header="Tổng tiền dịch vụ" Width="240"
+                            Header="Tổng tiền dịch vụ" Width="180"
                             Binding="{Binding TongTienDV, StringFormat=N0}"  />
 
                         <DataGridTextColumn 
-                            Header="Tổng tiền hóa đơn" Width="240"
+                            Header="Tổng tiền hóa đơn" Width="180"
                             Binding="{Binding TongTienHD, StringFormat=N0}" />
 
                         <DataGridTextColumn 
-                            Header="Tiền phải thanh toán" Width="250"
+                            Header="Tiền phải thanh toán" Width="200"
                             Binding="{Binding TienPhaiThanhToan, StringFormat=N0}"/>
+                        <DataGridTemplateColumn Header="" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Chi tiết"
+                                        Command="{Binding DataContext.ChonHoaDonCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"
+                                        Padding="5,2"
+                                        Background="#FFFFEE"
+                                        Foreground="Black"
+                                        FontWeight="Bold"
+                                        Cursor="Hand"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
