@@ -120,6 +120,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private Visibility _BtnDaThanhToanVisibility = Visibility.Hidden;
         public Visibility BtnDaThanhToanVisibility { get => _BtnDaThanhToanVisibility; set { _BtnDaThanhToanVisibility = value; OnPropertyChanged(); } }
 
+        private DateTime ngayToiDaThanhToan;
+
         #region Command
         public ICommand FirstLoadCommand { get; set; }
         public ICommand SetDateFilterCommand { get; set; }
@@ -307,11 +309,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     MessageBox.Show("Chưa lưu thay đổi");
                     return;
                 }
-                if(_TienPhatThanhToanTre != 0)
-                {
-                    HoaDonDuocChon.TienPhat = _TienPhatThanhToanTre;
-                    HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc + _TienPhatThanhToanTre;
-                }
+                HoaDonDuocChon.TienPhat = _TienPhatThanhToanTre;
+                HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc + _TienPhatThanhToanTre;
                 var hd = await hoaDonService.ThanhToan(HoaDonDuocChon);
                 if (hd != null)
                 {
@@ -380,30 +379,30 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             {
                 var ngayDaiTiec = TiecDuocChon.NgayDaiTiec.Date;
 
-                if (DateTime.Now.Date > ngayDaiTiec)
+                ngayToiDaThanhToan = ngayDaiTiec.AddDays(_thamSo.SLNgayThanhToanTreToiDa);
+                if (DateTime.Now.Date > ngayToiDaThanhToan)
                 {
-                    int soNgayTre = (DateTime.Now.Date - ngayDaiTiec).Days;
-
-                    decimal tongTien = TiecDuocChon.TienDatCoc + HoaDonDuocChon.TienPhaiThanhToan;
-                    _TienPhatThanhToanTre = soNgayTre * _thamSo.TyLePhatThanhToanTreTheoNgay * tongTien;
-
+                    int soNgayTre = (DateTime.Now.Date - ngayToiDaThanhToan).Days;
 
                     if (HoaDonDuocChon.NgayThanhToan != null) return;
                     decimal TongTienTatCaDichVu = ChiTietDVTiecDuocChon?.Sum(i => i.ThanhTien) ?? 0;
                     HoaDonDuocChon.TongTienDV = TongTienTatCaDichVu;
                     HoaDonDuocChon.TongTienBan = HoaDonDuocChon.DonGiaBan * HoaDonDuocChon.SoLuongBan;
                     HoaDonDuocChon.TongTienHD = HoaDonDuocChon.TongTienDV + HoaDonDuocChon.TongTienBan;
+                    _TienPhatThanhToanTre = soNgayTre * _thamSo.TyLePhatThanhToanTreTheoNgay * HoaDonDuocChon.TongTienHD;
+                    HoaDonDuocChon.TienPhat = _TienPhatThanhToanTre;
                     HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc + _TienPhatThanhToanTre;
                     OnPropertyChanged(nameof(HoaDonDuocChon));
 
-
-                    ThongBaoPhatText = $"Hóa đơn bị phạt {_TienPhatThanhToanTre.ToString("N0")} VND vì thanh toán trễ {soNgayTre} ngày với mức phạt theo ngày {_thamSo.TyLePhatThanhToanTreTheoNgay.ToString("P4")}";
+                    ThongBaoPhatText = $"Hóa đơn bị phạt {_TienPhatThanhToanTre.ToString("N0")} VND vì thanh toán trễ {soNgayTre} ngày với mức phạt theo ngày {_thamSo.TyLePhatThanhToanTreTheoNgay.ToString("P4")} kể từ sau ngày đặt tiệc {_thamSo.SLNgayThanhToanTreToiDa} ngày ({ngayToiDaThanhToan:dd/MM/yyyy})";
                     return;
                 }
             }
-
-             _TienPhatThanhToanTre = 0;
-            ThongBaoPhatText = "";
+            else
+            {
+                _TienPhatThanhToanTre = 0;
+                ThongBaoPhatText = "";
+            }
         }
 
 
@@ -560,11 +559,19 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private void TinhThanhTienDVHoaDon()
         {
             if (HoaDonDuocChon.NgayThanhToan != null) return;
+            int soNgayTre = (DateTime.Now.Date - ngayToiDaThanhToan).Days;
+
             BtnLuuVisibility = Visibility.Visible;
             decimal TongTienTatCaDichVu = ChiTietDVTiecDuocChon?.Sum(i => i.ThanhTien) ?? 0;
             HoaDonDuocChon.TongTienDV = TongTienTatCaDichVu;
             HoaDonDuocChon.TongTienBan = HoaDonDuocChon.DonGiaBan * HoaDonDuocChon.SoLuongBan;
             HoaDonDuocChon.TongTienHD = HoaDonDuocChon.TongTienDV + HoaDonDuocChon.TongTienBan;
+            if(_thamSo != null && _thamSo.ApDungQDPhatThanhToanTre)
+            {
+                _TienPhatThanhToanTre = soNgayTre * _thamSo.TyLePhatThanhToanTreTheoNgay * HoaDonDuocChon.TongTienHD;
+                HoaDonDuocChon.TienPhat = _TienPhatThanhToanTre;
+                ThongBaoPhatText = $"Hóa đơn bị phạt {_TienPhatThanhToanTre.ToString("N0")} VND vì thanh toán trễ {soNgayTre} ngày với mức phạt theo ngày {_thamSo.TyLePhatThanhToanTreTheoNgay.ToString("P4")} kể từ sau ngày đặt tiệc {_thamSo.SLNgayThanhToanTreToiDa} ngày ({ngayToiDaThanhToan:dd/MM/yyyy})";
+            }
             HoaDonDuocChon.TienPhaiThanhToan = HoaDonDuocChon.TongTienHD - HoaDonDuocChon.DATTIEC.TienDatCoc + _TienPhatThanhToanTre;
             OnPropertyChanged(nameof(HoaDonDuocChon));
         }

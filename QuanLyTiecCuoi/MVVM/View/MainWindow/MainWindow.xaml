@@ -38,7 +38,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Grid
+            <StackPanel
                 Grid.Row="0"
                 Width="225" Height="225"
                 Margin="25, 20, 25, 20">
@@ -47,11 +47,18 @@
                     Width="auto"
                     Height="auto"
                     Source="/Resources/Images/appImage.png"></Image>
-            </Grid>
+                <TextBlock Text="{Binding NguoiDungHienTai.TenDangNhap}" Style="{StaticResource Header3Style}"/>
+                <TextBlock Text="{Binding NguoiDungHienTai.NHOMNGUOIDUNG.TenNhom}" Style="{StaticResource Header3Style}"/>
+            </StackPanel>
 
 
-            <StackPanel 
+            <ScrollViewer
                 Grid.Row="1"
+                VerticalAlignment="Top"
+                VerticalScrollBarVisibility="Auto" 
+                Height="600">
+                
+            <StackPanel 
                 Height="660" 
                 Margin="0">
                 <ScrollViewer 
@@ -83,6 +90,7 @@
                     </ItemsControl>
                 </ScrollViewer>
             </StackPanel>
+            </ScrollViewer>
 
             <Button
                 Grid.Row="2"

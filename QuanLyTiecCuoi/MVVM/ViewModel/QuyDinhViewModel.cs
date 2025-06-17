@@ -61,6 +61,15 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             get => _PhanTramDatCocText; set { _PhanTramDatCocText = value; OnPropertyChanged(); }
         }
 
+        private String _SoNgayTreToiDaText;
+        public string SoNgayTreToiDaText
+        { get => _SoNgayTreToiDaText; set { _SoNgayTreToiDaText = value; OnPropertyChanged(); } }
+
+        private int SoNgayTreToiDa;
+        private bool CoTheLuuPhanTram = true;
+        private bool CoTheLuuTyLePhat = true;
+        private bool CoTheLuuSoNgayThanhToan = true;
+
 
         #region Command
         public ICommand FirstLoadCommand { get; set; }  
@@ -68,6 +77,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ICommand ThayDoiApDungQDPhatCommand { get; set; }
         public ICommand ThayDoiTyLeCocCommand { get; set; }
         public ICommand LuuThayDoiCommand { get; set;}
+        public ICommand ThayDoiNgayTreToiDaCocCommand { get; set;}
         #endregion
 
         public QuyDinhViewModel(ThamSoService thamSoService)
@@ -83,6 +93,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     TyLePhatMoi = _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay;
                     PhanTramDatCoc = _ThamSoHienTai.PhanTramDatCoc;
                     PhanTramDatCocText = PhanTramDatCoc.ToString("0.0000");
+                    SoNgayTreToiDa = _ThamSoHienTai.SLNgayThanhToanTreToiDa;
+                    SoNgayTreToiDaText = SoNgayTreToiDa.ToString();
 
                     Error = "";
                     BtnSaveVisability = Visibility.Hidden;
@@ -100,17 +112,19 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     {
                         TyLePhatMoi = decimal.Parse(TyLePhatText);
                         BtnSaveVisability = Visibility.Visible;
+                        CoTheLuuTyLePhat = true;
                         Error = "";
                     }
                     else
-                    {
+                    { 
                         Error = "Phải nhập vào số thập phân";
                         BtnSaveVisability = Visibility.Visible;
+                        CoTheLuuTyLePhat = false;
                         return;
                     }
                 }
                 if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000")
-                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000"))
+                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000") && SoNgayTreToiDaText == _ThamSoHienTai.SLNgayThanhToanTreToiDa.ToString())
                 {
                     return;
                 }
@@ -122,7 +136,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             ThayDoiApDungQDPhatCommand = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
                 if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000")
-                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000"))
+                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000") && SoNgayTreToiDaText == _ThamSoHienTai.SLNgayThanhToanTreToiDa.ToString())
                 {
                     return;
                 }
@@ -141,17 +155,52 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     {
                         PhanTramDatCoc = decimal.Parse(PhanTramDatCocText);
                         BtnSaveVisability = Visibility.Visible;
+                        CoTheLuuPhanTram = true;
                         Error = "";
                     }
                     else
                     {
+                        CoTheLuuPhanTram = false;
                         Error = "Phải nhập vào số thập phân";
                         BtnSaveVisability = Visibility.Visible;
                         return;
                     }
                 }
-                if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000") 
-                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000"))
+                if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000")
+                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000") && SoNgayTreToiDaText == _ThamSoHienTai.SLNgayThanhToanTreToiDa.ToString())
+                {
+                    return;
+                }
+
+                BtnSaveVisability = Visibility.Visible;
+
+            });
+
+            ThayDoiNgayTreToiDaCocCommand = new RelayCommand<String?>((p) => { return true; }, (p) =>
+            {
+                if (_ThamSoHienTai == null) return;
+                if (p != null && p.Length != 0)
+                {
+                    SoNgayTreToiDaText = p;
+                    int res = -1;
+                    bool hopLe = int.TryParse(SoNgayTreToiDaText, out res);
+                    if (hopLe && res >= 0)
+                    {
+                        SoNgayTreToiDa = int.Parse(SoNgayTreToiDaText);
+                        BtnSaveVisability = Visibility.Visible;
+                        CoTheLuuSoNgayThanhToan = true;
+                        Error = "";
+                    }
+                    else
+                    {
+                        CoTheLuuSoNgayThanhToan = false;
+                        Error = "Phải nhập vào số dương";
+                        BtnSaveVisability = Visibility.Visible;
+                        return;
+                    }
+                }
+                if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000")
+                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000") && SoNgayTreToiDaText == _ThamSoHienTai.SLNgayThanhToanTreToiDa.ToString())
                 {
                     return;
                 }
@@ -170,31 +219,41 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     return;
                 }
                 if (ApDungQDPhat == _ThamSoHienTai.ApDungQDPhatThanhToanTre && TyLePhatText == _ThamSoHienTai.TyLePhatThanhToanTreTheoNgay.ToString("0.0000")
-                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000"))
+                    && PhanTramDatCocText == _ThamSoHienTai.PhanTramDatCoc.ToString("0.0000") && SoNgayTreToiDaText == _ThamSoHienTai.SLNgayThanhToanTreToiDa.ToString())
                 {
                     Error = "Không có thông tin thay đổi.";
                     return;
                 }
 
-                var thamsomoi = new THAMSO()
+                if(CoTheLuuSoNgayThanhToan && CoTheLuuTyLePhat && CoTheLuuPhanTram)
                 {
-                    Id = _ThamSoHienTai.Id,
-                    TyLePhatThanhToanTreTheoNgay = TyLePhatMoi,
-                    ApDungQDPhatThanhToanTre = ApDungQDPhat,
-                    PhanTramDatCoc = PhanTramDatCoc,
-                };
+
+                    var thamsomoi = new THAMSO()
+                    {
+                        Id = _ThamSoHienTai.Id,
+                        TyLePhatThanhToanTreTheoNgay = TyLePhatMoi,
+                        ApDungQDPhatThanhToanTre = ApDungQDPhat,
+                        PhanTramDatCoc = PhanTramDatCoc,
+                        SLNgayThanhToanTreToiDa = SoNgayTreToiDa,
+                    };
 
 
-                var res = await _thamSoService.CapNhatThamSo(thamsomoi);
-                if(res == null)
-                {
-                    Error = "Có lỗi xảy ra";
+                    var res = await _thamSoService.CapNhatThamSo(thamsomoi);
+                    if(res == null)
+                    {
+                        Error = "Có lỗi xảy ra";
+                        return;
+                    }
+
+                    Error = "Thay đổi thành công";
+                    BtnSaveVisability = Visibility.Hidden;
                     return;
                 }
+                else
+                {
+                    MessageBox.Show("Thay đổi không hợp lệ");
 
-                Error = "Thay đổi thành công";
-                BtnSaveVisability = Visibility.Hidden;
-                return;
+                }
             });
         }
 
