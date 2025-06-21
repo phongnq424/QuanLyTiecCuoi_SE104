@@ -10,6 +10,7 @@ namespace QuanLyTiecCuoi.Data.Models
         [Key]
         public int MaDatTiec { get; set; }
 
+
         [Required]
         [MaxLength(100)]
         public string TenCoDau { get; set; }
@@ -30,6 +31,7 @@ namespace QuanLyTiecCuoi.Data.Models
         public int SoBanDuTru { get; set; }
 
         public DateTime NgayDaiTiec { get; set; }
+        public DateTime NgayDatTiec { get; set; }
         public TimeSpan Gio { get; set; }
 
         [ForeignKey("MaSanh")]

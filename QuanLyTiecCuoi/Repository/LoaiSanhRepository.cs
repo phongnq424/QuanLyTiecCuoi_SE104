@@ -27,7 +27,7 @@ namespace QuanLyTiecCuoi.Repository
         // Lấy toàn bộ danh sách loại sảnh
         public List<LOAISANH> GetAll()
         {
-            return _context.LoaiSanhs.Where(l => !l.isDelelte).ToList();
+            return _context.LoaiSanhs.Where(l => !l.TinhTrang).ToList();
         }
 
         // Lấy loại sảnh theo mã
@@ -56,7 +56,7 @@ namespace QuanLyTiecCuoi.Repository
             var loaiSanh = _context.LoaiSanhs.Find(maLoaiSanh);
             if (loaiSanh != null)
             {
-                loaiSanh.isDelelte = true;
+                loaiSanh.TinhTrang = true;
                 //_context.LoaiSanhs.Remove(loaiSanh);
                 _context.SaveChanges();
             }

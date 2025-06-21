@@ -19,6 +19,6 @@ namespace QuanLyTiecCuoi.Data.Models
         public decimal DonGia { get; set; }
         [MaxLength(255)]
         public string HinhAnh { get; set; }
-        public bool isDelelte { get; set; }
+        public bool TinhTrang { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanLyTiecCuoi.Data;
 
@@ -11,9 +12,11 @@ using QuanLyTiecCuoi.Data;
 namespace QuanLyTiecCuoi.Migrations
 {
     [DbContext(typeof(WeddingDbContext))]
-    partial class WeddingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250621154659_ThemNgay")]
+    partial class ThemNgay
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +69,7 @@ namespace QuanLyTiecCuoi.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("varchar(60)");
 
-                    b.Property<bool>("TinhTrang")
+                    b.Property<bool>("isDelelte")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("MaCa");
@@ -274,7 +277,7 @@ namespace QuanLyTiecCuoi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<bool>("TinhTrang")
+                    b.Property<bool>("isDelelte")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("MaDichVu");
@@ -343,7 +346,7 @@ namespace QuanLyTiecCuoi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<bool>("TinhTrang")
+                    b.Property<bool>("isDelelte")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("MaLoaiSanh");
@@ -372,7 +375,7 @@ namespace QuanLyTiecCuoi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<bool>("TinhTrang")
+                    b.Property<bool>("isDelelte")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("MaMon");
@@ -458,7 +461,7 @@ namespace QuanLyTiecCuoi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<bool>("TinhTrang")
+                    b.Property<bool>("isDelelte")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("MaSanh");

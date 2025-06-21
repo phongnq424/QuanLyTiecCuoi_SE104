@@ -13,7 +13,8 @@ namespace QuanLyTiecCuoi.Data.Models
         [Key]
         public int MaHoaDon { get; set; }
         public DateTime? NgayThanhToan { get; set; }
-
+ 
+       public DateTime NgayLap { get; set; }
         //Ngay thanh toan co the null
         //bỏ đơn giá bàn??
         public decimal DonGiaBan { get; set; }

@@ -17,7 +17,7 @@ namespace QuanLyTiecCuoi.Data.Models
         public string TenLoaiSanh { get; set; }
 
         public decimal DonGiaBanToiThieu { get; set; }
-        public bool isDelelte { get; set; }
+        public bool TinhTrang { get; set; }
 
     }
 }

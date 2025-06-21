@@ -20,7 +20,7 @@ namespace QuanLyTiecCuoi.Repository
         public List<CASANH> GetFilteredCa(string tenCa, string gioBD, string gioKT)
         {
             var query = _context.CaSanhs
-                .Where(c => !c.isDelelte) // chỉ lấy ca chưa bị xóa
+                .Where(c => !c.TinhTrang) // chỉ lấy ca chưa bị xóa
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(tenCa))
@@ -44,7 +44,7 @@ namespace QuanLyTiecCuoi.Repository
         }
         public List<CASANH> GetAllCa()
         {
-            return _context.CaSanhs.Where(c => !c.isDelelte).ToList();
+            return _context.CaSanhs.Where(c => !c.TinhTrang).ToList();
         }
 
         public void UpdateCa(CASANH ca)
@@ -78,7 +78,7 @@ namespace QuanLyTiecCuoi.Repository
             }
 
             // Nếu chỉ trong quá khứ => xóa mềm
-            ca.isDelelte = true;
+            ca.TinhTrang = true;
             _context.SaveChanges();
             return true;
         }

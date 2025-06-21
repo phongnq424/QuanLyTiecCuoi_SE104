@@ -21,7 +21,7 @@ namespace QuanLyTiecCuoi.Repository
         {
             return _context.MonAns
                            .AsNoTracking()
-                           .Where(m => !m.isDelelte)
+                           .Where(m => !m.TinhTrang)
                            .ToList();
         }
         public void SoftDelete(MONAN monAn)
@@ -29,7 +29,7 @@ namespace QuanLyTiecCuoi.Repository
             var entity = _context.MonAns.FirstOrDefault(m => m.MaMon == monAn.MaMon);
             if (entity != null)
             {
-                entity.isDelelte = true;
+                entity.TinhTrang = true;
                 _context.SaveChanges();
             }
         }

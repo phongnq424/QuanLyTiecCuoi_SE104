@@ -19,6 +19,6 @@ namespace QuanLyTiecCuoi.Data.Models
         public DateTime GioBatDau { get; set; }
 
         public DateTime GioKetThuc { get; set; }
-        public bool isDelelte { get; set; }
+        public bool TinhTrang { get; set; }
     }
 }

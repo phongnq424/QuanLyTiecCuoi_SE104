@@ -20,7 +20,7 @@ namespace QuanLyTiecCuoi.Repository
         {
             return _context.DichVus
                            .AsNoTracking()
-                           .Where(dv => !dv.isDelelte)
+                           .Where(dv => !dv.TinhTrang)
                            .ToList();
         }
 
@@ -47,7 +47,7 @@ namespace QuanLyTiecCuoi.Repository
             var entity = _context.DichVus.FirstOrDefault(d => d.MaDichVu == dv.MaDichVu);
             if (entity != null)
             {
-                entity.isDelelte = true;
+                entity.TinhTrang = true;
                 _context.SaveChanges();
             }
         }

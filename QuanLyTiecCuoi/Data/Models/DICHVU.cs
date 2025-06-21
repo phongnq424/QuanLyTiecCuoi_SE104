@@ -23,6 +23,6 @@ namespace QuanLyTiecCuoi.Data.Models
 
         [MaxLength(255)]
         public string HinhAnh { get; set; }
-        public bool isDelelte { get; set; }
+        public bool TinhTrang { get; set; }
     }
 }

@@ -84,13 +84,13 @@ namespace QuanLyTiecCuoi.Repository
         public List<CASANH> GetAllCaSanhs()
         {
             return _context.CaSanhs
-                .Where(ca => !ca.isDelelte) // Lọc ra các ca chưa bị xóa
+                .Where(ca => !ca.TinhTrang) // Lọc ra các ca chưa bị xóa
                 .ToList();
         }
         public List<SANH> GetAllSanhs()
         {
             return _context.Sanhs
-                .Where(s => !s.isDelelte) // Lọc ra các sảnh chưa bị xóa
+                .Where(s => !s.TinhTrang) // Lọc ra các sảnh chưa bị xóa
                 .ToList();
         }
         public bool KiemTraSanhDaDat(int maSanh, DateTime ngay, int maCa)
@@ -110,7 +110,7 @@ namespace QuanLyTiecCuoi.Repository
 
             // Trả về các sảnh KHÔNG nằm trong danh sách đã đặt
             var sanhsTrong = _context.Sanhs
-                .Where(s => (!sanhsDaDat.Contains(s.MaSanh) && s.isDelelte == false))
+                .Where(s => (!sanhsDaDat.Contains(s.MaSanh) && s.TinhTrang == false))
                 .ToList();
 
             return sanhsTrong;

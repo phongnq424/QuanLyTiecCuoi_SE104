@@ -43,27 +43,30 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel.BaoCao
         private async void LoadThangNamFromHoaDon()
         {
             var dsHoaDon = await _hoaDonService.GetAllHoaDonsAsync();
-
-            var thangList = dsHoaDon
+            var now = DateTime.Now;
+            var thangNamList = dsHoaDon
                 .Where(hd => hd.NgayThanhToan.HasValue)
-                .Select(hd => hd.NgayThanhToan.Value.Month)
+                .Select(hd => new { Thang = hd.NgayThanhToan.Value.Month, Nam = hd.NgayThanhToan.Value.Year })
                 .Distinct()
-                .OrderBy(x => x);
+                .Where(tn => !(tn.Thang == now.Month && tn.Nam == now.Year))
+                .ToList();
 
-            var namList = dsHoaDon
-                .Where(hd => hd.NgayThanhToan.HasValue)
-                .Select(hd => hd.NgayThanhToan.Value.Year)
-                .Distinct()
-                .OrderBy(x => x);
+            var thangList = thangNamList.Select(tn => tn.Thang).Distinct().OrderBy(x => x);
+            var namList = thangNamList.Select(tn => tn.Nam).Distinct().OrderBy(x => x);
+
+            ThangList.Clear();
+            NamList.Clear();
 
             foreach (var thang in thangList)
                 ThangList.Add(thang);
+
             foreach (var nam in namList)
                 NamList.Add(nam);
 
             SelectedThang = ThangList.FirstOrDefault();
             SelectedNam = NamList.LastOrDefault();
         }
+
 
         private async void ExecuteLapBaoCao()
         {

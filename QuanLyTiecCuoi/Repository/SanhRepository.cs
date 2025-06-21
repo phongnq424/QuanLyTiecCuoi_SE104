@@ -25,7 +25,7 @@ namespace QuanLyTiecCuoi.Repository
 
         public List<SANH> GetAll()
         {
-            return _context.Sanhs.Include(s => s.LoaiSanh).Where(s => !s.isDelelte).ToList();
+            return _context.Sanhs.Include(s => s.LoaiSanh).Where(s => !s.TinhTrang).ToList();
         }
 
         public SANH GetById(int maSanh)
@@ -50,7 +50,7 @@ namespace QuanLyTiecCuoi.Repository
             var sanh = _context.Sanhs.Find(maSanh);
             if (sanh != null)
             {
-                sanh.isDelelte = true;
+                sanh.TinhTrang = true;
                 //_context.Sanhs.Remove(sanh);
                 _context.SaveChanges();
             }
