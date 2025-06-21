@@ -13,7 +13,7 @@ namespace QuanLyTiecCuoi.MVVM.Model
         private decimal? _donGiaBanToiThieu;
 
         public int MaLoaiSanh { get; set; }
-        public bool isDelelte { get; set; } = false;
+        public bool TinhTrang { get; set; } = false;
 
         public string TenLoaiSanh
         {

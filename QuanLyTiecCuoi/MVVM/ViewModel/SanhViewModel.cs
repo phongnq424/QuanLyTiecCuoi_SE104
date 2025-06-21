@@ -89,6 +89,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 _selectedCaSanh = value; OnPropertyChanged();
                 DanhSachSanhView.Refresh();
                 OnPropertyChanged(nameof(SoLuongSanhTrong));
+                OnPropertyChanged(nameof(ThongTinSoLuongSanh));
             }
         }
 
@@ -101,6 +102,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 _selectedDate = value; OnPropertyChanged();
                 DanhSachSanhView.Refresh();
                 OnPropertyChanged(nameof(SoLuongSanhTrong));
+                OnPropertyChanged(nameof(ThongTinSoLuongSanh));
             }
         }
 
@@ -117,6 +119,16 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             }
         }
 
+        public string ThongTinSoLuongSanh
+        {
+            get
+            {
+                if (!SelectedDate.HasValue || SelectedCaSanh == null)
+                    return $"Tổng số sảnh: {SoLuongSanh}";
+                else
+                    return $"Số sảnh trống: {SoLuongSanhTrong}";
+            }
+        }
 
         // Thuộc tính chỉ hiển thị (readonly) – binding lên TextBlock
         public decimal? DonGiaBanToiThieu => SelectedLoaiSanh?.DonGiaBanToiThieu;
@@ -142,6 +154,22 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             DanhSachSanhView = CollectionViewSource.GetDefaultView(DanhSachSanh);
             DanhSachSanhView.Filter = FilterSanh;
+
+            SelectedDate = DateTime.Today;
+
+            var now = DateTime.Now.TimeOfDay;
+
+            // Tìm ca có giờ hiện tại nằm giữa giờ bắt đầu và giờ kết thúc
+            SelectedCaSanh = DanhSachCaSanh.FirstOrDefault(ca =>
+            {
+                var batDau = ca.GioBatDau.TimeOfDay;
+                var ketThuc = ca.GioKetThuc.TimeOfDay;
+                return now >= batDau && now <= ketThuc;
+            });
+
+            // Nếu không có ca phù hợp, chọn ca đầu tiên
+            if (SelectedCaSanh == null && DanhSachCaSanh.Any())
+                SelectedCaSanh = DanhSachCaSanh.First();
 
             // Khởi tạo lệnh 
             AddSanhCommand = new RelayCommand<object>(
@@ -198,10 +226,29 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         // Chỉnh sửa Sảnh
         private void EditSanh()
         {
+            if (SelectedSanh == null) return;
+
             var window = new AddOrEditSanhWindow(SelectedSanh, DanhSachLoaiSanh.ToList());
             if (window.ShowDialog() == true)
             {
                 var newSanh = window.SanhInfo;
+
+                // Kiểm tra nếu số lượng bàn tối đa thay đổi
+                if (newSanh.SoLuongBanToiDa != SelectedSanh.SoLuongBanToiDa)
+                {
+                    // Kiểm tra nếu sảnh đang được đặt trong tương lai
+                    if (_sanhService.IsSanhDangDuocSuDung(SelectedSanh.MaSanh))
+                    {
+                        MessageBox.Show(
+                            $"Sảnh '{SelectedSanh.TenSanh}' đang có trong phiếu đặt tiệc sắp tới. Không thể thay đổi số lượng bàn tối đa.",
+                            "Không thể thay đổi",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning
+                        );
+                        return;
+                    }
+                }
+
                 _sanhService.EditSanh(newSanh);
                 RefreshDanhSachSanh();
                 SelectedSanh = newSanh;
@@ -227,7 +274,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     if (_sanhService.IsSanhDangDuocSuDung(SelectedSanh.MaSanh))
                     {
                         MessageBox.Show(
-                            $"Sảnh '{SelectedSanh.TenSanh}' đang được sử dụng trong phiếu đặt tiệc sắp tới. Không thể xóa.",
+                            $"Sảnh '{SelectedSanh.TenSanh}' đang có trong phiếu đặt tiệc sắp tới. Không thể xóa.",
                             "Không thể xóa",
                             MessageBoxButton.OK,
                             MessageBoxImage.Warning
