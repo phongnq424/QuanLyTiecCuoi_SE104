@@ -186,7 +186,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 {
                     MaDatTiec = TiecMoi.MaDatTiec,
                     MaMon = monAn.MaMon,
-                    SoLuong = (TiecMoi.SoLuongBan + TiecMoi.SoBanDuTru),
+                    SoLuong = monAn.SoLuong,
                     GhiChu = ""
                 };
                 _chiTietMenuService.ThemChiTietMenu(chiTiet);
@@ -203,7 +203,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 {
                     MaDatTiec = TiecMoi.MaDatTiec,
                     MaDichVu = dv.MaDichVu,
-                    SoLuong = 1, // Có thể cho phép chọn số lượng tùy ý
+                    SoLuong = dv.SoLuong,
                     DonGia = dv.DonGia,
                 };
 

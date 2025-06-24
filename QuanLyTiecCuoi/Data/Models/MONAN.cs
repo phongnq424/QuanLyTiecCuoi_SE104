@@ -16,6 +16,7 @@ namespace QuanLyTiecCuoi.Data.Models
         [Required]
         [MaxLength(100)]
         public string TenMon { get; set; }
+        public int SoLuong { get; set; }
         public decimal DonGia { get; set; }
         [MaxLength(255)]
         public string HinhAnh { get; set; }

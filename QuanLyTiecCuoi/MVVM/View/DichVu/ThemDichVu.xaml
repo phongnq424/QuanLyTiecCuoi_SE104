@@ -63,14 +63,26 @@
 
                 <!-- Hình ảnh -->
                 <Label HorizontalAlignment="Center" MouseDoubleClick="imgDichVu_MouseLeftButtonDown">
-                    <Image x:Name="imgDichVu"
-                           Source="{Binding ImagePath}"
-                           Width="300" Height="270"
-                           Stretch="UniformToFill"
-                           Margin="10"/>
+                    <Grid HorizontalAlignment="Center" >
+                        <Image x:Name="imgDichVu"
+                               Source="{Binding HinhAnh}"
+                               Width="300" Height="270"
+                               Stretch="UniformToFill"
+                               Margin="10"/>
+
+                        <!-- Text hiển thị khi ảnh rỗng -->
+                        <TextBlock 
+                                   Text="Double click để thêm đường dẫn ảnh"
+                                   Foreground="Gray"
+                                   FontStyle="Italic"
+                                   FontSize="16"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+
                 </Label>
                 <TextBox x:Name="txtImagePath"
-                         Text="{Binding ImagePath, Mode=TwoWay}"
+                         Text="{Binding HinhAnh, Mode=TwoWay}"
                          Visibility="Collapsed"
                          FontSize="14"
                          Margin="10,0,10,10"

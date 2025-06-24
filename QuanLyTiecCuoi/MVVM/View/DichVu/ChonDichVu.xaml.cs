@@ -25,6 +25,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
             if (sender is Border border && border.DataContext is DICHVU dichVu)
             {
                 _viewModel.ChonDichVu(dichVu);
+                TinhTongTien();
             }
         }
 
@@ -138,5 +139,23 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
                 this.NavigationService.GoBack();
             }
         }
+        private void SoLuong_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TinhTongTien();
+        }
+
+        private void TinhTongTien()
+        {
+            decimal tong = 0;
+
+            foreach (var dv in _viewModel.DichVuDaChon)
+            {
+                int soLuong = dv.SoLuong > 0 ? dv.SoLuong : 1;
+                tong += dv.DonGia * soLuong;
+            }
+
+            txtTongTien.Text = $"Tổng tiền: {tong:N0} VND";
+        }
+
     }
 }

@@ -62,11 +62,22 @@
 
                 <!-- Hình ảnh -->
                 <Label HorizontalAlignment="Center" MouseDoubleClick="imgMonAn_MouseLeftButtonDown">
-                    <Image x:Name="imgMonAn"
-                           Source="{Binding HinhAnh}"
-                           Width="300" Height="270"
-                           Stretch="UniformToFill"
-                           Margin="10" />
+                    <Grid HorizontalAlignment="Center" >
+                        <Image x:Name="imgMonAn"
+                                Source="{Binding HinhAnh}"
+                                Width="300" Height="270"
+                                Stretch="UniformToFill"
+                                Margin="10"/>
+
+                        <!-- Text hiển thị khi ảnh rỗng -->
+                        <TextBlock 
+                                Text="Double click để thêm đường dẫn ảnh"
+                                Foreground="Gray"
+                                FontStyle="Italic"
+                                FontSize="16"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                    </Grid>
                 </Label>
                 <TextBox x:Name="txtImagePath"
                          Text="{Binding HinhAnh, Mode=TwoWay}"

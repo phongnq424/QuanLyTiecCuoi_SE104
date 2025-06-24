@@ -146,6 +146,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="Các món ăn đã chọn:" FontWeight="Bold" FontSize="24" FontFamily="Cambria" Margin="0,0,0,5" Grid.Row="0"/>
@@ -155,18 +156,34 @@
                             BorderThickness="2"
                             Background="White"
                             Margin="10,0,0,10">
-                            <ListBox x:Name="lstSelectedFoods" Grid.Row="1"
-                                 ItemsSource="{Binding MonAnDaChon}"
-                                 DisplayMemberPath="TenMon"
-                                 MouseLeftButtonUp="lstSelectedFoods_MouseLeftButtonUp"
-                                 BorderThickness="0"
-                             
-                                 FontSize="20"
-                                 FontFamily="Cambria"
-                                 Foreground="Black"
-                                 Margin="10,0,0,10"/>
+                            <ListBox x:Name="lstSelectedFoods"
+                                     ItemsSource="{Binding MonAnDaChon}"
+                                     BorderThickness="0"
+                                     FontSize="20"
+                                     FontFamily="Cambria"
+                                     Foreground="Black"
+                                     Margin="10,0,0,10">
+                                <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5">
+                                        <TextBlock Text="{Binding TenMon}" Width="200"/>
+                                        <TextBox Width="40"
+                                                 Text="{Binding SoLuong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 TextChanged="SoLuong_TextChanged"
+                                                 Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </Border>
-                        <Button Content="OK" FontSize="20" FontFamily="Cambria" Grid.Row="2" Width="150" Height="50" HorizontalAlignment="Right"
+                        <TextBlock x:Name="txtTongTien"
+               FontSize="24"
+               FontWeight="Bold"
+           FontFamily="Cambria"
+               Margin="0,10,0,0"
+               Grid.Row="2"/>
+
+                        <Button Content="OK" FontSize="20" FontFamily="Cambria" Grid.Row="3" Width="150" Height="50" HorizontalAlignment="Right"
                                 Margin="0,10,0,0" Background="#673500" Foreground="White" BorderBrush="#673500" Click="Ok_Click"/>
                     </Grid>
                 </Grid>
