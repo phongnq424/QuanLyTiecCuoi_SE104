@@ -57,7 +57,7 @@
                                 <TextBlock x:Name="tbl_DSDichVu" Text="Danh sách dịch vụ" FontWeight="Bold" FontSize="35" FontFamily="Cambria"/>
                             </Border>
 
-                            <ScrollViewer Background="White" Height="400" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer x:Name="scr_DSDichVu" Background="White" Height="400" VerticalScrollBarVisibility="Auto">
                                 <ItemsControl x:Name="itemsControlDichVu" ItemsSource="{Binding DanhSachDichVu}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
