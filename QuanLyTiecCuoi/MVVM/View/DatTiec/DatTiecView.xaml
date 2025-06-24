@@ -227,6 +227,13 @@
                             <DataGridTextColumn Header="Sảnh"
                                                 Binding="{Binding Sanh.TenSanh}"
                                                 Width="1.3*" />
+                            <DataGridTextColumn Header="Ngày đặt"
+                                                Width="*">
+                                <DataGridTextColumn.Binding>
+                                    <Binding Path="NgayDatTiec"
+                                                StringFormat="{}{0:dd/MM/yyyy}" />
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Ngày đãi"
                                                 Width="*">
                                 <DataGridTextColumn.Binding>
@@ -272,7 +279,7 @@
                                 Style="{StaticResource ButtonStyle}"
                                 FontSize="20"
                                 FontFamily="Cambria" />
-                        <Button Content="Xem hóa đơn"
+                        <Button Content="Tạo hóa đơn"
                                 Style="{StaticResource ButtonStyle}"
                                 FontSize="20"
                                 FontFamily="Cambria"

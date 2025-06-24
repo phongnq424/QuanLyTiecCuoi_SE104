@@ -70,28 +70,15 @@ public class DatTiecViewModel : BaseViewModel
     private void InHoaDon(DATTIEC datTiec)
     {
         if (datTiec == null) return;
-
         var hoaDon = _datTiecService.GetHoaDonTheoMaDatTiec(datTiec.MaDatTiec);
-        if (hoaDon == null)
-        {
-            MessageBox.Show("Không tìm thấy hóa đơn cho tiệc này.");
-            return;
+        if (hoaDon == null){
+            _datTiecService.AddHoaDon(datTiec);
+            MessageBox.Show("Tạo hóa đơn thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            LoadDanhSachDatTiec();
         }
-        DateTime ngayHienTai = DateTime.Now.Date;
-        DateTime ngayDaiTiec = datTiec.NgayDaiTiec.Date;
-
-        var window = App.AppHost?.Services.GetService<ChiTietHoaDonWindow>();
-        var viewModel = App.AppHost?.Services.GetService<HoaDonViewModel>();
-
-        if (window != null && viewModel != null)
+        else
         {
-
-            window.DataContext = viewModel;
-
-            if(viewModel.ChonHoaDonCommand.CanExecute(hoaDon))
-            {
-                viewModel.ChonHoaDonCommand.Execute(hoaDon);
-            }
+            MessageBox.Show("Hóa đơn đã tồn tại!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 
@@ -107,7 +94,15 @@ public class DatTiecViewModel : BaseViewModel
     }
     public void LoadDanhSachDatTiec()
     {
-        _allDatTiec = _datTiecService.GetAllDatTiec();
+        var allTiec = _datTiecService.GetAllDatTiec();
+        var allHoaDon = _datTiecService.GetAllHoaDon(); // hàm này bạn cần có trong service
+
+        var maTiecDaLapHoaDon = allHoaDon.Select(h => h.MaDatTiec).ToHashSet();
+
+        _allDatTiec = allTiec
+            .Where(tiec => !maTiecDaLapHoaDon.Contains(tiec.MaDatTiec))
+            .ToList();
+
         DanhSachDatTiec = new ObservableCollection<DATTIEC>(_allDatTiec);
         OnPropertyChanged(nameof(DanhSachDatTiec));
     }

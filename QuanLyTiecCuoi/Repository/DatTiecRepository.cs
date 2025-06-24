@@ -20,11 +20,14 @@ namespace QuanLyTiecCuoi.Repository
             return _context.DatTiecs
                 .Include(dt => dt.CaSanh)
                 .Include(dt => dt.Sanh)
-                .Where(dt => dt.NgayDaiTiec > DateTime.Now)
                 .OrderBy(dt => dt.NgayDaiTiec)
                 .ToList();
         }
-
+        public List<HOADON> GetAllHoaDon()
+        {
+            return _context.HoaDons
+                .ToList();
+        }
         public DATTIEC? GetDatTiecById(int id)
         {
             return _context.DatTiecs.FirstOrDefault(d => d.MaDatTiec == id);
@@ -124,6 +127,12 @@ namespace QuanLyTiecCuoi.Repository
         {
             return _context.HoaDons.FirstOrDefault(hd => hd.MaDatTiec == maDatTiec);
         }
+        public decimal tinhTienDatCoc(decimal a, decimal b)
+        {
+            decimal tiLeDC = _context.ThamSos.FirstOrDefault().PhanTramDatCoc;
+            decimal c = tiLeDC*(a + b);
+            return c;
+        }
         public void AddHoaDon(DATTIEC datTiec)
         {
             var chiTietMenu = _context.ChiTietMenus.Where(ctm => ctm.MaDatTiec == datTiec.MaDatTiec).ToList();
@@ -133,19 +142,16 @@ namespace QuanLyTiecCuoi.Repository
             foreach (var ct in chiTietMenu)
             {
                 var monAn = _context.MonAns.Where(monAn => monAn.MaMon == ct.MaMon).FirstOrDefault();
-                donGiaBan += monAn.DonGia;
+                donGiaBan += monAn.DonGia * monAn.SoLuong;
             }
             decimal tongTienBan = donGiaBan * datTiec.SoLuongBan;
             decimal tongTienDV = 0;
             foreach (var ctdv in chiTietDichVu)
             {
                 var dichVu = _context.DichVus.Where(dichVu => dichVu.MaDichVu == ctdv.MaDichVu).FirstOrDefault();
-                tongTienDV += dichVu.DonGia;
+                tongTienDV += dichVu.DonGia * dichVu.SoLuong;
             }
             decimal tongTien = tongTienBan + tongTienDV;
-            decimal tiLeDC = _context.ThamSos.FirstOrDefault().PhanTramDatCoc;
-            datTiec.TienDatCoc = tongTien * tiLeDC; // Giả sử tiền đặt cọc là 30% tổng tiền
-
 
             var hoaDon = new HOADON
             {
@@ -156,53 +162,10 @@ namespace QuanLyTiecCuoi.Repository
                 TienPhat = 0,
                 TongTienHD = tongTienDV + tongTienBan,
                 SoLuongBan = datTiec.SoLuongBan,
+                NgayLap = DateTime.Now,
                 TienPhaiThanhToan = tongTienBan + tongTienDV - datTiec.TienDatCoc,
             };
             _context.HoaDons.Add(hoaDon);
-            _context.SaveChanges();
-        }
-        public void UpdateHoaDon(int maDatTiec)
-        {
-            var datTiec = _context.DatTiecs.FirstOrDefault(d => d.MaDatTiec == maDatTiec);
-            if (datTiec == null) return;
-
-            var hoaDon = _context.HoaDons.FirstOrDefault(h => h.MaDatTiec == maDatTiec);
-            if (hoaDon == null) return;
-
-            var chiTietMenu = _context.ChiTietMenus.Where(ct => ct.MaDatTiec == maDatTiec).ToList();
-            var chiTietDV = _context.ChiTietDVTiecs.Where(ct => ct.MaDatTiec == maDatTiec).ToList();
-
-            decimal donGiaBan = 0;
-            foreach (var ct in chiTietMenu)
-            {
-                var monAn = _context.MonAns.FirstOrDefault(m => m.MaMon == ct.MaMon);
-                if (monAn != null)
-                    donGiaBan += monAn.DonGia;
-            }
-
-            decimal tongTienBan = donGiaBan * datTiec.SoLuongBan;
-
-            decimal tongTienDV = 0;
-            foreach (var ct in chiTietDV)
-            {
-                var dv = _context.DichVus.FirstOrDefault(d => d.MaDichVu == ct.MaDichVu);
-                if (dv != null)
-                    tongTienDV += dv.DonGia;
-            }
-
-            decimal tongTien = tongTienBan + tongTienDV;
-            decimal tiLeDC = _context.ThamSos.FirstOrDefault()?.PhanTramDatCoc ?? 0;
-
-            datTiec.TienDatCoc = tongTien * tiLeDC;
-
-            // Cập nhật hóa đơn
-            hoaDon.DonGiaBan = donGiaBan;
-            hoaDon.TongTienBan = tongTienBan;
-            hoaDon.TongTienDV = tongTienDV;
-            hoaDon.TongTienHD = tongTien;
-            hoaDon.SoLuongBan = datTiec.SoLuongBan;
-            hoaDon.TienPhaiThanhToan = tongTien - datTiec.TienDatCoc;
-
             _context.SaveChanges();
         }
 

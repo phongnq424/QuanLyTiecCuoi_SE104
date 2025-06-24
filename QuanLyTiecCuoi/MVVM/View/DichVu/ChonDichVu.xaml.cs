@@ -1,4 +1,5 @@
 ﻿using QuanLyTiecCuoi.Data.Models;
+using QuanLyTiecCuoi.MVVM.ViewModel;
 using QuanLyTiecCuoi.MVVM.ViewModel.DichVu;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -12,11 +13,26 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
     {
         private readonly ChonDichVuViewModel _viewModel;
 
-        public ChonDichVu(DATTIEC datTiec, ObservableCollection<DICHVU> dichVuDaChon)
+        private readonly ThemTiecViewModel _themTiecVM;
+        private readonly SuaTiecViewModel _suaTiecVM;
+
+        public ChonDichVu(ThemTiecViewModel themTiecVM)
         {
             InitializeComponent();
-            _viewModel = new ChonDichVuViewModel(datTiec, dichVuDaChon);
+            _themTiecVM = themTiecVM;
+            _viewModel = new ChonDichVuViewModel(themTiecVM.TiecMoi, themTiecVM.DichVuDaChon);
             this.DataContext = _viewModel;
+
+            TinhTongTien(); // cập nhật ban đầu
+        }
+        public ChonDichVu(SuaTiecViewModel suaTiecVM)
+        {
+            InitializeComponent();
+            _suaTiecVM = suaTiecVM;
+            _viewModel = new ChonDichVuViewModel(suaTiecVM.TiecMoi, suaTiecVM.DichVuDaChon);
+            this.DataContext = _viewModel;
+
+            TinhTongTien(); // cập nhật ban đầu
         }
 
 
@@ -31,7 +47,11 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            //_viewModel.LuuChiTietDichVu();
+            if (_themTiecVM != null)
+                _themTiecVM.CapNhatTongTien(); // cập nhật ngay khi đóng
+            else
+                _suaTiecVM.CapNhatTongTien(); // cập nhật ngay khi đóng
+
             if (this.NavigationService != null && this.NavigationService.CanGoBack)
             {
                 this.NavigationService.GoBack();
@@ -51,6 +71,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DichVu
                 // Reset selection để lần sau click lại được
                 lstSelectedFoods.SelectedItem = null;
             }
+            TinhTongTien();
         }
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)

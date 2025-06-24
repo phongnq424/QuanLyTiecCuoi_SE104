@@ -24,11 +24,15 @@ namespace QuanLyTiecCuoi.Services
             {
                 var monAn = _monAnRepository.GetById(ct.MaMon);
                 if (monAn != null)
+                {
+                    monAn.SoLuong = ct.SoLuong; 
                     danhSachMonAn.Add(monAn);
+                }
             }
 
             return danhSachMonAn;
         }
+
 
         /// <summary>
         /// Thêm 1 chi tiết menu vào DB.

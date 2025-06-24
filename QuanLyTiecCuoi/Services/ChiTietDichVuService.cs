@@ -24,7 +24,11 @@ namespace QuanLyTiecCuoi.Services
             {
                 var dv = _dichVuRepository.GetById(ct.MaDichVu);
                 if (dv != null)
+                {
+                    dv.SoLuong = ct.SoLuong;   // ✅ Gán lại số lượng từ CHITIETDVTIEC
+                    dv.DonGia = ct.DonGia;     // ✅ Gán lại đơn giá nếu khác đơn giá gốc
                     danhSachDichVu.Add(dv);
+                }
             }
 
             return danhSachDichVu;

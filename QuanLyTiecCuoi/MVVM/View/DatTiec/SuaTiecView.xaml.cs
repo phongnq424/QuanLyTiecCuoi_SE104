@@ -24,12 +24,14 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
             // Load các combobox (ca, sảnh)
             viewModel.LoadDanhSachCa();
             viewModel.LoadDanhSachSanh();
+            viewModel.CapNhatTongTien();
 
             // Gán dữ liệu cho ComboBox
             ShiftComboBox.ItemsSource = viewModel.DanhSachCa;
             HallComboBox.ItemsSource = viewModel.DanhSachSanh;
 
             FilterDatePicker.SelectedDate = viewModel.TiecMoi.NgayDaiTiec;
+            FilterDatePicker_dt.SelectedDate = viewModel.TiecMoi.NgayDatTiec;
 
             // Thiết lập Display/Value path
             ShiftComboBox.DisplayMemberPath = "TenCa";
@@ -95,7 +97,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
         }
         private void MonAnButton_Click(object sender, RoutedEventArgs e)
         {
-            var chonMonAnPage = new ChonMonAn(viewModel.TiecMoi, viewModel.MonAnDaChon);
+            var chonMonAnPage = new ChonMonAn(this.DataContext as SuaTiecViewModel);
             var mainWindow = Application.Current.MainWindow as MainWindow;
             if (mainWindow != null)
             {
@@ -105,7 +107,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
 
         private void DichVuButton_Click(object sender, RoutedEventArgs e)
         {
-            var chonDichVuPage = new ChonDichVu(viewModel.TiecMoi, viewModel.DichVuDaChon);
+            var chonDichVuPage = new ChonDichVu(this.DataContext as SuaTiecViewModel);
             var mainWindow = Application.Current.MainWindow as MainWindow;
             if (mainWindow != null)
             {
