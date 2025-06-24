@@ -51,7 +51,7 @@
 
                 <!-- Header -->
                 <DockPanel Grid.Row="0" LastChildFill="True">
-                    <TextBlock Text="Chọn dịch vụ" FontWeight="Bold" FontSize="35" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,400,0" />
+                    <TextBlock x:Name="tbl_ChonDichVu" Text="Chọn dịch vụ" FontWeight="Bold" FontSize="35" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,400,0" />
 
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center">
                         <Button Style="{StaticResource WindowButtonStyle}" Content="✕" Click="Close_Click"/>
@@ -107,11 +107,12 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Danh sách dịch vụ:" FontWeight="Bold" FontSize="24" FontFamily="Cambria" Margin="0,0,0,5" Grid.Row="0"/>
+                        <TextBlock x:Name="tbl_DSDichVu"
+                            Text="Danh sách dịch vụ:" FontWeight="Bold" FontSize="24" FontFamily="Cambria" Margin="0,0,0,5" Grid.Row="0"/>
 
                         <Border Grid.Row="1" BorderBrush="#673500" BorderThickness="2" CornerRadius="8" Padding="10">
                             <ScrollViewer Background="White" VerticalScrollBarVisibility="Auto">
-                                <ItemsControl ItemsSource="{Binding DanhSachDichVu}">
+                                <ItemsControl x:Name="it_DichVu" ItemsSource="{Binding DanhSachDichVu}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel Orientation="Horizontal" ItemWidth="400" />
@@ -148,7 +149,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Các dịch vụ đã chọn:" FontWeight="Bold" FontSize="24" FontFamily="Cambria" Margin="0,0,0,5" Grid.Row="0"/>
+                        <TextBlock x:Name="tbl_DichVuDaChon" Text="Các dịch vụ đã chọn:" FontWeight="Bold" FontSize="24" FontFamily="Cambria" Margin="0,0,0,5" Grid.Row="0"/>
 
                         <Border
                                 CornerRadius="10"
@@ -166,8 +167,9 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5">
-                                            <TextBlock Text="{Binding TenDichVu}" Width="200"/>
-                                            <TextBox Width="40"
+                                            <TextBlock x:Name="tbl_TenDichVuDaChon" Text="{Binding TenDichVu}" Width="200"/>
+                                            <TextBox x:Name="tbl_SoLuong"
+                                                Width="40"
                                                      Text="{Binding SoLuong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                      TextChanged="SoLuong_TextChanged"
                                                      Margin="10,0,0,0"/>
@@ -189,7 +191,8 @@
 
 
 
-                        <Button Content="OK"
+                        <Button x:Name="btn_OK"
+                            Content="OK"
                                 FontSize="20"
                                 FontFamily="Cambria"
                                 Grid.Row="3"

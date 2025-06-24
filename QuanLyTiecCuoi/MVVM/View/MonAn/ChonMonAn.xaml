@@ -52,7 +52,8 @@
 
                 <!-- Header -->
                 <DockPanel Grid.Row="0" LastChildFill="True">
-                    <TextBlock Text="Chọn món ăn" FontWeight="Bold" FontSize="35" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,400,0" />
+                    <TextBlock x:Name="tbl_ChonMonAn"
+                        Text="Chọn món ăn" FontWeight="Bold" FontSize="35" FontFamily="Cambria" VerticalAlignment="Center" Margin="10,0,400,0" />
 
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center">
                         <Button Style="{StaticResource WindowButtonStyle}" Content="✕" Click="Close_Click"/>
@@ -108,11 +109,14 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Danh sách món ăn:" FontWeight="Bold" FontSize="24" FontFamily="Cambria" Margin="0,0,0,5" Grid.Row="0"/>
+                        <TextBlock x:Name="tbl_DSMonAn"
+                            Text="Danh sách món ăn:" FontWeight="Bold" FontSize="24" FontFamily="Cambria" Margin="0,0,0,5" Grid.Row="0"/>
 
                         <Border Grid.Row="1" BorderBrush="#673500" BorderThickness="2" CornerRadius="8" Padding="10">
-                            <ScrollViewer Background="White" VerticalScrollBarVisibility="Auto">
-                                <ItemsControl ItemsSource="{Binding DanhSachMonAn}">
+                            <ScrollViewer x:Name="scr_DSMonAn"
+                                Background="White" VerticalScrollBarVisibility="Auto">
+                                <ItemsControl x:Name="it_MonAn"
+                                    ItemsSource="{Binding DanhSachMonAn}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel Orientation="Horizontal" ItemWidth="400" />
@@ -149,7 +153,8 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Các món ăn đã chọn:" FontWeight="Bold" FontSize="24" FontFamily="Cambria" Margin="0,0,0,5" Grid.Row="0"/>
+                        <TextBlock x:Name="tbl_MonAnDaChon"
+                            Text="Các món ăn đã chọn:" FontWeight="Bold" FontSize="24" FontFamily="Cambria" Margin="0,0,0,5" Grid.Row="0"/>
                         <Border Grid.Row="1"
                             CornerRadius="10"
                             BorderBrush="#673500"
@@ -166,8 +171,10 @@
                                 <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,5">
-                                        <TextBlock Text="{Binding TenMon}" Width="200"/>
-                                        <TextBox Width="40"
+                                        <TextBlock x:Name="tbl_TenMonDaChon" 
+                                            Text="{Binding TenMon}" Width="200"/>
+                                        <TextBox x:Name="tbl_SoLuong"
+                                                Width="40"
                                                  Text="{Binding SoLuong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                  TextChanged="SoLuong_TextChanged"
                                                  Margin="10,0,0,0"/>
@@ -183,7 +190,8 @@
                Margin="0,10,0,0"
                Grid.Row="2"/>
 
-                        <Button Content="OK" FontSize="20" FontFamily="Cambria" Grid.Row="3" Width="150" Height="50" HorizontalAlignment="Right"
+                        <Button x:Name="btn_OK"
+                            Content="OK" FontSize="20" FontFamily="Cambria" Grid.Row="3" Width="150" Height="50" HorizontalAlignment="Right"
                                 Margin="0,10,0,0" Background="#673500" Foreground="White" BorderBrush="#673500" Click="Ok_Click"/>
                     </Grid>
                 </Grid>

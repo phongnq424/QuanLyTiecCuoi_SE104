@@ -54,7 +54,7 @@
                     <Border BorderBrush="#AAA" BorderThickness="1" CornerRadius="8" Padding="10">
                         <StackPanel>
                             <Border CornerRadius="6" Padding="5" HorizontalAlignment="Center" Margin="0,0,0,10">
-                                <TextBlock Text="Danh sách dịch vụ" FontWeight="Bold" FontSize="35" FontFamily="Cambria"/>
+                                <TextBlock x:Name="tbl_DSDichVu" Text="Danh sách dịch vụ" FontWeight="Bold" FontSize="35" FontFamily="Cambria"/>
                             </Border>
 
                             <ScrollViewer Background="White" Height="400" VerticalScrollBarVisibility="Auto">
@@ -71,9 +71,9 @@
                                                     <Image Source="{Binding HinhAnh}" Width="120" Height="120" Stretch="UniformToFill" Margin="5"/>
                                                     <TextBlock Text="{Binding TenDichVu}" FontWeight="Bold" FontSize="14" TextAlignment="Center" Margin="5,0"/>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,5">
-                                                        <Button Content="🗑️" Width="30" Height="30" Margin="2" ToolTip="Xóa" Click="BtnXoa_Click"/>
-                                                        <Button Content="✎" Width="30" Height="30" Margin="2" ToolTip="Chỉnh sửa" Click="BtnChinhSua_Click"/>
-                                                        <Button Content="ℹ️" Width="30" Height="30" Margin="2" ToolTip="Chi tiết" Click="BtnChiTiet_Click"/>
+                                                        <Button x:Name="btn_Xoa" Content="🗑️" Width="30" Height="30" Margin="2" ToolTip="Xóa" Click="BtnXoa_Click"/>
+                                                        <Button x:Name="btn_ChinhSua" Content="✎" Width="30" Height="30" Margin="2" ToolTip="Chỉnh sửa" Click="BtnChinhSua_Click"/>
+                                                        <Button x:Name="btn_ChiTiet" Content="ℹ️" Width="30" Height="30" Margin="2" ToolTip="Chi tiết" Click="BtnChiTiet_Click"/>
                                                     </StackPanel>
                                                 </StackPanel>
                                             </Border>
