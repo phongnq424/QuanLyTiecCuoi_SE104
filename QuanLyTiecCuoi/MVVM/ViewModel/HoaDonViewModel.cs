@@ -140,6 +140,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         public ICommand XoaDichVuCommand { get; set; }
         public ICommand LuuThayDoiHoaDonCommand { get; set; }
         public ICommand ThayDoiSoLuongBanCommand { get; set; }
+        public ICommand XoaHDCommand { get; set; }
 
         #endregion
 
@@ -307,7 +308,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             ThanhToanCommand = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
-                if(TiecDuocChon != null && TiecDuocChon.NgayDaiTiec.Date >= DateTime.Now.Date)
+                if (TiecDuocChon != null && TiecDuocChon.NgayDaiTiec.Date >= DateTime.Now.Date)
                 {
                     MessageBox.Show("Hóa đơn chỉ được xác nhận thanh toán từ ngày đãi tiệc");
                     return;
@@ -349,15 +350,15 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             ThayDoiSoLuongBanCommand = new RelayCommand<String?>((p) => { return true; }, (p) =>
             {
-                if(p == null ||  p.Length == 0 || TiecDuocChon == null)
+                if (p == null || p.Length == 0 || TiecDuocChon == null)
                 {
                     return;
                 }
 
                 int soluong = 0;
-                if(int.TryParse(p, out soluong))
+                if (int.TryParse(p, out soluong))
                 {
-                    if(TiecDuocChon.SoLuongBan > soluong || soluong > TiecDuocChon.SoLuongBan + TiecDuocChon.SoBanDuTru)
+                    if (TiecDuocChon.SoLuongBan > soluong || soluong > TiecDuocChon.SoLuongBan + TiecDuocChon.SoBanDuTru)
                     {
                         MessageBox.Show($"Số bàn thực tế sử dụng trong khoản {TiecDuocChon.SoLuongBan} đến {TiecDuocChon.SoBanDuTru + TiecDuocChon.SoLuongBan}");
                         return;
@@ -371,12 +372,36 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 }
             });
 
+            XoaHDCommand = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            {
+                var result = MessageBox.Show("Bạn có muốn xóa hóa đơn", "Xóa hóa đơn", MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    var hd = await hoaDonService.XoaHD(HoaDonDuocChon);
+                    if(hd == null)
+                    {
+                        MessageBox.Show("Chưa thể xóa hóa đơn");
+                    }
+                    else
+                    {
+                        p.Close();
+                        List<HOADON> res = await hoaDonService.GetAllHoaDonsAsync();
+                        if (res != null)
+                        {
+                            DanhSachHoaDon = new ObservableCollection<HOADON>(res);
+                        }
+
+                    }
+                }
+            });
+
         }
 
         private void TinhMenu()
         {
             HoaDonDuocChon.DonGiaBan = 0;
-            foreach(var i in MenuTiecDuocChon)
+            foreach (var i in MenuTiecDuocChon)
             {
                 HoaDonDuocChon.DonGiaBan += i.MonAn.DonGia * i.SoLuong;
             }
@@ -485,20 +510,20 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             content.Inlines.Add(new Bold(new Run("Tổng tiền thanh toán: ")));
             content.Inlines.Add(new Run($"{HoaDonDuocChon.TongTienHD:C0}"));
             content.Inlines.Add(new LineBreak());
-            if(HoaDonDuocChon.TienPhat != 0)
+            if (HoaDonDuocChon.TienPhat != 0)
             {
                 content.Inlines.Add(new Bold(new Run($"Tiền phạt: ")));
                 content.Inlines.Add(new Run($"{HoaDonDuocChon.TienPhat:C0}"));
-            content.Inlines.Add(new LineBreak());
+                content.Inlines.Add(new LineBreak());
             }
 
             // Tạo bảng
             Table table = new Table();
             table.CellSpacing = 0;
-            table.Columns.Add(new TableColumn { Width = new GridLength(250) }); 
-            table.Columns.Add(new TableColumn { Width = new GridLength(100) }); 
-            table.Columns.Add(new TableColumn { Width = new GridLength(120) }); 
-            table.Columns.Add(new TableColumn { Width = new GridLength(130) }); 
+            table.Columns.Add(new TableColumn { Width = new GridLength(250) });
+            table.Columns.Add(new TableColumn { Width = new GridLength(100) });
+            table.Columns.Add(new TableColumn { Width = new GridLength(120) });
+            table.Columns.Add(new TableColumn { Width = new GridLength(130) });
 
             // Tạo phần thân bảng
             TableRowGroup group = new TableRowGroup();
@@ -597,7 +622,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             HoaDonDuocChon.TongTienDV = TongTienTatCaDichVu;
             HoaDonDuocChon.TongTienBan = HoaDonDuocChon.DonGiaBan * HoaDonDuocChon.SoLuongBan;
             HoaDonDuocChon.TongTienHD = HoaDonDuocChon.TongTienDV + HoaDonDuocChon.TongTienBan;
-            if(_thamSo != null && _thamSo.ApDungQDPhatThanhToanTre)
+            if (_thamSo != null && _thamSo.ApDungQDPhatThanhToanTre)
             {
                 ngayToiDaThanhToan = TiecDuocChon.NgayDaiTiec.AddDays(_thamSo.SLNgayThanhToanTreToiDa);
                 if (DateTime.Now.Date > ngayToiDaThanhToan)
@@ -617,10 +642,10 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             if (HoaDonDuocChon.NgayThanhToan == null && TiecDuocChon != null)
             {
                 // Có thể chỉnh sửa hóa đơn khi ngày đãi tiệc bé hơn ngày hiện tại
-                if(TiecDuocChon.NgayDaiTiec.Date > DateTime.Now)
+                if (TiecDuocChon.NgayDaiTiec.Date > DateTime.Now)
                 {
-                    CoTheChinhSua = false ;
-                    ThongBaoChinhSua = "Hóa đơn không thể chỉnh sửa vì chưa đến ngày đãi tiệc"; 
+                    CoTheChinhSua = false;
+                    ThongBaoChinhSua = "Hóa đơn không thể chỉnh sửa vì chưa đến ngày đãi tiệc";
                 }
                 else
                 {

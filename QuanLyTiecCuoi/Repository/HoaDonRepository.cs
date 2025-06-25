@@ -161,6 +161,12 @@ namespace QuanLyTiecCuoi.Repository
             return ctdv;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="maCTDV"></param>
+        /// <returns></returns>
         public async Task<CHITIETDVTIEC?> DeleteCTDV(int maCTDV)
         {
             var existing = await _context.ChiTietDVTiecs.FindAsync(maCTDV);

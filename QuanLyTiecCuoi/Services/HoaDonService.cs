@@ -139,6 +139,12 @@ namespace QuanLyTiecCuoi.Services
         {
             return await _hoaDonRepository.GetByNgayThanhToanRangeAsync(from, to);
         }
+
+        public async Task<HOADON?> XoaHD(HOADON hd)
+        {
+            return await _hoaDonRepository.DeleteAsync(hd.MaHoaDon);
+        }
+
     }
 
 }

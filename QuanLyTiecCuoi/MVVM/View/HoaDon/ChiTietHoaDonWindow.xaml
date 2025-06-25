@@ -486,9 +486,16 @@
 
             <StackPanel Grid.Row="4"
                     HorizontalAlignment="Right"
-                        Margin="596,0,0,0"
+                        Margin="450,0,0,0"
                         Orientation="Horizontal" Grid.ColumnSpan="2">
-
+                <Button
+                    Content="Xóa hóa đơn"
+                    HorizontalAlignment="Right"
+                    Visibility="{Binding BtnThanhToanVisibility}"
+                    Command="{Binding XoaHDCommand}"
+                    CommandParameter="{Binding ElementName=MangHinhHoaDon}"
+                    Style="{StaticResource ButtonStyle}"/>
+                
                 <Button
                     Content="Xác nhận thanh toán"
                     HorizontalAlignment="Right"
