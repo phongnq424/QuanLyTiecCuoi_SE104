@@ -9,6 +9,7 @@ using QuanLyTiecCuoi.MVVM.View.HoaDon;
 using Microsoft.Extensions.DependencyInjection;
 using QuanLyTiecCuoi.MVVM.ViewModel;
 using QuanLyTiecCuoi.Services;
+using System.Threading.Tasks;
 
 
 namespace QuanLyTiecCuoi.MVVM.View.DatTiec
@@ -48,7 +49,22 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                 // Lấy tiệc đang chọn từ DataGrid
                 if (MyDataGrid.SelectedItem is DATTIEC selectedTiec)
                 {
-                    vm.InHoaDonCommand.Execute(selectedTiec);
+                    if(selectedTiec.NgayDaiTiec.Date > DateTime.Now.Date)
+                    {
+                        MessageBox.Show("Không thể tạo hóa đơn khi chưa đến ngày đãi tiệc");
+                        return;
+                    }
+                    bool dacoHoaDonTruocDo = vm.HoaDonTheoDatTiec(selectedTiec);
+                    if (!dacoHoaDonTruocDo)
+                    {
+                        vm.ThemHoaDon(selectedTiec);
+                        vm.InHoaDonCommand.Execute(selectedTiec);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Đã tạo hóa đơn trước đó");
+                        vm.InHoaDonCommand.Execute(selectedTiec);
+                    }
                 }
                 else
                 {

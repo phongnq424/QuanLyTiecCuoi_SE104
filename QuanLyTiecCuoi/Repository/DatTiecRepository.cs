@@ -20,7 +20,6 @@ namespace QuanLyTiecCuoi.Repository
             return _context.DatTiecs
                 .Include(dt => dt.CaSanh)
                 .Include(dt => dt.Sanh)
-                .Where(dt => dt.NgayDaiTiec > DateTime.Now)
                 .OrderBy(dt => dt.NgayDaiTiec)
                 .ToList();
         }
@@ -150,6 +149,7 @@ namespace QuanLyTiecCuoi.Repository
             var hoaDon = new HOADON
             {
                 MaDatTiec = datTiec.MaDatTiec,
+                NgayLap = DateTime.Now,
                 DonGiaBan = donGiaBan,
                 TongTienBan = tongTienBan,
                 TongTienDV = tongTienDV,

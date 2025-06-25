@@ -186,6 +186,7 @@
                               FontSize="20"
                               FontFamily="Cambria"
                               Background="White"
+                              ScrollViewer.VerticalScrollBarVisibility="Visible"
                               ItemsSource="{Binding DanhSachDatTiec}"
                               SelectedItem="{Binding DatTiecDangChon, Mode=TwoWay}"
                               AutoGenerateColumns="False"
@@ -272,7 +273,7 @@
                                 Style="{StaticResource ButtonStyle}"
                                 FontSize="20"
                                 FontFamily="Cambria" />
-                        <Button Content="Xem hóa đơn"
+                        <Button Content="Tạo hóa đơn"
                                 Style="{StaticResource ButtonStyle}"
                                 FontSize="20"
                                 FontFamily="Cambria"

@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Text;
 using QuanLyTiecCuoi.MVVM.View.HoaDon;
 using QuanLyTiecCuoi.MVVM.ViewModel;
+using System.Threading.Tasks;
 public class DatTiecViewModel : BaseViewModel
 {
     private readonly DatTiecService _datTiecService;
@@ -74,7 +75,6 @@ public class DatTiecViewModel : BaseViewModel
         var hoaDon = _datTiecService.GetHoaDonTheoMaDatTiec(datTiec.MaDatTiec);
         if (hoaDon == null)
         {
-            MessageBox.Show("Không tìm thấy hóa đơn cho tiệc này.");
             return;
         }
         DateTime ngayHienTai = DateTime.Now.Date;
@@ -287,5 +287,15 @@ private void NavigateToDatTiecPage(object parameter)
         NavigateCommand = new RelayCommand<object>(_ => true, NavigateToDatTiecPage);
         InHoaDonCommand = new RelayCommand<DATTIEC>(x => true, InHoaDon);
 
+    }
+
+    internal void ThemHoaDon(DATTIEC selectedTiec)
+    {
+        _datTiecService.AddHoaDon(selectedTiec);
+    }
+
+    internal bool HoaDonTheoDatTiec(DATTIEC selectedTiec)
+    {
+        return _datTiecService.TimHoaDonTheoMaDatTiec(selectedTiec);
     }
 }

@@ -42,6 +42,12 @@ namespace QuanLyTiecCuoi.Repository
                 .ToListAsync();
         }
 
+        public HOADON? GetByMaDatTiec(String maDatTiec)
+        {
+            return _context.HoaDons
+                .Where(h => h.MaDatTiec.ToString().Contains(maDatTiec)).FirstOrDefault();
+        }
+
         /// <summary>
         /// Lọc hóa đơn theo khoảng đơn giá.
         /// </summary>

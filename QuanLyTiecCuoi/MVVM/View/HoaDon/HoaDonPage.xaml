@@ -119,12 +119,12 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn 
-                            Header="Mã hóa đơn" Width="120"
-                            Binding="{Binding MaHoaDon}" />
-
-                        <DataGridTextColumn 
                             Header="Mã đặt tiệc" Width="120"
                             Binding="{Binding MaDatTiec}" />
+
+                        <DataGridTextColumn 
+                            Header="Ngày lập" Width="170"
+                            Binding="{Binding NgayLap, StringFormat=dd/MM/yyyy}" />
 
                         <DataGridTextColumn 
                             Header="Ngày thanh toán" Width="170"

@@ -229,7 +229,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 // lưu chi tiết 
                 LuuChiTietMenu();
                 LuuChiTietDichVu();
-                _datTiecService.AddHoaDon(TiecMoi);
                 DanhSachChanged?.Invoke();
                 return true;
             }
