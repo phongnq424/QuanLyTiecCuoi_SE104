@@ -68,7 +68,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
         }
         private void MonAnButton_Click(object sender, RoutedEventArgs e)
         {
-            var chonMonAnPage = new ChonMonAn(viewModel.TiecMoi, viewModel.MonAnDaChon);
+            var chonMonAnPage = new ChonMonAn(this.DataContext as ThemTiecViewModel);
 
             var mainWindow = Application.Current.MainWindow as MainWindow;
             if (mainWindow != null)
@@ -78,7 +78,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
         }
         private void DichVuButton_Click(object sender, RoutedEventArgs e)
         {
-            var chonDichVuPage = new ChonDichVu(viewModel.TiecMoi, viewModel.DichVuDaChon);
+            var chonDichVuPage = new ChonDichVu(viewModel);
             var mainWindow = Application.Current.MainWindow as MainWindow;
             if (mainWindow != null)
             {

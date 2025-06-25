@@ -166,6 +166,36 @@
                                         <TextBlock Text="Số bàn dự trữ" Grid.Column="0" Margin="30 20"/>
                                         <TextBox x:Name ="DT" Text="{Binding TiecMoi.SoBanDuTru}" Grid.Column="1" Margin="0 20"/>
                                     </Grid>
+                                    <Grid Margin="0 5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Tổng tiền bàn" Grid.Column="0" Margin="30 20"/>
+                                        <TextBox Text="{Binding TongTienBan, StringFormat={}{0:N0}}"  Grid.Column="1" Margin="0 20" IsReadOnly="True" IsEnabled="False"/>
+                                    </Grid>
+                                    <Grid Margin="0 5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Tiền dịch vụ" Grid.Column="0" Margin="30 20"/>
+                                        <TextBox Text="{Binding TienDichVu, StringFormat={}{0:N0}}" 
+                                                 IsReadOnly="True"
+                                                 IsEnabled="False"
+                                                 Grid.Column="1" Margin="0 20"/>
+                                    </Grid>
+                                    <Grid Margin="0 5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Tiền đặt cọc" Grid.Column="0" Margin="30 20"/>
+                                        <TextBox Text="{Binding TiecMoi.TienDatCoc, StringFormat={}{0:N0}}" 
+                                                 IsReadOnly="True"
+                                                 IsEnabled="False"
+                                                 Grid.Column="1" Margin="0 20"/>
+                                    </Grid>
                                 </StackPanel>
 
                                 <!-- Right Form -->
@@ -181,6 +211,28 @@
                                         <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle1}" />
                                         <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}" />
                                     </StackPanel.Resources>
+                                    
+                                    <Grid Margin="0 10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="Ngày đặt tiệc" Grid.Column="0" VerticalAlignment="Center"/>
+                                        <DatePicker
+                                            IsEnabled="False"
+                                            x:Name="FilterDatePicker_dt"
+                                            SelectedDate="{Binding TiecMoi.NgayDatTiec}"
+                                            SelectedDateFormat="Short"
+                                            Grid.Column="1"
+                                            Width="400"
+                                            Height="40"
+                                            FontSize="20"
+                                            FontFamily="Cambria"
+                                            VerticalAlignment="Center"
+                                            SelectedDateChanged ="FilterDatePicker_SelectedDateChanged" 
+                                            Margin="0 10"/>
+                                    </Grid>
 
                                     <!-- Ngày đãi tiệc -->
                                     <Grid Margin="0 10">

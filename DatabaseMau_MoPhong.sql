@@ -1,0 +1,162 @@
+CREATE DATABASE QUANLYTIECCUOI;
+GO
+
+USE QUANLYTIECCUOI;
+GO
+
+-- 1. LOAISANH
+CREATE TABLE LOAISANH (
+    MaLoaiSanh INT PRIMARY KEY,
+    TenLoaiSanh NVARCHAR(100),
+    DonGiaBanToiThieu DECIMAL(18, 2)
+);
+
+-- 2. SANH
+CREATE TABLE SANH (
+    MaSanh INT PRIMARY KEY,
+    TenSanh NVARCHAR(100),
+    MaLoaiSanh INT,
+    SoLuongBanToiDa INT,
+    GhiChu TEXT,
+    TinhTrang TINYINT,
+    FOREIGN KEY (MaLoaiSanh) REFERENCES LOAISANH(MaLoaiSanh)
+);
+
+-- 3. CASANH
+CREATE TABLE CASANH (
+    MaCa INT PRIMARY KEY,
+    TenCa NVARCHAR(255),
+    GioBatDau DATETIME,
+    GioKetThuc DATETIME
+);
+
+-- 4. DATTIEC
+CREATE TABLE DATTIEC (
+    MaDatTiec INT PRIMARY KEY,
+    TenCoDau NVARCHAR(100),
+    TenChuRe NVARCHAR(100),
+    SDT NVARCHAR(10),
+    MaSanh INT,
+    MaCa INT,
+    TienDatCoc MONEY,
+    SoLuongBan INT,
+    SoBanDuTru INT,
+    NgayDaiTiec DATETIME,
+    NgayDatTiec DATETIME,
+    Gio TIME,
+    FOREIGN KEY (MaSanh) REFERENCES SANH(MaSanh),
+    FOREIGN KEY (MaCa) REFERENCES CASANH(MaCa)
+);
+
+-- 5. DICHVU
+CREATE TABLE DICHVU (
+    MaDichVu INT PRIMARY KEY,
+    TenDichVu NVARCHAR(100),
+    DonGia MONEY,
+    MoTa TEXT
+);
+
+-- 6. MONAN
+CREATE TABLE MONAN (
+    MaMon INT PRIMARY KEY,
+    TenMon NVARCHAR(100),
+    DonGia MONEY
+);
+
+-- 7. CHITIETDVTIEC
+CREATE TABLE CHITIETDVTIEC (
+    MaCTDV INT PRIMARY KEY,
+    MaDatTiec INT,
+    MaDichVu INT,
+    DonGia MONEY,
+    SoLuong INT,
+    FOREIGN KEY (MaDatTiec) REFERENCES DATTIEC(MaDatTiec),
+    FOREIGN KEY (MaDichVu) REFERENCES DICHVU(MaDichVu)
+);
+
+-- 8. CHITIETMENU
+CREATE TABLE CHITIETMENU (
+    MaCTMN INT PRIMARY KEY,
+    MaDatTiec INT,
+    MaMon INT,
+    SoLuong INT,
+    DonGia MONEY,
+    GhiChu TEXT,
+    FOREIGN KEY (MaDatTiec) REFERENCES DATTIEC(MaDatTiec),
+    FOREIGN KEY (MaMon) REFERENCES MONAN(MaMon)
+);
+
+-- 9. HOADON
+CREATE TABLE HOADON (
+    MaHoaDon INT PRIMARY KEY,
+    NgayThanhToan DATETIME,
+    NgayLap DATETIME,
+    DonGiaBan MONEY,
+    TongTienBan MONEY,
+    MaDatTiec INT,
+    SoLuongBan INT,
+    TienBan MONEY,
+    TongTienDV MONEY,
+    TongTienHD MONEY,
+    TienPhaiThanhToan MONEY,
+    FOREIGN KEY (MaDatTiec) REFERENCES DATTIEC(MaDatTiec)
+);
+
+-- 10. BAOCAOTHANG
+CREATE TABLE BAOCAOTHANG (
+    MaBaoCao INT PRIMARY KEY,
+    Thang INT,
+    Nam INT,
+    TongDoanhThu MONEY,
+    TongTiecCuoi INT,
+    NgayLap DATETIME
+);
+
+-- 11. CHITIETBAOCAO
+CREATE TABLE CHITIETBAOCAO (
+    MaChiTietBaoCao INT PRIMARY KEY,
+    MaBaoCao INT,
+    Ngay DATETIME,
+    SoLuongTiecCuoi INT,
+    DoanhThu MONEY,
+    TyLe DECIMAL(5,4),
+    FOREIGN KEY (MaBaoCao) REFERENCES BAOCAOTHANG(MaBaoCao)
+);
+
+-- 12. THAMSO
+CREATE TABLE THAMSO (
+    TyLePhatThanhToanTheoNgay DECIMAL(5,4),
+    ApDungQDPhatThanhToanTre TINYINT,
+    PhanTramDatCoc DECIMAL(5,2),
+    SoNgayTreToiDa INT
+);
+
+-- 13. NHOMNGUOIDUNG
+CREATE TABLE NHOMNGUOIDUNG (
+    MaNhom INT PRIMARY KEY,
+    TenNhom NVARCHAR(100)
+);
+
+-- 14. CHUCNANG
+CREATE TABLE CHUCNANG (
+    MaChucNang INT PRIMARY KEY,
+    TenChucNang NVARCHAR(255),
+    TenManHinhDuocLoad NVARCHAR(255)
+);
+
+-- 15. NGUOIDUNG
+CREATE TABLE NGUOIDUNG (
+    TenDangNhap NVARCHAR(100) PRIMARY KEY,
+    MatKhau NVARCHAR(100),
+    MaNhom INT,
+    FOREIGN KEY (MaNhom) REFERENCES NHOMNGUOIDUNG(MaNhom)
+);
+
+-- 16. PHANQUYEN
+CREATE TABLE PHANQUYEN (
+    MaNhom INT,
+    MaChucNang INT,
+    PRIMARY KEY (MaNhom, MaChucNang),
+    FOREIGN KEY (MaNhom) REFERENCES NHOMNGUOIDUNG(MaNhom),
+    FOREIGN KEY (MaChucNang) REFERENCES CHUCNANG(MaChucNang)
+);

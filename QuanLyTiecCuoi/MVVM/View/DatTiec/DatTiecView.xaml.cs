@@ -68,7 +68,7 @@ namespace QuanLyTiecCuoi.MVVM.View.DatTiec
                 }
                 else
                 {
-                    MessageBox.Show("Vui lòng chọn một tiệc cưới để thanh toán hóa đơn.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Vui lòng chọn một tiệc cưới để tạo hóa đơn.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }

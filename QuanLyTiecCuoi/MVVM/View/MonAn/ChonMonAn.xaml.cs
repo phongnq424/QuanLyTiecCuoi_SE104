@@ -1,5 +1,7 @@
 ﻿using QuanLyTiecCuoi.Data.Models;
 using QuanLyTiecCuoi.MVVM.View.MainVindow;
+using QuanLyTiecCuoi.MVVM.ViewModel;
+using QuanLyTiecCuoi.MVVM.ViewModel.DichVu;
 using QuanLyTiecCuoi.MVVM.ViewModel.MonAn;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -11,12 +13,24 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
     public partial class ChonMonAn : Page
     {
         private readonly ChonMonAnViewModel _viewModel;
+        private readonly ThemTiecViewModel _themTiecVM;
+        private readonly SuaTiecViewModel _suaTiecVM;
 
-        public ChonMonAn(DATTIEC datTiec, ObservableCollection<MONAN> monAnDaChon)
+        public ChonMonAn(ThemTiecViewModel themTiecVM)
         {
             InitializeComponent();
-            _viewModel = new ChonMonAnViewModel(datTiec, monAnDaChon);
+            _themTiecVM = themTiecVM;
+            _viewModel = new ChonMonAnViewModel(themTiecVM.TiecMoi, themTiecVM.MonAnDaChon);
             this.DataContext = _viewModel;
+        }
+        public ChonMonAn(SuaTiecViewModel suaTiecVM)
+        {
+            InitializeComponent();
+            _suaTiecVM = suaTiecVM;
+            _viewModel = new ChonMonAnViewModel(suaTiecVM.TiecMoi, suaTiecVM.MonAnDaChon);
+            this.DataContext = _viewModel;
+
+            TinhTongTien(); // cập nhật ban đầu
         }
 
         private void MonAn_Click(object sender, MouseButtonEventArgs e)
@@ -30,17 +44,14 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
+            if (_themTiecVM != null) 
+                _themTiecVM.CapNhatTongTien(); // cập nhật ngay khi đóng
+            else
+                _suaTiecVM.CapNhatTongTien(); // cập nhật ngay khi đóng 
+
             if (this.NavigationService != null && this.NavigationService.CanGoBack)
             {
                 this.NavigationService.GoBack();
-            }
-            else
-            {
-                var mainWindow = Application.Current.MainWindow as MainWindow;
-                if (mainWindow != null && mainWindow.MainFrame.CanGoBack)
-                {
-                    mainWindow.MainFrame.GoBack();
-                }
             }
         }
         private void lstSelectedFoods_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -56,6 +67,7 @@ namespace QuanLyTiecCuoi.MVVM.View.MonAn
 
                 // Reset selection để lần sau click lại được
                 lstSelectedFoods.SelectedItem = null;
+                TinhTongTien();
             }
         }
 

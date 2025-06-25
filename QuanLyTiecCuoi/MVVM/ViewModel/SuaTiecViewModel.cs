@@ -16,7 +16,38 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private readonly ChiTietMenuService _chiTietService;
         private readonly ChiTietDichVuService _chiTietServiceDV;
         public DATTIEC TiecMoi { get; set; }
+        private decimal _tongTienBan;
+        public decimal TongTienBan
+        {
+            get => _tongTienBan;
+            set
+            {
+                if (_tongTienBan != value)
+                {
+                    _tongTienBan = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
+        private decimal _tienDichVu;
+        public decimal TienDichVu
+        {
+            get => _tienDichVu;
+            set
+            {
+                if (_tienDichVu != value)
+                {
+                    _tienDichVu = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public void CapNhatTongTien()
+        {
+            TongTienBan = MonAnDaChon.Sum(m => m.DonGia * m.SoLuong);
+            TienDichVu = DichVuDaChon.Sum(d => d.DonGia * d.SoLuong);
+        }
         public ObservableCollection<CASANH> DanhSachCa { get; set; } = new();
         public ObservableCollection<SANH> DanhSachSanh { get; set; } = new();
 
@@ -38,6 +69,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 TienDatCoc = tiecCanSua.TienDatCoc,
                 SoLuongBan = tiecCanSua.SoLuongBan,
                 SoBanDuTru = tiecCanSua.SoBanDuTru,
+                NgayDatTiec = tiecCanSua.NgayDatTiec,
                 NgayDaiTiec = tiecCanSua.NgayDaiTiec,
                 MaCa = tiecCanSua.MaCa,
                 MaSanh = tiecCanSua.MaSanh
@@ -100,7 +132,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
             var loaiSanh = _datTiecService.GetLoaiSanhById(sanh.MaLoaiSanh);
             if (loaiSanh != null)
             {
-                decimal tongTienBan = MonAnDaChon.Sum(mon => mon.DonGia);
+                decimal tongTienBan = MonAnDaChon.Sum(mon => mon.DonGia*mon.SoLuong);
                 if (tongTienBan < loaiSanh.DonGiaBanToiThieu)
                 {
                     MessageBox.Show($"Tổng tiền bàn ({tongTienBan:N0}đ) phải >= đơn giá tối thiểu ({loaiSanh.DonGiaBanToiThieu:N0} đ).", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -192,7 +224,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     {
                         MaDatTiec = TiecMoi.MaDatTiec,
                         MaMon = monAn.MaMon,
-                        SoLuong = TiecMoi.SoLuongBan + TiecMoi.SoBanDuTru,
+                        SoLuong = monAn.SoLuong,
                         GhiChu = ""
                     }).ToList();
 
@@ -226,7 +258,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     {
                         MaDatTiec = TiecMoi.MaDatTiec,
                         MaDichVu = dv.MaDichVu,
-                        SoLuong = 1, // hoặc cho người dùng chỉnh sửa nếu cần
+                        SoLuong = dv.SoLuong, // hoặc cho người dùng chỉnh sửa nếu cần
                         DonGia = dv.DonGia
                     }).ToList();
 
@@ -266,7 +298,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 DanhSachChanged?.Invoke();
                 LuuChiTietMenu();
                 LuuChiTietDichVu();
-                _datTiecService.UpdateHoaDon(TiecMoi);
                 return true;
             }
             catch (Exception ex)

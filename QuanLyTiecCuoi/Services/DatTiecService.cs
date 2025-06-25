@@ -31,6 +31,10 @@ namespace QuanLyTiecCuoi.Services
         {
             return _datTiecRepo.GetAllDatTiec();
         }
+        public List<HOADON> GetAllHoaDon()
+        {
+            return _datTiecRepo.GetAllHoaDon();
+        }
 
         /// <summary>
         /// Lọc danh sách theo tên cô dâu.
@@ -112,9 +116,9 @@ namespace QuanLyTiecCuoi.Services
         {
             return _datTiecRepo.GetHoaDonTheoMaDatTiec(maDatTiec);
         }
-        public void AddHoaDon(DATTIEC datTiec)
+        public decimal TienDatCoc(decimal a, decimal b)
         {
-            _datTiecRepo.AddHoaDon(datTiec);
+           return _datTiecRepo.tinhTienDatCoc(a, b);
         }
 
         public bool TimHoaDonTheoMaDatTiec(DATTIEC dattiec)
@@ -127,10 +131,11 @@ namespace QuanLyTiecCuoi.Services
             return true;
         }
 
-        public void UpdateHoaDon(DATTIEC dAtTiec)
+        public void AddHoaDon(DATTIEC datTiec)
         {
-            _datTiecRepo.UpdateHoaDon(dAtTiec.MaDatTiec);
+            _datTiecRepo.AddHoaDon(datTiec);
         }
+
         public async Task<HOADON?> UpdateHoaDonAsync(HOADON hoaDon)
         {
             return await _hoadonRepo.UpdateAsync(hoaDon);
