@@ -12,13 +12,28 @@
 ## Members:
 
 | STT | MSSV      | Họ và Tên            | Chức Vụ     | Email                    |
-|-----|----------|-------------------|------------|--------------------------|
-| 1   | 23521169 | Nguyễn Quý Phong     | Nhóm trưởng  | 23521169@gm.uit.edu.vn |
-| 2   | 23520340 | Tôn Kim Dung         | Thành viên  | 23520340@gm.uit.edu.vn |
-| 3   | 23521826 | Đỗ Lê Khánh Vy       | Thành viên  | 23521826@gm.uit.edu.vn |
-| 4   | 23521834 | Nguyễn Thúy Vy       | Thành viên  | 23521834@gm.uit.edu.vn |
-| 5   | 23521063 | Trần Thị Huệ Nguyên  | Thành viên  | 23521063@gm.uit.edu.vn |
+|-----|-----------|----------------------|-------------|--------------------------|
+| 1   | 23521169  | Nguyễn Quý Phong     | Nhóm trưởng | 23521169@gm.uit.edu.vn   |
+| 2   | 23520340  | Tôn Kim Dung         | Thành viên  | 23520340@gm.uit.edu.vn   |
+| 3   | 23521826  | Đỗ Lê Khánh Vy       | Thành viên  | 23521826@gm.uit.edu.vn   |
+| 4   | 23521834  | Nguyễn Thúy Vy       | Thành viên  | 23521834@gm.uit.edu.vn   |
+| 5   | 23521063  | Trần Thị Huệ Nguyên  | Thành viên  | 23521063@gm.uit.edu.vn   |
 
+---
 
+## **Hướng dẫn sử dụng**
 
+- **Database** trong project chỉ là **mô phỏng**, không kết nối đến cơ sở dữ liệu thật. Tụi em sử dụng thư viện trong **WPF** để hiển thị và xử lý dữ liệu.  
+- Các file `.cs`/đối tượng nằm trong thư mục `Data` tương đương với **các bảng** được định nghĩa như trong lệnh `CREATE TABLE`.
+
+- **Để chạy chương trình:**
+  1. Tải file cấu hình `appsettings.json` từ nhóm.
+  2. Đặt file vào thư mục gốc của project.
+  3. Vào phần **Properties** của file:
+     - `Build Action`: chọn `Content`.
+     - `Copy to Output Directory`: chọn `Copy if newer`.
+
+> Sau khi thực hiện các bước trên, chương trình sẽ hoạt động bình thường khi chạy trong Visual Studio.
+
+---
 
