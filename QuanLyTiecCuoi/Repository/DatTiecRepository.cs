@@ -163,7 +163,6 @@ namespace QuanLyTiecCuoi.Repository
                 TienPhat = 0,
                 TongTienHD = tongTienDV + tongTienBan,
                 SoLuongBan = datTiec.SoLuongBan,
-                NgayLap = DateTime.Now,
                 TienPhaiThanhToan = tongTienBan + tongTienDV - datTiec.TienDatCoc,
             };
             _context.HoaDons.Add(hoaDon);
