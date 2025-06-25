@@ -186,6 +186,7 @@
                               FontSize="20"
                               FontFamily="Cambria"
                               Background="White"
+                              ScrollViewer.VerticalScrollBarVisibility="Visible"
                               ItemsSource="{Binding DanhSachDatTiec}"
                               SelectedItem="{Binding DatTiecDangChon, Mode=TwoWay}"
                               AutoGenerateColumns="False"

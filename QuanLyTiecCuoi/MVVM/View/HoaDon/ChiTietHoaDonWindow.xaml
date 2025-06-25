@@ -61,7 +61,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Row="0">
+                    <StackPanel Grid.Column="0">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Mã hóa đơn:"
                                     Style="{StaticResource Header3Style}"/>
@@ -100,6 +100,20 @@
                                     CommandParameter="{Binding Text, ElementName=SLban}"
                                     Style="{StaticResource ButtonAddServiceStyle}"></Button>
                         </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Tiền đặt cọc:"
+                                    Style="{StaticResource Header3Style}"/>
+                            <TextBlock Text="{Binding HoaDonDuocChon.DATTIEC.TienDatCoc,StringFormat={}{0:C0}}" Language="vi-VN"
+                                    Style="{StaticResource Header4Style}"/>
+                        </StackPanel>
+                        <TextBlock Grid.Row="3"
+                                Text="{Binding ThongBaoChinhSua}"
+                               HorizontalAlignment="Left"
+                               Foreground="Red"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Margin="18,10,10,0"/>
                     </StackPanel>
 
                     <StackPanel
@@ -124,12 +138,22 @@
                                     Style="{StaticResource Header4Style}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Tiền đặt cọc:"
+                            <TextBlock Text="Ngày lập hóa đơn:"
                                     Style="{StaticResource Header3Style}"/>
-                            <TextBlock Text="{Binding HoaDonDuocChon.DATTIEC.TienDatCoc,StringFormat={}{0:C0}}" Language="vi-VN"
+                            <TextBlock Text="{Binding HoaDonDuocChon.NgayLap, StringFormat='dd/MM/yyyy'}"
                                     Style="{StaticResource Header4Style}"/>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Ngày thanh toán: "
+                                    Style="{StaticResource Header3Style}"/>
+                            <TextBlock
+                                    Text="{Binding HoaDonDuocChon.NgayThanhToan, StringFormat='dd/MM/yyyy'}"
+                                    Style="{StaticResource Header4Style}"/>
+                        </StackPanel>
+
                     </StackPanel>
+
+
                 </Grid>
 
             </Border>
@@ -186,18 +210,6 @@
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
                                         <GridViewColumn
-                                            Width="80"
-                                            Header="Mã món"
-                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
-                                            <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock
-                                                        Style="{StaticResource Header6Style}"
-                                                        Text="{Binding MaMon, StringFormat='0000'}"/>
-                                                </DataTemplate>
-                                            </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
-                                        <GridViewColumn
                                             Width="120"
                                             Header="Tên món"
                                             HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
@@ -206,6 +218,18 @@
                                                     <TextBlock
                                                         Style="{StaticResource Header6Style}"
                                                         Text="{Binding MonAn.TenMon}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn
+                                            Width="30"
+                                            Header="SL"
+                                            HeaderContainerStyle="{StaticResource GridViewTableHeaderStyle}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Style="{StaticResource Header6Style}"
+                                                        Text="{Binding SoLuong}"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
@@ -265,6 +289,7 @@
                 <Grid Grid.Column="1"
                         Grid.Row="0">
                     <Border
+                        IsHitTestVisible="{Binding CoTheChinhSua}"
                         Grid.Row="0"
                         Margin="30,10,30,10"
                         CornerRadius="30"
@@ -350,7 +375,6 @@
                                                 <DataTemplate>
                                                     <xctk:IntegerUpDown
                                                         Minimum="1"
-                                                        IsEnabled="{Binding DataContext.CoTheThayDoiSL, RelativeSource={RelativeSource AncestorType=Window}}"
                                                         Value="{Binding SoLuong}"
                                                         Name="myUpDownControl">
                                                         <i:Interaction.Triggers>
@@ -440,20 +464,7 @@
                         Style="{StaticResource Header4Style}"/>
                 </StackPanel>
 
-                <StackPanel
-                    Visibility="{Binding TextNgayThanhToan}"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal"
-                    Margin="30,0"
-                    Grid.Row="1"
-                        Grid.Column="1">
-                    <TextBlock
-                        Text="Ngày thanh toán: "
-                        Style="{StaticResource Header3Style}"/>
-                    <TextBlock
-                        Text="{Binding HoaDonDuocChon.NgayThanhToan, StringFormat='dd/MM/yyyy'}"
-                        Style="{StaticResource Header4Style}"/>
-                </StackPanel>
+
             </Grid>
 
             <TextBlock Grid.Row="3"
@@ -481,7 +492,7 @@
                 <Button
                     Content="Xác nhận thanh toán"
                     HorizontalAlignment="Right"
-                    Visibility="{Binding BtnDaThanhToanVisibility}"
+                    Visibility="{Binding BtnThanhToanVisibility}"
                     Command="{Binding ThanhToanCommand}"
                     CommandParameter="{Binding ElementName=MangHinhHoaDon}"
                     Style="{StaticResource ButtonStyle}"/>
