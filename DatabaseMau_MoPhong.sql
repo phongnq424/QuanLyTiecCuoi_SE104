@@ -8,7 +8,8 @@ GO
 CREATE TABLE LOAISANH (
     MaLoaiSanh INT PRIMARY KEY,
     TenLoaiSanh NVARCHAR(100),
-    DonGiaBanToiThieu DECIMAL(18, 2)
+    DonGiaBanToiThieu DECIMAL(18, 2),
+	TinhTrang TINYINT
 );
 
 -- 2. SANH
@@ -27,7 +28,8 @@ CREATE TABLE CASANH (
     MaCa INT PRIMARY KEY,
     TenCa NVARCHAR(255),
     GioBatDau DATETIME,
-    GioKetThuc DATETIME
+    GioKetThuc DATETIME,
+	TinhTrang TINYINT
 );
 
 -- 4. DATTIEC
@@ -53,14 +55,16 @@ CREATE TABLE DICHVU (
     MaDichVu INT PRIMARY KEY,
     TenDichVu NVARCHAR(100),
     DonGia MONEY,
-    MoTa TEXT
+    MoTa TEXT,
+	TinhTrang TINYINT
 );
 
 -- 6. MONAN
 CREATE TABLE MONAN (
     MaMon INT PRIMARY KEY,
     TenMon NVARCHAR(100),
-    DonGia MONEY
+    DonGia MONEY,
+	TinhTrang TINYINT
 );
 
 -- 7. CHITIETDVTIEC
