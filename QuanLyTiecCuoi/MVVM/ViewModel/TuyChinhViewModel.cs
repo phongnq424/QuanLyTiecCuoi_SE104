@@ -35,8 +35,8 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 String viewName = TenManHinh(p);
                 CurrentView = LoadViewByName(viewName);
             });
-            String viewName = TenManHinh("Loại sảnh");
-            CurrentView = LoadViewByName(viewName);
+            //String viewName = TenManHinh("Loại sảnh");
+            //CurrentView = LoadViewByName(viewName);g
         }
 
         private string TenManHinh(string p)
