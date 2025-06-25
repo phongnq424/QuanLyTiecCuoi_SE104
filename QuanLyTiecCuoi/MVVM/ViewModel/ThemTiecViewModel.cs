@@ -269,7 +269,6 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 // lưu chi tiết 
                 LuuChiTietMenu();
                 LuuChiTietDichVu();
-
                 DanhSachChanged?.Invoke();
                 return true;
             }

@@ -9,16 +9,19 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuanLyTiecCuoi.Services
 {
     public class DatTiecService
     {
         private readonly DatTiecRepository _datTiecRepo;
+        private readonly HoaDonRepository _hoadonRepo;
 
-        public DatTiecService(DatTiecRepository datTiecRepo)
+        public DatTiecService(DatTiecRepository datTiecRepo,HoaDonRepository hoaDonRepo)
         {
             _datTiecRepo = datTiecRepo;
+            _hoadonRepo = hoaDonRepo;
         }
 
         /// <summary>
@@ -117,16 +120,25 @@ namespace QuanLyTiecCuoi.Services
         {
            return _datTiecRepo.tinhTienDatCoc(a, b);
         }
+
+        public bool TimHoaDonTheoMaDatTiec(DATTIEC dattiec)
+        {
+            var res = _hoadonRepo.GetByMaDatTiec(dattiec.MaDatTiec.ToString());
+            if(res == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public void AddHoaDon(DATTIEC datTiec)
         {
             _datTiecRepo.AddHoaDon(datTiec);
         }
-       
-        HoaDonRepository _hoaDonRepository;
+
         public async Task<HOADON?> UpdateHoaDonAsync(HOADON hoaDon)
         {
-            _hoaDonRepository = App.AppHost.Services.GetRequiredService<HoaDonRepository>();
-            return await _hoaDonRepository.UpdateAsync(hoaDon);
+            return await _hoadonRepo.UpdateAsync(hoaDon);
         }
         public SANH? GetSanhById(int maSanh)
         {

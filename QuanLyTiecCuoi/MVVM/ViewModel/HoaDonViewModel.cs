@@ -104,23 +104,29 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         private List<CHITIETDVTIEC> DanhSachDichVuTiecBiXoa;
 
-        private bool _CoTheThayDoiSL;
-        public bool CoTheThayDoiSL { get => _CoTheThayDoiSL; set { _CoTheThayDoiSL = value; OnPropertyChanged(); } }
-
         private bool _DangChonHoaDon = false;
 
         private Visibility _BtnLuuVisibility = Visibility.Hidden;
         public Visibility BtnLuuVisibility { get => _BtnLuuVisibility; set { _BtnLuuVisibility = value; OnPropertyChanged(); } }
 
-        private Visibility _TextNgayThanhToan = Visibility.Hidden;
-        public Visibility TextNgayThanhToan { get => _TextNgayThanhToan; set { _TextNgayThanhToan = value; OnPropertyChanged(); } }
-
         private Visibility _TextSoTienThanhToan = Visibility.Visible;
         public Visibility TextSoTienThanhToan { get => _TextSoTienThanhToan; set { _TextSoTienThanhToan = value; OnPropertyChanged(); } }
-        private Visibility _BtnDaThanhToanVisibility = Visibility.Hidden;
-        public Visibility BtnDaThanhToanVisibility { get => _BtnDaThanhToanVisibility; set { _BtnDaThanhToanVisibility = value; OnPropertyChanged(); } }
+        private Visibility _BtnThanhToanVisibility = Visibility.Hidden;
+        public Visibility BtnThanhToanVisibility { get => _BtnThanhToanVisibility; set { _BtnThanhToanVisibility = value; OnPropertyChanged(); } }
 
         private DateTime ngayToiDaThanhToan;
+
+        private bool _CoTheChinhSua;
+        public bool CoTheChinhSua
+        {
+            get => _CoTheChinhSua; set { _CoTheChinhSua = value; OnPropertyChanged(); }
+        }
+
+        private String _ThongBaoChinhSua = "";
+        public String ThongBaoChinhSua
+        {
+            get => _ThongBaoChinhSua; set { _ThongBaoChinhSua += value; OnPropertyChanged(); }
+        }
 
         #region Command
         public ICommand FirstLoadCommand { get; set; }
@@ -187,6 +193,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                         ChiTietDVTiecDuocChon = new ObservableCollection<CHITIETDVTIEC>(await hoaDonService.GetCTDVT(TiecDuocChon.MaDatTiec));
                         MenuTiecDuocChon = new ObservableCollection<CHITIETMENU>(await hoaDonService.GetMenu(TiecDuocChon.MaDatTiec));
                         DanhSachDichVu = new ObservableCollection<DICHVU>(await hoaDonService.GetDV());
+                        TinhMenu();
                         GanDanhSachTenDV();
                         KiemTraPhatThanhToanTre();
                         DatThanhToanChoHoaDonDuocChon();
@@ -201,7 +208,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             ThemDichVuCommand = new RelayCommand<String?>((p) => { return true; }, async (p) =>
             {
-                if (HoaDonDuocChon.NgayThanhToan != null || TiecDuocChon == null || TiecDuocChon.NgayDaiTiec > DateTime.Now.Date) return;
+                if (!CoTheChinhSua) return;
                 if (p != null)
                 {
                     foreach (var i in ChiTietDVTiecDuocChon)
@@ -235,7 +242,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             DoiSoLuongCommand = new RelayCommand<CHITIETDVTIEC>((p) => { return true; }, async (p) =>
             {
-                if (HoaDonDuocChon.NgayThanhToan != null) return;
+                if (!CoTheChinhSua) return;
                 if (p != null)
                 {
                     var danhSachMoi = new ObservableCollection<CHITIETDVTIEC>(ChiTietDVTiecDuocChon);
@@ -247,7 +254,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
             XoaDichVuCommand = new RelayCommand<CHITIETDVTIEC>((p) => { return true; }, async (p) =>
             {
-                if (HoaDonDuocChon.NgayThanhToan != null) return;
+                if (!CoTheChinhSua) return;
                 if (p != null)
                 {
                     if (DanhSachDichVuTiecBiXoa == null) DanhSachDichVuTiecBiXoa = new List<CHITIETDVTIEC>();
@@ -332,7 +339,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                     MessageBox.Show("Chưa lưu thay đổi");
                     return;
                 }
-                if (BtnDaThanhToanVisibility == Visibility.Visible)
+                if (BtnThanhToanVisibility == Visibility.Visible)
                 {
                     MessageBox.Show("Hóa đơn chưa được xác nhận thanh toán");
                     return;
@@ -364,6 +371,16 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
                 }
             });
 
+        }
+
+        private void TinhMenu()
+        {
+            HoaDonDuocChon.DonGiaBan = 0;
+            foreach(var i in MenuTiecDuocChon)
+            {
+                HoaDonDuocChon.DonGiaBan += i.MonAn.DonGia * i.SoLuong;
+            }
+            HoaDonDuocChon.TongTienBan = HoaDonDuocChon.DonGiaBan * HoaDonDuocChon.SoLuongBan;
         }
 
         private void PHANQUYEN()
@@ -572,7 +589,7 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
 
         private void TinhThanhTienDVHoaDon()
         {
-            if (HoaDonDuocChon.NgayThanhToan != null || TiecDuocChon != null) return;
+            if (HoaDonDuocChon.NgayThanhToan != null || TiecDuocChon == null) return;
             int soNgayTre = (DateTime.Now.Date - ngayToiDaThanhToan).Days;
 
             BtnLuuVisibility = Visibility.Visible;
@@ -597,24 +614,32 @@ namespace QuanLyTiecCuoi.MVVM.ViewModel
         private void DatThanhToanChoHoaDonDuocChon()
         {
             if (HoaDonDuocChon == null) return;
-            if (HoaDonDuocChon.NgayThanhToan == null || TiecDuocChon == null || TiecDuocChon.NgayDaiTiec <= DateTime.Now.Date)
+            if (HoaDonDuocChon.NgayThanhToan == null && TiecDuocChon != null)
             {
+                // Có thể chỉnh sửa hóa đơn khi ngày đãi tiệc bé hơn ngày hiện tại
+                if(TiecDuocChon.NgayDaiTiec.Date > DateTime.Now)
+                {
+                    CoTheChinhSua = false ;
+                    ThongBaoChinhSua = "Hóa đơn không thể chỉnh sửa vì chưa đến ngày đãi tiệc"; 
+                }
+                else
+                {
+                    CoTheChinhSua = true;
+                    ThongBaoChinhSua = "";
+                }
                 TextSoTienThanhToan = Visibility.Visible;
-                BtnDaThanhToanVisibility = Visibility.Visible;
-                TextNgayThanhToan = Visibility.Hidden;
-                CoTheThayDoiSL = true;
+                BtnThanhToanVisibility = Visibility.Visible;
                 PHANQUYEN();
-                OnPropertyChanged(nameof(CoTheThayDoiSL));
             }
             else
             {
+                //Đã thanh toán hóa đơn nên ko chỉnh sửa được nữa
+                CoTheChinhSua = false;
+                ThongBaoChinhSua = "Hóa đơn không thể chỉnh sửa vì đã thanh toán";
                 TextSoTienThanhToan = Visibility.Hidden;
-                BtnDaThanhToanVisibility = Visibility.Hidden;
-                TextNgayThanhToan = Visibility.Visible;
+                BtnThanhToanVisibility = Visibility.Hidden;
                 BtnLuuVisibility = Visibility.Hidden;
-                CoTheThayDoiSL = false;
                 PHANQUYEN();
-                OnPropertyChanged(nameof(CoTheThayDoiSL));
             }
         }
 

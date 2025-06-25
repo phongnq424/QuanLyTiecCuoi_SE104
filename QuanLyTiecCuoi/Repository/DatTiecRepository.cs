@@ -156,6 +156,7 @@ namespace QuanLyTiecCuoi.Repository
             var hoaDon = new HOADON
             {
                 MaDatTiec = datTiec.MaDatTiec,
+                NgayLap = DateTime.Now,
                 DonGiaBan = donGiaBan,
                 TongTienBan = tongTienBan,
                 TongTienDV = tongTienDV,
